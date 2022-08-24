@@ -4,6 +4,15 @@
         [[xmake lua C:\Users\bioni\xmake\actions\build\cleaner.lua]],
         "xmake ",
         "xmake run helloworld",
+        "xmake clean",
+        "xmake clean",
+        "xmake ",
+        "xmake clean",
+        "xmake run helloworld",
+        "xmake clean",
+        "xmake run helloworld",
+        "xmake ",
+        "xmake run helloworld",
         "xmake clean"
     }
 }
