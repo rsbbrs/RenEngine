@@ -1,0 +1,9 @@
+{
+    cmdlines = {
+        [[xmake lua C:\Users\bioni\xmake\actions\build\statistics.lua]],
+        [[xmake lua C:\Users\bioni\xmake\actions\build\cleaner.lua]],
+        "xmake ",
+        "xmake run helloworld",
+        "xmake clean"
+    }
+}
