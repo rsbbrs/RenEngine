@@ -13,6 +13,11 @@
         "xmake run helloworld",
         "xmake ",
         "xmake run helloworld",
+        "xmake clean",
+        "xmake ",
+        "xmake clean",
+        "xmake ",
+        "xmake run helloworld",
         "xmake clean"
     }
 }
