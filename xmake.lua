@@ -1,4 +1,5 @@
 add_rules("mode.debug", "mode.release")
+add_requires("glfw")
 
 target("helloworld")
     set_kind("binary")
@@ -18,3 +19,6 @@ target("RenEngine")
     
     -- Add all .cpp files in the `src` directory.
     add_files("src/*.cpp")
+
+    -- Packages
+    add_packages("glfw")

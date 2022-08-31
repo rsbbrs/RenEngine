@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Types.h>
+#include "GraphicsManager.h"
 
 namespace RenEngine
 {
@@ -8,14 +9,19 @@ namespace RenEngine
     {
         private:
             Window window;
-            //GraphicsManager graphics;
+            GraphicsManager graphics;
             //InputManager input;
-            void Startup(Window);
-            void Shutdown();
+
+            // Start and shutdown functions.
+            // Made private so no other classes can shut down the engine itself.
+            void startup();
+            void shutdown();
 
         public:
+            // Constructor takes game parameters. Currently only for window size.
             Engine(int, int, const char *, bool);
 
-            void GameLoop();
+            // Main game loop
+            void gameLoop();
     };
 }

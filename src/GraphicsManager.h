@@ -6,6 +6,8 @@ namespace RenEngine
 {
     class GraphicsManager
     {
-        
+        public:
+            void gmStartup(Window);
+            void gmShutdown();
     };
 }
