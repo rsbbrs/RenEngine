@@ -1,9 +1,10 @@
 #include <iostream>
-using namespace std;
+#include "Engine.h"
 
 int main(int argc, const char* argv[])
 {
-    cout << "Hello World!" << endl;
+    bool fullscreen = std::string(argv[4]).compare("true") ? true : false;
+    RenEngine::Engine::Engine(atoi(argv[1]), atoi(argv[2]), argv[3], fullscreen);
 
     return 0;
 }
