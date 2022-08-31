@@ -31,6 +31,12 @@
         "xmake ",
         "xmake ",
         "xmake clean",
-        "xmake "
+        "xmake ",
+        "xmake ",
+        "xmake clean",
+        "xmake ",
+        "xmake ",
+        "xmake clean",
+        "xmake clean"
     }
 }
