@@ -18,6 +18,19 @@
         "xmake clean",
         "xmake ",
         "xmake run helloworld",
-        "xmake clean"
+        "xmake clean",
+        "xmake ",
+        "xmake clean",
+        "xmake ",
+        "xmake ",
+        "xmake clean",
+        "xmake ",
+        "xmake clean",
+        "xmake clean",
+        "xmake ",
+        "xmake ",
+        "xmake ",
+        "xmake clean",
+        "xmake "
     }
 }

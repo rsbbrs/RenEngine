@@ -1,5 +1,9 @@
+#define GLFW_INCLUDE_NONE
+
+#include "GLFW/glfw3.h"
 #include "Types.h"
 #include "GraphicsManager.h"
+#include <iostream>
 
 using namespace RenEngine;
 

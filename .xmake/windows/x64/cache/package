@@ -1,1 +1,6 @@
-{ }
+{
+    glfw = {
+        __requirestr = "glfw",
+        __enabled = false
+    }
+}
