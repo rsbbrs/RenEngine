@@ -37,6 +37,19 @@
         "xmake ",
         "xmake ",
         "xmake clean",
-        "xmake clean"
+        "xmake clean",
+        "xmake ",
+        "xmake build",
+        "xmake ",
+        "xmake ",
+        "xmake ",
+        "xmake ",
+        "xmake g --pkg_searchdirs=/",
+        "xmake g --pkg_searchdirs=/",
+        "xmake clean",
+        "xmake ",
+        "xmake ",
+        "xmake ",
+        "xmake "
     }
 }
