@@ -60,6 +60,8 @@
         "xmake ",
         "xmake ",
         "xmake package",
+        "xmake ",
+        "xmake ",
         "xmake "
     }
 }
