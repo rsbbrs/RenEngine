@@ -10,4 +10,10 @@ namespace RenEngine
     class InputManager;
 
     // Global types.
+    typedef struct window_param
+    {
+        int width, height;
+        const char *name;
+        bool fullscreen;
+    } Window;
 }

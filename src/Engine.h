@@ -7,12 +7,15 @@ namespace RenEngine
     class Engine
     {
         private:
+            Window window;
             //GraphicsManager graphics;
             //InputManager input;
+            void Startup(Window);
+            void Shutdown();
 
         public:
-            void Startup();
-            void Shutdown();
+            Engine(int, int, const char *, bool);
+
             void GameLoop();
     };
 }
