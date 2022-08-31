@@ -50,6 +50,16 @@
         "xmake ",
         "xmake ",
         "xmake ",
+        "xmake ",
+        "xmake ",
+        "xmake clean",
+        "xmake i glfw-3.8.8",
+        "xmake ",
+        "xmake ",
+        "xmake ",
+        "xmake ",
+        "xmake ",
+        "xmake package",
         "xmake "
     }
 }
