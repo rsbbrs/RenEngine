@@ -1,17 +1,5 @@
 {
     cmdlines = {
-        "xmake clean",
-        "xmake ",
-        "xmake clean",
-        "xmake clean",
-        "xmake ",
-        "xmake ",
-        "xmake ",
-        "xmake clean",
-        "xmake ",
-        "xmake ",
-        "xmake clean",
-        "xmake ",
         "xmake ",
         "xmake clean",
         "xmake clean",
@@ -64,6 +52,18 @@
         "xmake ",
         "xmake --build",
         "xmake clean",
+        "xmake ",
+        "xmake ",
+        "xmake ",
+        "xmake f -c -vD",
+        "xmake -vD",
+        "xmake f -c -vD",
+        "xmake f -c -vD",
+        "xmake f -c -vD",
+        "xmake -vD",
+        "xmake ",
+        "xmake ",
+        "xmake ",
         "xmake "
     }
 }

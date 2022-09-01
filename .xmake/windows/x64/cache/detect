@@ -1,49 +1,40 @@
 {
-    ["detect.sdks.find_vcpkgdir"] = false,
-    find_program_fetch_package_xmake = {
-        cmake = [[C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake]]
-    },
-    find_program_msvc_arch_x64_plat_windows_checktoolcxx = {
-        ["cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\bin\HostX64\x64\cl.exe]]
-    },
     find_programver_fetch_package_xmake = {
         ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake"] = "3.23.22060601-MSVC"
-    },
-    find_program_fetch_package_system = {
-        cmake = [[C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake]]
     },
     find_package_windows_x64_fetch_package_xmake = {
         ["xmake::glfw_d12e591897c9472fb7d3725fa5811388_release_3.3.8_external"] = false
     },
-    find_package_windows_x64_fetch_package_system = {
-        glfw_d12e591897c9472fb7d3725fa5811388_release_external = false
-    },
     find_programver = {
-        ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe"] = "19.33.31629"
-    },
-    find_program_msvc_arch_x64_plat_windows_checktoolld = {
-        ["link.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\bin\HostX64\x64\link.exe]]
+        ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe"] = "19.33.31629",
+        curl = "7.83.1"
     },
     find_program = {
+        gdc = false,
+        ["cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\bin\HostX64\x64\cl.exe]],
+        git = "git",
+        ["pkg-config"] = false,
+        zig = false,
+        dmd = false,
+        curl = "curl",
         unzip = false,
+        ping = "ping",
         ldc2 = false,
         pkgconf = false,
-        gdc = false,
-        ["pkg-config"] = false,
-        gzip = false,
-        ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\bin\HostX64\x64\cl.exe]],
-        git = "git",
-        zig = false,
         ["7z"] = [[C:\Users\bioni\xmake\winenv\bin\7z]],
-        ["cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\bin\HostX64\x64\cl.exe]],
-        dmd = false
+        gzip = false
     },
     find_programver_fetch_package_system = {
         ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake"] = "3.23.22060601-MSVC"
     },
-    ["lib.detect.has_flags"] = {
-        ["windows_x64_C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe_19.33.31629_cxx_cxflags_/EHsc_-DNDEBUG"] = true,
-        ["windows_x64_C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe_19.33.31629_cxx_cxflags_/EHsc_cl_sourceDependencies"] = true,
-        ["windows_x64_C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe_19.33.31629_cxx__/EHsc_-Ox -fp:fast"] = true
-    }
+    find_program_fetch_package_xmake = {
+        cmake = [[C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake]]
+    },
+    find_package_windows_x64_fetch_package_system = {
+        glfw_d12e591897c9472fb7d3725fa5811388_release_external = false
+    },
+    find_program_fetch_package_system = {
+        cmake = [[C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake]]
+    },
+    ["detect.sdks.find_vcpkgdir"] = false
 }
