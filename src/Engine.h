@@ -1,9 +1,9 @@
 #pragma once
 
 #include <Types.h>
-#include "GraphicsManager.h"
 #include <thread>
 #include <chrono>
+#include "GraphicsManager.h"
 
 namespace RenEngine
 {
