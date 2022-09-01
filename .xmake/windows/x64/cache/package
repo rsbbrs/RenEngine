@@ -1,6 +1,30 @@
 {
     glfw = {
+        links = {
+            "glfw3",
+            "opengl32"
+        },
+        static = true,
+        license = "zlib",
+        __installdir = [[C:\Users\bioni\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388]],
+        __enabled = true,
+        syslinks = {
+            "user32",
+            "shell32",
+            "gdi32"
+        },
+        libfiles = [[C:\Users\bioni\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\lib\glfw3.lib]],
         __requirestr = "glfw",
-        __enabled = false
+        defines = "GLFW_INCLUDE_NONE",
+        linkdirs = [[C:\Users\bioni\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\lib]],
+        version = "3.3.8",
+        sysincludedirs = [[C:\Users\bioni\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\include]],
+        envs = {
+            PATH = {
+                [[C:\Users\bioni\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\bin]],
+                [[C:\Users\bioni\AppData\Local\.xmake\packages\c\cmake\3.24.1\071998414ffe4b808b46ac97cd886ed2\bin]],
+                [[C:\Users\bioni\AppData\Local\.xmake\packages\o\opengl\latest\8574311f4b544fa89a3d8c3ee79d1929\bin]]
+            }
+        }
     }
 }

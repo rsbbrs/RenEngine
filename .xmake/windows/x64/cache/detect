@@ -1,40 +1,80 @@
 {
-    find_programver_fetch_package_system = {
-        ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake"] = "3.23.22060601-MSVC"
-    },
-    find_programver = {
-        ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe"] = "19.33.31629",
-        curl = "7.83.1"
-    },
-    find_package_windows_x64_fetch_package_system = {
-        glfw_d12e591897c9472fb7d3725fa5811388_release_external = false
-    },
     find_program_fetch_package_system = {
         cmake = [[C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake]]
     },
     find_program_fetch_package_xmake = {
         cmake = [[C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake]]
     },
+    ["detect.sdks.find_vcpkgdir"] = false,
     find_package_windows_x64_fetch_package_xmake = {
-        ["xmake::glfw_d12e591897c9472fb7d3725fa5811388_release_3.3.8_external"] = false
+        ["xmake::glfw_d12e591897c9472fb7d3725fa5811388_release_3.3.8_external"] = {
+            links = {
+                "glfw3",
+                "opengl32"
+            },
+            static = true,
+            syslinks = {
+                "user32",
+                "shell32",
+                "gdi32"
+            },
+            libfiles = {
+                [[C:\Users\bioni\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\lib\glfw3.lib]]
+            },
+            defines = "GLFW_INCLUDE_NONE",
+            linkdirs = {
+                [[C:\Users\bioni\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\lib]]
+            },
+            version = "3.3.8",
+            sysincludedirs = {
+                [[C:\Users\bioni\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\include]]
+            },
+            license = "zlib"
+        }
+    },
+    find_programver_fetch_package_system = {
+        ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake"] = "3.23.22060601-MSVC"
+    },
+    find_programver = {
+        ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe"] = "19.33.31629"
+    },
+    find_program_msvc_arch_x64_plat_windows_checktoolcxx = {
+        ["cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\bin\HostX64\x64\cl.exe]]
+    },
+    find_program_msvc_arch_x64_plat_windows_checktoolld = {
+        ["link.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\bin\HostX64\x64\link.exe]]
+    },
+    ["lib.detect.has_flags"] = {
+        ["windows_x64_C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe_19.33.31629_cxx_cxflags_/EHsc_-DNDEBUG"] = true,
+        ["windows_x64_C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe_19.33.31629_cc_cxflags_-nologo_/MT"] = true,
+        ["windows_x64_C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe_19.33.31629_cxx__/EHsc_-Ox -fp:fast"] = true,
+        ["windows_x64_C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe_19.33.31629_cc_cxflags_-nologo_cl_external_includedir"] = true,
+        ["windows_x64_C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe_19.33.31629_cxx_cxflags_/EHsc_cl_external_includedir"] = true,
+        ["windows_x64_C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe_19.33.31629_cxx_cxflags_/EHsc_cl_sourceDependencies"] = true,
+        ["windows_x64_C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe_19.33.31629_cc_cxflags_-nologo_-std:c11"] = true
+    },
+    find_package_windows_x64_fetch_package_system = {
+        glfw_d12e591897c9472fb7d3725fa5811388_release_external = false
+    },
+    find_program = {
+        gdc = false,
+        ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\bin\HostX64\x64\cl.exe]],
+        dmd = false,
+        ldc2 = false,
+        git = "git",
+        unzip = false,
+        zig = false,
+        gzip = false,
+        ["7z"] = [[C:\Program Files\xmake\winenv\bin\7z]],
+        ["pkg-config"] = false,
+        ping = "ping",
+        pkgconf = false,
+        ["cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\bin\HostX64\x64\cl.exe]]
+    },
+    find_program_msvc_arch_x64_plat_windows_checktoolcc = {
+        ["cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\bin\HostX64\x64\cl.exe]]
     },
     find_programver_fetch_package_xmake = {
         ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake"] = "3.23.22060601-MSVC"
-    },
-    ["detect.sdks.find_vcpkgdir"] = false,
-    find_program = {
-        dmd = false,
-        ldc2 = false,
-        zig = false,
-        ["cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\bin\HostX64\x64\cl.exe]],
-        gzip = false,
-        curl = "curl",
-        ["7z"] = [[C:\Users\bioni\xmake\winenv\bin\7z]],
-        ping = "ping",
-        pkgconf = false,
-        git = "git",
-        unzip = false,
-        ["pkg-config"] = false,
-        gdc = false
     }
 }
