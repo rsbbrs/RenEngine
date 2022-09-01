@@ -1,35 +1,49 @@
 {
-    find_program = {
-        unzip = "unzip",
-        zig = false,
-        ldc2 = false,
-        curl = [[C:\Users\bioni\xmake\winenv\bin\curl]],
-        gzip = "gzip",
-        ["cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\bin\HostX64\x64\cl.exe]],
-        gdc = false,
-        ping = "ping",
-        git = "git",
-        dmd = false,
-        tar = "tar"
-    },
     ["detect.sdks.find_vcpkgdir"] = false,
-    find_package_windows_x64_fetch_package_xmake = {
-        ["xmake::glfw_d12e591897c9472fb7d3725fa5811388_release_3.3.8_external"] = false
-    },
-    find_programver = {
-        ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe"] = "19.33.31629",
-        ["C:\\Users\\bioni\\xmake\\winenv\\bin\\curl"] = "7.81.0"
-    },
-    find_programver_fetch_package_system = {
-        ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake"] = "3.23.22060601-MSVC"
-    },
     find_program_fetch_package_xmake = {
-        cmake = false
+        cmake = [[C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake]]
+    },
+    find_program_msvc_arch_x64_plat_windows_checktoolcxx = {
+        ["cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\bin\HostX64\x64\cl.exe]]
+    },
+    find_programver_fetch_package_xmake = {
+        ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake"] = "3.23.22060601-MSVC"
     },
     find_program_fetch_package_system = {
         cmake = [[C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake]]
     },
+    find_package_windows_x64_fetch_package_xmake = {
+        ["xmake::glfw_d12e591897c9472fb7d3725fa5811388_release_3.3.8_external"] = false
+    },
     find_package_windows_x64_fetch_package_system = {
         glfw_d12e591897c9472fb7d3725fa5811388_release_external = false
+    },
+    find_programver = {
+        ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe"] = "19.33.31629"
+    },
+    find_program_msvc_arch_x64_plat_windows_checktoolld = {
+        ["link.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\bin\HostX64\x64\link.exe]]
+    },
+    find_program = {
+        unzip = false,
+        ldc2 = false,
+        pkgconf = false,
+        gdc = false,
+        ["pkg-config"] = false,
+        gzip = false,
+        ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\bin\HostX64\x64\cl.exe]],
+        git = "git",
+        zig = false,
+        ["7z"] = [[C:\Users\bioni\xmake\winenv\bin\7z]],
+        ["cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\bin\HostX64\x64\cl.exe]],
+        dmd = false
+    },
+    find_programver_fetch_package_system = {
+        ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake"] = "3.23.22060601-MSVC"
+    },
+    ["lib.detect.has_flags"] = {
+        ["windows_x64_C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe_19.33.31629_cxx_cxflags_/EHsc_-DNDEBUG"] = true,
+        ["windows_x64_C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe_19.33.31629_cxx_cxflags_/EHsc_cl_sourceDependencies"] = true,
+        ["windows_x64_C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe_19.33.31629_cxx__/EHsc_-Ox -fp:fast"] = true
     }
 }
