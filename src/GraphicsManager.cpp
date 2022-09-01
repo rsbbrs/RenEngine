@@ -21,7 +21,7 @@ void GraphicsManager::gmStartup(Window windowParam)
     GLFWwindow* window = glfwCreateWindow( windowParam.width, 
                                            windowParam.height, 
                                            windowParam.name, 
-                                           windowParam.fullscreen ? glfwGetPrimaryMonitor() : 0, 0 );
+                                           windowParam.fullscreen ? glfwGetPrimaryMonitor() : 0, 0);
 
     glfwSetWindowAspectRatio( window, windowParam.width, windowParam.height );
 
@@ -34,4 +34,9 @@ void GraphicsManager::gmStartup(Window windowParam)
     glfwMakeContextCurrent( window );
     
     glfwSwapInterval(1);
+}
+
+void GraphicsManager::gmShutdown()
+{
+    glfwTerminate();
 }
