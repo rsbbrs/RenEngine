@@ -1,11 +1,6 @@
 {
     cmdlines = {
         "xmake ",
-        "xmake clean",
-        "xmake clean",
-        "xmake ",
-        "xmake build",
-        "xmake ",
         "xmake ",
         "xmake ",
         "xmake ",
@@ -61,6 +56,11 @@
         "xmake f -c -vD",
         "xmake f -c -vD",
         "xmake -vD",
+        "xmake ",
+        "xmake ",
+        "xmake ",
+        "xmake ",
+        "xmake g --pkg_searchdirs=/packages/",
         "xmake ",
         "xmake ",
         "xmake ",

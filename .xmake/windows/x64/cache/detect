@@ -1,34 +1,10 @@
 {
-    find_programver_fetch_package_xmake = {
+    find_programver_fetch_package_system = {
         ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake"] = "3.23.22060601-MSVC"
-    },
-    find_package_windows_x64_fetch_package_xmake = {
-        ["xmake::glfw_d12e591897c9472fb7d3725fa5811388_release_3.3.8_external"] = false
     },
     find_programver = {
         ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe"] = "19.33.31629",
         curl = "7.83.1"
-    },
-    find_program = {
-        gdc = false,
-        ["cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\bin\HostX64\x64\cl.exe]],
-        git = "git",
-        ["pkg-config"] = false,
-        zig = false,
-        dmd = false,
-        curl = "curl",
-        unzip = false,
-        ping = "ping",
-        ldc2 = false,
-        pkgconf = false,
-        ["7z"] = [[C:\Users\bioni\xmake\winenv\bin\7z]],
-        gzip = false
-    },
-    find_programver_fetch_package_system = {
-        ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake"] = "3.23.22060601-MSVC"
-    },
-    find_program_fetch_package_xmake = {
-        cmake = [[C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake]]
     },
     find_package_windows_x64_fetch_package_system = {
         glfw_d12e591897c9472fb7d3725fa5811388_release_external = false
@@ -36,5 +12,29 @@
     find_program_fetch_package_system = {
         cmake = [[C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake]]
     },
-    ["detect.sdks.find_vcpkgdir"] = false
+    find_program_fetch_package_xmake = {
+        cmake = [[C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake]]
+    },
+    find_package_windows_x64_fetch_package_xmake = {
+        ["xmake::glfw_d12e591897c9472fb7d3725fa5811388_release_3.3.8_external"] = false
+    },
+    find_programver_fetch_package_xmake = {
+        ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake"] = "3.23.22060601-MSVC"
+    },
+    ["detect.sdks.find_vcpkgdir"] = false,
+    find_program = {
+        dmd = false,
+        ldc2 = false,
+        zig = false,
+        ["cl.exe"] = [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\bin\HostX64\x64\cl.exe]],
+        gzip = false,
+        curl = "curl",
+        ["7z"] = [[C:\Users\bioni\xmake\winenv\bin\7z]],
+        ping = "ping",
+        pkgconf = false,
+        git = "git",
+        unzip = false,
+        ["pkg-config"] = false,
+        gdc = false
+    }
 }
