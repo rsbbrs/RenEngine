@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Engine.h"
 
 int main(int argc, const char* argv[])
@@ -7,6 +6,7 @@ int main(int argc, const char* argv[])
     {
         std::cerr << "Error: Four arguments are needed to run the engine." << "\n";
         std::cerr << "Format: helloworld width height name fullscreen." << "\n";
+        return -1;
     }
     
     // Starts the engine.

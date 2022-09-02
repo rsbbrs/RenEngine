@@ -3,7 +3,7 @@ using namespace RenEngine;
 
 // Constructor.
 Engine::Engine(int width, int height, const char *name, bool fullscreen)
-: one_sixtieth_of_a_second(1.f/60.f)
+: one_sixtieth_of_a_second(1.f/120.f)
 {
     window.width = width;
     window.height = height;
@@ -34,7 +34,13 @@ void Engine::gameLoop()
 
     const auto start = time(0);
 
-    // Game loop. Currently not running at 60 lps, more like 30 lps.
+    // Game loop. According to my calculations, the loop runs
+    // approx 60 lps by making the calculation subtract from
+    // 1/120 of a second. I did this due to a comment on the
+    // discord my Cameron Massey stating that the Windows's sleep
+    // function doubles the amount of time to sleep. Halfving
+    // the interval per loop seems to make it run in 1/60 of
+    // a second.
     while(running)
     {
         // Tick start.
