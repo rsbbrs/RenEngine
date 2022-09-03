@@ -23,7 +23,7 @@ void InputManager::update()
     glfwPollEvents();
 }
 
-bool InputManager::keyPressed(GraphicsManager& gm, input_codes key)
+bool InputManager::keyPressed(GraphicsManager& gm, input_code key)
 {
-    glfwGetKey(gm.window, key);
+    return (glfwGetKey(gm.window, key) == 1) ? true : false;
 }

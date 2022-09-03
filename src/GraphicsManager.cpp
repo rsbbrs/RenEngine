@@ -7,7 +7,7 @@
 
 using namespace RenEngine;
 
-void GraphicsManager::gmStartup(Window windowParam)
+void GraphicsManager::gmStartup(Configuration windowParam)
 {
     // Window creation magic by GLFW.
     glfwInit();
@@ -18,12 +18,12 @@ void GraphicsManager::gmStartup(Window windowParam)
     glfwWindowHint( GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE );
     glfwWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE );
 
-    window = glfwCreateWindow( windowParam.width, 
-                                           windowParam.height, 
-                                           windowParam.name, 
-                                           windowParam.fullscreen ? glfwGetPrimaryMonitor() : 0, 0);
+    window = glfwCreateWindow( windowParam.window.width, 
+                                           windowParam.window.height, 
+                                           windowParam.window.name, 
+                                           windowParam.window.fullscreen ? glfwGetPrimaryMonitor() : 0, 0);
 
-    glfwSetWindowAspectRatio( window, windowParam.width, windowParam.height );
+    glfwSetWindowAspectRatio( window, windowParam.window.width, windowParam.window.height );
 
     if( !window )
     {

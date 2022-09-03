@@ -5,10 +5,10 @@ using namespace RenEngine;
 Engine::Engine(int width, int height, const char *name, bool fullscreen)
 : one_sixtieth_of_a_second(1.f/120.f)
 {
-    window.width = width;
-    window.height = height;
-    window.name = name;
-    window.fullscreen = fullscreen;
+    config.window.width = width;
+    config.window.height = height;
+    config.window.name = name;
+    config.window.fullscreen = fullscreen;
 
     startup();
 }
@@ -16,7 +16,7 @@ Engine::Engine(int width, int height, const char *name, bool fullscreen)
 // Starts up all managers.
 void Engine::startup()
 {
-    graphics.gmStartup(window);
+    graphics.gmStartup(config);
     input.imStartup();
 }
 
@@ -47,7 +47,11 @@ void Engine::gameLoop(const UpdateCallback& callback)
         // Tick start.
         const auto t1 = std::chrono::steady_clock::now();
 
+        // Update input state.
         input.update();
+
+        if(input.keyPressed(graphics, input_code::a))
+            std::cout << "Key pressed: a.\n";  
 
         /* 
         if(loops == 600)

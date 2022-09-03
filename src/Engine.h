@@ -19,7 +19,7 @@ namespace RenEngine
         private:
             // Variables used by the engine.
             const std::chrono::duration<double> one_sixtieth_of_a_second;
-            Window window;
+            Configuration config;
 
             // Game managers.
             GraphicsManager graphics;
@@ -29,6 +29,7 @@ namespace RenEngine
             // Made private so no other classes can shut down the engine itself.
             void startup();
             void shutdown();
+            void processInput();
 
         public:
             // Constructor takes game parameters. Currently only for window size.

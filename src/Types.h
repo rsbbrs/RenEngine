@@ -12,10 +12,46 @@ namespace RenEngine
     class InputManager;
 
     // Global types.
-    typedef struct window_param
+    typedef struct engine_config
     {
-        int width, height;
-        const char *name;
-        bool fullscreen;
-    } Window;
+        struct window_param
+        {
+            int width, height;
+            const char *name;
+            bool fullscreen;
+        } window;
+
+    } Configuration;
+
+    //  Some common keyboard buttons for games
+    enum input_code
+    {
+        unknown = -1,
+
+        left_shift = 340,
+        left_ctrl,
+        left_alt,
+        
+        space = 32,
+
+        num_0 = 48,
+        num_2,
+        num_3,
+        num_4,
+        num_5,
+        num_6,
+        f1 = 290,
+        f2,
+        f3,
+        f4,
+
+        w = 87,
+        a = 65,
+        s = 83,
+        d = 68,
+
+        escape = 256,
+        enter,
+        tab,
+    };
 }

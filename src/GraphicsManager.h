@@ -11,7 +11,7 @@ namespace RenEngine
             friend class InputManager;
 
         public:
-            void gmStartup(Window);
+            void gmStartup(Configuration);
             void gmShutdown();
     };
 }
