@@ -1,18 +1,21 @@
-#define GLFW_INCLUDE_NONE
 #pragma once
 
-#include "GLFW/glfw3.h"
 #include <Types.h>
+
+class PrivateImpl;
 
 namespace RenEngine
 {
     class GraphicsManager
     {
         private: 
-            GLFWwindow* window;
+            PrivateImpl* pimpl;
+
             friend class InputManager;
+            void *getWindow();
 
         public:
+            GraphicsManager();
             void gmStartup(Configuration);
             void gmShutdown();
             bool closeWindow();

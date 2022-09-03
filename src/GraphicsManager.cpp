@@ -1,9 +1,24 @@
-#include "Types.h"
-#include "GraphicsManager.h"
-#include <iostream>
+#define GLFW_INCLUDE_NONE
+
+#include <GLFW/glfw3.h>
+#include <GraphicsManager.h>
 
 using namespace RenEngine;
 
+// Private implemenation class.
+class PrivateImpl
+{
+    public:
+        GLFWwindow* window;
+};
+
+// Constructor creates a new Private Implemenation automatically.
+GraphicsManager::GraphicsManager()
+: pimpl(new PrivateImpl())
+{}
+
+// Creates the window to be displayed with the specific
+// configuration parameters.
 void GraphicsManager::gmStartup(Configuration windowParam)
 {
     // Window creation magic by GLFW.
@@ -15,26 +30,27 @@ void GraphicsManager::gmStartup(Configuration windowParam)
     glfwWindowHint( GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE );
     glfwWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE );
 
-    window = glfwCreateWindow( windowParam.window.width, 
+    pimpl->window = glfwCreateWindow( windowParam.window.width, 
                                            windowParam.window.height, 
                                            windowParam.window.name, 
                                            windowParam.window.fullscreen ? glfwGetPrimaryMonitor() : 0, 0);
 
-    glfwSetWindowAspectRatio( window, windowParam.window.width, windowParam.window.height );
+    glfwSetWindowAspectRatio( pimpl->window, windowParam.window.width, windowParam.window.height );
 
-    if( !window )
+    if( !pimpl->window )
     {
         std::cerr << "Failed to create a window." << std::endl;
         glfwTerminate();
     }
 
-    glfwMakeContextCurrent( window );
+    glfwMakeContextCurrent( pimpl->window );
     
     glfwSwapInterval(1);
 }
 
 void GraphicsManager::gmShutdown()
 {
+    delete pimpl;
     glfwTerminate();
 }
 
@@ -43,5 +59,11 @@ void GraphicsManager::gmShutdown()
 // pressed, otherwise returns 0.
 bool GraphicsManager::closeWindow()
 {
-    return !glfwWindowShouldClose(window);
+    return !glfwWindowShouldClose(pimpl->window);
+}
+
+// Used to access the window by the input manager.
+void* GraphicsManager::getWindow()
+{
+    return pimpl->window;
 }

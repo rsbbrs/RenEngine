@@ -12,7 +12,7 @@ int main(int argc, const char* argv[])
     // Starts the engine.
     RenEngine::Engine myEngine(atoi(argv[1]), atoi(argv[2]), argv[3], std::string(argv[4]).compare("true") == 0? true : false);
 
-    myEngine.gameLoop([&](RenEngine::Engine&)
+    myEngine.gameLoop([&]()
     {
         std::cout << "Keyboard input working.\n";
     });

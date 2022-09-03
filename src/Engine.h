@@ -1,24 +1,26 @@
 #pragma once
 
 // C++ libraries
-#include <Types.h>
 #include <thread>
 #include <chrono>
 #include <functional>
 
+// My own types
+#include <Types.h>
+
 // Managers
-#include "GraphicsManager.h"
-#include "InputManager.h"
+#include <GraphicsManager.h>
+#include <InputManager.h>
 
 namespace RenEngine
 {
     class Engine
     {
-        typedef std::function<void(Engine&)> UpdateCallback;
+        typedef std::function<void()> UpdateCallback;
 
         private:
             // Variables used by the engine.
-            const std::chrono::duration<double> one_sixtieth_of_a_second;
+            const std::chrono::duration<double> total_loop_time;
             Configuration config;
 
             // Game managers.
