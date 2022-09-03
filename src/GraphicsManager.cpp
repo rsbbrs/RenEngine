@@ -18,7 +18,7 @@ void GraphicsManager::gmStartup(Window windowParam)
     glfwWindowHint( GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE );
     glfwWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE );
 
-    GLFWwindow* window = glfwCreateWindow( windowParam.width, 
+    window = glfwCreateWindow( windowParam.width, 
                                            windowParam.height, 
                                            windowParam.name, 
                                            windowParam.fullscreen ? glfwGetPrimaryMonitor() : 0, 0);

@@ -24,4 +24,4 @@ target("RenEngine")
     add_files("src/*.cpp")
 
     -- Packages
-    add_packages("glfw")
+    add_packages("glfw, {public = true}")
