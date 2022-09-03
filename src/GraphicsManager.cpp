@@ -1,6 +1,3 @@
-#define GLFW_INCLUDE_NONE
-
-#include "GLFW/glfw3.h"
 #include "Types.h"
 #include "GraphicsManager.h"
 #include <iostream>
@@ -39,4 +36,12 @@ void GraphicsManager::gmStartup(Configuration windowParam)
 void GraphicsManager::gmShutdown()
 {
     glfwTerminate();
+}
+
+// Returns the value of the close flag, which
+// is set to 1 whenever the close button is 
+// pressed, otherwise returns 0.
+bool GraphicsManager::closeWindow()
+{
+    return !glfwWindowShouldClose(window);
 }

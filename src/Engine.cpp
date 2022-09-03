@@ -30,7 +30,6 @@ void Engine::shutdown()
 // Runs 60 times per second.
 void Engine::gameLoop(const UpdateCallback& callback)
 {
-    bool running = true;
     // int loops = 0;
 
     // const auto start = time(0);
@@ -42,7 +41,7 @@ void Engine::gameLoop(const UpdateCallback& callback)
     // function doubles the amount of time to sleep. Halfving
     // the interval per loop seems to make it run in 1/60 of
     // a second.
-    while(running)
+    while(graphics.closeWindow() && !input.keyPressed(graphics, input_code::escape))
     {
         // Tick start.
         const auto t1 = std::chrono::steady_clock::now();
@@ -51,7 +50,7 @@ void Engine::gameLoop(const UpdateCallback& callback)
         input.update();
 
         if(input.keyPressed(graphics, input_code::a))
-            std::cout << "Key pressed: a.\n";  
+            callback;
 
         /* 
         if(loops == 600)
