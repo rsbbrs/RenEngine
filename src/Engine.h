@@ -11,6 +11,8 @@
 // Managers
 #include <GraphicsManager.h>
 #include <InputManager.h>
+#include <ResourceManager.h>
+#include <SoundManager.h>
 
 namespace RenEngine
 {
@@ -26,6 +28,9 @@ namespace RenEngine
             // Game managers.
             GraphicsManager graphics;
             InputManager input;
+            ResourceManager resources;
+            SoundManager sound;
+
 
             // Start and shutdown functions.
             // Made private so no other classes can shut down the engine itself.

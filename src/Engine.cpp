@@ -18,11 +18,15 @@ void Engine::startup()
 {
     graphics.gmStartup(config);
     input.imStartup();
+    resources.rmStartup();
+    sound.smStartup();
 }
 
 // Shuts down the managers.
 void Engine::shutdown()
 {
+    sound.smShutdown();
+    resources.rmShutdown();
     input.imShutdown();
     graphics.gmShutdown();
 }

@@ -1,0 +1,27 @@
+#include <SoundManager.h>
+
+using namespace RenEngine;
+
+// Initializes the sound manager.
+void SoundManager::smStartup()
+{
+    soundInstance.init();
+}
+
+// Shuts down the sound manager.
+void SoundManager::smShutdown()
+{
+    soundInstance.deinit();
+}
+
+// Loads a sound into the sounds list.
+void SoundManager::loadSound(const string& name, const string& path)
+{
+    soundsList[name].load((path.c_str()));
+}
+
+// Plays the sound.
+void SoundManager::playSound(const string& name)
+{
+    soundInstance.play(soundList[name]);
+}
