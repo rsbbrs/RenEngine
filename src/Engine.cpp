@@ -23,6 +23,7 @@ void Engine::startup()
 // Shuts down the managers.
 void Engine::shutdown()
 {
+    input.imShutdown();
     graphics.gmShutdown();
 }
 
