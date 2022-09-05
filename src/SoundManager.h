@@ -11,12 +11,13 @@ namespace RenEngine
     {
         private:
             SoLoud::Soloud soundInstance;
-            std::unordered_map<string, SoLoud::Wav> soundsList;
+            std::unordered_map<std::string, SoLoud::Wav> soundsList;
 
         public:
             void smStartup();
             void smShutdown();
 
-            void loadSound(const string&, const string&)
+            void loadSound(const std::string&, const std::string&);
+            void playSound(const std::string& name);
     };
 }
