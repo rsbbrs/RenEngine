@@ -21,5 +21,8 @@ Checkpoint 3 and 4
 		   user input.
 		   
 		   The sound manager class stores the sounds in an 
-		   unordered map. It also clears it out before exiting
-		   in the smShutdown function.
+		   unordered map. A special clearSoundsList
+		   function was created to clear the sounds list
+		   in case the user wants to get rid of all sounds stored.
+		   It's also called in the shutdown function for the 
+		   sound manager.

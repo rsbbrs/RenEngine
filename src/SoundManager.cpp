@@ -9,8 +9,10 @@ void SoundManager::smStartup()
 }
 
 // Shuts down the sound manager.
+// Clears the sound list completely.
 void SoundManager::smShutdown()
 {
+    clearSoundsList();
     soundInstance.deinit();
 }
 
@@ -32,4 +34,10 @@ void SoundManager::playSound(const std::string& name)
 void SoundManager::closeSound(const std::string& name)
 {
     soundsList.erase(name);
+}
+
+// Clear sound list.
+void SoundManager::clearSoundsList()
+{
+    soundsList.clear();
 }
