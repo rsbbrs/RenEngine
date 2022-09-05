@@ -33,4 +33,4 @@ target("RenEngine")
 
     -- Packages
     add_packages("glfw", {public = true})
-    add_packages("soloud")
+    add_packages("soloud", {public = true})

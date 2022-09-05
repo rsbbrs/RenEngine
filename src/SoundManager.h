@@ -1,8 +1,9 @@
 #pragma once
 
 #include <Types.h>
-#include <soloud.h>
 #include <unordered_map>
+#include "soloud.h"
+#include "soloud_wav.h"
 
 namespace RenEngine
 {
