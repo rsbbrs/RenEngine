@@ -26,3 +26,8 @@ Checkpoint 3 and 4
 		   in case the user wants to get rid of all sounds stored.
 		   It's also called in the shutdown function for the 
 		   sound manager.
+		   
+		   The engine currently only has keyboard input for the enter
+		   and escape keys. The enter key calls the callback() function
+		   while the escape key closes the engine. I have defined more
+		   key codes in my Types.h file, in the input_code enum.
