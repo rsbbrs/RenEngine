@@ -68,6 +68,7 @@ void Engine::gameLoop(const UpdateCallback& callback)
         std::this_thread::sleep_for(total_loop_time - (t2 - t1));
     }
 
+    // Statistics for loop timing printed after game loop finishes.
     const auto end = time(0) - start;
     std::cout << "Game loop terminated.\nTotal time running: " << end << " seconds.\n"
               << "Total loops: " << loops << "\nLoops per second: " << (double)loops / (double)end << "\n";

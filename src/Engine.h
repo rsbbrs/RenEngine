@@ -25,13 +25,6 @@ namespace RenEngine
             const std::chrono::duration<double> total_loop_time;
             Configuration config;
 
-            // Game managers.
-            GraphicsManager graphics;
-            InputManager input;
-            ResourceManager resources;
-            SoundManager sound;
-
-
             // Start and shutdown functions.
             // Made private so no other classes can shut down the engine itself.
             void startup();
@@ -39,6 +32,12 @@ namespace RenEngine
             void processInput();
 
         public:
+            // Game managers.
+            GraphicsManager graphics;
+            InputManager input;
+            ResourceManager resources;
+            SoundManager sound;
+            
             // Constructor takes game parameters. Currently only for window size.
             Engine(int, int, const char *, bool);
 

@@ -15,13 +15,21 @@ void SoundManager::smShutdown()
 }
 
 // Loads a sound into the sounds list.
+// If sound already exists, skip loading.
 void SoundManager::loadSound(const std::string& name, const std::string& path)
 {
-    soundsList[name].load((path.c_str()));
+    if(soundsList.count(name) == 0)
+        soundsList[name].load((path.c_str()));
 }
 
 // Plays the sound.
 void SoundManager::playSound(const std::string& name)
 {
     soundInstance.play(soundsList[name]);
+}
+
+// Destroy a sound
+void SoundManager::closeSound(const std::string& name)
+{
+    soundsList.erase(name);
 }

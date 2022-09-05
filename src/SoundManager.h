@@ -18,6 +18,7 @@ namespace RenEngine
             void smShutdown();
 
             void loadSound(const std::string&, const std::string&);
-            void playSound(const std::string& name);
+            void playSound(const std::string&);
+            void closeSound(const std::string&);
     };
 }

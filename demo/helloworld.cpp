@@ -15,6 +15,8 @@ int main(int argc, const char* argv[])
     myEngine.gameLoop([&]()
     {
         std::cout << "Keyboard input working.\n";
+        myEngine.sound.loadSound("soundname", myEngine.resources.resolvePath("path"));
+        myEngine.sound.playSound("soundname");
     });
 
     return 0;
