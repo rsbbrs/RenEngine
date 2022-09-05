@@ -10,5 +10,4 @@ Thumbs.db
 
 # Personal
 /.vscode
-/packages/glfw-3.3.8
-/packages/soloud
+/packages
