@@ -55,8 +55,8 @@ void Engine::gameLoop(const UpdateCallback& callback)
         input.update();
 
         // Call the callback function when enter is pressed.
-        if(input.keyPressed(graphics, input_code::enter))
-            callback();
+        //if(input.keyPressed(graphics, input_code::enter))
+        callback();
        
         loops++;
 
@@ -74,4 +74,31 @@ void Engine::gameLoop(const UpdateCallback& callback)
               << "Total loops: " << loops << "\nLoops per second: " << (double)loops / (double)end << "\n";
 
     shutdown();
+}
+
+// API functions for the engine.
+// Mainly just pass through functions for the different manager's functions.
+bool Engine::keyPressed(input_code key)
+{
+    return input.keyPressed(graphics, key);
+}
+
+void Engine::loadSound(const std::string& name, const std::string& path)
+{
+    sound.loadSound(name, path);
+}
+
+void Engine::playSound(const std::string& name)
+{
+    sound.playSound(name);
+}
+
+void Engine::closeSound(const std::string& name)
+{
+    sound.closeSound(name);
+}
+
+std::string Engine::filePath(const std::string path)
+{
+    return resources.resolvePath(path);
 }

@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "Types.h"
 
 int main(int argc, const char* argv[])
 {
@@ -14,9 +15,12 @@ int main(int argc, const char* argv[])
 
     myEngine.gameLoop([&]()
     {
-        std::cout << "Keyboard input working.\n";
-        myEngine.sound.loadSound("Success", myEngine.resources.resolvePath("assets/sounds/success.mp3"));
-        myEngine.sound.playSound("Success");
+        if(myEngine.keyPressed(myEngine.))
+        {
+            std::cout << "Keyboard input working.\n";
+            myEngine.loadSound("Success", myEngine.filePath("assets/sounds/success.mp3"));
+            myEngine.playSound("Success");
+        }
     });
 
     return 0;
