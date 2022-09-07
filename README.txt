@@ -28,6 +28,15 @@ Checkpoint 3 and 4
 		   sound manager.
 		   
 		   The engine currently only has keyboard input for the enter
-		   and escape keys. The enter key calls the callback() function
+		   and escape keys. The enter key is used in the callback
+		   function to print a message and play a sound,
 		   while the escape key closes the engine. I have defined more
 		   key codes in my Types.h file, in the input_code enum.
+
+		   I also implemented an API in the Engine class that allows
+		   a user to call certain functions such as input checking and
+		   sound management. Mostly, these functions are just pass
+		   through functions that functions from the different
+		   managers. This way, the user can specify custom
+		   engine behaviour without having access to the managers
+		   directly. 
