@@ -1,5 +1,4 @@
-#include "Engine.h"
-#include "Types.h"
+#include <Engine.h>
 
 int main(int argc, const char* argv[])
 {
@@ -15,7 +14,7 @@ int main(int argc, const char* argv[])
 
     myEngine.gameLoop([&]()
     {
-        if(myEngine.keyPressed(myEngine.))
+        if(myEngine.queryInput(RenEngine::input_code::enter))
         {
             std::cout << "Keyboard input working.\n";
             myEngine.loadSound("Success", myEngine.filePath("assets/sounds/success.mp3"));

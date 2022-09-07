@@ -7,7 +7,6 @@
 
 // My own types
 #include <Types.h>
-#include <Declarations.h>
 
 // Managers
 #include <GraphicsManager.h>
@@ -44,16 +43,22 @@ namespace RenEngine
             // Main game loop.
             void gameLoop(const UpdateCallback&);
 
-            // Functions used so users can access certain engine functionality
-            // Input manager pass through.
-            bool keyPressed(input_code);
+            /*****************************************************************************/
+            /*                                                                           */
+            /* Functions created so users can access certain engine functionality        */
+            /* Mainly just pass through functions for the different manager's functions. */
+            /*                                                                           */
+            /*****************************************************************************/
+            
+            // Input manager pass throughs.
+            bool queryInput(input_code);
 
-            // Sound manager pass through.
+            // Sound manager pass throughs.
             void loadSound(const std::string&, const std::string&);
             void playSound(const std::string&);
             void closeSound(const std::string&);
 
-            // Resource manager pass through.
+            // Resource manager pass throughs.
             std::string filePath(std::string);
     };
 }

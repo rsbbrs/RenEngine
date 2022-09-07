@@ -9,7 +9,7 @@ namespace RenEngine
     class GraphicsManager
     {
         private: 
-            PrivateImpl* pimpl;
+            PrivateImpl* pImpl;
 
             friend class InputManager;
             void *getWindow();

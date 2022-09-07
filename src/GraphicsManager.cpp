@@ -14,7 +14,7 @@ class PrivateImpl
 
 // Constructor creates a new Private Implemenation automatically.
 GraphicsManager::GraphicsManager()
-: pimpl(new PrivateImpl())
+: pImpl(new PrivateImpl())
 {}
 
 // Creates the window to be displayed with the specific
@@ -30,27 +30,27 @@ void GraphicsManager::gmStartup(Configuration windowParam)
     glfwWindowHint( GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE );
     glfwWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE );
 
-    pimpl->window = glfwCreateWindow( windowParam.window.width, 
+    pImpl->window = glfwCreateWindow( windowParam.window.width, 
                                            windowParam.window.height, 
                                            windowParam.window.name, 
                                            windowParam.window.fullscreen ? glfwGetPrimaryMonitor() : 0, 0);
 
-    glfwSetWindowAspectRatio( pimpl->window, windowParam.window.width, windowParam.window.height );
+    glfwSetWindowAspectRatio( pImpl->window, windowParam.window.width, windowParam.window.height );
 
-    if( !pimpl->window )
+    if( !pImpl->window )
     {
         std::cerr << "Failed to create a window." << std::endl;
         glfwTerminate();
     }
 
-    glfwMakeContextCurrent( pimpl->window );
+    glfwMakeContextCurrent( pImpl->window );
     
     glfwSwapInterval(1);
 }
 
 void GraphicsManager::gmShutdown()
 {
-    delete pimpl;
+    delete pImpl;
     glfwTerminate();
 }
 
@@ -59,11 +59,11 @@ void GraphicsManager::gmShutdown()
 // pressed, otherwise returns 0.
 bool GraphicsManager::closeWindow()
 {
-    return !glfwWindowShouldClose(pimpl->window);
+    return !glfwWindowShouldClose(pImpl->window);
 }
 
 // Used to access the window by the input manager.
 void* GraphicsManager::getWindow()
 {
-    return pimpl->window;
+    return pImpl->window;
 }

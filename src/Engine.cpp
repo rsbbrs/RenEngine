@@ -35,8 +35,8 @@ void Engine::shutdown()
 // Runs 60 times per second.
 void Engine::gameLoop(const UpdateCallback& callback)
 {
+    // Variables used for timing statistics.
     int loops = 0;
-
     const auto start = time(0);
 
     // Game loop. According to my calculations, the loop runs
@@ -54,8 +54,7 @@ void Engine::gameLoop(const UpdateCallback& callback)
         // Update input state.
         input.update();
 
-        // Call the callback function when enter is pressed.
-        //if(input.keyPressed(graphics, input_code::enter))
+        // User callback to specify custom behaviour.
         callback();
        
         loops++;
@@ -76,9 +75,12 @@ void Engine::gameLoop(const UpdateCallback& callback)
     shutdown();
 }
 
-// API functions for the engine.
-// Mainly just pass through functions for the different manager's functions.
-bool Engine::keyPressed(input_code key)
+/*************************************************/
+/*                                               */
+/* API function immplementations for the engine. */
+/*                                               */
+/*************************************************/
+bool Engine::queryInput(input_code key)
 {
     return input.keyPressed(graphics, key);
 }
