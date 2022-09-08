@@ -17,7 +17,7 @@ int main(int argc, const char* argv[])
         if(myEngine.queryInput(RenEngine::input_code::enter))
         {
             std::cout << "Keyboard input working.\n";
-            myEngine.loadSound("Success", myEngine.filePath("assets/sounds/success.mp3"));
+            myEngine.loadSound("Success", myEngine.filePath("sounds/success.mp3"));
             myEngine.playSound("Success");
         }
     });

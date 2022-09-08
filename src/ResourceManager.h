@@ -1,5 +1,6 @@
 #pragma once
 
+#include <types.h>
 #include <string>
 #include <filesystem>
 
@@ -13,6 +14,6 @@ namespace RenEngine
         public:
             void rmStartup();
             void rmShutdown();
-            std::filesystem::path resolvePath(std::string);
+            std::string resolvePath(std::string);
     };
 }
