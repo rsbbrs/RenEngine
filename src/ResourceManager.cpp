@@ -4,7 +4,7 @@ using namespace RenEngine;
 
 void ResourceManager::rmStartup()
 {
-    // Does nothing currently.
+    assetsPath = "./assets";
 }
 
 void ResourceManager::rmShutdown()
@@ -14,7 +14,7 @@ void ResourceManager::rmShutdown()
 
 // Simply returns the path unchanged currently.
 // Will need to be improved later.
-std::string ResourceManager::resolvePath(std::string relativePath)
+std::filesystem::path ResourceManager::resolvePath(std::string relativePath)
 {
-    return relativePath;
+    return assetsPath / relativePath;
 }
