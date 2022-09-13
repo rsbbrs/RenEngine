@@ -1,6 +1,9 @@
 #define GLFW_INCLUDE_NONE
+#define SOKOL_IMPL
+#define SOKOL_GLCORE33
 
 #include <GLFW/glfw3.h>
+#include "sokol_gfx.h"
 #include <GraphicsManager.h>
 
 using namespace RenEngine;

@@ -2,6 +2,7 @@ includes("external/xmake_soloud.lua")
 add_rules("mode.debug", "mode.release")
 add_requires("glfw")
 add_requires("soloud")
+add_requires("sokol")
 
 set_policy("build.warning", true) -- show warnings
 set_warnings("all") -- warn about many things
@@ -34,3 +35,4 @@ target("RenEngine")
     -- Packages
     add_packages("glfw", {public = true})
     add_packages("soloud", {public = true})
+    add_packages("sokol")
