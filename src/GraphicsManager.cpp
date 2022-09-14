@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include "sokol_gfx.h"
 #include <GraphicsManager.h>
+#include <vector>
 
 using namespace RenEngine;
 
@@ -12,7 +13,19 @@ using namespace RenEngine;
 class PrivateImpl
 {
     public:
+        // Pointer to main window.
         GLFWwindow* window;
+
+        // A vertex buffer containing a textured square.
+        std::vector<float> vertices;
+        
+        // Vertex buffer for 2D objects.
+        sg_buffer_desc buffer_desc{};
+        sg_buffer vertex_buffer;
+
+        // Pipeline to describe GPU state for drawing.
+        sg_pipeline_desc pipeline_desc{};
+
 };
 
 // Constructor creates a new Private Implemenation automatically.
@@ -49,12 +62,27 @@ void GraphicsManager::gmStartup(Configuration windowParam)
     glfwMakeContextCurrent( pImpl->window );
     
     glfwSwapInterval(1);
+
+    // Sokol startup
+    sg_setup(sg_desc{});
+
+    pImpl->vertices = {
+        // positions      // texcoords
+        -1.0f,  -1.0f,    0.0f,  0.0f,
+        1.0f,  -1.0f,    1.0f,  0.0f,
+        -1.0f,   1.0f,    0.0f,  1.0f,
+        1.0f,   1.0f,    1.0f,  1.0f,
+    };
+
+    pImpl->buffer_desc.data = SG_RANGE(pImpl->vertices);
+    pImpl->vertex_buffer = sg_make_buffer(pImpl->buffer_desc);
 }
 
 void GraphicsManager::gmShutdown()
 {
     delete pImpl;
     glfwTerminate();
+    sg_shutdown();
 }
 
 // Returns the value of the close flag, which

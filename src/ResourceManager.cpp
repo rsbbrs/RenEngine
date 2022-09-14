@@ -5,7 +5,7 @@ using namespace RenEngine;
 // Sets the path to the assets folder.
 void ResourceManager::rmStartup()
 {
-    assetsPath = "./assets";
+    assetsPath = ".\\assets";
 }
 
 void ResourceManager::rmShutdown()
