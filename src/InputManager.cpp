@@ -1,8 +1,8 @@
 #define GLFW_INCLUDE_NONE
 
-#include <GLFW/glfw3.h>
-#include <InputManager.h>
-#include <GraphicsManager.h>
+#include "GLFW/glfw3.h"
+#include "InputManager.h"
+#include "GraphicsManager.h"
 
 using namespace RenEngine;
 

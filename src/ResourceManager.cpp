@@ -1,4 +1,6 @@
-#include <ResourceManager.h>
+#pragma once
+
+#include "ResourceManager.h"
 
 using namespace RenEngine;
 

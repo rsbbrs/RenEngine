@@ -1,12 +1,15 @@
+#pragma once
+
 #define GLFW_INCLUDE_NONE
 #define SOKOL_IMPL
 #define SOKOL_GLCORE33
 
-#include <GLFW/glfw3.h>
+#include <vector>
+
+#include "GLFW/glfw3.h"
 #include "sokol_gfx.h"
 #include "glm/glm.hpp"
-#include <GraphicsManager.h>
-#include <vector>
+#include "GraphicsManager.h"
 
 using namespace RenEngine;
 using namespace glm;
@@ -31,12 +34,11 @@ class PrivateImpl
         // Shader
         sg_shader_desc shader_desc{};
 
+        // Transformation matrices.
         struct Uniforms {
             mat4 projection;
             mat4 transform;
         };
-}
-
 };
 
 // Constructor creates a new Private Implemenation automatically.
@@ -115,6 +117,13 @@ void GraphicsManager::gmStartup(Configuration windowParam)
             gl_Position = projection*transform*vec4( position, 0.0, 1.0 );
             texcoords = texcoords0;
         })";
+
+    // The order of `.uniforms[0]` and `.uniforms[1]` must match the order in `Uniforms`
+    pImpl->shader_desc.vs.uniform_blocks[0].size = sizeof(PrivateImpl::Uniforms);
+    pImpl->shader_desc.vs.uniform_blocks[0].uniforms[0].name = "projection";
+    pImpl->shader_desc.vs.uniform_blocks[0].uniforms[0].type = SG_UNIFORMTYPE_MAT4;
+    pImpl->shader_desc.vs.uniform_blocks[0].uniforms[1].name = "transform";
+    pImpl->shader_desc.vs.uniform_blocks[0].uniforms[1].type = SG_UNIFORMTYPE_MAT4;   
 }
 
 void GraphicsManager::gmShutdown()
