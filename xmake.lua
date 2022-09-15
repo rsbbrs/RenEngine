@@ -3,6 +3,7 @@ add_rules("mode.debug", "mode.release")
 add_requires("glfw")
 add_requires("soloud")
 add_requires("sokol")
+add_requires("glm")
 
 set_policy("build.warning", true) -- show warnings
 set_warnings("all") -- warn about many things
@@ -36,3 +37,4 @@ target("RenEngine")
     add_packages("glfw", {public = true})
     add_packages("soloud", {public = true})
     add_packages("sokol")
+    add_packages("glm", {public = true})
