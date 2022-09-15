@@ -33,12 +33,6 @@ class PrivateImpl
 
         // Shader
         sg_shader_desc shader_desc{};
-
-        // Transformation matrices.
-        struct Uniforms {
-            mat4 projection;
-            mat4 transform;
-        };
 };
 
 // Constructor creates a new Private Implemenation automatically.
@@ -118,8 +112,15 @@ void GraphicsManager::gmStartup(Configuration windowParam)
             texcoords = texcoords0;
         })";
 
+    // Transformation matrices.
+    struct Uniforms {
+        mat4 projection;
+        mat4 transform;
+    };
+
+    // Sets up the projection and transformation matrices and informs the GPU about them.
     // The order of `.uniforms[0]` and `.uniforms[1]` must match the order in `Uniforms`
-    pImpl->shader_desc.vs.uniform_blocks[0].size = sizeof(PrivateImpl::Uniforms);
+    pImpl->shader_desc.vs.uniform_blocks[0].size = sizeof(Uniforms);
     pImpl->shader_desc.vs.uniform_blocks[0].uniforms[0].name = "projection";
     pImpl->shader_desc.vs.uniform_blocks[0].uniforms[0].type = SG_UNIFORMTYPE_MAT4;
     pImpl->shader_desc.vs.uniform_blocks[0].uniforms[1].name = "transform";
