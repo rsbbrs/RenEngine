@@ -9,6 +9,7 @@
 #include "GLFW/glfw3.h"
 #include "sokol_gfx.h"
 #include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 #include "GraphicsManager.h"
 
 using namespace RenEngine;
@@ -28,8 +29,11 @@ class PrivateImpl
         sg_buffer_desc buffer_desc{};
         sg_buffer vertex_buffer;
 
-        // Pipeline to describe GPU state for drawing.
+        // Pipeline description to describe GPU state for drawing.
         sg_pipeline_desc pipeline_desc{};
+
+        // Actual pipeline
+        sg_pipeline pipeline;
 
         // Shader
         sg_shader_desc shader_desc{};
@@ -100,6 +104,12 @@ void GraphicsManager::gmStartup(Configuration windowParam)
     pImpl->pipeline_desc.layout.attrs[0].format = SG_VERTEXFORMAT_FLOAT2;
     pImpl->pipeline_desc.layout.attrs[1].format = SG_VERTEXFORMAT_FLOAT2;
 
+    // Transformation matrices.
+    struct Uniforms {
+        mat4 projection;
+        mat4 transform;
+    };
+
     pImpl->shader_desc.vs.source = R"(
         #version 330
         uniform mat4 projection;
@@ -110,21 +120,55 @@ void GraphicsManager::gmStartup(Configuration windowParam)
         void main() {
             gl_Position = projection*transform*vec4( position, 0.0, 1.0 );
             texcoords = texcoords0;
+
+            // Sets up the projection and transformation matrices and informs the GPU about them.
+            // The order of `.uniforms[0]` and `.uniforms[1]` must match the order in `Uniforms`
+            pImpl->shader_desc.vs.uniform_blocks[0].size = sizeof(Uniforms);
+            pImpl->shader_desc.vs.uniform_blocks[0].uniforms[0].name = "projection";
+            pImpl->shader_desc.vs.uniform_blocks[0].uniforms[0].type = SG_UNIFORMTYPE_MAT4;
+            pImpl->shader_desc.vs.uniform_blocks[0].uniforms[1].name = "transform";
+            pImpl->shader_desc.vs.uniform_blocks[0].uniforms[1].type = SG_UNIFORMTYPE_MAT4;
+
+            // Start with an identity matrix.
+            uniforms.projection = mat4{1};
+            // Scale x and y by 1/100.
+            uniforms.projection[0][0] = uniforms.projection[1][1] = 1./100.;
+            // Scale the long edge by an additional 1/(long/short) = short/long.
+            if( width < height ) {
+                uniforms.projection[1][1] *= width;
+                uniforms.projection[1][1] /= height;
+            } else {
+                uniforms.projection[0][0] *= height;
+                uniforms.projection[0][0] /= width;
+            }
+
+            uniforms.transform = translate( mat4{1}, vec3( position, z ) ) * scale( mat4{1}, glm::vec3( scale ) );
+
+            if( image_width < image_height ) {
+                uniforms.transform = uniforms.transform * scale( mat4{1}, vec3( real(image_width)/image_height, 1.0, 1.0 ) );
+            } else {
+                uniforms.transform = uniforms.transform * scale( mat4{1}, vec3( 1.0, real(image_height)/image_width, 1.0 ) );
+            }   
         })";
 
-    // Transformation matrices.
-    struct Uniforms {
-        mat4 projection;
-        mat4 transform;
-    };
+    pImpl->shader_desc.fs.source = R"(
+        #version 330
+        uniform sampler2D tex;
+        in vec2 texcoords;
+        out vec4 frag_color;
+        void main() {
+            frag_color = texture( tex, texcoords );
+            // If we're not drawing back to front, discard very transparent pixels so we
+            // don't write to the depth buffer and prevent farther sprites from drawing.
+            if( frag_color.a < 0.1 ) discard;
+        }
+    )";
+    pImpl->shader_desc.fs.images[0].name = "tex"; // The name should match the shader source code.
+    pImpl->shader_desc.fs.images[0].image_type = SG_IMAGETYPE_2D;
 
-    // Sets up the projection and transformation matrices and informs the GPU about them.
-    // The order of `.uniforms[0]` and `.uniforms[1]` must match the order in `Uniforms`
-    pImpl->shader_desc.vs.uniform_blocks[0].size = sizeof(Uniforms);
-    pImpl->shader_desc.vs.uniform_blocks[0].uniforms[0].name = "projection";
-    pImpl->shader_desc.vs.uniform_blocks[0].uniforms[0].type = SG_UNIFORMTYPE_MAT4;
-    pImpl->shader_desc.vs.uniform_blocks[0].uniforms[1].name = "transform";
-    pImpl->shader_desc.vs.uniform_blocks[0].uniforms[1].type = SG_UNIFORMTYPE_MAT4;   
+    // Sets up the pipeline using the shaders.
+    pImpl->pipeline_desc.shader = sg_make_shader( pImpl->shader_desc );
+    pImpl->pipeline = sg_make_pipeline( pImpl->pipeline_desc );
 }
 
 void GraphicsManager::gmShutdown()
