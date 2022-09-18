@@ -5,7 +5,6 @@
 #define SOKOL_GLCORE33
 #define STB_IMAGE_IMPLEMENTATION
 
-#include <vector>
 #include <unordered_map>
 
 #include "GLFW/glfw3.h"
@@ -20,6 +19,13 @@ using namespace glm;
 
 namespace
 {
+    // Transformation matrices.
+    struct Uniforms {
+        mat4 projection;
+        mat4 transform;
+    };
+
+    // Image struct to hold sprite image info.
     typedef struct image_info
     {
         sg_image image;
@@ -57,7 +63,7 @@ class PrivateImpl
         sg_bindings bindings{};
 
         // Stores image data.
-        std::unordered_map<std::string, sg_image> imageMap;
+        std::unordered_map<std::string, Image> imageMap;
 
 };
 
@@ -125,12 +131,6 @@ void GraphicsManager::gmStartup(Configuration windowParam)
     // Layout of points.
     pImpl->pipeline_desc.layout.attrs[0].format = SG_VERTEXFORMAT_FLOAT2;
     pImpl->pipeline_desc.layout.attrs[1].format = SG_VERTEXFORMAT_FLOAT2;
-
-    // Transformation matrices.
-    struct Uniforms {
-        mat4 projection;
-        mat4 transform;
-    };
 
     // Vertex shader.
     pImpl->shader_desc.vs.source = R"(
@@ -201,7 +201,7 @@ void* GraphicsManager::getWindow()
 }
 
 // Loads sprite images to attach to fragment shader.
-bool loadImage(const std::string& name, const std::string& path)
+bool GraphicsManager::loadImage(const std::string& name, const std::string& path)
 {
     // Loads the image.
     Image newImage = {};
@@ -210,18 +210,36 @@ bool loadImage(const std::string& name, const std::string& path)
 
     // Uploads image data to the GPU
     sg_image_desc image_desc{};
-    image_desc.width = width;
-    image_desc.height = height;
+    image_desc.width = newImage.width;
+    image_desc.height = newImage.height;
     image_desc.pixel_format = SG_PIXELFORMAT_RGBA8;
     image_desc.min_filter = SG_FILTER_LINEAR;
     image_desc.mag_filter = SG_FILTER_LINEAR;
     image_desc.wrap_u = SG_WRAP_CLAMP_TO_EDGE;
     image_desc.wrap_v = SG_WRAP_CLAMP_TO_EDGE;
     image_desc.data.subimage[0][0].ptr = data;
-    image_desc.data.subimage[0][0].size = (size_t)(width * height * 4);
+    image_desc.data.subimage[0][0].size = (size_t)(newImage.width * newImage.height * 4);
 
     sg_image image = sg_make_image( image_desc );
+    newImage.image = image;
+
+    // Adds the image data to the map
+    pImpl->imageMap[name] = newImage;
 
     // Free image memory now that data's in the GPU.
     stbi_image_free( data );
+
+    return true;
+}
+
+// Destroys a specific image in the image map.
+void GraphicsManager::destroyImage(const std::string& name)
+{
+    pImpl->imageMap.erase(name);
+}
+
+// Clears the entire list of images.
+void GraphicsManager::clearAllImages()
+{
+    pImpl->imageMap.clear();
 }

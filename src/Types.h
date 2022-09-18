@@ -13,7 +13,7 @@ namespace RenEngine
     class InputManager;
 
     // Global types.
-    typedef struct engine_config
+    typedef struct
     {
         struct window_param
         {
@@ -23,6 +23,12 @@ namespace RenEngine
         } window;
 
     } Configuration;
+
+    // Sprite data.
+    typedef struct
+    {
+
+    } Sprite;
 
     //  Some common keyboard buttons for games
     enum input_code
