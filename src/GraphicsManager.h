@@ -16,8 +16,9 @@ namespace RenEngine
 
         public:
             GraphicsManager();
-            void gmStartup(Configuration);
+            void gmStartup(Configuration windowParamm);
             void gmShutdown();
             bool closeWindow();
+            bool loadImage(const std::string& name, const std::string& path);
     };
 }
