@@ -6,13 +6,13 @@
 #include <functional>
 
 // My own types
-#include <Types.h>
+#include "Types.h"
 
 // Managers
-#include <GraphicsManager.h>
-#include <InputManager.h>
-#include <ResourceManager.h>
-#include <SoundManager.h>
+#include "GraphicsManager.h"
+#include "InputManager.h"
+#include "ResourceManager.h"
+#include "SoundManager.h"
 
 namespace RenEngine
 {
@@ -38,10 +38,10 @@ namespace RenEngine
 
         public:            
             // Constructor takes game parameters. Currently only for window size.
-            Engine(int, int, const char *, bool);
+            Engine(int width, int height, const char *name , bool fullscreen);
 
             // Main game loop.
-            void gameLoop(const UpdateCallback&);
+            void gameLoop(const UpdateCallback& callback);
 
             /*****************************************************************************/
             /*                                                                           */
@@ -51,14 +51,20 @@ namespace RenEngine
             /*****************************************************************************/
             
             // Input manager pass throughs.
-            bool queryInput(input_code);
+            bool queryInput(input_code key);
 
             // Sound manager pass throughs.
-            void loadSound(const std::string&, const std::string&);
-            void playSound(const std::string&);
-            void closeSound(const std::string&);
+            void loadSound(const std::string& name, const std::string& path);
+            void playSound(const std::string& name);
+            void closeSound(const std::string& name);
+            void clearAllSounds();
 
             // Resource manager pass throughs.
-            std::string filePath(std::string);
+            std::string filePath(std::string path);
+
+            // Graphics manager pass throughs.
+            void loadSpriteImage(const std::string& name, const std::string& path);
+            void destroySpriteImage(const std::string& name);
+            void clearAllImages();
     };
 }

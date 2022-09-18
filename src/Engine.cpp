@@ -77,7 +77,7 @@ void Engine::gameLoop(const UpdateCallback& callback)
 
 /*************************************************/
 /*                                               */
-/* API function immplementations for the engine. */
+/* API function implementations for the engine. */
 /*                                               */
 /*************************************************/
 bool Engine::queryInput(input_code key)
@@ -100,7 +100,27 @@ void Engine::closeSound(const std::string& name)
     sound.closeSound(name);
 }
 
+void Engine::clearAllSounds()
+{
+    sound.clearSoundsList();
+}
+
 std::string Engine::filePath(const std::string path)
 {
     return resources.resolvePath(path);
+}
+
+void Engine::loadSpriteImage(const std::string& name, const std::string& path)
+{
+    graphics.loadImage(name, path);
+}
+
+void Engine::destroySpriteImage(const std::string& name)
+{
+    graphics.destroyImage(name);
+}
+
+void Engine::clearAllImages()
+{
+    graphics.clearAllImages();
 }
