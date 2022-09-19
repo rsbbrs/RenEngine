@@ -113,9 +113,9 @@ std::string Engine::filePath(const std::string& path)
     return resourceManager.resolvePath(path);
 }
 
-void Engine::loadSpriteImage(const std::string& name, const std::string& path)
+bool Engine::loadSpriteImage(const std::string& name, const std::string& path)
 {
-    graphicsManager.loadImage(name, path);
+    return graphicsManager.loadImage(name, path);
 }
 
 void Engine::destroySpriteImage(const std::string& name)

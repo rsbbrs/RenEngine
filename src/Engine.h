@@ -63,7 +63,7 @@ namespace RenEngine
             std::string filePath(const std::string& path);
 
             // Graphics manager pass throughs.
-            void loadSpriteImage(const std::string& name, const std::string& path);
+            bool loadSpriteImage(const std::string& name, const std::string& path);
             void destroySpriteImage(const std::string& name);
             void clearAllImages();
             void draw(const std::vector<Sprite>& sprites);

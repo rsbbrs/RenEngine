@@ -20,12 +20,6 @@ using namespace glm;
 
 namespace
 {
-    // Transformation matrices.
-    struct Uniforms {
-        mat4 projection;
-        mat4 transform;
-    };
-
     // Image struct to hold sprite image info.
     typedef struct image_info
     {
@@ -173,7 +167,7 @@ void GraphicsManager::gmStartup(Configuration windowParam)
     // Tells system what to do when drawing a new frame.
     pImpl->pass_action.colors[0].action = SG_ACTION_CLEAR;
     /* red, green, blue, alpha floating point values for a color to fill the frame buffer with */
-    pImpl->pass_action.colors[0].value = {0.5, 0.5, 0.0, 1.0};
+    pImpl->pass_action.colors[0].value = {0.5, 0.0, 0.5, 1.0};
     
     pImpl->bindings.vertex_buffers[0] = vertex_buffer;
 }
@@ -238,6 +232,10 @@ bool GraphicsManager::loadImage(const std::string& name, const std::string& path
     Image newImage = {};
     int channels;
     unsigned char* data = stbi_load( path.c_str(), &newImage.width, &newImage.height, &channels, 4 );
+
+    // Load failed.
+    if(data == NULL)
+        return false;
 
     // Uploads image data to the GPU
     sg_image_desc image_desc{};

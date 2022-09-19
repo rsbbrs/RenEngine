@@ -1,5 +1,7 @@
 #include "Engine.h"
 
+using namespace RenEngine;
+
 int main(int argc, const char* argv[])
 {
     if(argc < 5)
@@ -10,16 +12,35 @@ int main(int argc, const char* argv[])
     }
     
     // Starts the engine.
-    RenEngine::Engine myEngine(atoi(argv[1]), atoi(argv[2]), argv[3], std::string(argv[4]).compare("true") == 0? true : false);
+    Engine renEngine(atoi(argv[1]), atoi(argv[2]), argv[3], std::string(argv[4]).compare("true") == 0? true : false);
 
-    myEngine.gameLoop([&]()
+    // Sprite vector.
+    std::vector<Sprite> sprites;
+    if(renEngine.loadSpriteImage("mySprite", renEngine.filePath("sprites\\mySprite.png")))
     {
-        if(myEngine.queryInput(RenEngine::input_code::enter))
+        std::cout << "Successfully loaded mySprite.\n";
+        // Creates a sprite called mySprite with position (1, 1), scale of 1 and z value of 1.
+        sprites.push_back(Sprite
+            {
+                "mySprite",
+                vec2(0, 0),
+                1,
+                1
+            });
+    }
+
+    // Callback for the engine.
+    renEngine.gameLoop([&]()
+    {
+        // Checks if user input is pressed to play the sound.
+        if(renEngine.queryInput(input_code::enter))
         {
-            std::cout << "Keyboard input working.\n";
-            myEngine.loadSound("Success", myEngine.filePath("sounds\\success.mp3"));
-            myEngine.playSound("Success");
+            renEngine.loadSound("Success", renEngine.filePath("sounds\\success.mp3"));
+            renEngine.playSound("Success");
         }
+
+        // Draws loaded sprites.
+        renEngine.draw(sprites);
     });
 
     return 0;
