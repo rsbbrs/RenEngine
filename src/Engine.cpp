@@ -1,4 +1,7 @@
+#pragma once
+
 #include <Engine.h>
+
 using namespace RenEngine;
 
 // Constructor.
@@ -16,19 +19,19 @@ Engine::Engine(int width, int height, const char *name, bool fullscreen)
 // Starts up all managers.
 void Engine::startup()
 {
-    graphics.gmStartup(config);
-    input.imStartup();
-    resources.rmStartup();
-    sound.smStartup();
+    graphicsManager.gmStartup(config);
+    inputManager.imStartup();
+    resourceManager.rmStartup();
+    soundManager.smStartup();
 }
 
 // Shuts down the managers.
 void Engine::shutdown()
 {
-    sound.smShutdown();
-    resources.rmShutdown();
-    input.imShutdown();
-    graphics.gmShutdown();
+    soundManager.smShutdown();
+    resourceManager.rmShutdown();
+    inputManager.imShutdown();
+    graphicsManager.gmShutdown();
 }
 
 // Main game loop where game logic will be processed.
@@ -46,13 +49,13 @@ void Engine::gameLoop(const UpdateCallback& callback)
     // function doubles the amount of time to sleep. Halfving
     // the interval per loop seems to make it run in 1/60 of
     // a second.
-    while(graphics.closeWindow() && !input.keyPressed(graphics, input_code::escape))
+    while(graphicsManager.closeWindow() && !inputManager.keyPressed(graphicsManager, input_code::escape))
     {
         // Tick start.
         const auto t1 = std::chrono::steady_clock::now();
 
         // Update input state.
-        input.update();
+        inputManager.update();
 
         // User callback to specify custom behaviour.
         callback();
@@ -75,52 +78,57 @@ void Engine::gameLoop(const UpdateCallback& callback)
     shutdown();
 }
 
-/*************************************************/
-/*                                               */
-/* API function implementations for the engine. */
-/*                                               */
-/*************************************************/
+/**************************************************/
+/*                                                */
+/*  API function implementations for the engine.  */
+/*                                                */
+/**************************************************/
 bool Engine::queryInput(input_code key)
 {
-    return input.keyPressed(graphics, key);
+    return inputManager.keyPressed(graphicsManager, key);
 }
 
 void Engine::loadSound(const std::string& name, const std::string& path)
 {
-    sound.loadSound(name, path);
+    soundManager.loadSound(name, path);
 }
 
 void Engine::playSound(const std::string& name)
 {
-    sound.playSound(name);
+    soundManager.playSound(name);
 }
 
 void Engine::closeSound(const std::string& name)
 {
-    sound.closeSound(name);
+    soundManager.closeSound(name);
 }
 
 void Engine::clearAllSounds()
 {
-    sound.clearSoundsList();
+    soundManager.clearSoundsList();
 }
 
-std::string Engine::filePath(const std::string path)
+std::string Engine::filePath(const std::string& path)
 {
-    return resources.resolvePath(path);
+    return resourceManager.resolvePath(path);
 }
 
 void Engine::loadSpriteImage(const std::string& name, const std::string& path)
 {
-    graphics.loadImage(name, path);
+    graphicsManager.loadImage(name, path);
 }
 
 void Engine::destroySpriteImage(const std::string& name)
 {
-    graphics.destroyImage(name);
+    graphicsManager.destroyImage(name);
 }
 
 void Engine::clearAllImages()
 {
-    graphics.clearAllImages();
+    graphicsManager.clearAllImages();
+}
+
+void Engine::draw(const std::vector<Sprite>& sprites)
+{
+    graphicsManager.draw(sprites);
 }

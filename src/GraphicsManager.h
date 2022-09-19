@@ -15,6 +15,7 @@ namespace RenEngine
 
             friend class InputManager;
             void *getWindow();
+            void createMatrices(Sprite sprite, Uniforms& uniforms, int width, int height);
 
         public:
             GraphicsManager();

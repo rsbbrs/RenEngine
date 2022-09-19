@@ -26,10 +26,10 @@ namespace RenEngine
             Configuration config;
 
             // Game managers.
-            GraphicsManager graphics;
-            InputManager input;
-            ResourceManager resources;
-            SoundManager sound;
+            GraphicsManager graphicsManager;
+            InputManager inputManager;
+            ResourceManager resourceManager;
+            SoundManager soundManager;
 
             // Start and shutdown functions.
             // Made private so no other classes can shut down the engine itself.
@@ -60,11 +60,12 @@ namespace RenEngine
             void clearAllSounds();
 
             // Resource manager pass throughs.
-            std::string filePath(std::string path);
+            std::string filePath(const std::string& path);
 
             // Graphics manager pass throughs.
             void loadSpriteImage(const std::string& name, const std::string& path);
             void destroySpriteImage(const std::string& name);
             void clearAllImages();
+            void draw(const std::vector<Sprite>& sprites);
     };
 }

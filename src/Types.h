@@ -12,6 +12,11 @@ namespace RenEngine
     class GraphicsManager;
     class InputManager;
 
+    // Full featured vector types.
+    typedef glm::vec2 vec2;
+    typedef glm::vec3 vec3;
+    typedef glm::vec4 vec4;
+
     // Global types.
     typedef struct
     {
@@ -27,7 +32,10 @@ namespace RenEngine
     // Sprite data.
     typedef struct
     {
-
+        std::string name;
+        vec2 position;
+        int scale;
+        int z;
     } Sprite;
 
     //  Some common keyboard buttons for games
@@ -61,9 +69,4 @@ namespace RenEngine
         enter,
         tab,
     };
-
-    // Full featured vector types.
-    typedef glm::vec2 vec2;
-    typedef glm::vec3 vec3;
-    typedef glm::vec4 vec4;
 }
