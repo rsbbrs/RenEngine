@@ -7,7 +7,7 @@ int main(int argc, const char* argv[])
     if(argc < 5)
     {
         std::cerr << "Error: Four arguments are needed to run the engine." << "\n";
-        std::cerr << "Format: helloworld width height name fullscreen." << "\n";
+        std::cerr << "Format: helloworld name width height fullscreen." << "\n";
         return -1;
     }
     

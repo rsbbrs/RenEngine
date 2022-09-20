@@ -5,12 +5,12 @@
 using namespace RenEngine;
 
 // Constructor.
-Engine::Engine(int width, int height, const char *name, bool fullscreen)
+Engine::Engine(const char* name, int width, int height, bool fullscreen)
 : total_loop_time(1.f/120.f)
 {
+    config.window.name = name;
     config.window.width = width;
     config.window.height = height;
-    config.window.name = name;
     config.window.fullscreen = fullscreen;
 
     startup();
