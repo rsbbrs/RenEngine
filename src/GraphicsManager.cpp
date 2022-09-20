@@ -143,7 +143,10 @@ void GraphicsManager::gmStartup(Configuration windowParam)
             gl_Position = projection*transform*vec4( position, 0.0, 1.0 );
             texcoords = texcoords0;
     })";
+
+    // Sets the uniform matrices used in the vertex shader.
     shader_desc.vs.uniform_blocks[0].size = sizeof(Uniforms);
+    
     // The order of `.uniforms[0]` and `.uniforms[1]` must match the order in `Uniforms`
     shader_desc.vs.uniform_blocks[0].uniforms[0].name = "projection";
     shader_desc.vs.uniform_blocks[0].uniforms[0].type = SG_UNIFORMTYPE_MAT4;
