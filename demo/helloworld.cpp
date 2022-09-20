@@ -7,7 +7,7 @@ int main(int argc, const char* argv[])
     if(argc < 5)
     {
         std::cerr << "Error: Four arguments are needed to run the engine." << "\n";
-        std::cerr << "Format: helloworld width height name fullscreen." << "\n";
+        std::cerr << "Format: helloworld name width height fullscreen." << "\n";
         return -1;
     }
     
@@ -16,6 +16,8 @@ int main(int argc, const char* argv[])
 
     // Sprite vector.
     std::vector<Sprite> sprites;
+
+    // Loading sprite.
     if(renEngine.loadSpriteImage("mySprite", renEngine.filePath("sprites\\mySprite.png")))
     {
         std::cout << "Successfully loaded mySprite.\n";
