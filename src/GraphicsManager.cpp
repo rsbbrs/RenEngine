@@ -249,6 +249,8 @@ bool GraphicsManager::loadImage(const std::string& name, const std::string& path
     if(data == NULL)
         return false;
 
+    std::cout << newImage.width << " " << newImage.height << "\n";
+
     // Uploads image data to the GPU
     sg_image_desc image_desc{};
     image_desc.width = newImage.width;
