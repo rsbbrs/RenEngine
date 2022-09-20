@@ -68,6 +68,8 @@ void GraphicsManager::gmStartup(Configuration windowParam)
     // Window creation magic by GLFW.
     glfwInit();
 
+    std::cout << "Here\n";
+
     // We'll use sokol_gfx's OpenGL backend
     glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 3 );
     glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 3 );
