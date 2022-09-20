@@ -20,6 +20,13 @@ using namespace glm;
 
 namespace
 {
+    // Transformation matrices.
+    struct Uniforms
+    {
+        glm::mat4 projection;
+        glm::mat4 transform;
+    };
+
     // Image struct to hold sprite image info.
     typedef struct image_info
     {
@@ -34,9 +41,6 @@ class PrivateImpl
     public:
         // Pointer to main window.
         GLFWwindow* window;
-
-        // A vertex buffer containing a textured square.
-        std::vector<float> vertices;
 
         // Actual pipeline
         sg_pipeline pipeline;
@@ -90,7 +94,8 @@ void GraphicsManager::gmStartup(Configuration windowParam)
     // Sokol startup
     sg_setup(sg_desc{});
 
-    pImpl->vertices = {
+    // A vertex buffer containing a textured square.
+    const float vertices[] = {
         // positions      // texcoords
         -1.0f,  -1.0f,    0.0f,  0.0f,
         1.0f,  -1.0f,    1.0f,  0.0f,
@@ -107,7 +112,7 @@ void GraphicsManager::gmStartup(Configuration windowParam)
     // Shader
     sg_shader_desc shader_desc{};
 
-    buffer_desc.data = SG_RANGE(pImpl->vertices);
+    buffer_desc.data = SG_RANGE(vertices);
     vertex_buffer = sg_make_buffer(buffer_desc);    
 
     // Triangle strip for data primitives.
@@ -144,7 +149,7 @@ void GraphicsManager::gmStartup(Configuration windowParam)
     shader_desc.vs.uniform_blocks[0].uniforms[0].type = SG_UNIFORMTYPE_MAT4;
     shader_desc.vs.uniform_blocks[0].uniforms[1].name = "transform";
     shader_desc.vs.uniform_blocks[0].uniforms[1].type = SG_UNIFORMTYPE_MAT4;
-
+    
     // Fragment shader.
     shader_desc.fs.source = R"(
     #version 330
@@ -167,7 +172,7 @@ void GraphicsManager::gmStartup(Configuration windowParam)
     // Tells system what to do when drawing a new frame.
     pImpl->pass_action.colors[0].action = SG_ACTION_CLEAR;
     /* red, green, blue, alpha floating point values for a color to fill the frame buffer with */
-    pImpl->pass_action.colors[0].value = {0.5, 0.0, 0.5, 1.0};
+    pImpl->pass_action.colors[0].value = {/*0.5, 0.5, 0.5, 1.0*/};
     
     pImpl->bindings.vertex_buffers[0] = vertex_buffer;
 }
@@ -179,35 +184,39 @@ void GraphicsManager::gmShutdown()
     sg_shutdown();
 }
 
-// Creates the projection and transformation matrices.
-void GraphicsManager::createMatrices(Sprite sprite, Uniforms& uniforms, int width, int height)
+// Creates the projection matrix for drawing.
+void GraphicsManager::createProjectionMatrix(glm::mat4& projection, int width, int height)
 {
-    // First, set up the projection matrix.
+    // Set up the projection matrix.
     // Start with an identity matrix.
-    uniforms.projection = mat4{1};
+    projection = mat4{1};
     // Scale x and y by 1/100.
-    uniforms.projection[0][0] = uniforms.projection[1][1] = 1./100.;
+    projection[0][0] = projection[1][1] = 1./100.;
     // Scale the long edge by an additional 1/(long/short) = short/long.
     if( width < height ) {
-        uniforms.projection[1][1] *= width;
-        uniforms.projection[1][1] /= height;
+        projection[1][1] *= width;
+        projection[1][1] /= height;
     } else {
-        uniforms.projection[0][0] *= height;
-        uniforms.projection[0][0] /= width;
+        projection[0][0] *= height;
+        projection[0][0] /= width;
     }
+}
 
-    // Second, set the transformation matrix.
+// Creates the transformation matrix for each sprite.
+void GraphicsManager::createTransformMatrix(const Sprite& sprite, glm::mat4& transform)
+{
+    // Set the transformation matrix.
     // Currently only allows scaling and translation.
-    uniforms.transform = translate( mat4{1}, vec3( sprite.position, sprite.z ) ) * scale( mat4{1}, vec3( sprite.scale ) );
+    transform = translate( mat4{1}, vec3( sprite.position, sprite.z ) ) * scale( mat4{1}, vec3( sprite.scale ) );
 
     // Scales down quad so that image draws within the appropriate aspect ratio.
     int image_width = pImpl->imageMap[sprite.name].width;
     int image_height = pImpl->imageMap[sprite.name].height;
 
     if( image_width < image_height ) {
-    uniforms.transform = uniforms.transform * scale( mat4{1}, vec3( std::real(image_width)/image_height, 1.0, 1.0 ) );
+    transform = transform * scale( mat4{1}, vec3( std::real(image_width)/image_height, 1.0, 1.0 ) );
     } else {
-        uniforms.transform = uniforms.transform * scale( mat4{1}, vec3( 1.0, std::real(image_height)/image_width, 1.0 ) );
+        transform = transform * scale( mat4{1}, vec3( 1.0, std::real(image_height)/image_width, 1.0 ) );
     }
 }
 
@@ -229,7 +238,7 @@ void* GraphicsManager::getWindow()
 bool GraphicsManager::loadImage(const std::string& name, const std::string& path)
 {
     // Loads the image.
-    Image newImage = {};
+    Image newImage{};
     int channels;
     unsigned char* data = stbi_load( path.c_str(), &newImage.width, &newImage.height, &channels, 4 );
 
@@ -277,29 +286,32 @@ void GraphicsManager::draw(const std::vector<Sprite>& sprites)
 {
     int width, height;
 
-    // Gets current frame buffer size corresponding to the window.
+    // 1. Gets current frame buffer size corresponding to the window.
     glfwGetFramebufferSize(pImpl->window, &width, &height);
 
-    // Clears default frame buffer.
+    // 2. Clears default frame buffer.
     sg_begin_default_pass(pImpl->pass_action, width, height);
 
-    // Apply the pipeline.
+    // 3. Apply the pipeline.
     sg_apply_pipeline(pImpl->pipeline);
 
     // Sprite transformation matrices.
     Uniforms uniforms;
 
-    // Draw each sprite.
+    // 4. Creates the projection matrix
+    createProjectionMatrix(uniforms.projection, width, height);
+
+    // 5. Draw each sprite.
     for(Sprite s : sprites)
     {
-        createMatrices(s, uniforms, width, height);
+        createTransformMatrix(s, uniforms.transform);
         sg_apply_uniforms(SG_SHADERSTAGE_VS, 0, SG_RANGE(uniforms));
         pImpl->bindings.fs_images[0] = pImpl->imageMap[s.name].image;
         sg_apply_bindings(pImpl->bindings);
         sg_draw(0, 4, 1);
     }
 
-    // End drawing.
+    // 6. End drawing.
     sg_end_pass();
     sg_commit();
     glfwSwapBuffers(pImpl->window);

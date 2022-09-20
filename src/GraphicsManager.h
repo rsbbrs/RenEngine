@@ -13,17 +13,10 @@ namespace RenEngine
         private: 
             PrivateImpl* pImpl;
 
-            // Transformation matrices.
-            struct Uniforms
-            {
-                glm::mat4 projection;
-                glm::mat4 transform;
-            };
-
             friend class InputManager;
             void *getWindow();
-            void createMatrices(Sprite sprite, Uniforms& uniforms, int width, int height);
-
+            void createProjectionMatrix(glm::mat4& projection, int width, int height);
+            void createTransformMatrix(const Sprite& sprite, glm::mat4& transform);
         public:
             GraphicsManager();
             void gmStartup(Configuration windowParamm);
