@@ -12,7 +12,7 @@ int main(int argc, const char* argv[])
     }
     
     // Starts the engine.
-    Engine renEngine(atoi(argv[1]), atoi(argv[2]), argv[3], std::string(argv[4]).compare("true") == 0? true : false);
+    Engine renEngine(argv[1], atoi(argv[2]), atoi(argv[3]), std::string(argv[4]).compare("true") == 0? true : false);
 
     // Sprite vector.
     std::vector<Sprite> sprites;
