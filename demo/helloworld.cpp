@@ -25,9 +25,9 @@ int main(int argc, const char* argv[])
         sprites.push_back(Sprite
             {
                 "mySprite",
-                vec2(600, 340),
-                1,
-                1
+                vec2(0, 0),
+                50,
+                0
             });
     }
 
