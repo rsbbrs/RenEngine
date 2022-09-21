@@ -38,7 +38,7 @@ namespace RenEngine
 
         public:            
             // Constructor takes game parameters. Currently only for window size.
-            Engine(const char* name, int width, int height, bool fullscreen);
+            Engine(const char* name = "RenEngine", int width = 1280, int height = 720, bool fullscreen = false);
 
             // Main game loop.
             void gameLoop(const UpdateCallback& callback);
