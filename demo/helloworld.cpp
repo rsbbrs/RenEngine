@@ -27,7 +27,7 @@ int main(int argc, const char* argv[])
                 "mySprite",
                 vec2(0, 0),
                 50,
-                0
+                1
             });
     }
 
