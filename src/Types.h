@@ -65,6 +65,11 @@ namespace RenEngine
         s = 83,
         d = 68,
 
+        right = 262,
+        left,
+        down,
+        up,
+
         escape = 256,
         enter,
         tab,

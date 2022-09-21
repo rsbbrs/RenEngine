@@ -2,6 +2,27 @@
 
 using namespace RenEngine;
 
+void procInput(Sprite& sprites, Engine* engine)
+{
+        if(engine->queryInput(input_code::up))
+        sprites.scale != 100 ? sprites.scale += 1 : sprites.scale = 100;
+
+        if(engine->queryInput(input_code::down))
+            sprites.scale != 0 ? sprites.scale -= 1 : sprites.scale = 0;
+
+        if(engine->queryInput(input_code::w))
+            sprites.position.y += 1;
+
+        if(engine->queryInput(input_code::a))
+            sprites.position.x -= 1;
+
+        if(engine->queryInput(input_code::s))
+            sprites.position.y -= 1;
+
+        if(engine->queryInput(input_code::d))
+            sprites.position.x += 1;
+}
+
 int main(int argc, const char* argv[])
 {
     // Dynamic allocation for using default arguments in case none are provided.
@@ -45,6 +66,8 @@ int main(int argc, const char* argv[])
             renEngine->loadSound("Success", renEngine->filePath("sounds\\success.mp3"));
             renEngine->playSound("Success");
         }
+
+        procInput(sprites[0], renEngine);
 
         // Draws loaded sprites.
         renEngine->draw(sprites);
