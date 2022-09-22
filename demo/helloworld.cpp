@@ -5,7 +5,7 @@ using namespace RenEngine;
 void procInput(Sprite& sprites, Engine* engine)
 {
         if(engine->queryInput(input_code::up))
-        sprites.scale != 100 ? sprites.scale += 1 : sprites.scale = 100;
+            sprites.scale != 100 ? sprites.scale += 1 : sprites.scale = 100;
 
         if(engine->queryInput(input_code::down))
             sprites.scale != 0 ? sprites.scale -= 1 : sprites.scale = 0;
@@ -21,6 +21,12 @@ void procInput(Sprite& sprites, Engine* engine)
 
         if(engine->queryInput(input_code::d))
             sprites.position.x += 1;
+
+        if(engine->queryInput(input_code::left))
+            sprites.rotate += 1.0;
+
+        if(engine->queryInput(input_code::right))
+            sprites.rotate -= 1.0;
 }
 
 int main(int argc, const char* argv[])
@@ -53,6 +59,7 @@ int main(int argc, const char* argv[])
                 "mySprite",
                 vec2(0, 0),
                 50,
+                180.0,
                 1
             });
     }

@@ -211,7 +211,7 @@ void GraphicsManager::createTransformMatrix(const Sprite& sprite, glm::mat4& tra
     // Set the transformation matrix.
     // Allows translation, rotation and scaling.
     transform = translate( mat4{1}, vec3( sprite.position, sprite.z ) ) 
-                * rotate(mat4{1}, radians(180.f), normalize(vec3{0, 0, sprite.z}))
+                * rotate(mat4{1}, radians(sprite.rotate), normalize(vec3{0, 0, sprite.z}))
                 * scale( mat4{1}, vec3( sprite.scale ) );
 
     // Scales down quad so that image draws within the appropriate aspect ratio.

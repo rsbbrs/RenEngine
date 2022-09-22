@@ -35,6 +35,7 @@ namespace RenEngine
         std::string name;
         vec2 position;
         int scale;
+        float rotate;
         int z;
     } Sprite;
 
