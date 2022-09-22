@@ -50,15 +50,29 @@ int main(int argc, const char* argv[])
     std::vector<Sprite> sprites;
 
     // Loading sprite.
-    if(renEngine->loadSpriteImage("mySprite", renEngine->filePath("sprites\\mySprite.png")))
+    if(renEngine->loadSpriteImage("mySprite1", renEngine->filePath("sprites\\mySprite.png")))
     {
-        std::cout << "Successfully loaded mySprite.\n";
+        std::cout << "Successfully loaded mySprite1.\n";
         // Creates a sprite called mySprite with position (1, 1), scale of 1 and z value of 1.
         sprites.push_back(Sprite
             {
-                "mySprite",
+                "mySprite1",
                 vec2(0, 0),
                 50,
+                180.0,
+                1
+            });
+    }
+
+    if(renEngine->loadSpriteImage("mySprite2", renEngine->filePath("sprites\\mySprite.png")))
+    {
+        std::cout << "Successfully loaded mySprite2.\n";
+        // Creates a sprite called mySprite with position (1, 1), scale of 1 and z value of 1.
+        sprites.push_back(Sprite
+            {
+                "mySprite2",
+                vec2(50, 50),
+                20,
                 180.0,
                 1
             });
