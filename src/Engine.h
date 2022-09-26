@@ -13,6 +13,7 @@
 #include "InputManager.h"
 #include "ResourceManager.h"
 #include "SoundManager.h"
+#include "ECS.h"
 
 namespace RenEngine
 {
@@ -30,6 +31,7 @@ namespace RenEngine
             InputManager inputManager;
             ResourceManager resourceManager;
             SoundManager soundManager;
+            ECS ECSManager;
 
             // Start and shutdown functions.
             // Made private so no other classes can shut down the engine itself.

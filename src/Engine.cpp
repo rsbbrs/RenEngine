@@ -23,11 +23,13 @@ void Engine::startup()
     inputManager.imStartup();
     resourceManager.rmStartup();
     soundManager.smStartup();
+    ECSManager.ecsStartup();
 }
 
 // Shuts down the managers.
 void Engine::shutdown()
 {
+    ECSManager.ecsShutdown();
     soundManager.smShutdown();
     resourceManager.rmShutdown();
     inputManager.imShutdown();

@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <string>
+#include <complex>
+
 #include "glm/glm.hpp"
 // #include "spdlog/spdlog.h"
 
@@ -11,6 +13,8 @@ namespace RenEngine
     class Engine;
     class GraphicsManager;
     class InputManager;
+    class SoundManager;
+    class ECS;
 
     // Full featured vector types.
     typedef glm::vec2 vec2;
@@ -75,4 +79,16 @@ namespace RenEngine
         enter,
         tab,
     };
+
+    // Basic components for the ECS.
+    // More can be added, and even by the user.
+    struct Position { int x, y; }; // or: struct Position : public vec2 {};
+    struct Velocity { double x, y; }; // or: struct Velocity : public vec2 {};
+    struct Gravity { double meters_per_second; };
+    struct Sprite { std::string image; double size; };
+    struct Health { double percent; };
+    struct Script { std::string name; };
+
+    // Entity ID
+    typedef long EntityID;
 }
