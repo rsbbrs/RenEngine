@@ -1,5 +1,10 @@
+includes("external/xmake_soloud.lua")
 add_rules("mode.debug", "mode.release")
 add_requires("glfw")
+add_requires("soloud")
+add_requires("sokol")
+add_requires("glm")
+add_requires("stb")
 
 set_policy("build.warning", true) -- show warnings
 set_warnings("all") -- warn about many things
@@ -11,6 +16,12 @@ target("helloworld")
     add_deps("RenEngine")
     
     add_files("demo/helloworld.cpp")
+
+    -- Copy assets
+    after_build(function (target)
+        cprint("Copying assets")
+        os.cp("$(projectdir)/assets", path.directory(target:targetfile()))
+    end)
 
 target("RenEngine")
     set_kind("static")
@@ -24,4 +35,8 @@ target("RenEngine")
     add_files("src/*.cpp")
 
     -- Packages
-    add_packages("glfw")
+    add_packages("glfw", {public = true})
+    add_packages("soloud", {public = true})
+    add_packages("sokol")
+    add_packages("glm", {public = true})
+    add_packages("stb")
