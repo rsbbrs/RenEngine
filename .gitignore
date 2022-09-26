@@ -4,5 +4,10 @@
 
 # macOS
 .DS_Store
+
 # Windows
 Thumbs.db
+
+# Personal
+/.vscode
+/packages
