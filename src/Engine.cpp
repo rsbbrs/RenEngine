@@ -61,6 +61,8 @@ void Engine::gameLoop(const UpdateCallback& callback)
 
         // User callback to specify custom behaviour.
         callback();
+
+        graphicsManager.draw();
        
         loops++;
 
