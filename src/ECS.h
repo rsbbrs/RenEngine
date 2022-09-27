@@ -15,7 +15,8 @@ namespace RenEngine
     {
         private:
             EntityID count;
-            std::vector< std::unique_ptr< SparseSetHolder > > m_components;
+            std::vector<std::unique_ptr<SparseSetHolder>> m_components;
+
 
             template<typename T> ComponentIndex GetComponentIndex();
 
