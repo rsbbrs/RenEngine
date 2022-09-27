@@ -39,18 +39,13 @@ namespace RenEngine
     // Basic components for the ECS.
     // More can be added, and even by the user.
     struct Position { int x, y; }; // or: struct Position : public vec2 {};
+    struct Rotation{ float angle };
+    struct Scale { int scale };
     struct Velocity { double x, y; }; // or: struct Velocity : public vec2 {};
     struct Gravity { double meters_per_second; };
     struct Health { double percent; };
     struct Script { std::string name; };
-    struct Sprite
-    {
-        std::string name;
-        vec2 position;
-        int scale;
-        float rotate;
-        int z;
-    };
+    struct Sprite { std::string name; int z;};
 
     //  Some common keyboard buttons for games
     enum input_code
