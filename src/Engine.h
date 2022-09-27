@@ -68,6 +68,11 @@ namespace RenEngine
             bool loadSpriteImage(const std::string& name, const std::string& path);
             void destroySpriteImage(const std::string& name);
             void clearAllImages();
-            void draw(const std::vector<Sprite>& sprites);
+
+            // Entity Component System pass throughs
+            EntityID createEntity();
+            void destroyEntity(EntityID e);
+            template< typename T > T& getComponent(EntityID e);
+            template< typename EntityComponents, typename... MoreComponents > void forEach(const ForEachCallback& callback);
     };
 }

@@ -2,6 +2,8 @@
 
 using namespace RenEngine;
 
+/*
+
 void procInput(Sprite& sprites, Engine* engine)
 {
         if(engine->queryInput(input_code::up))
@@ -27,7 +29,7 @@ void procInput(Sprite& sprites, Engine* engine)
 
         if(engine->queryInput(input_code::right))
             sprites.rotate -= 1.0;
-}
+}*/
 
 int main(int argc, const char* argv[])
 {
@@ -47,35 +49,20 @@ int main(int argc, const char* argv[])
     }
 
     // Sprite vector.
-    std::vector<Sprite> sprites;
+    std::vector<EntityID> entities;
 
     // Loading sprite.
-    if(renEngine->loadSpriteImage("mySprite1", renEngine->filePath("sprites\\mySprite.png")))
+    if(renEngine->loadSpriteImage("mySprite", renEngine->filePath("sprites\\mySprite.png")))
     {
-        std::cout << "Successfully loaded mySprite1.\n";
+        std::cout << "Successfully loaded mySprite.\n";
         // Creates a sprite called mySprite with position (1, 1), scale of 1 and z value of 1.
-        sprites.push_back(Sprite
-            {
-                "mySprite1",
-                vec2(0, 0),
-                50,
-                180.0,
-                1
-            });
-    }
-
-    if(renEngine->loadSpriteImage("mySprite2", renEngine->filePath("sprites\\mySprite.png")))
-    {
-        std::cout << "Successfully loaded mySprite2.\n";
-        // Creates a sprite called mySprite with position (1, 1), scale of 1 and z value of 1.
-        sprites.push_back(Sprite
-            {
-                "mySprite2",
-                vec2(50, 50),
-                20,
-                180.0,
-                1
-            });
+        entities.push_back(renEngine->createEntity());
+        Position pos = renEngine->getComponent<Position>(entities[0]);
+        Scale scale = renEngine->getComponent<Scale>(entities[0]);
+        pos.x = 0;
+        pos.y = 0;
+        pos.z = 1;
+        scale.scale = 50;
     }
 
     // Callback for the engine.
@@ -87,11 +74,6 @@ int main(int argc, const char* argv[])
             renEngine->loadSound("Success", renEngine->filePath("sounds\\success.mp3"));
             renEngine->playSound("Success");
         }
-
-        procInput(sprites[0], renEngine);
-
-        // Draws loaded sprites.
-        renEngine->draw(sprites);
     });
 
     delete renEngine;

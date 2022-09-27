@@ -130,7 +130,24 @@ void Engine::clearAllImages()
     graphicsManager.clearAllImages();
 }
 
-void Engine::draw(const std::vector<Sprite>& sprites)
+EntityID Engine::createEntity()
 {
-    graphicsManager.draw(sprites);
+    return ECSManager.Create();
+}
+
+void Engine::destroyEntity(EntityID e)
+{
+    ECSManager.Destroy(e);
+}
+
+template< typename T >
+T& Engine::getComponent(EntityID e)
+{
+    return ECSManager.Get(e);
+}
+
+template< typename EntityComponents, typename... MoreComponents >
+void Engine::forEach(const ForEachCallback& callback)
+{
+    ECSManager.ForEach(callback);
 }

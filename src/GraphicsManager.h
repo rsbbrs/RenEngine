@@ -16,7 +16,11 @@ namespace RenEngine
             friend class InputManager;
             void *getWindow();
             void createProjectionMatrix(glm::mat4& projection, int width, int height);
-            void createTransformMatrix(const Sprite& sprite, glm::mat4& transform);
+            void createTransformMatrix(const std::string name,
+                                       const Position& pos, 
+                                       const Rotation& rot, 
+                                       const Scale& scale, 
+                                       glm::mat4& transform);
         public:
             GraphicsManager();
             void gmStartup(Configuration windowParamm);
@@ -29,6 +33,6 @@ namespace RenEngine
             void clearAllImages();
 
             // Draw images.
-            void draw(const std::vector<Sprite>& sprites);
+            void draw(ECS manager);
     };
 }
