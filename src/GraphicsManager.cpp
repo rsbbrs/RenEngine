@@ -318,7 +318,7 @@ void GraphicsManager::draw(ECS manager)
         Position pos = manager.Get<Position>(e);
         Rotation rot = manager.Get<Rotation>(e);
         Scale scale = manager.Get<Scale>(e);
-        
+
         createTransformMatrix(name, pos, rot, scale, uniforms.transform);
         sg_apply_uniforms(SG_SHADERSTAGE_VS, 0, SG_RANGE(uniforms));
         pImpl->bindings.fs_images[0] = pImpl->imageMap[name].image;
