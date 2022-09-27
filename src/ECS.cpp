@@ -97,7 +97,7 @@ void ECS::Destroy( EntityID e )
         comps->Drop( e ); 
 }
 
-template<typename EntityComponents, typename... MoreComponents>
+template< typename EntityComponents, typename... MoreComponents >
 void ECS::ForEach( const ForEachCallback& callback ) 
 {
     // Iterate over elements of the first container.

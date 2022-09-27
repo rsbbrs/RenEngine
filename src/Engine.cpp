@@ -132,6 +132,12 @@ void Engine::clearAllImages()
     graphicsManager.clearAllImages();
 }
 
+ECS& Engine::getECS()
+{
+    return ECSManager;
+}
+
+/*
 EntityID Engine::createEntity()
 {
     return ECSManager.Create();
@@ -145,11 +151,12 @@ void Engine::destroyEntity(EntityID e)
 template< typename T >
 T& Engine::getComponent(EntityID e)
 {
-    return ECSManager.Get(e);
+    return ECSManager.Get<T>(e);
 }
+
 
 template< typename EntityComponents, typename... MoreComponents >
 void Engine::forEach(const ForEachCallback& callback)
 {
-    ECSManager.ForEach(callback);
-}
+    ECSManager.ForEach<EntityComponents, MoreComponents>(callback);
+}*/

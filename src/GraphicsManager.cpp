@@ -312,7 +312,7 @@ void GraphicsManager::draw(ECS manager)
     createProjectionMatrix(uniforms.projection, width, height);
 
     // 5. Draw each sprite with a position, rotation and scale components.
-    manager.ForEach<Sprite, Position, Rotation, Scale>([&](EntityID e)
+    manager.ForEach<Sprite>([&](EntityID e)
     {
         std::string name = manager.Get<Sprite>(e).name;
         Position pos = manager.Get<Position>(e);

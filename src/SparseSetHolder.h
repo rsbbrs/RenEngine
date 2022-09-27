@@ -20,6 +20,7 @@ namespace RenEngine
     {
         public:
             std::unordered_map< EntityID, T > data;
+            ~SparseSet() override {};
             bool Has( EntityID e ) const override { return data.count( e ) > 0; };
             void Drop( EntityID e ) override { data.erase( e ); };
     };

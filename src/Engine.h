@@ -70,9 +70,11 @@ namespace RenEngine
             void clearAllImages();
 
             // Entity Component System pass throughs
+            ECS& getECS();
+            /*
             EntityID createEntity();
             void destroyEntity(EntityID e);
             template< typename T > T& getComponent(EntityID e);
-            template< typename EntityComponents, typename... MoreComponents > void forEach(const ForEachCallback& callback);
+            //template< typename EntityComponents, typename... MoreComponents > void forEach(const ForEachCallback& callback);*/
     };
 }
