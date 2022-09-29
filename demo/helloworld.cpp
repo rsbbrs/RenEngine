@@ -61,15 +61,18 @@ int main(int argc, const char* argv[])
         entities.push_back(renEngine->getECS().Create());
         Sprite mySprite;
         Position pos;
+        Rotation rot;
         Scale scale;
         mySprite.name = "mySprite";
         pos.x = 0;
         pos.y = 0;
         pos.z = 1;
+        rot.angle = 180;
         scale.scale = 50;
         
         renEngine->getECS().Get<Sprite>(entities[0]) = mySprite;
         renEngine->getECS().Get<Position>(entities[0]) = pos;
+        renEngine->getECS().Get<Rotation>(entities[0])= rot;
         renEngine->getECS().Get<Scale>(entities[0]) = scale;
     }
 
