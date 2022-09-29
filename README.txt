@@ -88,3 +88,24 @@ Checkpoint 5
 		   so it appears in the correct order. I need to understand the 
 		   system better in order to fix this issue without having to flip
 		   every image outside the engine.
+		   
+Checkpoint 6
+	- Implemented the entity component system and its respective functions.
+	- Modified the graphics manager to draw using ForEach function of
+	  the ECS over all entities with a Sprite component.
+	- Loaded a sprite and set it up as an entity in helloworld.cpp.
+	
+	Notes: I moved the entire implementation of the ECS to the header
+	       file since most functions were already there (due to templates).
+		   I also added the API functions that will allow the user to 
+		   access ECS functions without having direct access to the manager.
+		   They simply call the ECS functions using the manager inside the
+		   engine and return their return values. All other managers have
+		   similar functions. Finally, I also added a function that moves,
+		   rotates and scales the sprite on screen by updating the entity's
+		   position, rotation and scale components. The function is called
+		   within the game loop function in helloworld.cpp so that the sprite
+		   can be moved in real time. WASD change the sprite's position.
+		   Up and down arrow keys scale the sprite. Left and right arrow
+		   keys rotate the sprite.
+		   
