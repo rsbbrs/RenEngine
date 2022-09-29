@@ -51,15 +51,14 @@ int main(int argc, const char* argv[])
 
     // Sprite vector.
     std::vector<EntityID> entities;
-    ECS myECS;
     
     // Loading sprite.
     if(renEngine->loadSpriteImage("mySprite", renEngine->filePath("sprites\\mySprite.png")))
     {
         std::cout << "Successfully loaded mySprite.\n";
         // Creates a sprite called mySprite with position (1, 1), scale of 1 and z value of 1.
-        myECS = renEngine->getECS();
-        entities.push_back(myECS.Create());
+    
+        entities.push_back(renEngine->getECS().Create());
         Position pos;
         Scale scale;
         pos.x = 0;
@@ -67,8 +66,8 @@ int main(int argc, const char* argv[])
         pos.z = 1;
         scale.scale = 50;
         
-        myECS.Get<Position>(entities[0]) = pos;
-        myECS.Get<Scale>(entities[0]) = scale;
+        renEngine->getECS().Get<Position>(entities[0]) = pos;
+        renEngine->getECS().Get<Scale>(entities[0]) = scale;
     }
 
     // Callback for the engine.
