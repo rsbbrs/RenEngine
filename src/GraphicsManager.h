@@ -33,6 +33,6 @@ namespace RenEngine
             void clearAllImages();
 
             // Draw images.
-            void draw(ECS manager);
+            void draw(ECS& manager);
     };
 }

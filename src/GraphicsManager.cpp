@@ -292,7 +292,7 @@ void GraphicsManager::clearAllImages()
     pImpl->imageMap.clear();
 }
 
-void GraphicsManager::draw(ECS manager)
+void GraphicsManager::draw(ECS& manager)
 {
     int width, height;
 
