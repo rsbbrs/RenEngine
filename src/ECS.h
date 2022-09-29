@@ -17,15 +17,28 @@ namespace RenEngine
             EntityID count;
             std::vector< std::unique_ptr<SparseSetHolder> > m_components;
 
-            ComponentIndex GetNextIndex();
+            /****************************/
+            /*                          */
+            /* PRIVATE HELPER FUNCTIONS */
+            /*                          */
+            /****************************/
 
-            template< typename T > ComponentIndex GetComponentIndex() 
+            ComponentIndex GetNextIndex()
+            {
+                static ComponentIndex index = -1; // Returns the sequence 0, 1, 2, … every time this is called.
+                index += 1;
+                return index;
+            }
+
+            template< typename T > 
+            ComponentIndex GetComponentIndex() 
             {
                 static ComponentIndex index = GetNextIndex(); // Only calls GetNextIndex() the first time this function is called.
                 return index;
             }
 
-            template< typename T > std::unordered_map< EntityID, T >& GetAppropriateSparseSet()
+            template< typename T > 
+            std::unordered_map< EntityID, T >& GetAppropriateSparseSet()
             {
                 // Get the index for T’s SparseSet
                 const ComponentIndex index = GetComponentIndex<T>();
@@ -45,7 +58,8 @@ namespace RenEngine
             }
 
             // Returns true if the entity has all types.
-            template < typename T, typename... Rest > bool HasAll( EntityID entity ) 
+            template < typename T, typename... Rest > 
+            bool HasAll( EntityID entity ) 
             {
                 bool result = true;
 
@@ -59,23 +73,35 @@ namespace RenEngine
             }
 
         public:
+            /***************************/
+            /*                         */
+            /* PUBLIC FACING FUNCTIONS */
+            /*                         */
+            /***************************/
+
             // Startup and shutdown functions.
-            void ecsStartup();
-            void ecsShutdown();
+            void ecsStartup() { count = 0; };
+            void ecsShutdown() {};
             
             // Create and destroy entities.
-            EntityID Create();
-            void Destroy(EntityID e);
+            EntityID Create() { return ++count; };
+            void Destroy(EntityID e)
+            {
+                for( const auto& comps : m_components ) 
+                    comps->Drop( e ); 
+            }
 
             // Get component from an entity.
             // Gets entity's components.
-            template< typename T > T& Get( EntityID entity ) 
+            template< typename T > 
+            T& Get( EntityID entity ) 
             {
                 return GetAppropriateSparseSet<T>()[ entity ];
             }
 
             // Iterate over all entities that have the specified components.
-            template< typename EntityComponents, typename... MoreComponents > void ForEach( const ForEachCallback& callback ) 
+            template< typename EntityComponents, typename... MoreComponents > 
+            void ForEach( const ForEachCallback& callback ) 
             {
                 // Iterate over elements of the first container.
                 auto& container = GetAppropriateSparseSet<EntityComponents>();

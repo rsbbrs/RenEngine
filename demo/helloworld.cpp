@@ -3,34 +3,36 @@
 
 using namespace RenEngine;
 
-/*
-
-void procInput(Sprite& sprites, Engine* engine)
+void procInput(EntityID id, Engine* engine)
 {
-        if(engine->queryInput(input_code::up))
-            sprites.scale != 100 ? sprites.scale += 1 : sprites.scale = 100;
+    Position& pos = engine->getComponent<Position>(id);
+    Rotation& rot = engine->getComponent<Rotation>(id);
+    Scale& scale = engine->getComponent<Scale>(id);
 
-        if(engine->queryInput(input_code::down))
-            sprites.scale != 0 ? sprites.scale -= 1 : sprites.scale = 0;
+    if(engine->queryInput(input_code::up))
+        scale.scale != 100 ? scale.scale += 1 : scale.scale = 100;
 
-        if(engine->queryInput(input_code::w))
-            sprites.position.y += 1;
+    if(engine->queryInput(input_code::down))
+        scale.scale != 0 ? scale.scale -= 1 : scale.scale = 0;
 
-        if(engine->queryInput(input_code::a))
-            sprites.position.x -= 1;
+    if(engine->queryInput(input_code::w))
+        pos.y += 1;
 
-        if(engine->queryInput(input_code::s))
-            sprites.position.y -= 1;
+    if(engine->queryInput(input_code::a))
+        pos.x -= 1;
 
-        if(engine->queryInput(input_code::d))
-            sprites.position.x += 1;
+    if(engine->queryInput(input_code::s))
+        pos.y -= 1;
 
-        if(engine->queryInput(input_code::left))
-            sprites.rotate += 1.0;
+    if(engine->queryInput(input_code::d))
+        pos.x += 1;
 
-        if(engine->queryInput(input_code::right))
-            sprites.rotate -= 1.0;
-}*/
+    if(engine->queryInput(input_code::left))
+        rot.angle += 1.0;
+
+    if(engine->queryInput(input_code::right))
+        rot.angle -= 1.0;
+}
 
 int main(int argc, const char* argv[])
 {
@@ -57,8 +59,9 @@ int main(int argc, const char* argv[])
     {
         std::cout << "Successfully loaded mySprite.\n";
         // Creates a sprite called mySprite with position (1, 1), scale of 1 and z value of 1.
-    
-        entities.push_back(renEngine->getECS().Create());
+
+        // Entity setup.
+        entities.push_back(renEngine->createEntity());
         Sprite mySprite;
         Position pos;
         Rotation rot;
@@ -70,10 +73,11 @@ int main(int argc, const char* argv[])
         rot.angle = 180;
         scale.scale = 50;
         
-        renEngine->getECS().Get<Sprite>(entities[0]) = mySprite;
-        renEngine->getECS().Get<Position>(entities[0]) = pos;
-        renEngine->getECS().Get<Rotation>(entities[0])= rot;
-        renEngine->getECS().Get<Scale>(entities[0]) = scale;
+        // Setting the entity's components.
+        renEngine->getComponent<Sprite>(entities[0]) = mySprite;
+        renEngine->getComponent<Position>(entities[0]) = pos;
+        renEngine->getComponent<Rotation>(entities[0]) = rot;
+        renEngine->getComponent<Scale>(entities[0]) = scale;
     }
 
     // Callback for the engine.
@@ -85,6 +89,8 @@ int main(int argc, const char* argv[])
             renEngine->loadSound("Success", renEngine->filePath("sounds\\success.mp3"));
             renEngine->playSound("Success");
         }
+
+        procInput(entities[0], renEngine);
     });
 
     delete renEngine;
