@@ -12,9 +12,7 @@ void ECS::ecsStartup()
 
 // Currently does nothing.
 void ECS::ecsShutdown()
-{
-
-}
+{}
 
 /****************************/
 /*                          */
@@ -40,8 +38,6 @@ EntityID ECS::Create()
 {
     return ++count;
 }
-
-
 
 // Destroys the entity by removing all components.
 void ECS::Destroy( EntityID e ) 
