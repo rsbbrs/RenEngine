@@ -15,8 +15,7 @@ void ResourceManager::rmShutdown()
     // Does nothing currently.
 }
 
-// Simply returns the path unchanged currently.
-// Will need to be improved later.
+// Returns a path starting from assets directory.
 std::string ResourceManager::resolvePath(std::string relativePath)
 {
     return (assetsPath / relativePath).string();

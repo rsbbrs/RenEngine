@@ -61,6 +61,8 @@ void Engine::gameLoop(const UpdateCallback& callback)
 
         // User callback to specify custom behaviour.
         callback();
+
+        graphicsManager.draw(ECSManager);
        
         loops++;
 
@@ -130,7 +132,12 @@ void Engine::clearAllImages()
     graphicsManager.clearAllImages();
 }
 
-void Engine::draw(const std::vector<Sprite>& sprites)
+EntityID Engine::createEntity()
 {
-    graphicsManager.draw(sprites);
+    return ECSManager.Create();
+}
+
+void Engine::destroyEntity(EntityID e)
+{
+    ECSManager.Destroy(e);
 }

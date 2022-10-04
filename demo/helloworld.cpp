@@ -1,32 +1,37 @@
 #include "Engine.h"
+#include "ECS.h"
 
 using namespace RenEngine;
 
-void procInput(Sprite& sprites, Engine* engine)
+void procInput(EntityID id, Engine* engine)
 {
-        if(engine->queryInput(input_code::up))
-            sprites.scale != 100 ? sprites.scale += 1 : sprites.scale = 100;
+    Position& pos = engine->getComponent<Position>(id);
+    Rotation& rot = engine->getComponent<Rotation>(id);
+    Scale& scale = engine->getComponent<Scale>(id);
 
-        if(engine->queryInput(input_code::down))
-            sprites.scale != 0 ? sprites.scale -= 1 : sprites.scale = 0;
+    if(engine->queryInput(input_code::up))
+        scale.scale != 100 ? scale.scale += 1 : scale.scale = 100;
 
-        if(engine->queryInput(input_code::w))
-            sprites.position.y += 1;
+    if(engine->queryInput(input_code::down))
+        scale.scale != 0 ? scale.scale -= 1 : scale.scale = 0;
 
-        if(engine->queryInput(input_code::a))
-            sprites.position.x -= 1;
+    if(engine->queryInput(input_code::w))
+        pos.y += 1;
 
-        if(engine->queryInput(input_code::s))
-            sprites.position.y -= 1;
+    if(engine->queryInput(input_code::a))
+        pos.x -= 1;
 
-        if(engine->queryInput(input_code::d))
-            sprites.position.x += 1;
+    if(engine->queryInput(input_code::s))
+        pos.y -= 1;
 
-        if(engine->queryInput(input_code::left))
-            sprites.rotate += 1.0;
+    if(engine->queryInput(input_code::d))
+        pos.x += 1;
 
-        if(engine->queryInput(input_code::right))
-            sprites.rotate -= 1.0;
+    if(engine->queryInput(input_code::left))
+        rot.angle += 1.0;
+
+    if(engine->queryInput(input_code::right))
+        rot.angle -= 1.0;
 }
 
 int main(int argc, const char* argv[])
@@ -47,35 +52,32 @@ int main(int argc, const char* argv[])
     }
 
     // Sprite vector.
-    std::vector<Sprite> sprites;
-
+    std::vector<EntityID> entities;
+    
     // Loading sprite.
-    if(renEngine->loadSpriteImage("mySprite1", renEngine->filePath("sprites\\mySprite.png")))
+    if(renEngine->loadSpriteImage("mySprite", renEngine->filePath("sprites\\mySprite.png")))
     {
-        std::cout << "Successfully loaded mySprite1.\n";
+        std::cout << "Successfully loaded mySprite.\n";
         // Creates a sprite called mySprite with position (1, 1), scale of 1 and z value of 1.
-        sprites.push_back(Sprite
-            {
-                "mySprite1",
-                vec2(0, 0),
-                50,
-                180.0,
-                1
-            });
-    }
 
-    if(renEngine->loadSpriteImage("mySprite2", renEngine->filePath("sprites\\mySprite.png")))
-    {
-        std::cout << "Successfully loaded mySprite2.\n";
-        // Creates a sprite called mySprite with position (1, 1), scale of 1 and z value of 1.
-        sprites.push_back(Sprite
-            {
-                "mySprite2",
-                vec2(50, 50),
-                20,
-                180.0,
-                1
-            });
+        // Entity setup.
+        entities.push_back(renEngine->createEntity());
+        Sprite mySprite;
+        Position pos;
+        Rotation rot;
+        Scale scale;
+        mySprite.name = "mySprite";
+        pos.x = 0;
+        pos.y = 0;
+        pos.z = 1;
+        rot.angle = 180;
+        scale.scale = 50;
+        
+        // Setting the entity's components.
+        renEngine->getComponent<Sprite>(entities[0]) = mySprite;
+        renEngine->getComponent<Position>(entities[0]) = pos;
+        renEngine->getComponent<Rotation>(entities[0]) = rot;
+        renEngine->getComponent<Scale>(entities[0]) = scale;
     }
 
     // Callback for the engine.
@@ -88,10 +90,7 @@ int main(int argc, const char* argv[])
             renEngine->playSound("Success");
         }
 
-        procInput(sprites[0], renEngine);
-
-        // Draws loaded sprites.
-        renEngine->draw(sprites);
+        procInput(entities[0], renEngine);
     });
 
     delete renEngine;

@@ -16,6 +16,9 @@ namespace RenEngine
     class SoundManager;
     class ECS;
 
+    // Entity ID
+    typedef long EntityID;
+
     // Full featured vector types.
     typedef glm::vec2 vec2;
     typedef glm::vec3 vec3;
@@ -33,15 +36,16 @@ namespace RenEngine
 
     } Configuration;
 
-    // Sprite data.
-    typedef struct
-    {
-        std::string name;
-        vec2 position;
-        int scale;
-        float rotate;
-        int z;
-    } Sprite;
+    // Basic components for the ECS.
+    // More can be added, and even by the user.
+    struct Position : public vec3 {}; 
+    struct Rotation{ float angle; };
+    struct Scale { int scale; };
+    struct Velocity : public vec2 {};
+    struct Gravity { double meters_per_second; };
+    struct Health { double percent; };
+    struct Script { std::string name; };
+    struct Sprite { std::string name; };
 
     //  Some common keyboard buttons for games
     enum input_code
@@ -79,16 +83,4 @@ namespace RenEngine
         enter,
         tab,
     };
-
-    // Basic components for the ECS.
-    // More can be added, and even by the user.
-    struct Position { int x, y; }; // or: struct Position : public vec2 {};
-    struct Velocity { double x, y; }; // or: struct Velocity : public vec2 {};
-    struct Gravity { double meters_per_second; };
-    struct Sprite { std::string image; double size; };
-    struct Health { double percent; };
-    struct Script { std::string name; };
-
-    // Entity ID
-    typedef long EntityID;
 }

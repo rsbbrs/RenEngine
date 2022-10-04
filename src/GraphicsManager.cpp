@@ -14,6 +14,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "stb_image.h"
 #include "GraphicsManager.h"
+#include "ECS.h"
 
 using namespace RenEngine;
 using namespace glm;
@@ -206,17 +207,21 @@ void GraphicsManager::createProjectionMatrix(glm::mat4& projection, int width, i
 }
 
 // Creates the transformation matrix for each sprite.
-void GraphicsManager::createTransformMatrix(const Sprite& sprite, glm::mat4& transform)
+void GraphicsManager::createTransformMatrix(const std::string name,
+                                            const Position& pos, 
+                                            const Rotation& rot, 
+                                            const Scale& scaleVal, 
+                                            glm::mat4& transform)
 {
     // Set the transformation matrix.
     // Allows translation, rotation and scaling.
-    transform = translate( mat4{1}, vec3( sprite.position, sprite.z ) ) 
-                * rotate(mat4{1}, radians(sprite.rotate), normalize(vec3{0, 0, sprite.z}))
-                * scale( mat4{1}, vec3( sprite.scale ) );
+    transform = translate( mat4{1}, pos ) 
+                * rotate(mat4{1}, radians(rot.angle), normalize(vec3{0, 0, pos.z}))
+                * scale( mat4{1}, vec3( scaleVal.scale ) );
 
     // Scales down quad so that image draws within the appropriate aspect ratio.
-    int image_width = pImpl->imageMap[sprite.name].width;
-    int image_height = pImpl->imageMap[sprite.name].height;
+    int image_width = pImpl->imageMap[name].width;
+    int image_height = pImpl->imageMap[name].height;
 
     if( image_width < image_height ) {
     transform = transform * scale( mat4{1}, vec3( std::real(image_width)/image_height, 1.0, 1.0 ) );
@@ -287,7 +292,7 @@ void GraphicsManager::clearAllImages()
     pImpl->imageMap.clear();
 }
 
-void GraphicsManager::draw(const std::vector<Sprite>& sprites)
+void GraphicsManager::draw(ECS& manager)
 {
     int width, height;
 
@@ -306,15 +311,20 @@ void GraphicsManager::draw(const std::vector<Sprite>& sprites)
     // 4. Creates the projection matrix
     createProjectionMatrix(uniforms.projection, width, height);
 
-    // 5. Draw each sprite.
-    for(Sprite s : sprites)
+    // 5. Draw each sprite with a position, rotation and scale components.
+    manager.ForEach<Sprite>([&](EntityID e)
     {
-        createTransformMatrix(s, uniforms.transform);
+        std::string name = manager.Get<Sprite>(e).name;
+        Position pos = manager.Get<Position>(e);
+        Rotation rot = manager.Get<Rotation>(e);
+        Scale scale = manager.Get<Scale>(e);
+
+        createTransformMatrix(name, pos, rot, scale, uniforms.transform);
         sg_apply_uniforms(SG_SHADERSTAGE_VS, 0, SG_RANGE(uniforms));
-        pImpl->bindings.fs_images[0] = pImpl->imageMap[s.name].image;
+        pImpl->bindings.fs_images[0] = pImpl->imageMap[name].image;
         sg_apply_bindings(pImpl->bindings);
         sg_draw(0, 4, 1);
-    }
+    });
 
     // 6. End drawing.
     sg_end_pass();
