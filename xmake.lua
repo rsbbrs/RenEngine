@@ -5,6 +5,7 @@ add_requires("soloud")
 add_requires("sokol")
 add_requires("glm")
 add_requires("stb")
+add_requires("lua", "sol2")
 
 set_policy("build.warning", true) -- show warnings
 set_warnings("all") -- warn about many things
@@ -40,3 +41,5 @@ target("RenEngine")
     add_packages("sokol")
     add_packages("glm", {public = true})
     add_packages("stb")
+    add_packages("lua")
+    add_packages("sol2", {public = true})
