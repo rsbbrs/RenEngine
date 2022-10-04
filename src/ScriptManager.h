@@ -7,6 +7,10 @@ namespace RenEngine
 {
     class ScriptManager
     {
+        private:
+            void scmStartup();
+            void scmShutDown();
 
+            
     };
 }
