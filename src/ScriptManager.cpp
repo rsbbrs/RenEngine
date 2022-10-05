@@ -4,10 +4,15 @@
 
 using namespace RenEngine;
 
-// Starts up the Lua state with built-in libraries. 
-void ScriptManager::scmStartup()
+// Starts up the Lua state with built-in libraries.
+// Creates callback functions to engine functionality
+// so that Lua can access them.
+void ScriptManager::scmStartup(InputManager& inputManager, GraphicsManager& graphicsManager)
 {
     lua.open_libraries(sol::lib::base, sol::lib::math, sol::lib::table);
+
+    //lua.new_enum<input_code>("input_code", {});
+    lua.set_function("KeyPressed", [&](const input_code keycode) { return inputManager.keyPressed(graphicsManager, keycode); } );
 }
 
 // Currently does nothing.
