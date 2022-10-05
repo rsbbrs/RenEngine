@@ -46,10 +46,9 @@ namespace RenEngine
     struct Health { double percent; };
     struct Script { std::string name; };
     struct Sprite { std::string name; };
-    struct Script { std::string name; };
 
     //  Some common keyboard buttons for games
-    typedef enum input_code
+    enum input_code
     {
         unknown = -1,
 
@@ -60,6 +59,7 @@ namespace RenEngine
         space = 32,
 
         num_0 = 48,
+        num_1,
         num_2,
         num_3,
         num_4,

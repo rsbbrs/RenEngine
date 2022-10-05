@@ -6,24 +6,35 @@
 #include "Types.h"
 #include "GraphicsManager.h"
 #include "InputManager.h"
+#include "ResourceManager.h"
+#include "SoundManager.h"
 #include "ECS.h"
 
 namespace RenEngine
 {
     class ScriptManager
     {
-        typedef sol::state Lua;
-
         private:
+            typedef sol::state Lua;
+
             // Lua environment variable.
             Lua lua;
 
             // Script container.
             std::unordered_map<std::string, sol::load_result> scripts;
 
+            // Helper functions for initialization.
+            void setInputCodes();
+
         public:
+            bool scriptQuit;
+
             // Startup and shutdown functions.
-            void scmStartup(InputManager& InputManager, GraphicsManager& graphicsManager);
+            void scmStartup(GraphicsManager& graphicsManager,
+                            InputManager& inputManager, 
+                            ResourceManager& resourceManager,
+                            SoundManager& soundManager,
+                            ECS& ecsManager);
             void scmShutDown();
 
             // Loads Lua scripts into the engine.
@@ -34,6 +45,9 @@ namespace RenEngine
 
             // Runs all entities with script components.
             void update(ECS& ecsManager);
+
+            // Script command to quit the engine.
+            void quit();
 
     };
 }

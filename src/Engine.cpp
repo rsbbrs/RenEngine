@@ -24,7 +24,11 @@ void Engine::startup()
     resourceManager.rmStartup();
     soundManager.smStartup();
     ECSManager.ecsStartup();
-    scriptManager.scmStartup(inputManager, graphicsManager);
+    scriptManager.scmStartup(graphicsManager, 
+                             inputManager, 
+                             resourceManager, 
+                             soundManager, 
+                             ECSManager);
 }
 
 // Shuts down the managers.
@@ -53,7 +57,9 @@ void Engine::gameLoop(const UpdateCallback& callback)
     // function doubles the amount of time to sleep. Halfving
     // the interval per loop seems to make it run in 1/60 of
     // a second.
-    while(graphicsManager.closeWindow() && !inputManager.keyPressed(graphicsManager, input_code::escape))
+    while(graphicsManager.closeWindow() 
+          && !inputManager.keyPressed(graphicsManager, input_code::escape) 
+          && !scriptManager.scriptQuit)
     {
         // Tick start.
         const auto t1 = std::chrono::steady_clock::now();
