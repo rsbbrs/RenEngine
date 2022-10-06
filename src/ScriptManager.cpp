@@ -19,6 +19,7 @@ void ScriptManager::scmStartup(GraphicsManager& graphicsManager,
     lua.script("math.randomseed(0)");
 
     setInputCodes();
+    setComponentStructs();
 
     // Input manager functions.
     lua.set_function("KeyPressed", [&](const input_code keycode) { return inputManager.keyPressed(graphicsManager, keycode); } );
@@ -33,6 +34,8 @@ void ScriptManager::scmStartup(GraphicsManager& graphicsManager,
     // ECS manager functions.
     lua.set_function("createEntity", [&]() { ecsManager.Create(); } );
     lua.set_function("destroyEntity", [&](const EntityID e) { ecsManager.Destroy(e); } );
+
+    lua.set_function("getPosition");
 
     // Quit function.
     lua.set_function("quit", [&]() { quit(); } );
@@ -74,6 +77,60 @@ void ScriptManager::setInputCodes()
         {"tab", input_code::tab},
     }; 
     lua.new_enum<input_code>("input_code", inputList);
+}
+
+// Initializes all component structures into Lua.
+void ScriptManager::setComponentStructs()
+{
+    lua.new_usertype<Position>(
+        "Position",
+        sol::constructors<Position()>(),
+        "x", &Position::x,
+        "y", &Position::y
+    );
+
+    lua.new_usertype<Velocity>(
+        "Velocity",
+        sol::constructors<Velocity()>(),
+        "x", &Velocity::x,
+        "y", &Velocity::y
+    );
+
+    lua.new_usertype<Rotation>(
+        "Rotation",
+        sol::constructors<Rotation()>(),
+        "angle", &Rotation::angle
+    );
+
+    lua.new_usertype<Scale>(
+        "Scale",
+        sol::constructors<Scale()>(),
+        "scale", &Scale::scale
+    );
+
+    lua.new_usertype<Gravity>(
+        "Gravity",
+        sol::constructors<Gravity()>(),
+        "meter_per_second", &Gravity::meters_per_second
+    );
+
+    lua.new_usertype<Health>(
+        "Health",
+        sol::constructors<Health()>(),
+        "percent", &Health::percent
+    );
+
+    lua.new_usertype<Script>(
+        "Script",
+        sol::constructors<Script()>(),
+        "name", &Script::name
+    );
+
+    lua.new_usertype<Sprite>(
+        "Sprite",
+        sol::constructors<Sprite()>(),
+        "name", &Sprite::name
+    );
 }
 
 // Currently does nothing.

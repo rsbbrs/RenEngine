@@ -26,6 +26,8 @@ namespace RenEngine
             // Helper functions for initialization.
             void setInputCodes();
 
+            void setComponentStructs();
+
         public:
             bool scriptQuit;
 
