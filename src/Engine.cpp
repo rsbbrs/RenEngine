@@ -69,6 +69,7 @@ void Engine::gameLoop(const UpdateCallback& callback)
 
         // User callback to specify custom behaviour.
         callback();
+        scriptManager.update(ECSManager);
 
         graphicsManager.draw(ECSManager);
        
@@ -148,4 +149,9 @@ EntityID Engine::createEntity()
 void Engine::destroyEntity(EntityID e)
 {
     ECSManager.Destroy(e);
+}
+
+bool Engine::loadScript(const std::string& name, const std::string& path)
+{
+    return scriptManager.loadScript(name, path);
 }

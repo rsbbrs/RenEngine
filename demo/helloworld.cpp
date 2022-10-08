@@ -53,6 +53,7 @@ int main(int argc, const char* argv[])
 
     // Sprite vector.
     std::vector<EntityID> entities;
+    EntityID newEntity = renEngine->createEntity();
     
     // Loading sprite.
     if(renEngine->loadSpriteImage("mySprite", renEngine->filePath("sprites\\mySprite.png")))
@@ -61,7 +62,7 @@ int main(int argc, const char* argv[])
         // Creates a sprite called mySprite with position (1, 1), scale of 1 and z value of 1.
 
         // Entity setup.
-        entities.push_back(renEngine->createEntity());
+        entities.push_back(newEntity);
         Sprite mySprite;
         Position pos;
         Rotation rot;
@@ -78,6 +79,18 @@ int main(int argc, const char* argv[])
         renEngine->getComponent<Position>(entities[0]) = pos;
         renEngine->getComponent<Rotation>(entities[0]) = rot;
         renEngine->getComponent<Scale>(entities[0]) = scale;
+    }
+
+    if(renEngine->loadScript("myScript", renEngine->filePath("scripts\\myScript.lua")))
+    {
+        std::cout << "Successfully loaded myScript.\n";
+
+        Script newScript;
+        newScript.name = "myScript";
+
+        renEngine->getComponent<Script>(entities[0]) = newScript;
+
+
     }
 
     // Callback for the engine.

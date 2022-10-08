@@ -185,5 +185,15 @@ namespace RenEngine
             {
                 ECSManager.ForEach<EntityComponents, MoreComponents>(callback);
             }
+
+            /**
+             * @brief Loads a Lua script into the engine.
+             * 
+             * @param name The desired name for the script.
+             * @param path The path to the script.
+             * @return True if the script was successfully loaded.
+             * @return False otherwise.
+             */
+            bool loadScript(const std::string& name, const std::string& path);
     };
 }
