@@ -54,6 +54,7 @@ int main(int argc, const char* argv[])
     // Sprite vector.
     std::vector<EntityID> entities;
     EntityID newEntity = renEngine->createEntity();
+    std::cout << newEntity << "\n";
     
     // Loading sprite.
     if(renEngine->loadSpriteImage("mySprite", renEngine->filePath("sprites\\mySprite.png")))
@@ -80,13 +81,15 @@ int main(int argc, const char* argv[])
         renEngine->getComponent<Rotation>(entities[0]) = rot;
         renEngine->getComponent<Scale>(entities[0]) = scale;
     }
+    auto scriptPath = renEngine->filePath("scripts\\myScript.lua");
 
-    if(renEngine->loadScript("myScript", renEngine->filePath("scripts\\myScript.lua")))
+    if(renEngine->loadScript("myScript", scriptPath))
     {
         std::cout << "Successfully loaded myScript.\n";
 
         Script newScript;
         newScript.name = "myScript";
+        newScript.path = scriptPath;
 
         renEngine->getComponent<Script>(entities[0]) = newScript;
 
@@ -103,7 +106,7 @@ int main(int argc, const char* argv[])
             renEngine->playSound("Success");
         }
 
-        procInput(entities[0], renEngine);
+        //procInput(entities[0], renEngine);
     });
 
     delete renEngine;
