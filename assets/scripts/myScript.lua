@@ -27,3 +27,22 @@ if(keyPressed(input_code.down) and (getScale(1).scale > 0)) then
     scale = getScale(1).scale
     getScale(1).scale = scale - 1
 end
+
+if(keyPressed(input_code.left)) then
+    angle = getRotation(1).angle
+    getRotation(1).angle = angle + 1
+end
+
+if(keyPressed(input_code.right)) then
+    angle = getRotation(1).angle
+    getRotation(1).angle = angle - 1
+end
+
+if(keyPressed(input_code.escape)) then
+    quit()
+end
+
+if(keyPressed(input_code.enter)) then
+    loadSound("Success", "sounds\\success.mp3")
+    playSound("Success")
+end

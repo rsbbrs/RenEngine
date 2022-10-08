@@ -177,7 +177,6 @@ void ScriptManager::update(ECS& manager)
     {
         Script entity_script = manager.Get<Script>(e);
         loadScript(entity_script.name, entity_script.path);
-        getScript(manager.Get<Script>(e).name)();
-
+        getScript(entity_script.name)();
     });
 }

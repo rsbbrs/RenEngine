@@ -3,37 +3,6 @@
 
 using namespace RenEngine;
 
-void procInput(EntityID id, Engine* engine)
-{
-    Position& pos = engine->getComponent<Position>(id);
-    Rotation& rot = engine->getComponent<Rotation>(id);
-    Scale& scale = engine->getComponent<Scale>(id);
-
-    if(engine->queryInput(input_code::up))
-        scale.scale != 100 ? scale.scale += 1 : scale.scale = 100;
-
-    if(engine->queryInput(input_code::down))
-        scale.scale != 0 ? scale.scale -= 1 : scale.scale = 0;
-
-    if(engine->queryInput(input_code::w))
-        pos.y += 1;
-
-    if(engine->queryInput(input_code::a))
-        pos.x -= 1;
-
-    if(engine->queryInput(input_code::s))
-        pos.y -= 1;
-
-    if(engine->queryInput(input_code::d))
-        pos.x += 1;
-
-    if(engine->queryInput(input_code::left))
-        rot.angle += 1.0;
-
-    if(engine->queryInput(input_code::right))
-        rot.angle -= 1.0;
-}
-
 int main(int argc, const char* argv[])
 {
     // Dynamic allocation for using default arguments in case none are provided.
@@ -96,18 +65,8 @@ int main(int argc, const char* argv[])
 
     }
 
-    // Callback for the engine.
-    renEngine->gameLoop([&]()
-    {
-        // Checks if user input is pressed to play the sound.
-        if(renEngine->queryInput(input_code::enter))
-        {
-            renEngine->loadSound("Success", renEngine->filePath("sounds\\success.mp3"));
-            renEngine->playSound("Success");
-        }
-
-        //procInput(entities[0], renEngine);
-    });
+    // Initializes the game loop.
+    renEngine->gameLoop([&](){});
 
     delete renEngine;
 

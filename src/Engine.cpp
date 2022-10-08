@@ -57,9 +57,7 @@ void Engine::gameLoop(const UpdateCallback& callback)
     // function doubles the amount of time to sleep. Halfving
     // the interval per loop seems to make it run in 1/60 of
     // a second.
-    while(graphicsManager.closeWindow() 
-          && !inputManager.keyPressed(graphicsManager, input_code::escape) 
-          && !scriptManager.scriptQuit)
+    while(graphicsManager.closeWindow() && !scriptManager.scriptQuit)
     {
         // Tick start.
         const auto t1 = std::chrono::steady_clock::now();
