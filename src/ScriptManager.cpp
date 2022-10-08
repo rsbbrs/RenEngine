@@ -174,6 +174,7 @@ void ScriptManager::update(ECS& manager)
 {
     manager.ForEach<Script>([&](EntityID e)
     {
-        auto fx = lua.load(scripts[manager.Get<Script>(e).name]);
+        scripts[manager.Get<Script>(e).name]();
+
     });
 }
