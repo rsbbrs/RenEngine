@@ -114,6 +114,7 @@ Checkpoint 7
 	- Engine now capable of loading and running Lua scripts via the ECS.
 	- Exposed functionality to the script manager, including graphics,
 	  input, sound and ECS functionality.
+	- Created a simple script to test functionality.
 
 	Notes: My script manager is loaded as the last manager, so that the other
 	       managers can expose their functionality to it. I also exported
