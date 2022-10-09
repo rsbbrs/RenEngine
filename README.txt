@@ -108,4 +108,20 @@ Checkpoint 6
 		   can be moved in real time. WASD change the sprite's position.
 		   Up and down arrow keys scale the sprite. Left and right arrow
 		   keys rotate the sprite.
+
+Checkpoint 7
+	- Implemented the script manager.
+	- Engine now capable of loading and running Lua scripts via the ECS.
+	- Exposed functionality to the script manager, including graphics,
+	  input, sound and ECS functionality.
+
+	Notes: My script manager is loaded as the last manager, so that the other
+	       managers can expose their functionality to it. I also exported
+		   all my component structs and the input_code struct. The update 
+		   function is called within the engine's main game loop. It uses
+		   the ECS's ForAll function to iterate over all entities with scripts
+		   attached to them. The only problem the function has is that it's supposed
+		   to reload the script again so it can run any changes on the fly, but
+		   it's not working. I have to recompile the engine so that the scripts
+		   can be re-imported, and only then wll script changes be run.
 		   
