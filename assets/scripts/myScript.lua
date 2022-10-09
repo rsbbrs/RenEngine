@@ -1,21 +1,24 @@
+local movementSpeed = 2
+local turnSpeed = 2
+
 if(keyPressed(input_code.w)) then
     ypos = getPosition(1).y
-    getPosition(1).y = ypos + 1
+    getPosition(1).y = ypos + movementSpeed
 end
 
 if(keyPressed(input_code.s)) then
     ypos = getPosition(1).y
-    getPosition(1).y = ypos - 1
+    getPosition(1).y = ypos - movementSpeed
 end
 
 if(keyPressed(input_code.d)) then
     xpos = getPosition(1).x
-    getPosition(1).x = xpos + 1
+    getPosition(1).x = xpos + movementSpeed
 end
 
 if(keyPressed(input_code.a)) then
     xpos = getPosition(1).x
-    getPosition(1).x = xpos - 1
+    getPosition(1).x = xpos - movementSpeed
 end
 
 if(keyPressed(input_code.up) and (getScale(1).scale < 100)) then
@@ -30,12 +33,12 @@ end
 
 if(keyPressed(input_code.left)) then
     angle = getRotation(1).angle
-    getRotation(1).angle = angle + 1
+    getRotation(1).angle = angle + turnSpeed
 end
 
 if(keyPressed(input_code.right)) then
     angle = getRotation(1).angle
-    getRotation(1).angle = angle - 1
+    getRotation(1).angle = angle - turnSpeed
 end
 
 if(keyPressed(input_code.escape)) then

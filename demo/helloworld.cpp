@@ -23,7 +23,6 @@ int main(int argc, const char* argv[])
     // Sprite vector.
     std::vector<EntityID> entities;
     EntityID newEntity = renEngine->createEntity();
-    std::cout << newEntity << "\n";
     
     // Loading sprite.
     if(renEngine->loadSpriteImage("mySprite", renEngine->filePath("sprites\\mySprite.png")))
@@ -61,8 +60,6 @@ int main(int argc, const char* argv[])
         newScript.path = scriptPath;
 
         renEngine->getComponent<Script>(entities[0]) = newScript;
-
-
     }
 
     // Initializes the game loop.

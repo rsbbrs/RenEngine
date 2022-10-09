@@ -21,12 +21,23 @@ void ScriptManager::scmStartup(GraphicsManager& graphicsManager,
     setInputCodes();
     setComponentStructs();
 
+    // Graphics manager functions.
+    lua.set_function("loadImage", [&](const std::string& name, const std::string path) 
+    {
+        return graphicsManager.loadImage(name, resourceManager.resolvePath(path));
+    });
+    lua.set_function("destroyImage", [&](const std::string& name) { graphicsManager.destroyImage(name); } );
+    lua.set_function("closeAllImages", [&]() { graphicsManager.clearAllImages(); });
+
+
     // Input manager functions.
     lua.set_function("keyPressed", [&](const input_code keycode) { return inputManager.keyPressed(graphicsManager, keycode); } );
 
     // Sound manager functions.
     lua.set_function("loadSound", [&](const std::string name, const std::string path) 
-                                     { soundManager.loadSound(name, resourceManager.resolvePath(path)); } );
+    {
+        soundManager.loadSound(name, resourceManager.resolvePath(path)); 
+    });
     lua.set_function("playSound", [&](const std::string name) { soundManager.playSound(name); } );
     lua.set_function("closeSound", [&](const std::string name) { soundManager.closeSound(name); } );
     lua.set_function("clearAllSounds", [&]() { soundManager.clearSoundsList(); } );
