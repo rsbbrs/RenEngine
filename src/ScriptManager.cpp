@@ -186,7 +186,7 @@ void ScriptManager::update(ECS& manager)
 {
     manager.ForEach<Script>([&](EntityID e)
     {
-        Script entity_script = manager.Get<Script>(e);
+        Script& entity_script = manager.Get<Script>(e);
         loadScript(entity_script.name, entity_script.path);
         getScript(entity_script.name)();
     });
