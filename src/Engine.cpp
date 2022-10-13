@@ -67,8 +67,9 @@ void Engine::gameLoop(const UpdateCallback& callback)
 
         // User callback to specify custom behaviour.
         callback();
-        scriptManager.update(ECSManager);
 
+        // Manager updates of game state.
+        scriptManager.update(ECSManager);
         graphicsManager.draw(ECSManager);
        
         loops++;
