@@ -25,6 +25,10 @@ namespace RenEngine
 
             // Helper functions for initialization.
             void setInputCodes();
+            void setComponentStructs();
+
+            // Script command to quit the engine.
+            void quit();
 
         public:
             bool scriptQuit;
@@ -45,9 +49,5 @@ namespace RenEngine
 
             // Runs all entities with script components.
             void update(ECS& ecsManager);
-
-            // Script command to quit the engine.
-            void quit();
-
     };
 }

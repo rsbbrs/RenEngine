@@ -3,37 +3,6 @@
 
 using namespace RenEngine;
 
-void procInput(EntityID id, Engine* engine)
-{
-    Position& pos = engine->getComponent<Position>(id);
-    Rotation& rot = engine->getComponent<Rotation>(id);
-    Scale& scale = engine->getComponent<Scale>(id);
-
-    if(engine->queryInput(input_code::up))
-        scale.scale != 100 ? scale.scale += 1 : scale.scale = 100;
-
-    if(engine->queryInput(input_code::down))
-        scale.scale != 0 ? scale.scale -= 1 : scale.scale = 0;
-
-    if(engine->queryInput(input_code::w))
-        pos.y += 1;
-
-    if(engine->queryInput(input_code::a))
-        pos.x -= 1;
-
-    if(engine->queryInput(input_code::s))
-        pos.y -= 1;
-
-    if(engine->queryInput(input_code::d))
-        pos.x += 1;
-
-    if(engine->queryInput(input_code::left))
-        rot.angle += 1.0;
-
-    if(engine->queryInput(input_code::right))
-        rot.angle -= 1.0;
-}
-
 int main(int argc, const char* argv[])
 {
     // Dynamic allocation for using default arguments in case none are provided.
@@ -53,6 +22,7 @@ int main(int argc, const char* argv[])
 
     // Sprite vector.
     std::vector<EntityID> entities;
+    EntityID newEntity = renEngine->createEntity();
     
     // Loading sprite.
     if(renEngine->loadSpriteImage("mySprite", renEngine->filePath("sprites\\mySprite.png")))
@@ -61,7 +31,7 @@ int main(int argc, const char* argv[])
         // Creates a sprite called mySprite with position (1, 1), scale of 1 and z value of 1.
 
         // Entity setup.
-        entities.push_back(renEngine->createEntity());
+        entities.push_back(newEntity);
         Sprite mySprite;
         Position pos;
         Rotation rot;
@@ -79,19 +49,21 @@ int main(int argc, const char* argv[])
         renEngine->getComponent<Rotation>(entities[0]) = rot;
         renEngine->getComponent<Scale>(entities[0]) = scale;
     }
+    auto scriptPath = renEngine->filePath("scripts\\myScript.lua");
 
-    // Callback for the engine.
-    renEngine->gameLoop([&]()
+    if(renEngine->loadScript("myScript", scriptPath))
     {
-        // Checks if user input is pressed to play the sound.
-        if(renEngine->queryInput(input_code::enter))
-        {
-            renEngine->loadSound("Success", renEngine->filePath("sounds\\success.mp3"));
-            renEngine->playSound("Success");
-        }
+        std::cout << "Successfully loaded myScript.\n";
 
-        procInput(entities[0], renEngine);
-    });
+        Script newScript;
+        newScript.name = "myScript";
+        newScript.path = scriptPath;
+
+        renEngine->getComponent<Script>(entities[0]) = newScript;
+    }
+
+    // Initializes the game loop.
+    renEngine->gameLoop([&](){});
 
     delete renEngine;
 

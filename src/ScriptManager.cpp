@@ -19,20 +19,45 @@ void ScriptManager::scmStartup(GraphicsManager& graphicsManager,
     lua.script("math.randomseed(0)");
 
     setInputCodes();
+    setComponentStructs();
+
+    // Graphics manager functions.
+    lua.set_function("loadImage", [&](const std::string& name, const std::string path) 
+    {
+        return graphicsManager.loadImage(name, resourceManager.resolvePath(path));
+    });
+    lua.set_function("destroyImage", [&](const std::string& name) { graphicsManager.destroyImage(name); } );
+    lua.set_function("closeAllImages", [&]() { graphicsManager.clearAllImages(); });
+
 
     // Input manager functions.
-    lua.set_function("KeyPressed", [&](const input_code keycode) { return inputManager.keyPressed(graphicsManager, keycode); } );
+    lua.set_function("keyPressed", [&](const input_code keycode) { return inputManager.keyPressed(graphicsManager, keycode); } );
 
     // Sound manager functions.
     lua.set_function("loadSound", [&](const std::string name, const std::string path) 
-                                     { soundManager.loadSound(name, resourceManager.resolvePath(path)); } );
+    {
+        soundManager.loadSound(name, resourceManager.resolvePath(path)); 
+    });
     lua.set_function("playSound", [&](const std::string name) { soundManager.playSound(name); } );
     lua.set_function("closeSound", [&](const std::string name) { soundManager.closeSound(name); } );
     lua.set_function("clearAllSounds", [&]() { soundManager.clearSoundsList(); } );
 
     // ECS manager functions.
-    lua.set_function("createEntity", [&]() { ecsManager.Create(); } );
+    lua.set_function("createEntity", [&]() { return ecsManager.Create(); } );
     lua.set_function("destroyEntity", [&](const EntityID e) { ecsManager.Destroy(e); } );
+
+    // Component getters.
+    lua.set_function("getPosition", [&](const EntityID e) -> Position& { return ecsManager.Get<Position>(e); } );
+    lua.set_function("getRotation", [&](const EntityID e) -> Rotation& { return ecsManager.Get<Rotation>(e); } );
+    lua.set_function("getScale", [&](const EntityID e) -> Scale& { return ecsManager.Get<Scale>(e); } );
+    lua.set_function("getVelocity", [&](const EntityID e) -> Velocity& { return ecsManager.Get<Velocity>(e); } );
+    lua.set_function("getGravity", [&](const EntityID e) -> Gravity& { return ecsManager.Get<Gravity>(e); } );
+    lua.set_function("getHealth", [&](const EntityID e) -> Health& { return ecsManager.Get<Health>(e); } );
+    lua.set_function("getScript", [&](const EntityID e) -> Script& { return ecsManager.Get<Script>(e); } );
+    lua.set_function("getSprite", [&](const EntityID e) { return ecsManager.Get<Sprite>(e); } );
+
+    // Lua state in the engine.
+    lua.set_function("getState", [&]() { return true; } );
 
     // Quit function.
     lua.set_function("quit", [&]() { quit(); } );
@@ -76,6 +101,61 @@ void ScriptManager::setInputCodes()
     lua.new_enum<input_code>("input_code", inputList);
 }
 
+// Initializes all component structures into Lua.
+void ScriptManager::setComponentStructs()
+{
+    lua.new_usertype<Position>(
+        "Position",
+        sol::constructors<Position()>(),
+        "x", &Position::x,
+        "y", &Position::y
+    );
+
+    lua.new_usertype<Velocity>(
+        "Velocity",
+        sol::constructors<Velocity()>(),
+        "x", &Velocity::x,
+        "y", &Velocity::y
+    );
+
+    lua.new_usertype<Rotation>(
+        "Rotation",
+        sol::constructors<Rotation()>(),
+        "angle", &Rotation::angle
+    );
+
+    lua.new_usertype<Scale>(
+        "Scale",
+        sol::constructors<Scale()>(),
+        "scale", &Scale::scale
+    );
+
+    lua.new_usertype<Gravity>(
+        "Gravity",
+        sol::constructors<Gravity()>(),
+        "meter_per_second", &Gravity::meters_per_second
+    );
+
+    lua.new_usertype<Health>(
+        "Health",
+        sol::constructors<Health()>(),
+        "percent", &Health::percent
+    );
+
+    lua.new_usertype<Script>(
+        "Script",
+        sol::constructors<Script()>(),
+        "name", &Script::name,
+        "path", &Script::path
+    );
+
+    lua.new_usertype<Sprite>(
+        "Sprite",
+        sol::constructors<Sprite()>(),
+        "name", &Sprite::name
+    );
+}
+
 // Currently does nothing.
 void ScriptManager::scmShutDown()
 {}
@@ -99,4 +179,15 @@ sol::load_result& ScriptManager::getScript(const std::string& name)
 void ScriptManager::quit()
 {
     scriptQuit = true;
+}
+
+// Runs the scripts attached to each entity.
+void ScriptManager::update(ECS& manager)
+{
+    manager.ForEach<Script>([&](EntityID e)
+    {
+        Script& entity_script = manager.Get<Script>(e);
+        loadScript(entity_script.name, entity_script.path);
+        getScript(entity_script.name)();
+    });
 }

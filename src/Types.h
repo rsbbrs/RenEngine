@@ -44,7 +44,7 @@ namespace RenEngine
     struct Velocity : public vec2 {};
     struct Gravity { double meters_per_second; };
     struct Health { double percent; };
-    struct Script { std::string name; };
+    struct Script { std::string name; std::string path; };
     struct Sprite { std::string name; };
 
     //  Some common keyboard buttons for games
