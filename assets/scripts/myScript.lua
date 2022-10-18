@@ -33,8 +33,3 @@ if(keyPressed(input_code.enter)) then
     loadSound("Success", "sounds\\success.mp3")
     playSound("Success")
 end
-
-if(getPosition(1).x < -100) then
-    position = getPosition(1)
-    getPosition(1).x = winWidth() + 100
-end
