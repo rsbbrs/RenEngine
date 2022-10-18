@@ -28,6 +28,8 @@ void ScriptManager::scmStartup(GraphicsManager& graphicsManager,
     });
     lua.set_function("destroyImage", [&](const std::string& name) { graphicsManager.destroyImage(name); } );
     lua.set_function("closeAllImages", [&]() { graphicsManager.clearAllImages(); });
+    lua.set_function("winWidth", [&]() { return graphicsManager.width(); } );
+    lua.set_function("winHeight", [&]() { return graphicsManager.height(); } );
 
 
     // Input manager functions.

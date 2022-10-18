@@ -34,5 +34,9 @@ namespace RenEngine
 
             // Draw images.
             void draw(ECS& manager);
+            
+            // Getters for window dimensions.
+            int width();
+            int height();
     };
 }
