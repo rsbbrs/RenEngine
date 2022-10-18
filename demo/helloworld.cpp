@@ -25,10 +25,10 @@ int main(int argc, const char* argv[])
     EntityID newEntity = renEngine->createEntity();
     
     // Loading sprite.
-    if(renEngine->loadSpriteImage("mySprite", renEngine->filePath("sprites\\mySprite.png")))
+    if(renEngine->loadSpriteImage("Spaceship", renEngine->filePath("sprites\\Spaceship.png")))
     {
-        std::cout << "Successfully loaded mySprite.\n";
-        // Creates a sprite called mySprite with position (1, 1), scale of 1 and z value of 1.
+        std::cout << "Successfully loaded Spaceship sprite.\n";
+        // Creates a sprite called Spaceship with position (1, 1), scale of 1 and z value of 1.
 
         // Entity setup.
         entities.push_back(newEntity);
@@ -36,12 +36,12 @@ int main(int argc, const char* argv[])
         Position pos;
         Rotation rot;
         Scale scale;
-        mySprite.name = "mySprite";
+        mySprite.name = "Spaceship";
         pos.x = 0;
         pos.y = 0;
         pos.z = 1;
-        rot.angle = 180;
-        scale.scale = 50;
+        rot.angle = 0;
+        scale.scale = 25;
         
         // Setting the entity's components.
         renEngine->getComponent<Sprite>(entities[0]) = mySprite;
@@ -51,12 +51,12 @@ int main(int argc, const char* argv[])
     }
     auto scriptPath = renEngine->filePath("scripts\\myScript.lua");
 
-    if(renEngine->loadScript("myScript", scriptPath))
+    if(renEngine->loadScript("Spaceship", scriptPath))
     {
-        std::cout << "Successfully loaded myScript.\n";
+        std::cout << "Successfully loaded Spaceship script.\n";
 
         Script newScript;
-        newScript.name = "myScript";
+        newScript.name = "Spaceship";
         newScript.path = scriptPath;
 
         renEngine->getComponent<Script>(entities[0]) = newScript;
