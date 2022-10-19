@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ScriptManager.h"
+#include <chrono>
 
 using namespace RenEngine;
 
@@ -63,6 +64,8 @@ void ScriptManager::scmStartup(GraphicsManager& graphicsManager,
 
     // Quit function.
     lua.set_function("quit", [&]() { quit(); } );
+
+    lua.set_function("getTime", [&]() { return std::chrono::steady_clock::now(); } );
 }
 
 void ScriptManager::setInputCodes()
