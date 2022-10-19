@@ -7,8 +7,7 @@ if(keyPressed(input_code.w)) then
     position = getPosition(1)
     angle = math.rad(getRotation(1).angle + 90)
     velocity = getVelocity(1)
-    dt = getTime() - initTime
-    
+    dt = 1
     getPosition(1).x = position.x + (math.cos(angle) * velocity.x * dt)
     getPosition(1).y = position.y + (math.sin(angle) * velocity.y * dt)
 
