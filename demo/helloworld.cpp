@@ -36,18 +36,21 @@ int main(int argc, const char* argv[])
         Position pos;
         Rotation rot;
         Scale scale;
+        Velocity v;
         mySprite.name = "Spaceship";
         pos.x = 0;
         pos.y = 0;
         pos.z = 1;
         rot.angle = 0;
         scale.scale = 25;
+        v.x = v.y = 0;
         
         // Setting the entity's components.
         renEngine->getComponent<Sprite>(entities[0]) = mySprite;
         renEngine->getComponent<Position>(entities[0]) = pos;
         renEngine->getComponent<Rotation>(entities[0]) = rot;
         renEngine->getComponent<Scale>(entities[0]) = scale;
+        renEngine->getComponent<Velocity>(entities[0]) = v;
     }
     auto scriptPath = renEngine->filePath("scripts\\myScript.lua");
 
@@ -63,7 +66,10 @@ int main(int argc, const char* argv[])
     }
 
     // Initializes the game loop.
-    renEngine->gameLoop([&](){});
+    renEngine->gameLoop([&]()
+    {
+
+    });
 
     delete renEngine;
 
