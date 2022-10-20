@@ -10,23 +10,10 @@ using namespace RenEngine;
 int main(int argc, const char* argv[])
 {
     // Dynamic allocation for using default arguments in case none are provided.
-    Engine* renEngine;
-
-    // Starts the engine with default or user specified arguments.
-    if(argc < 5)
-    {
-        std::cerr << "Note: Four arguments can be passed to the engine. Starting with default arguments" << "\n";
-        std::cerr << "Format: helloworld name width height fullscreen." << "\n\n";
-        renEngine = new Engine();
-    }
-    else
-    {
-        renEngine = new Engine(argv[1], atoi(argv[2]), atoi(argv[3]), std::string(argv[4]).compare("true") == 0? true : false);
-    }
+    Engine* renEngine = new Engine("Asteroids", 1200, 720, true);
 
     // Sprite vector.
-    std::vector<EntityID> entities;
-    EntityID newEntity = renEngine->createEntity();
+    std::vector<EntityID> entities;    
     
     // Loading sprite.
     if(renEngine->loadSpriteImage("Spaceship", renEngine->filePath("sprites\\Spaceship.png")))
@@ -35,7 +22,7 @@ int main(int argc, const char* argv[])
         // Creates a sprite called Spaceship with position (1, 1), scale of 1 and z value of 1.
 
         // Entity setup.
-        entities.push_back(newEntity);
+        entities.push_back(renEngine->createEntity());      // EntityID 1
         Sprite mySprite;
         Position pos;
         Rotation rot;
@@ -55,6 +42,11 @@ int main(int argc, const char* argv[])
         renEngine->getComponent<Rotation>(entities[0]) = rot;
         renEngine->getComponent<Scale>(entities[0]) = scale;
         renEngine->getComponent<Velocity>(entities[0]) = v;
+
+        entities.push_back(renEngine->createEntity());      // EntityID 2
+        Rotation mvRot;
+        mvRot.angle = 0;
+        renEngine->getComponent<Rotation>(entities[1]) = mvRot;
     }
     auto scriptPath = renEngine->filePath("scripts\\myScript.lua");
 
@@ -70,23 +62,7 @@ int main(int argc, const char* argv[])
     }
 
     // Initializes the game loop.
-    renEngine->gameLoop([&]()
-    {
-        if(!renEngine->queryInput(input_code::w))
-        {
-            Position& pos = renEngine->getComponent<Position>(entities[0]);
-            float angle = renEngine->getComponent<Rotation>(entities[0]).angle;
-            Velocity& v = renEngine->getComponent<Velocity>(entities[0]);
-            auto dt = 0.5f;
-            auto acc = 0.5f;
-
-            pos.x += (float)std::cos(M_PI * angle / 180) * v.x * dt;
-            pos.y += (float)std::sin(M_PI * angle / 180) * v.y * dt;
-
-            v.x = std::max<float>(0, v.x - (acc * dt));
-            v.y = std::max<float>(0, v.y - (acc * dt));
-        }
-    });
+    renEngine->gameLoop([&]() {});
 
     delete renEngine;
 
