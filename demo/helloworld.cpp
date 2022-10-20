@@ -10,7 +10,7 @@ using namespace RenEngine;
 int main(int argc, const char* argv[])
 {
     // Dynamic allocation for using default arguments in case none are provided.
-    Engine* renEngine = new Engine("Asteroids", 1200, 720, true);
+    Engine* renEngine = new Engine("Asteroids", 1200, 720, false);
 
     // Sprite vector.
     std::vector<EntityID> entities;    
@@ -48,6 +48,7 @@ int main(int argc, const char* argv[])
         mvRot.angle = 0;
         renEngine->getComponent<Rotation>(entities[1]) = mvRot;
     }
+
     auto scriptPath = renEngine->filePath("scripts\\myScript.lua");
 
     if(renEngine->loadScript("Spaceship", scriptPath))
@@ -60,6 +61,29 @@ int main(int argc, const char* argv[])
 
         renEngine->getComponent<Script>(entities[0]) = newScript;
     }
+
+    if(renEngine->loadSpriteImage("Space", renEngine->filePath("sprites\\space.png")))
+    {
+        std::cout << "Successfully loaded space.png.\n";
+
+        entities.push_back(renEngine->createEntity());      // EntityID 3
+        Sprite sprite;
+        Position pos;
+        Rotation rot;
+        Scale scale;
+        sprite.name = "Space";
+        pos.x = 0;
+        pos.y = 0;
+        pos.z = 0;
+        rot.angle = 0;
+        scale.scale = 100;
+
+        renEngine->getComponent<Sprite>(entities[2]) = sprite;
+        renEngine->getComponent<Position>(entities[2]) = pos;
+        renEngine->getComponent<Rotation>(entities[2]) = rot;
+        renEngine->getComponent<Scale>(entities[2]) = scale;
+    }
+
 
     // Initializes the game loop.
     renEngine->gameLoop([&]() {});
