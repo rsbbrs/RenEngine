@@ -1,5 +1,9 @@
+#pragma once
+
 #include "Engine.h"
 #include "ECS.h"
+#include <cmath>
+#include <algorithm>
 
 using namespace RenEngine;
 
@@ -68,7 +72,20 @@ int main(int argc, const char* argv[])
     // Initializes the game loop.
     renEngine->gameLoop([&]()
     {
+        if(!renEngine->queryInput(input_code::w))
+        {
+            Position& pos = renEngine->getComponent<Position>(entities[0]);
+            float angle = renEngine->getComponent<Rotation>(entities[0]).angle;
+            Velocity& v = renEngine->getComponent<Velocity>(entities[0]);
+            auto dt = 0.5f;
+            auto acc = 0.5f;
 
+            pos.x += (float)std::cos(M_PI * angle / 180) * v.x * dt;
+            pos.y += (float)std::sin(M_PI * angle / 180) * v.y * dt;
+
+            v.x = std::max<float>(0, v.x - (acc * dt));
+            v.y = std::max<float>(0, v.y - (acc * dt));
+        }
     });
 
     delete renEngine;

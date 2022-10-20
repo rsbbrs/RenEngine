@@ -65,7 +65,7 @@ void ScriptManager::scmStartup(GraphicsManager& graphicsManager,
     // Quit function.
     lua.set_function("quit", [&]() { quit(); } );
 
-    lua.set_function("getTime", [&]() { return std::chrono::steady_clock::now(); } );
+    //lua.set_function("getTime", [&]() { return std::chrono::steady_clock::now(); } );
 }
 
 void ScriptManager::setInputCodes()

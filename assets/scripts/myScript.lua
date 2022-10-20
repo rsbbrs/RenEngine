@@ -1,18 +1,18 @@
 local movementSpeed = 2
-local turnSpeed = 2
+local turnSpeed = 3
 local acceleration = 0.5
-local initTime = getTime()
+local initTime = 0
 
 if(keyPressed(input_code.w)) then
     position = getPosition(1)
     angle = math.rad(getRotation(1).angle + 90)
     velocity = getVelocity(1)
-    dt = 1
+    dt = 0.5
     getPosition(1).x = position.x + (math.cos(angle) * velocity.x * dt)
     getPosition(1).y = position.y + (math.sin(angle) * velocity.y * dt)
 
-    getVelocity(1).x = velocity.x + (acceleration * dt)
-    getVelocity(1).y = velocity.y + (acceleration * dt)
+    getVelocity(1).x = math.min(velocity.x + (acceleration * dt), 10)
+    getVelocity(1).y = math.min(velocity.y + (acceleration * dt), 10)
 
 end
 
