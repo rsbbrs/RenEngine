@@ -92,14 +92,13 @@ int main(int argc, const char* argv[])
         std::cout << "Successfully loaded laser.png\n";
 
     int laserSpeed = 5;
+    bool pressed = false;
     
     // Initializes the game loop.
     renEngine->gameLoop([&]() 
     {
-        bool pressed = false;
-        if(renEngine->queryInput(input_code::space) && !pressed)
+        if(renEngine->queryInput(input_code::space))
         {
-            pressed = true;
             EntityID newID = renEngine->createEntity();
             
             Sprite laser = {"Laser"};
