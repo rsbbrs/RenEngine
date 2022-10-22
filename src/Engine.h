@@ -195,5 +195,25 @@ namespace RenEngine
              * @return False otherwise.
              */
             bool loadScript(const std::string& name, const std::string& path);
+
+            /**
+             * @brief Converts degrees to radians. The engine stores 
+             *        angles in degrees, but many trig. functions in
+             *        c++ require radians.
+             * 
+             * @param degrees The desired angle in degrees.
+             * @return The angle converted to radians.
+             */
+            double radians(const int degrees);
+
+            /**
+             * @brief Converts degrees to radians. The engine stores 
+             *        angles in degrees, but many trig. functions in
+             *        c++ require radians.
+             * 
+             * @param degrees The Rotation component.
+             * @return The angle converted to radians.
+             */
+            double radians(const Rotation degrees);
     };
 }

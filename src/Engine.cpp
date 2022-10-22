@@ -154,3 +154,13 @@ bool Engine::loadScript(const std::string& name, const std::string& path)
 {
     return scriptManager.loadScript(name, path);
 }
+
+double Engine::radians(const int degrees)
+{
+    return (degrees * M_PI) / 180.0f;
+}
+
+double Engine::radians(const Rotation degrees)
+{
+    return radians(degrees.angle);
+}

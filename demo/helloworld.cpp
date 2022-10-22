@@ -1,9 +1,8 @@
 #pragma once
 
 #include "Engine.h"
-#include "ECS.h"
 #include <cmath>
-#include <algorithm>
+#include <string>
 
 using namespace RenEngine;
 
@@ -13,7 +12,10 @@ int main(int argc, const char* argv[])
     Engine* renEngine = new Engine("Asteroids Demo", 1200, 720, false);
 
     // Sprite vector.
-    std::vector<EntityID> entities;
+    EntityID background, spaceship;
+    
+    // Blaster fire vector
+    std::vector<EntityID> bfEntities;
 
     // Setup script for lua.
     if(renEngine->loadScript("Setup", renEngine->filePath("sprites\\setup.lua")))
@@ -28,7 +30,7 @@ int main(int argc, const char* argv[])
     {
         std::cout << "Successfully loaded space.png.\n";
 
-        entities.push_back(renEngine->createEntity());      // EntityID 1
+        background = renEngine->createEntity();      // EntityID 1
         Sprite sprite;
         Position pos;
         Rotation rot;
@@ -40,10 +42,10 @@ int main(int argc, const char* argv[])
         rot.angle = 180;
         scale.scale = 180;
 
-        renEngine->getComponent<Sprite>(entities[2]) = sprite;
-        renEngine->getComponent<Position>(entities[2]) = pos;
-        renEngine->getComponent<Rotation>(entities[2]) = rot;
-        renEngine->getComponent<Scale>(entities[2]) = scale;
+        renEngine->getComponent<Sprite>(background) = sprite;
+        renEngine->getComponent<Position>(background) = pos;
+        renEngine->getComponent<Rotation>(background) = rot;
+        renEngine->getComponent<Scale>(background) = scale;
     }  
     
     // Loading sprite.
@@ -53,7 +55,7 @@ int main(int argc, const char* argv[])
         // Creates a sprite called Spaceship with position (1, 1), scale of 1 and z value of 1.
 
         // Entity setup.
-        entities.push_back(renEngine->createEntity());      // EntityID 2
+        spaceship = renEngine->createEntity();      // EntityID 2
         Sprite mySprite;
         Position pos;
         Rotation rot;
@@ -68,11 +70,11 @@ int main(int argc, const char* argv[])
         v.x = v.y = 0;
         
         // Setting the entity's components.
-        renEngine->getComponent<Sprite>(entities[0]) = mySprite;
-        renEngine->getComponent<Position>(entities[0]) = pos;
-        renEngine->getComponent<Rotation>(entities[0]) = rot;
-        renEngine->getComponent<Scale>(entities[0]) = scale;
-        renEngine->getComponent<Velocity>(entities[0]) = v;
+        renEngine->getComponent<Sprite>(spaceship) = mySprite;
+        renEngine->getComponent<Position>(spaceship) = pos;
+        renEngine->getComponent<Rotation>(spaceship) = rot;
+        renEngine->getComponent<Scale>(spaceship) = scale;
+        renEngine->getComponent<Velocity>(spaceship) = v;
 
         // Lua script loading for spaceship entity.
         auto scriptPath = renEngine->filePath("scripts\\spaceship.lua");
@@ -84,19 +86,48 @@ int main(int argc, const char* argv[])
             newScript.name = "Spaceship";
             newScript.path = scriptPath;
 
-            renEngine->getComponent<Script>(entities[0]) = newScript;
+            renEngine->getComponent<Script>(spaceship) = newScript;
         }
-
-        /*
-        entities.push_back(renEngine->createEntity());      // EntityID 3
-        Rotation mvRot;
-        mvRot.angle = 0;
-        renEngine->getComponent<Rotation>(entities[1]) = mvRot;
-        */
     }
 
+    int bfCount = 0;
+
     // Initializes the game loop.
-    renEngine->gameLoop([&]() {});
+    renEngine->gameLoop([&]() 
+    {
+        if(renEngine->queryInput(input_code::space))
+        {
+            EntityID newID = renEngine->createEntity();
+            bfEntities.push_back(newID);
+            bfCount++;
+            std::string name = "Laser" + std::to_string(bfCount);
+            renEngine->loadSpriteImage(name, renEngine->filePath("sprites\\laser.png"));
+            Sprite laser = {name};
+            Scale scale = {10};
+            Rotation angle = {renEngine->getComponent<Rotation>(spaceship).angle + 90};
+            Position pos = renEngine->getComponent<Position>(spaceship);
+
+            renEngine->getComponent<Sprite>(newID) = laser;
+            renEngine->getComponent<Position>(newID) = pos;
+            renEngine->getComponent<Scale>(newID) = scale;
+            renEngine->getComponent<Rotation>(newID) = angle;
+        }
+
+        for(EntityID e : bfEntities)
+        {
+            Position& pos = renEngine->getComponent<Position>(e);
+            Rotation& angle = renEngine->getComponent<Rotation>(e);
+
+            if(pos.x < -185 || pos.x > 185 || pos.y < -121 || pos.y > 121)
+            {
+                renEngine->destroyEntity(e);
+                bfCount--;
+            }
+
+            pos.x += cos(renEngine->radians(angle)) * 5;
+            pos.y += sin(renEngine->radians(angle)) * 5;
+        }
+    });
 
     delete renEngine;
 
