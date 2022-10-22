@@ -10,10 +10,14 @@ using namespace RenEngine;
 int main(int argc, const char* argv[])
 {
     // Dynamic allocation for using default arguments in case none are provided.
-    Engine* renEngine = new Engine("Asteroids", 1200, 720, false);
+    Engine* renEngine = new Engine("Asteroids Demo", 1200, 720, false);
 
     // Sprite vector.
     std::vector<EntityID> entities;
+
+    // Setup script for lua.
+    if(renEngine->loadScript("Setup", renEngine->filePath("sprites\\setup.lua")))
+        std::cout << "Successfully loaded setup.lua\n";
 
     // Entities must be loaded in the order they're gonna be drawn in.
     // To show the background behind the spaceship sprite, load it
@@ -33,8 +37,8 @@ int main(int argc, const char* argv[])
         pos.x = 0;
         pos.y = 0;
         pos.z = 1;
-        rot.angle = 0;
-        scale.scale = 200;
+        rot.angle = 180;
+        scale.scale = 180;
 
         renEngine->getComponent<Sprite>(entities[2]) = sprite;
         renEngine->getComponent<Position>(entities[2]) = pos;
@@ -60,7 +64,7 @@ int main(int argc, const char* argv[])
         pos.y = 0;
         pos.z = 1;
         rot.angle = 0;
-        scale.scale = 25;
+        scale.scale = 20;
         v.x = v.y = 0;
         
         // Setting the entity's components.
@@ -70,23 +74,25 @@ int main(int argc, const char* argv[])
         renEngine->getComponent<Scale>(entities[0]) = scale;
         renEngine->getComponent<Velocity>(entities[0]) = v;
 
+        // Lua script loading for spaceship entity.
+        auto scriptPath = renEngine->filePath("scripts\\spaceship.lua");
+        if(renEngine->loadScript("Spaceship", scriptPath))
+        {
+            std::cout << "Successfully loaded Spaceship script.\n";
+
+            Script newScript;
+            newScript.name = "Spaceship";
+            newScript.path = scriptPath;
+
+            renEngine->getComponent<Script>(entities[0]) = newScript;
+        }
+
+        /*
         entities.push_back(renEngine->createEntity());      // EntityID 3
         Rotation mvRot;
         mvRot.angle = 0;
         renEngine->getComponent<Rotation>(entities[1]) = mvRot;
-    }
-
-    auto scriptPath = renEngine->filePath("scripts\\myScript.lua");
-
-    if(renEngine->loadScript("Spaceship", scriptPath))
-    {
-        std::cout << "Successfully loaded Spaceship script.\n";
-
-        Script newScript;
-        newScript.name = "Spaceship";
-        newScript.path = scriptPath;
-
-        renEngine->getComponent<Script>(entities[0]) = newScript;
+        */
     }
 
     // Initializes the game loop.

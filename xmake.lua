@@ -19,10 +19,11 @@ target("helloworld")
     add_files("demo/helloworld.cpp")
 
     -- Copy assets
-    after_build(function (target)
-        cprint("Copying assets")
-        os.cp("$(projectdir)/assets", path.directory(target:targetfile()))
-    end)
+    set_rundir("$(projectdir)")
+    -- after_build(function (target)
+        -- cprint("Copying assets")
+        -- os.cp("$(projectdir)/assets", path.directory(target:targetfile()))
+    -- end)
 
 target("RenEngine")
     set_kind("static")
