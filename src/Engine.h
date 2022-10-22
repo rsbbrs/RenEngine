@@ -181,9 +181,9 @@ namespace RenEngine
              *                 will execute on all entities with the
              *                 desired components.
              */
-            template< typename EntityComponents, typename... MoreComponents > void forEach(const ForEachCallback& callback)
+            template< typename EntityComponents > void forEach(const ForEachCallback& callback)
             {
-                ECSManager.ForEach<EntityComponents, MoreComponents>(callback);
+                ECSManager.ForEach<EntityComponents>(callback);
             }
 
             /**
@@ -204,7 +204,7 @@ namespace RenEngine
              * @param degrees The desired angle in degrees.
              * @return The angle converted to radians.
              */
-            double radians(const int degrees);
+            double radians(const float degrees);
 
             /**
              * @brief Converts degrees to radians. The engine stores 

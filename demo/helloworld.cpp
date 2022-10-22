@@ -13,9 +13,6 @@ int main(int argc, const char* argv[])
 
     // Sprite vector.
     EntityID background, spaceship;
-    
-    // Blaster fire vector
-    std::vector<EntityID> bfEntities;
 
     // Setup script for lua.
     if(renEngine->loadScript("Setup", renEngine->filePath("sprites\\setup.lua")))
@@ -90,19 +87,22 @@ int main(int argc, const char* argv[])
         }
     }
 
-    int bfCount = 0;
+    // Loads the lazer image to the engine.
+    if(renEngine->loadSpriteImage("Laser", renEngine->filePath("sprites\\laser.png")))
+        std::cout << "Successfully loaded laser.png\n";
 
+    int laserSpeed = 5;
+    
     // Initializes the game loop.
     renEngine->gameLoop([&]() 
     {
-        if(renEngine->queryInput(input_code::space))
+        bool pressed = false;
+        if(renEngine->queryInput(input_code::space) && !pressed)
         {
+            pressed = true;
             EntityID newID = renEngine->createEntity();
-            bfEntities.push_back(newID);
-            bfCount++;
-            std::string name = "Laser" + std::to_string(bfCount);
-            renEngine->loadSpriteImage(name, renEngine->filePath("sprites\\laser.png"));
-            Sprite laser = {name};
+            
+            Sprite laser = {"Laser"};
             Scale scale = {10};
             Rotation angle = {renEngine->getComponent<Rotation>(spaceship).angle + 90};
             Position pos = renEngine->getComponent<Position>(spaceship);
@@ -113,20 +113,22 @@ int main(int argc, const char* argv[])
             renEngine->getComponent<Rotation>(newID) = angle;
         }
 
-        for(EntityID e : bfEntities)
+        renEngine->forEach<Sprite>([&](EntityID e)
         {
-            Position& pos = renEngine->getComponent<Position>(e);
-            Rotation& angle = renEngine->getComponent<Rotation>(e);
-
-            if(pos.x < -185 || pos.x > 185 || pos.y < -121 || pos.y > 121)
+            if(renEngine->getComponent<Sprite>(e).name == "Laser")
             {
-                renEngine->destroyEntity(e);
-                bfCount--;
-            }
+                Position& pos = renEngine->getComponent<Position>(e);
+                Rotation angle = renEngine->getComponent<Rotation>(e);
 
-            pos.x += cos(renEngine->radians(angle)) * 5;
-            pos.y += sin(renEngine->radians(angle)) * 5;
-        }
+                if(pos.x < -185 || pos.x > 185 || pos.y < -121 || pos.y > 121)
+                    renEngine->destroyEntity(e);
+                else
+                {
+                    pos.x += (float)cos(renEngine->radians(angle)) * laserSpeed;
+                    pos.y += (float)sin(renEngine->radians(angle)) * laserSpeed;
+                }                
+            }
+        });
     });
 
     delete renEngine;

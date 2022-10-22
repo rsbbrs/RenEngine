@@ -155,7 +155,7 @@ bool Engine::loadScript(const std::string& name, const std::string& path)
     return scriptManager.loadScript(name, path);
 }
 
-double Engine::radians(const int degrees)
+double Engine::radians(const float degrees)
 {
     return (degrees * M_PI) / 180.0f;
 }
