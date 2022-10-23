@@ -42,6 +42,8 @@ class PrivateImpl
     public:
         // Pointer to main window.
         GLFWwindow* window;
+        int width;
+        int height;
 
         // Actual pipeline
         sg_pipeline pipeline;
@@ -79,6 +81,9 @@ void GraphicsManager::gmStartup(Configuration windowParam)
                                            windowParam.window.height, 
                                            windowParam.window.name, 
                                            windowParam.window.fullscreen ? glfwGetPrimaryMonitor() : 0, 0);
+
+    pImpl->width = windowParam.window.width;
+    pImpl->height = windowParam.window.height;
 
     glfwSetWindowAspectRatio( pImpl->window, windowParam.window.width, windowParam.window.height );
 
@@ -216,7 +221,7 @@ void GraphicsManager::createTransformMatrix(const std::string name,
     // Set the transformation matrix.
     // Allows translation, rotation and scaling.
     transform = translate( mat4{1}, pos ) 
-                * rotate(mat4{1}, radians(rot.angle), normalize(vec3{0, 0, pos.z}))
+                * rotate(mat4{1}, radians(rot.angle), normalize(vec3{0.0, 0.0, pos.z}))
                 * scale( mat4{1}, vec3( scaleVal.scale ) );
 
     // Scales down quad so that image draws within the appropriate aspect ratio.
@@ -330,4 +335,14 @@ void GraphicsManager::draw(ECS& manager)
     sg_end_pass();
     sg_commit();
     glfwSwapBuffers(pImpl->window);
+}
+
+int GraphicsManager::width()
+{
+    return pImpl->width;
+}
+
+int GraphicsManager::height()
+{
+    return pImpl->height;
 }

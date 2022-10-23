@@ -73,7 +73,7 @@ namespace RenEngine
              * 
              * @param key The keyboard key code being queried.
              * @return True if the key has been pressed.
-             * @return False otherwise.
+             * @return False if the key was not pressed or released.
              */
             bool queryInput(input_code key);
 
@@ -181,9 +181,9 @@ namespace RenEngine
              *                 will execute on all entities with the
              *                 desired components.
              */
-            template< typename EntityComponents, typename... MoreComponents > void forEach(const ForEachCallback& callback)
+            template< typename EntityComponents > void forEach(const ForEachCallback& callback)
             {
-                ECSManager.ForEach<EntityComponents, MoreComponents>(callback);
+                ECSManager.ForEach<EntityComponents>(callback);
             }
 
             /**
@@ -195,5 +195,25 @@ namespace RenEngine
              * @return False otherwise.
              */
             bool loadScript(const std::string& name, const std::string& path);
+
+            /**
+             * @brief Converts degrees to radians. The engine stores 
+             *        angles in degrees, but many trig. functions in
+             *        c++ require radians.
+             * 
+             * @param degrees The desired angle in degrees.
+             * @return The angle converted to radians.
+             */
+            double radians(const float degrees);
+
+            /**
+             * @brief Converts degrees to radians. The engine stores 
+             *        angles in degrees, but many trig. functions in
+             *        c++ require radians.
+             * 
+             * @param degrees The Rotation component.
+             * @return The angle converted to radians.
+             */
+            double radians(const Rotation degrees);
     };
 }

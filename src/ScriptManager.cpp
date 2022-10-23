@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ScriptManager.h"
+#include <chrono>
 
 using namespace RenEngine;
 
@@ -28,6 +29,8 @@ void ScriptManager::scmStartup(GraphicsManager& graphicsManager,
     });
     lua.set_function("destroyImage", [&](const std::string& name) { graphicsManager.destroyImage(name); } );
     lua.set_function("closeAllImages", [&]() { graphicsManager.clearAllImages(); });
+    lua.set_function("winWidth", [&]() { return graphicsManager.width(); } );
+    lua.set_function("winHeight", [&]() { return graphicsManager.height(); } );
 
 
     // Input manager functions.
@@ -61,6 +64,8 @@ void ScriptManager::scmStartup(GraphicsManager& graphicsManager,
 
     // Quit function.
     lua.set_function("quit", [&]() { quit(); } );
+
+    //lua.set_function("getTime", [&]() { return std::chrono::steady_clock::now(); } );
 }
 
 void ScriptManager::setInputCodes()
