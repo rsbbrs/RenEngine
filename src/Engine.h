@@ -73,7 +73,7 @@ namespace RenEngine
              * 
              * @param key The keyboard key code being queried.
              * @return True if the key has been pressed.
-             * @return False otherwise.
+             * @return False if the key was not pressed or released.
              */
             bool queryInput(input_code key);
 

@@ -33,9 +33,9 @@ int main(int argc, const char* argv[])
         Rotation rot;
         Scale scale;
         sprite.name = "Space";
-        pos.x = 0;
-        pos.y = 0;
-        pos.z = 1;
+        pos.x = 0.0;
+        pos.y = 0.0;
+        pos.z = 1.0;
         rot.angle = 180;
         scale.scale = 180;
 
@@ -43,7 +43,7 @@ int main(int argc, const char* argv[])
         renEngine->getComponent<Position>(background) = pos;
         renEngine->getComponent<Rotation>(background) = rot;
         renEngine->getComponent<Scale>(background) = scale;
-    }  
+    }
     
     // Loading sprite.
     if(renEngine->loadSpriteImage("Spaceship", renEngine->filePath("sprites\\Spaceship.png")))
@@ -59,9 +59,9 @@ int main(int argc, const char* argv[])
         Scale scale;
         Velocity v;
         mySprite.name = "Spaceship";
-        pos.x = 0;
-        pos.y = 0;
-        pos.z = 1;
+        pos.x = 0.0;
+        pos.y = 0.0;
+        pos.z = 1.0;
         rot.angle = 0;
         scale.scale = 20;
         v.x = v.y = 0;
@@ -87,18 +87,23 @@ int main(int argc, const char* argv[])
         }
     }
 
-    // Loads the lazer image to the engine.
+    // Loads the lazer image and sound effect to the engine.
     if(renEngine->loadSpriteImage("Laser", renEngine->filePath("sprites\\laser.png")))
+    {
         std::cout << "Successfully loaded laser.png\n";
+        renEngine->loadSound("Gunshot", renEngine->filePath("sounds\\gunshot.mp3"));
+    }
 
-    int laserSpeed = 5;
-    bool pressed = false;
+    int laserSpeed = 8;
+    bool wasPressed = false;
     
     // Initializes the game loop.
     renEngine->gameLoop([&]() 
     {
-        if(renEngine->queryInput(input_code::space))
+        if(renEngine->queryInput(input_code::space) && !wasPressed)
         {
+            renEngine->playSound("Gunshot");
+            wasPressed = true;
             EntityID newID = renEngine->createEntity();
             
             Sprite laser = {"Laser"};
@@ -111,6 +116,10 @@ int main(int argc, const char* argv[])
             renEngine->getComponent<Scale>(newID) = scale;
             renEngine->getComponent<Rotation>(newID) = angle;
         }
+
+        // Resets the button press if the button was released.
+        if(!renEngine->queryInput(input_code::space))
+            wasPressed = false;
 
         renEngine->forEach<Sprite>([&](EntityID e)
         {

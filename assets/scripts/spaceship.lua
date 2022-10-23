@@ -38,11 +38,6 @@ if(keyPressed(input_code.escape)) then
     quit()
 end
 
-if(keyPressed(input_code.enter)) then
-    loadSound("Success", "sounds\\success.mp3")
-    playSound("Success")
-end
-
 if(not keyPressed(input_code.w)) then
     position = getPosition(spaceship)
     velocity = getVelocity(spaceship)

@@ -221,7 +221,7 @@ void GraphicsManager::createTransformMatrix(const std::string name,
     // Set the transformation matrix.
     // Allows translation, rotation and scaling.
     transform = translate( mat4{1}, pos ) 
-                * rotate(mat4{1}, radians(rot.angle), normalize(vec3{0, 0, pos.z}))
+                * rotate(mat4{1}, radians(rot.angle), normalize(vec3{0.0, 0.0, pos.z}))
                 * scale( mat4{1}, vec3( scaleVal.scale ) );
 
     // Scales down quad so that image draws within the appropriate aspect ratio.
