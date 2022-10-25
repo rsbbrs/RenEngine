@@ -1,5 +1,7 @@
 #pragma once
 
+#define STATS
+
 #include <Engine.h>
 
 using namespace RenEngine;
@@ -83,9 +85,11 @@ void Engine::gameLoop(const UpdateCallback& callback)
     }
 
     // Statistics for loop timing printed after game loop finishes.
+    #ifdef STATS
     const auto end = time(0) - start;
     std::cout << "Game loop terminated.\nTotal time running: " << end << " seconds.\n"
               << "Total loops: " << loops << "\nLoops per second: " << (double)loops / (double)end << "\n";
+    #endif
 
     shutdown();
 }

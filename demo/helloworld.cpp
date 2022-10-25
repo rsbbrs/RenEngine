@@ -48,7 +48,7 @@ int main(int argc, const char* argv[])
     // Loading sprite.
     if(renEngine->loadSpriteImage("Spaceship", renEngine->filePath("sprites\\Spaceship.png")))
     {
-        std::cout << "Successfully loaded Spaceship sprite.\n";
+        std::cout << "Successfully loaded Spaceship.png.\n";
         // Creates a sprite called Spaceship with position (1, 1), scale of 1 and z value of 1.
 
         // Entity setup.
@@ -77,7 +77,7 @@ int main(int argc, const char* argv[])
         auto scriptPath = renEngine->filePath("scripts\\spaceship.lua");
         if(renEngine->loadScript("Spaceship", scriptPath))
         {
-            std::cout << "Successfully loaded Spaceship script.\n";
+            std::cout << "Successfully loaded spaceship.lua.\n";
 
             Script newScript;
             newScript.name = "Spaceship";
@@ -100,6 +100,7 @@ int main(int argc, const char* argv[])
     // Initializes the game loop.
     renEngine->gameLoop([&]() 
     {
+        // Creates the laser entity when the player fires the spaceship's cannon.
         if(renEngine->queryInput(input_code::space) && !wasPressed)
         {
             renEngine->playSound("Gunshot");
@@ -121,6 +122,7 @@ int main(int argc, const char* argv[])
         if(!renEngine->queryInput(input_code::space))
             wasPressed = false;
 
+        // Updates laser components' positions after they've been fired.
         renEngine->forEach<Sprite>([&](EntityID e)
         {
             if(renEngine->getComponent<Sprite>(e).name == "Laser")
