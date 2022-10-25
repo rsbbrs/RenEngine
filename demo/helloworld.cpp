@@ -9,7 +9,7 @@ using namespace RenEngine;
 int main(int argc, const char* argv[])
 {
     // Dynamic allocation for using default arguments in case none are provided.
-    Engine* renEngine = new Engine("Asteroids Demo", 1200, 720, false);
+    Engine* renEngine = new Engine("Engine Demo", 1200, 720, false);
 
     // Sprite vector.
     EntityID background, spaceship;
