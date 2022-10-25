@@ -125,4 +125,13 @@ Checkpoint 7
 		   to reload the script again so it can run any changes on the fly, but
 		   it's not working. I have to recompile the engine so that the scripts
 		   can be re-imported, and only then wll script changes be run.
-		   
+
+Build Week
+	- Made a simple asteroids demo, without any kind of health or combat.
+
+	Things I'd like to work on for rest of the semester:
+		- Rigid body physics and 3D graphics.
+		- GUI components and editors for developers.
+		- Text processing and displaying.
+		- Procedural content generation.
+		- AI and path planning for NPCs and enemies.	   
