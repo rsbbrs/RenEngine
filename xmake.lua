@@ -6,6 +6,7 @@ add_requires("sokol")
 add_requires("glm")
 add_requires("stb")
 add_requires("lua", "sol2")
+add_requires("imgui")
 
 set_policy("build.warning", true) -- show warnings
 set_warnings("all") -- warn about many things

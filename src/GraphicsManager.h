@@ -13,7 +13,7 @@ namespace RenEngine
         private: 
             PrivateImpl* pImpl;
 
-            friend class InputManager;
+            friend class InputManager; friend class GuiManager;
             void *getWindow();
             void createProjectionMatrix(glm::mat4& projection, int width, int height);
             void createTransformMatrix(const std::string name,

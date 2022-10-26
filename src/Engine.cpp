@@ -26,6 +26,7 @@ void Engine::startup()
     resourceManager.rmStartup();
     soundManager.smStartup();
     ECSManager.ecsStartup();
+    guiManager.startup(graphicsManager);
     scriptManager.scmStartup(graphicsManager, 
                              inputManager, 
                              resourceManager, 
@@ -37,6 +38,7 @@ void Engine::startup()
 void Engine::shutdown()
 {
     scriptManager.scmShutDown();
+    guiManager.shutdown();
     ECSManager.ecsShutdown();
     soundManager.smShutdown();
     resourceManager.rmShutdown();
@@ -64,6 +66,8 @@ void Engine::gameLoop(const UpdateCallback& callback)
         // Tick start.
         const auto t1 = std::chrono::steady_clock::now();
 
+        guiManager.newFrame();
+
         // Update input state.
         inputManager.update();
 
@@ -73,6 +77,8 @@ void Engine::gameLoop(const UpdateCallback& callback)
         // Manager updates of game state.
         scriptManager.update(ECSManager);
         graphicsManager.draw(ECSManager);
+
+        guiManager.drawUI();
        
         loops++;
 
