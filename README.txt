@@ -130,8 +130,8 @@ Build Week
 	- Made a simple asteroids demo, without any kind of health or combat.
 
 	Things I'd like to work on for rest of the semester:
-		- Rigid body physics and 3D graphics.
+		- Rigid body physics and (maybe) 3D graphics.
 		- GUI components and editors for developers.
 		- Text processing and displaying.
 		- Procedural content generation.
-		- AI and path planning for NPCs and enemies.	   
+		- AI and path planning for NPCs and enemies.  
