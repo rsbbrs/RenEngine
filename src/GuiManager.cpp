@@ -1,5 +1,7 @@
 #pragma once
 
+#define GLFW_INCLUDE_NONE
+
 #include "GLFW/glfw3.h"
 #include "GuiManager.h"
 #include "GraphicsManager.h"
@@ -10,7 +12,7 @@ void GuiManager::startup(GraphicsManager& gm)
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
     ImGui_ImplGlfw_InitForOpenGL((GLFWwindow*)gm.getWindow(), true);
     ImGui_ImplOpenGL3_Init("#version 330");
     ImGui::StyleColorsDark();
