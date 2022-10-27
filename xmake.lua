@@ -6,7 +6,7 @@ add_requires("sokol")
 add_requires("glm")
 add_requires("stb")
 add_requires("lua", "sol2")
-add_requires("imgui")
+add_requires("imgui", {configs = {glfw_opengl3 = true}})
 
 set_policy("build.warning", true) -- show warnings
 set_warnings("all") -- warn about many things
