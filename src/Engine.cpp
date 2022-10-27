@@ -66,19 +66,18 @@ void Engine::gameLoop(const UpdateCallback& callback)
         // Tick start.
         const auto t1 = std::chrono::steady_clock::now();
 
-        guiManager.newFrame();
-
         // Update input state.
         inputManager.update();
+
+        guiManager.newFrame();
 
         // User callback to specify custom behaviour.
         callback();
 
         // Manager updates of game state.
+        guiManager.drawUI();
         scriptManager.update(ECSManager);
         graphicsManager.draw(ECSManager);
-
-        guiManager.drawUI();
        
         loops++;
 

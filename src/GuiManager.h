@@ -10,10 +10,8 @@ namespace RenEngine
     class GuiManager
     {
         private:
-            ImGuiIO& io;
 
         public:
-            GuiManager();
             void startup(GraphicsManager& gm);
             void shutdown();
             void newFrame();
