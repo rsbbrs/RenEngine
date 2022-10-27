@@ -32,13 +32,11 @@ void GuiManager::newFrame()
     ImGui::NewFrame();
 }
 
-void GuiManager::drawUI()
+void GuiManager::UI()
 {
     ImGui::Begin("ImGui Window");
     ImGui::Text("Hello world");
     ImGui::End();
-
-    ImGui::Render();
 }
 
 void GuiManager::render()
