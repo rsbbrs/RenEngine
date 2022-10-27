@@ -75,9 +75,11 @@ void Engine::gameLoop(const UpdateCallback& callback)
         callback();
 
         // Manager updates of game state.
-        guiManager.drawUI();
+        guiManager.UI;
         scriptManager.update(ECSManager);
+        guiManager.render();
         graphicsManager.draw(ECSManager);
+        guiManager.draw();
        
         loops++;
 

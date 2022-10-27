@@ -39,5 +39,14 @@ void GuiManager::drawUI()
     ImGui::End();
 
     ImGui::Render();
+}
+
+void GuiManager::render()
+{
+    ImGui::Render();
+}
+
+void GuiManager::draw()
+{
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }

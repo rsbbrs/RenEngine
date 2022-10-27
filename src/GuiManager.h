@@ -15,6 +15,8 @@ namespace RenEngine
             void startup(GraphicsManager& gm);
             void shutdown();
             void newFrame();
-            void drawUI();
+            void UI();
+            void render();
+            void draw();
     };
 }
