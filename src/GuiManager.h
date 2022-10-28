@@ -3,6 +3,7 @@
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+#include "sokol_imgui.h"
 #include "Types.h"
 
 namespace RenEngine
@@ -15,8 +16,6 @@ namespace RenEngine
             void startup(GraphicsManager& gm);
             void shutdown();
             void newFrame();
-            void UI();
-            void render();
             void draw();
     };
 }

@@ -69,17 +69,13 @@ void Engine::gameLoop(const UpdateCallback& callback)
         // Update input state.
         inputManager.update();
 
-        guiManager.newFrame();
-
         // User callback to specify custom behaviour.
         callback();
 
         // Manager updates of game state.
-        guiManager.UI();
         scriptManager.update(ECSManager);
-        guiManager.render();
-        graphicsManager.draw(ECSManager);
         guiManager.draw();
+        graphicsManager.draw(ECSManager);
        
         loops++;
 

@@ -10,19 +10,18 @@ using namespace RenEngine;
 
 void GuiManager::startup(GraphicsManager& gm)
 {
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    ImGui_ImplGlfw_InitForOpenGL((GLFWwindow*)gm.getWindow(), true);
-    ImGui_ImplOpenGL3_Init("#version 330");
-    ImGui::StyleColorsDark();
+    simgui_setup(simgui_desc_t());
+    ImGui_ImplGlfw_InitForOther((GLFWwindow*)gm.getWindow(), true);
 }
 
 void GuiManager::shutdown()
 {
+    ImGui_ImplGlfw_Shutdown();
+    simgui_shutdown();
+    /*
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
-    ImGui::DestroyContext();
+    ImGui::DestroyContext();*/
 }
 
 void GuiManager::newFrame()
@@ -32,19 +31,11 @@ void GuiManager::newFrame()
     ImGui::NewFrame();
 }
 
-void GuiManager::UI()
+void GuiManager::draw()
 {
+    ImGui_ImplGlfw_NewFrame();
     ImGui::Begin("ImGui Window");
     ImGui::Text("Hello world");
     ImGui::End();
-}
-
-void GuiManager::render()
-{
-    ImGui::Render();
-}
-
-void GuiManager::draw()
-{
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    simgui_render();
 }
