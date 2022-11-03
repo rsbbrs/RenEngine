@@ -23,7 +23,7 @@ namespace RenEngine
                                        glm::mat4& transform);
         public:
             GraphicsManager();
-            void gmStartup(Configuration windowParamm);
+            void gmStartup(Configuration windowParam, GuiManager& gm);
             void gmShutdown();
             bool closeWindow();
 
@@ -33,7 +33,7 @@ namespace RenEngine
             void clearAllImages();
 
             // Draw images.
-            void draw(ECS& manager);
+            void draw(ECS& manager, GuiManager& gm);
             
             // Getters for window dimensions.
             int width();
