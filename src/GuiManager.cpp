@@ -1,4 +1,4 @@
-/*#pragma once
+#pragma once
 
 #define GLFW_INCLUDE_NONE
 #define SOKOL_IMGUI_IMPL
@@ -35,16 +35,17 @@ void GuiManager::shutdown()
 
 void GuiManager::newFrame()
 {
-    ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplGlfw_NewFrame();
-    ImGui::NewFrame();
+    
 }
 
 void GuiManager::draw()
 {
+    ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+
     ImGui::Begin("ImGui Window");
     ImGui::Text("Hello world");
     ImGui::End();
     simgui_render();
-}*/
+}
