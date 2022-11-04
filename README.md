@@ -22,7 +22,7 @@ is responsible for running a game. Finally, it also provdes an API
 so that a programmer can access the engine's functionality with ease.
 
 ## Starting the Engine
-To start the engine, create a file named `main.cpp`, this will contain
+First, create a file named `main.cpp`, this will contain
 the main instance of the engine. Make sure to add `#include "Engine.h"`
 to have access to it. To start the engine, simply create an engine object
 with one of two constructors:
@@ -45,6 +45,8 @@ hey on the keyboard, which is used to close the main game loop. No further
 action is necessary, the engine will handle closing all of its components,
 (unless you dynamically allocated the engine, in which case you can call
 `delete`).
+
+Using xmake, you can run the code using the command `xmake run main`.
 
 ## Engine API
 This section contains documentation for the API functions the engine provides.
