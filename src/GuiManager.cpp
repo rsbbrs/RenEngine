@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #define SOKOL_IMGUI_IMPL
 #define SOKOL_GLCORE33
@@ -32,4 +32,4 @@ void GuiManager::draw()
     ImGui::Text("Hello world");
     ImGui::End();
     simgui_render();
-}
+}*/

@@ -16,7 +16,7 @@
 
 #include "GraphicsManager.h"
 #include "ECS.h"
-#include "GuiManager.h"
+//#include "GuiManager.h"
 
 using namespace RenEngine;
 using namespace glm;
@@ -68,7 +68,7 @@ GraphicsManager::GraphicsManager()
 
 // Creates the window to be displayed with the specific
 // configuration parameters.
-void GraphicsManager::gmStartup(Configuration windowParam, GuiManager& gm)
+void GraphicsManager::gmStartup(Configuration windowParam)//, GuiManager& gm)
 {
     // Window creation magic by GLFW.
     glfwInit();
@@ -101,7 +101,9 @@ void GraphicsManager::gmStartup(Configuration windowParam, GuiManager& gm)
 
     // Sokol startup
     sg_setup(sg_desc{});
-    gm.startup();
+
+    // imgui manager startup.
+    //gm.startup();
 
     // A vertex buffer containing a textured square.
     const float vertices[] = {
@@ -300,7 +302,7 @@ void GraphicsManager::clearAllImages()
     pImpl->imageMap.clear();
 }
 
-void GraphicsManager::draw(ECS& manager, GuiManager& gm)
+void GraphicsManager::draw(ECS& manager)//, GuiManager& gm)
 {
     int width, height;
 
@@ -334,8 +336,8 @@ void GraphicsManager::draw(ECS& manager, GuiManager& gm)
         sg_draw(0, 4, 1);
     });
 
-    // imgui draw
-    gm.draw();
+    /* imgui draw
+    gm.draw();*/
 
     // 6. End drawing.
     sg_end_pass();

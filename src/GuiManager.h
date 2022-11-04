@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #include "Types.h"
 
@@ -13,4 +13,4 @@ namespace RenEngine
             void shutdown();
             void draw();
     };
-}
+}*/
