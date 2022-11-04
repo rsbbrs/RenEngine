@@ -11,13 +11,13 @@ add_requires("imgui", {configs = {glfw_opengl3 = true}})
 set_policy("build.warning", true) -- show warnings
 set_warnings("all") -- warn about many things
 
-target("helloworld")
+target("main")
     set_kind("binary")
     set_languages("cxx17")
 
     add_deps("RenEngine")
     
-    add_files("demo/helloworld.cpp")
+    add_files("demo/main.cpp")
 
     -- Copy assets
     set_rundir("$(projectdir)")
