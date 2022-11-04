@@ -54,10 +54,10 @@ This section contains documentation for the API functions the engine provides.
 ### `bool queryInput(input_code key)`
 Queries the window for a key press. 
 #### Parameters
-`key`: The keyboard key code being queried.
+- `key`: The keyboard key code being queried.
 #### Returns
-True if the key has been pressed.
-False if the key was not pressed or released.
+- `True` if the key has been pressed.
+- `False` if the key was not pressed or released.
 
 ### `void loadSound(const std::string& name, const std::string& path)`
 Loads a sound effect into the engine. 
@@ -65,19 +65,19 @@ If sound doesn't play, loading failed.
 If the sound already exists in the engine,
 loading is skipped.
 #### Parameters
-`name`: The desired name of the sound effect.
+- `name`: The desired name of the sound effect.
 
-`path`: The path to the sound file.
+- `path`: The path to the sound file.
 
 ### `void playSound(const std::string& name)`
 Plays a sound effect.
 #### Parameters
-`name`: The designated name of the sound effect.
+- `name`: The designated name of the sound effect.
 
 ### `void closeSound(const std::string& name)`
 Removes a sound effect.
 #### Parameters
-`name`: The designated name of the sound effect.
+- `name`: The designated name of the sound effect.
 
 ### `void clearAllSounds()`
 Removes all sound effects.
