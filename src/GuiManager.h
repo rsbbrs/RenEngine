@@ -1,4 +1,4 @@
-/*#pragma once
+#pragma once
 
 #include "Types.h"
 
@@ -9,9 +9,8 @@ namespace RenEngine
         private:
 
         public:
-            void startup(GraphicsManager& gm);
+            void startup();
             void shutdown();
-            void newFrame();
             void draw();
     };
-}*/
+}

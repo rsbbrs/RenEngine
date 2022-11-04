@@ -15,7 +15,7 @@
 #include "SoundManager.h"
 #include "ECS.h"
 #include "ScriptManager.h"
-//#include "GuiManager.h"
+#include "GuiManager.h"
 
 namespace RenEngine
 {
@@ -35,7 +35,7 @@ namespace RenEngine
             SoundManager soundManager;
             ECS ECSManager;
             ScriptManager scriptManager;
-            //GuiManager guiManager;
+            GuiManager guiManager;
 
             // Start and shutdown functions.
             // Made private so no other classes can shut down the engine itself.

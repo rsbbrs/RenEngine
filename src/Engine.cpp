@@ -21,12 +21,11 @@ Engine::Engine(const char *name, int width, int height, bool fullscreen)
 // Starts up all managers.
 void Engine::startup()
 {
-    graphicsManager.gmStartup(config);
+    graphicsManager.gmStartup(config, guiManager);
     inputManager.imStartup();
     resourceManager.rmStartup();
     soundManager.smStartup();
     ECSManager.ecsStartup();
-    //guiManager.startup(graphicsManager);
     scriptManager.scmStartup(graphicsManager, 
                              inputManager, 
                              resourceManager, 
@@ -38,7 +37,7 @@ void Engine::startup()
 void Engine::shutdown()
 {
     scriptManager.scmShutDown();
-    //guiManager.shutdown();
+    guiManager.shutdown();
     ECSManager.ecsShutdown();
     soundManager.smShutdown();
     resourceManager.rmShutdown();
@@ -74,8 +73,7 @@ void Engine::gameLoop(const UpdateCallback& callback)
 
         // Manager updates of game state.
         scriptManager.update(ECSManager);
-        //guiManager.draw();
-        graphicsManager.draw(ECSManager);
+        graphicsManager.draw(ECSManager, guiManager);
        
         loops++;
 
