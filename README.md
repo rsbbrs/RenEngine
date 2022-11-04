@@ -82,26 +82,64 @@ Removes a sound effect.
 ### `void clearAllSounds()`
 Removes all sound effects.
 
+### `std::string filePath(const std::string& path)`
+Constructs a file path starting at the
+engine's "assets" directory. This is necessary
+since the engine will look for files to load
+starting from the "assets" directory.
+#### Parameters
+- `path`: The path to the file inside the assets directory.
+### Returns
+- The full path name starting from assets directory.
 
+### `bool loadSpriteImage(const std::string& name, const std::string& path)`
+Loads an image file to be used as a sprite image.
+#### Parameters
+- `name`: The desired name for the sprite image.
+- `path`: The path to the image file.
+#### Returns
+`True` if the image file was successfully loaded.
+`False` otherwise. 
 
+### `void destroySpriteImage(const std::string& name)`
+Removes a sprite image.
+#### Parameters
+- `name`: The designated name for the image file.
 
+### `void clearAllImages()`
+Removes all sprite images.
 
+### `EntityID createEntity()`
+Create a new entity.
+#### Returns
+The designated entity ID for the new entity.
+The user should store these to access the
+created entities. There is no other way
+to get an entity's ID.
 
+### `void destroyEntity(EntityID e)`
+Removes an entity and all related components.
+#### Parameters
+- `e`: The entity ID of the desired entity.
 
+### `template< typename T > T& getComponent(EntityID e)`
+Get a component assigned to an entity.
+#### Parameters
+- `T`: The data type of the desired component.
+- `e`: The entity ID of the desired entity.
+#### Returns
+- A reference to the desired component.
 
+### `template< typename EntityComponents > void forEach(const ForEachCallback& callback)`
+Iterates over all entities that contain a particular component(s).
+#### Parameters
+- `EntityComponents`: Specify the desired component 
+- `callback`: Can be used to pass custom code that will execute on all entities with the desired components.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+### `bool loadScript(const std::string& name, const std::string& path)`
+Loads a Lua script into the engine.
+#### Parameters
+- `name`: The desired name for the script.
+- `path`: The path to the script.
+#### Returns
+- `True` if the script was successfully loaded. False` otherwise.
