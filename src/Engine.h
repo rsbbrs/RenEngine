@@ -157,7 +157,7 @@ namespace RenEngine
             /**
              * @brief Removes an entity and all related components.
              * 
-             * @param e The entity ID of the desired engine.
+             * @param e The entity ID of the desired entity.
              */
             void destroyEntity(EntityID e);
 
@@ -178,7 +178,6 @@ namespace RenEngine
              *        particular component(s).
              * 
              * @tparam EntityComponents 
-             * @tparam MoreComponents 
              * @param callback Can be used to pass custom code that
              *                 will execute on all entities with the
              *                 desired components.
