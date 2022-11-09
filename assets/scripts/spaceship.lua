@@ -2,7 +2,6 @@ local maxSpeed = 8
 local turnSpeed = 3
 local acceleration = 0.4
 local spaceship = 2
-local laserSpeed = 8
 
 if(keyPressed(input_code.w)) then
     position = getPosition(spaceship)
@@ -37,11 +36,6 @@ end
 
 if(keyPressed(input_code.escape)) then
     quit()
-end
-
-if(keyPressed(input_code.space) and (not wasPressed)) then
-    e = createEntity()
-    print(e)
 end
 
 if(not keyPressed(input_code.w)) then

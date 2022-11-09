@@ -15,7 +15,7 @@ int main(int argc, const char* argv[])
     EntityID background, spaceship;
 
     // Setup script for lua.
-    if(renEngine->loadScript("Setup", renEngine->filePath("sprites\\setup.lua")))
+    if(renEngine->loadScript("Setup", renEngine->filePath("sprites\\setup.lua"), true))
         std::cout << "Successfully loaded setup.lua\n";
 
     // Entities must be loaded in the order they're gonna be drawn in.
@@ -76,7 +76,7 @@ int main(int argc, const char* argv[])
 
         // Lua script loading for spaceship entity.
         auto scriptPath = renEngine->filePath("scripts\\spaceship.lua");
-        if(renEngine->loadScript("Spaceship", scriptPath))
+        if(renEngine->loadScript("Spaceship", scriptPath, false))
         {
             std::cout << "Successfully loaded spaceship.lua.\n";
 
@@ -92,7 +92,7 @@ int main(int argc, const char* argv[])
     if(renEngine->loadSpriteImage("Laser", renEngine->filePath("sprites\\laser.png")))
     {
         std::cout << "Successfully loaded laser.png\n";
-        renEngine->loadSound("Gunshot", renEngine->filePath("sounds\\gunshot.mp3"));
+        //renEngine->loadSound("Gunshot", renEngine->filePath("sounds\\gunshot.mp3"));
     }*/
 
     int laserSpeed = 8;
@@ -107,7 +107,7 @@ int main(int argc, const char* argv[])
             renEngine->playSound("Gunshot");
             wasPressed = true;
             EntityID newID = renEngine->createEntity();
-            
+
             Sprite laser = {"Laser"};
             Scale scale = {10};
             Rotation angle = {renEngine->getComponent<Rotation>(spaceship).angle + 90};

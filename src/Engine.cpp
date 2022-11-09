@@ -155,9 +155,9 @@ void Engine::destroyEntity(EntityID e)
     ECSManager.Destroy(e);
 }
 
-bool Engine::loadScript(const std::string& name, const std::string& path)
+bool Engine::loadScript(const std::string& name, const std::string& path, bool run)
 {
-    return scriptManager.loadScript(name, path);
+    return scriptManager.loadScript(name, path, run);
 }
 
 double Engine::radians(const float degrees)

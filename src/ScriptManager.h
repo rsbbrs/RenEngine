@@ -42,7 +42,7 @@ namespace RenEngine
             void scmShutDown();
 
             // Loads Lua scripts into the engine.
-            bool loadScript( const std::string& name, const std::string& path );
+            bool loadScript(const std::string& name, const std::string& path, bool run);
 
             // Returns a script function loaded into the manager.
             sol::load_result& getScript(const std::string& name);

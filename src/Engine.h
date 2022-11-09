@@ -192,10 +192,11 @@ namespace RenEngine
              * 
              * @param name The desired name for the script.
              * @param path The path to the script.
+             * @param run Specifies if we want to run the script immediately or not.
              * @return True if the script was successfully loaded.
              * @return False otherwise.
              */
-            bool loadScript(const std::string& name, const std::string& path);
+            bool loadScript(const std::string& name, const std::string& path, bool run);
 
             /**
              * @brief Converts degrees to radians. The engine stores 

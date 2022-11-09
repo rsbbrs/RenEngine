@@ -23,11 +23,11 @@ void ScriptManager::scmStartup(GraphicsManager& graphicsManager,
     setComponentStructs();
 
     // Graphics manager functions.
-    lua.set_function("loadImage", [&](const std::string& name, const std::string path) 
+    lua.set_function("loadImage", [&](const std::string name, const std::string path)
     {
         return graphicsManager.loadImage(name, resourceManager.resolvePath(path));
     });
-    lua.set_function("destroyImage", [&](const std::string& name) { graphicsManager.destroyImage(name); } );
+    lua.set_function("destroyImage", [&](const std::string name) { graphicsManager.destroyImage(name); } );
     lua.set_function("closeAllImages", [&]() { graphicsManager.clearAllImages(); });
     lua.set_function("winWidth", [&]() { return graphicsManager.width(); } );
     lua.set_function("winHeight", [&]() { return graphicsManager.height(); } );
@@ -180,9 +180,11 @@ void ScriptManager::scmShutDown()
 // Loads a script into the scripts manager.
 // Stored in the unordered map under "name"
 // NOTE: Need to figure out what the load_file function returns on failure.
-bool ScriptManager::loadScript(const std::string& name, const std::string& path)
+bool ScriptManager::loadScript(const std::string& name, const std::string& path, bool run)
 {
     scripts[name] = lua.load_file(path);
+    if(run)
+        getScript(name)();
     return true;
 }
 
@@ -204,7 +206,7 @@ void ScriptManager::update(ECS& manager)
     manager.ForEach<Script>([&](EntityID e)
     {
         Script& entity_script = manager.Get<Script>(e);
-        loadScript(entity_script.name, entity_script.path);
+        //loadScript(entity_script.name, entity_script.path);
         getScript(entity_script.name)();
     });
 }
