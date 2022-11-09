@@ -6,12 +6,12 @@ local spaceship = 2
 if(keyPressed(input_code.w)) then
     position = getPosition(spaceship)
     angle = math.rad(getRotation(spaceship).angle + 90)
-    velocity = getRigidBody(spaceship).velocity
+    rigidBody = getRigidBody(spaceship)
     dt = 0.5
-    print("Hello world")
+    print(rigidBody.velocity.x)
     getRigidBody(spaceship).velocity.x = math.min(velocity.x + (acceleration * dt), maxSpeed)
     getRigidBody(spaceship).velocity.y = math.min(velocity.y + (acceleration * dt), maxSpeed)
-
+    print("Hello world")
     getPosition(spaceship).x = position.x + (math.cos(angle) * velocity.x * dt)
     getPosition(spaceship).y = position.y + (math.sin(angle) * velocity.y * dt)
 

@@ -65,6 +65,7 @@ int main(int argc, const char* argv[])
         rot.angle = 0;
         scale.scale = 20;
         rb.velocity.x = rb.velocity.y = 0;
+        rb.mass = 50;
         
         // Setting the entity's components.
         renEngine->getComponent<Sprite>(spaceship) = mySprite;

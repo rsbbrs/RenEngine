@@ -56,7 +56,7 @@ void ScriptManager::scmStartup(GraphicsManager& graphicsManager,
     lua.set_function("getRigidBody", [&](const EntityID e) -> RigidBody& { return ecsManager.Get<RigidBody>(e); } );
     lua.set_function("getHealth", [&](const EntityID e) -> Health& { return ecsManager.Get<Health>(e); } );
     lua.set_function("getScript", [&](const EntityID e) -> Script& { return ecsManager.Get<Script>(e); } );
-    lua.set_function("getSprite", [&](const EntityID e) { return ecsManager.Get<Sprite>(e); } );
+    lua.set_function("getSprite", [&](const EntityID e) -> Sprite& { return ecsManager.Get<Sprite>(e); } );
 
     // Lua state in the engine.
     lua.set_function("getState", [&]() { return true; } );
