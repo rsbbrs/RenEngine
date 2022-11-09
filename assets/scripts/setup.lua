@@ -1,3 +1,5 @@
 mvAngle = 0
-blasterEntity = {}
-arrIndex = 1
+wasPressed = false
+
+loadImage("Laser", "sprites\\laser.png")
+loadSound("Gunshot", "sounds\\gunshot.mp3");

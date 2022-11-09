@@ -165,7 +165,6 @@ void ScriptManager::setComponentStructs()
     lua.new_usertype<RigidBody>(
         "RigidBody",
         sol::constructors<RigidBody()>(),
-        "position", &RigidBody::position,
         "velocity", &RigidBody::velocity,
         "acceleration", &RigidBody::acceleration,
         "gravity", &RigidBody::gravity,

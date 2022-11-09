@@ -2,16 +2,17 @@ local maxSpeed = 8
 local turnSpeed = 3
 local acceleration = 0.4
 local spaceship = 2
+local laserSpeed = 8
 
 if(keyPressed(input_code.w)) then
     position = getPosition(spaceship)
     angle = math.rad(getRotation(spaceship).angle + 90)
-    rigidBody = getRigidBody(spaceship)
+    velocity = getRigidBody(spaceship).velocity
     dt = 0.5
-    print(rigidBody.velocity.x)
+
     getRigidBody(spaceship).velocity.x = math.min(velocity.x + (acceleration * dt), maxSpeed)
     getRigidBody(spaceship).velocity.y = math.min(velocity.y + (acceleration * dt), maxSpeed)
-    print("Hello world")
+
     getPosition(spaceship).x = position.x + (math.cos(angle) * velocity.x * dt)
     getPosition(spaceship).y = position.y + (math.sin(angle) * velocity.y * dt)
 
@@ -36,6 +37,11 @@ end
 
 if(keyPressed(input_code.escape)) then
     quit()
+end
+
+if(keyPressed(input_code.space) and (not wasPressed)) then
+    e = createEntity()
+    print(e)
 end
 
 if(not keyPressed(input_code.w)) then

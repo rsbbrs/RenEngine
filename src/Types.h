@@ -46,7 +46,6 @@ namespace RenEngine
     struct Sprite { std::string name; };
     struct RigidBody 
     {
-        vec3 position;
         vec2 velocity;
         vec2 acceleration;
         vec2 gravity;

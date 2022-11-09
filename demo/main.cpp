@@ -88,12 +88,12 @@ int main(int argc, const char* argv[])
         }
     }
 
-    // Loads the lazer image and sound effect to the engine.
+    /* Loads the lazer image and sound effect to the engine.
     if(renEngine->loadSpriteImage("Laser", renEngine->filePath("sprites\\laser.png")))
     {
         std::cout << "Successfully loaded laser.png\n";
         renEngine->loadSound("Gunshot", renEngine->filePath("sounds\\gunshot.mp3"));
-    }
+    }*/
 
     int laserSpeed = 8;
     bool wasPressed = false;
