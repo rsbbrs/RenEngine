@@ -53,8 +53,7 @@ void ScriptManager::scmStartup(GraphicsManager& graphicsManager,
     lua.set_function("getPosition", [&](const EntityID e) -> Position& { return ecsManager.Get<Position>(e); } );
     lua.set_function("getRotation", [&](const EntityID e) -> Rotation& { return ecsManager.Get<Rotation>(e); } );
     lua.set_function("getScale", [&](const EntityID e) -> Scale& { return ecsManager.Get<Scale>(e); } );
-    lua.set_function("getVelocity", [&](const EntityID e) -> Velocity& { return ecsManager.Get<Velocity>(e); } );
-    lua.set_function("getGravity", [&](const EntityID e) -> Gravity& { return ecsManager.Get<Gravity>(e); } );
+    lua.set_function("getRigidBody", [&](const EntityID e) -> RigidBody& { return ecsManager.Get<RigidBody>(e); } );
     lua.set_function("getHealth", [&](const EntityID e) -> Health& { return ecsManager.Get<Health>(e); } );
     lua.set_function("getScript", [&](const EntityID e) -> Script& { return ecsManager.Get<Script>(e); } );
     lua.set_function("getSprite", [&](const EntityID e) { return ecsManager.Get<Sprite>(e); } );
@@ -116,11 +115,15 @@ void ScriptManager::setComponentStructs()
         "y", &Position::y
     );
 
-    lua.new_usertype<Velocity>(
-        "Velocity",
-        sol::constructors<Velocity()>(),
-        "x", &Velocity::x,
-        "y", &Velocity::y
+    lua.new_usertype<RigidBody>(
+        "RigidBody",
+        sol::constructors<RigidBody()>(),
+        "position", &RigidBody::position,
+        "velocity", &RigidBody::velocity,
+        "acceleration", &RigidBody::acceleration,
+        "gravity", &RigidBody::gravity,
+        "force", &RigidBody::force,
+        "mass", &RigidBody::mass
     );
 
     lua.new_usertype<Rotation>(
@@ -133,12 +136,6 @@ void ScriptManager::setComponentStructs()
         "Scale",
         sol::constructors<Scale()>(),
         "scale", &Scale::scale
-    );
-
-    lua.new_usertype<Gravity>(
-        "Gravity",
-        sol::constructors<Gravity()>(),
-        "meter_per_second", &Gravity::meters_per_second
     );
 
     lua.new_usertype<Health>(

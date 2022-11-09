@@ -38,7 +38,7 @@ namespace RenEngine
 
     // Basic components for the ECS.
     // More can be added, and even by the user.
-    struct Position : public vec3 {}; 
+    struct Position : public vec3 {};
     struct Rotation{ float angle; };
     struct Scale { int scale; };
     struct Health { double percent; };

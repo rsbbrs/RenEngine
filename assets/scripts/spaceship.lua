@@ -6,11 +6,11 @@ local spaceship = 2
 if(keyPressed(input_code.w)) then
     position = getPosition(spaceship)
     angle = math.rad(getRotation(spaceship).angle + 90)
-    velocity = getVelocity(spaceship)
+    velocity = getRigidBody(spaceship).velocity
     dt = 0.5
-
-    getVelocity(spaceship).x = math.min(velocity.x + (acceleration * dt), maxSpeed)
-    getVelocity(spaceship).y = math.min(velocity.y + (acceleration * dt), maxSpeed)
+    print("Hello world")
+    getRigidBody(spaceship).velocity.x = math.min(velocity.x + (acceleration * dt), maxSpeed)
+    getRigidBody(spaceship).velocity.y = math.min(velocity.y + (acceleration * dt), maxSpeed)
 
     getPosition(spaceship).x = position.x + (math.cos(angle) * velocity.x * dt)
     getPosition(spaceship).y = position.y + (math.sin(angle) * velocity.y * dt)
@@ -40,11 +40,11 @@ end
 
 if(not keyPressed(input_code.w)) then
     position = getPosition(spaceship)
-    velocity = getVelocity(spaceship)
+    velocity = getRigidBody(spaceship).velocity
     acc = 0.1
 
-    getVelocity(spaceship).x = math.max(velocity.x - (acc * dt), 0)
-    getVelocity(spaceship).y = math.max(velocity.y - (acc * dt), 0)
+    getRigidBody(spaceship).velocity.x = math.max(velocity.x - (acc * dt), 0)
+    getRigidBody(spaceship).velocity.y = math.max(velocity.y - (acc * dt), 0)
 
     getPosition(spaceship).x = position.x + (math.cos(mvAngle) * velocity.x * dt)
     getPosition(spaceship).y = position.y + (math.sin(mvAngle) * velocity.y * dt)
