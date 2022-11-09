@@ -115,17 +115,6 @@ void ScriptManager::setComponentStructs()
         "y", &Position::y
     );
 
-    lua.new_usertype<RigidBody>(
-        "RigidBody",
-        sol::constructors<RigidBody()>(),
-        "position", &RigidBody::position,
-        "velocity", &RigidBody::velocity,
-        "acceleration", &RigidBody::acceleration,
-        "gravity", &RigidBody::gravity,
-        "force", &RigidBody::force,
-        "mass", &RigidBody::mass
-    );
-
     lua.new_usertype<Rotation>(
         "Rotation",
         sol::constructors<Rotation()>(),
@@ -155,6 +144,33 @@ void ScriptManager::setComponentStructs()
         "Sprite",
         sol::constructors<Sprite()>(),
         "name", &Sprite::name
+    );
+
+    // Rigid body stuff.
+    lua.new_usertype<vec2>(
+        "vec2",
+        sol::constructors<vec2()>(),
+        "x", &vec2::x,
+        "y", &vec2::y
+    );
+
+    lua.new_usertype<vec3>(
+        "vec3",
+        sol::constructors<vec3()>(),
+        "x", &vec3::x,
+        "y", &vec3::y,
+        "Z", &vec3::z
+    );
+
+    lua.new_usertype<RigidBody>(
+        "RigidBody",
+        sol::constructors<RigidBody()>(),
+        "position", &RigidBody::position,
+        "velocity", &RigidBody::velocity,
+        "acceleration", &RigidBody::acceleration,
+        "gravity", &RigidBody::gravity,
+        "force", &RigidBody::force,
+        "mass", &RigidBody::mass
     );
 }
 
