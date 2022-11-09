@@ -41,11 +41,18 @@ namespace RenEngine
     struct Position : public vec3 {}; 
     struct Rotation{ float angle; };
     struct Scale { int scale; };
-    struct Velocity : public vec2 {};
-    struct Gravity { double meters_per_second; };
     struct Health { double percent; };
     struct Script { std::string name; std::string path; };
     struct Sprite { std::string name; };
+    struct RigidBody 
+    {
+        vec3 position;
+        vec2 velocity;
+        vec2 acceleration;
+        vec2 gravity;
+        vec2 force;
+        float mass;
+    };
 
     //  Some common keyboard buttons for games
     enum input_code

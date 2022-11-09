@@ -57,21 +57,21 @@ int main(int argc, const char* argv[])
         Position pos;
         Rotation rot;
         Scale scale;
-        Velocity v;
+        RigidBody rb;
         mySprite.name = "Spaceship";
         pos.x = 0.0;
         pos.y = 0.0;
         pos.z = 1.0;
         rot.angle = 0;
         scale.scale = 20;
-        v.x = v.y = 0;
+        rb.velocity.x = rb.velocity.y = 0;
         
         // Setting the entity's components.
         renEngine->getComponent<Sprite>(spaceship) = mySprite;
         renEngine->getComponent<Position>(spaceship) = pos;
         renEngine->getComponent<Rotation>(spaceship) = rot;
         renEngine->getComponent<Scale>(spaceship) = scale;
-        renEngine->getComponent<Velocity>(spaceship) = v;
+        renEngine->getComponent<RigidBody>(spaceship) = rb;
 
         // Lua script loading for spaceship entity.
         auto scriptPath = renEngine->filePath("scripts\\spaceship.lua");
