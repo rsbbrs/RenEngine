@@ -60,7 +60,11 @@ int main(int argc, const char* argv[])
         pos.z = 1.0;
         rot.angle = 0;
         scale.scale = 20;
-        rb.velocity.x = rb.velocity.y = 0;
+
+        rb.force = vec2(0, 0);
+        rb.gravity = vec2(0, 0);
+        rb.acceleration = vec2(0, 0);
+        rb.velocity = vec2(0, 0);
         rb.mass = 50;
         
         // Setting the entity's components.

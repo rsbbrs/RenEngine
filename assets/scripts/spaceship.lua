@@ -33,17 +33,9 @@ elseif(getPosition(spaceship).y > 121) then
 end
 
 if(keyPressed(input_code.w)) then
-    position = getPosition(spaceship)
     angle = math.rad(getRotation(spaceship).angle + 90)
-    velocity = getRigidBody(spaceship).velocity
-    dt = 0.5
-
-    getRigidBody(spaceship).velocity.x = math.min(velocity.x + (acceleration * dt), maxSpeed)
-    getRigidBody(spaceship).velocity.y = math.min(velocity.y + (acceleration * dt), maxSpeed)
-
-    getPosition(spaceship).x = position.x + (math.cos(angle) * velocity.x * dt)
-    getPosition(spaceship).y = position.y + (math.sin(angle) * velocity.y * dt)
-
+    getRigidBody(spaceship).force.x = 0.5
+    getRigidBody(spaceship).force.y = 0.5;
     mvAngle = angle
 end
 
