@@ -179,12 +179,16 @@ void ScriptManager::scmShutDown()
 
 // Loads a script into the scripts manager.
 // Stored in the unordered map under "name"
-// NOTE: Need to figure out what the load_file function returns on failure.
 bool ScriptManager::loadScript(const std::string& name, const std::string& path, bool run)
 {
     scripts[name] = lua.load_file(path);
+    
+    if(!scripts[name].valid())
+        return false;
+    
     if(run)
         getScript(name)();
+
     return true;
 }
 
@@ -206,7 +210,7 @@ void ScriptManager::update(ECS& manager)
     manager.ForEach<Script>([&](EntityID e)
     {
         Script& entity_script = manager.Get<Script>(e);
-        //loadScript(entity_script.name, entity_script.path);
+        loadScript(entity_script.name, entity_script.path, false);
         getScript(entity_script.name)();
     });
 }

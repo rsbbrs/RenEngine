@@ -15,7 +15,8 @@ int main(int argc, const char* argv[])
     EntityID background, spaceship;
 
     // Setup script for lua.
-    if(renEngine->loadScript("Setup", renEngine->filePath("sprites\\setup.lua"), true))
+    // Runs it immediately.
+    if(renEngine->loadScript("Setup", renEngine->filePath("scripts\\setup.lua"), true))
         std::cout << "Successfully loaded setup.lua\n";
 
     // Entities must be loaded in the order they're gonna be drawn in.
@@ -88,20 +89,14 @@ int main(int argc, const char* argv[])
         }
     }
 
-    /* Loads the lazer image and sound effect to the engine.
-    if(renEngine->loadSpriteImage("Laser", renEngine->filePath("sprites\\laser.png")))
-    {
-        std::cout << "Successfully loaded laser.png\n";
-        //renEngine->loadSound("Gunshot", renEngine->filePath("sounds\\gunshot.mp3"));
-    }*/
-
+    
     int laserSpeed = 8;
-    bool wasPressed = false;
+    // bool wasPressed = false;
     
     // Initializes the game loop.
     renEngine->gameLoop([&]() 
     {
-        // Creates the laser entity when the player fires the spaceship's cannon.
+        /* Creates the laser entity when the player fires the spaceship's cannon.
         if(renEngine->queryInput(input_code::space) && !wasPressed)
         {
             renEngine->playSound("Gunshot");
@@ -122,12 +117,14 @@ int main(int argc, const char* argv[])
         // Resets the button press if the button was released.
         if(!renEngine->queryInput(input_code::space))
             wasPressed = false;
+        */
 
         // Updates laser components' positions after they've been fired.
         renEngine->forEach<Sprite>([&](EntityID e)
         {
             if(renEngine->getComponent<Sprite>(e).name == "Laser")
             {
+                std::cout << e << std::endl;
                 Position& pos = renEngine->getComponent<Position>(e);
                 Rotation angle = renEngine->getComponent<Rotation>(e);
 
