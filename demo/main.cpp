@@ -14,11 +14,6 @@ int main(int argc, const char* argv[])
     // Sprite vector.
     EntityID background, spaceship;
 
-    // Setup script for lua.
-    // Runs it immediately.
-    if(renEngine->loadScript("Setup", renEngine->filePath("scripts\\setup.lua"), true))
-        std::cout << "Successfully loaded setup.lua\n";
-
     // Entities must be loaded in the order they're gonna be drawn in.
     // To show the background behind the spaceship sprite, load it
     // first. This is due to the way the image is drawn; the entities with
@@ -89,7 +84,11 @@ int main(int argc, const char* argv[])
         }
     }
 
-    
+    // Setup script for lua.
+    // Runs it immediately.
+    if(renEngine->loadScript("Setup", renEngine->filePath("scripts\\setup.lua"), true))
+        std::cout << "Successfully loaded setup.lua\n";
+
     int laserSpeed = 8;
     // bool wasPressed = false;
     
@@ -124,9 +123,12 @@ int main(int argc, const char* argv[])
         {
             if(renEngine->getComponent<Sprite>(e).name == "Laser")
             {
-                std::cout << e << std::endl;
+                //std::cout << e << std::endl;
                 Position& pos = renEngine->getComponent<Position>(e);
                 Rotation angle = renEngine->getComponent<Rotation>(e);
+
+                //std::cout << pos.x << " " << pos.y << "\n";
+                //std::cout << angle.angle << "\n";
 
                 if(pos.x < -185 || pos.x > 185 || pos.y < -121 || pos.y > 121)
                     renEngine->destroyEntity(e);

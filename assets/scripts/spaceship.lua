@@ -4,6 +4,34 @@ local acceleration = 0.4
 local spaceship = 2
 local laserSpeed = 8
 
+if(not keyPressed(input_code.space)) then
+    wasPressed = false
+end
+
+if(not keyPressed(input_code.w)) then
+    position = getPosition(spaceship)
+    velocity = getRigidBody(spaceship).velocity
+    acc = 0.1
+
+    getRigidBody(spaceship).velocity.x = math.max(velocity.x - (acc * dt), 0)
+    getRigidBody(spaceship).velocity.y = math.max(velocity.y - (acc * dt), 0)
+
+    getPosition(spaceship).x = position.x + (math.cos(mvAngle) * velocity.x * dt)
+    getPosition(spaceship).y = position.y + (math.sin(mvAngle) * velocity.y * dt)
+end
+
+if(getPosition(spaceship).x < -185) then
+    getPosition(spaceship).x = 185
+elseif(getPosition(spaceship).x > 185) then
+    getPosition(spaceship).x = -185
+end
+
+if(getPosition(spaceship).y < -121) then
+    getPosition(spaceship).y = 121
+elseif(getPosition(spaceship).y > 121) then
+    getPosition(spaceship).y = -121
+end
+
 if(keyPressed(input_code.w)) then
     position = getPosition(spaceship)
     angle = math.rad(getRotation(spaceship).angle + 90)
@@ -47,35 +75,7 @@ if(keyPressed(input_code.space) and wasPressed == false) then
     getSprite(newID).name = "Laser"
     getPosition(newID).x = getPosition(spaceship).x
     getPosition(newID).y = getPosition(spaceship).y
+    getPosition(newID).z = getPosition(spaceship).z
     getScale(newID).scale = 10
-    getRotation(newID).angle = getRotation(spaceship).angle + 90
-
-end
-
-if(not keyPressed(input_code.w)) then
-    position = getPosition(spaceship)
-    velocity = getRigidBody(spaceship).velocity
-    acc = 0.1
-
-    getRigidBody(spaceship).velocity.x = math.max(velocity.x - (acc * dt), 0)
-    getRigidBody(spaceship).velocity.y = math.max(velocity.y - (acc * dt), 0)
-
-    getPosition(spaceship).x = position.x + (math.cos(mvAngle) * velocity.x * dt)
-    getPosition(spaceship).y = position.y + (math.sin(mvAngle) * velocity.y * dt)
-end
-
-if(getPosition(spaceship).x < -185) then
-    getPosition(spaceship).x = 185
-elseif(getPosition(spaceship).x > 185) then
-    getPosition(spaceship).x = -185
-end
-
-if(getPosition(spaceship).y < -121) then
-    getPosition(spaceship).y = 121
-elseif(getPosition(spaceship).y > 121) then
-    getPosition(spaceship).y = -121
-end
-
-if(not keyPressed(input_code.space)) then
-    wasPressed = false
+    getRotation(newID).angle = (getRotation(spaceship).angle + 90)
 end

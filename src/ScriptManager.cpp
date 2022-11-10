@@ -112,7 +112,8 @@ void ScriptManager::setComponentStructs()
         "Position",
         sol::constructors<Position()>(),
         "x", &Position::x,
-        "y", &Position::y
+        "y", &Position::y,
+        "z", &Position::z
     );
 
     lua.new_usertype<Rotation>(

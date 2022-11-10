@@ -88,7 +88,8 @@ namespace RenEngine
             void Destroy(EntityID e)
             {
                 for( const auto& comps : m_components ) 
-                    comps->Drop( e ); 
+                    comps->Drop( e );
+                count--;
             }
 
             // Get component from an entity.

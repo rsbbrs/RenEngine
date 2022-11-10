@@ -1,5 +1,7 @@
 mvAngle = 0
 wasPressed = false
 
-loadImage("Laser", "sprites\\laser.png")
-loadSound("Gunshot", "sounds\\gunshot.mp3")
+if(loadImage("Laser", "sprites\\laser.png")) then
+    print("Successfully loaded laser.png")
+    loadSound("Gunshot", "sounds\\gunshot.mp3")
+end
