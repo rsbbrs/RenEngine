@@ -1,19 +1,22 @@
 #pragma once
 
 #include "Types.h"
+#include <chrono>
 
 namespace RenEngine
 {
     class PhysicsManager
     {
-        private: 
+        private:
+            std::chrono::time_point<std::chrono::steady_clock> start;
+            ECS* manager;
 
         public: 
-            startup();
-            shutdown();
+            void startup(ECS* manager);
+            void shutdown();
 
-            void collisions();
-            void updatePhysics();
-            void getTime();
-    }
+            void collisionDetection();
+            void collisionResolution();
+            void updatePhysics(const std::chrono::time_point<std::chrono::steady_clock> dt);
+    };
 }

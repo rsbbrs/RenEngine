@@ -15,6 +15,7 @@
 #include "SoundManager.h"
 #include "ECS.h"
 #include "ScriptManager.h"
+#include "PhysicsManager.h"
 //#include "GuiManager.h"
 
 namespace RenEngine
@@ -35,6 +36,7 @@ namespace RenEngine
             SoundManager soundManager;
             ECS ECSManager;
             ScriptManager scriptManager;
+            PhysicsManager physicsManager;
             //GuiManager guiManager;
 
             // Start and shutdown functions.

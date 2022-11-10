@@ -26,6 +26,7 @@ void Engine::startup()
     resourceManager.rmStartup();
     soundManager.smStartup();
     ECSManager.ecsStartup();
+    physicsManager.startup(&ECSManager);
     scriptManager.scmStartup(graphicsManager, 
                              inputManager, 
                              resourceManager, 
@@ -37,6 +38,7 @@ void Engine::startup()
 void Engine::shutdown()
 {
     scriptManager.scmShutDown();
+    physicsManager.shutdown();
     //guiManager.shutdown();
     ECSManager.ecsShutdown();
     soundManager.smShutdown();
@@ -73,6 +75,7 @@ void Engine::gameLoop(const UpdateCallback& callback)
 
         // Manager updates of game state.
         scriptManager.update(ECSManager);
+        physicsManager.updatePhysics(t1);
         graphicsManager.draw(ECSManager);//, guiManager);
        
         loops++;

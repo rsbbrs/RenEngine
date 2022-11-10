@@ -8,6 +8,7 @@
 #include "InputManager.h"
 #include "ResourceManager.h"
 #include "SoundManager.h"
+#include "PhysicsManager.h"
 #include "ECS.h"
 
 namespace RenEngine
