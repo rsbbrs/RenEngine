@@ -14,7 +14,10 @@ namespace RenEngine
     class GraphicsManager;
     class InputManager;
     class SoundManager;
+    class ResourceManager;
     class ECS;
+    class ScriptManager;
+    class PhysicsManager;
 
     // Entity ID
     typedef long EntityID;
