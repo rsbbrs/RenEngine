@@ -60,7 +60,7 @@ if(keyPressed(input_code.space) and wasPressed == false) then
     getRotation(newID).angle = (getRotation(spaceship).angle + 90)
 end
 
-if(not keyPressed(input_code.w)) then
-    getRigidBody(spaceship).force.x = -50
-    getRigidBody(spaceship).force.y = -50
-end
+--if(not keyPressed(input_code.w)) then
+    --getRigidBody(spaceship).force.x = -50
+    --getRigidBody(spaceship).force.y = -50
+--end
