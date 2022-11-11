@@ -21,13 +21,14 @@ Engine::Engine(const char *name, int width, int height, bool fullscreen)
 // Starts up all managers.
 void Engine::startup()
 {
-    graphicsManager.gmStartup(config);//, guiManager);
-    inputManager.imStartup();
-    resourceManager.rmStartup();
-    soundManager.smStartup();
-    ECSManager.ecsStartup();
+    graphicsManager.startup(config);
+    inputManager.startup();
+    resourceManager.startup();
+    soundManager.startup();
+    ECSManager.startup();
+    guiManager.startup(graphicsManager);
     physicsManager.startup(&ECSManager);
-    scriptManager.scmStartup(graphicsManager, 
+    scriptManager.startup(graphicsManager, 
                              inputManager, 
                              resourceManager, 
                              soundManager, 
@@ -37,14 +38,14 @@ void Engine::startup()
 // Shuts down the managers.
 void Engine::shutdown()
 {
-    scriptManager.scmShutDown();
+    scriptManager.shutDown();
     physicsManager.shutdown();
-    //guiManager.shutdown();
-    ECSManager.ecsShutdown();
-    soundManager.smShutdown();
-    resourceManager.rmShutdown();
-    inputManager.imShutdown();
-    graphicsManager.gmShutdown();
+    guiManager.shutdown();
+    ECSManager.shutdown();
+    soundManager.shutdown();
+    resourceManager.shutdown();
+    inputManager.shutdown();
+    graphicsManager.shutdown();
 }
 
 // Main game loop where game logic will be processed.
@@ -76,7 +77,7 @@ void Engine::gameLoop(const UpdateCallback& callback)
         // Manager updates of game state.
         scriptManager.update(ECSManager);
         physicsManager.updatePhysics(t1);
-        graphicsManager.draw(ECSManager);//, guiManager);
+        graphicsManager.draw(ECSManager, guiManager);
        
         loops++;
 

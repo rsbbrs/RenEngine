@@ -16,7 +16,7 @@
 
 #include "GraphicsManager.h"
 #include "ECS.h"
-//#include "GuiManager.h"
+#include "GuiManager.h"
 
 using namespace RenEngine;
 using namespace glm;
@@ -68,7 +68,7 @@ GraphicsManager::GraphicsManager()
 
 // Creates the window to be displayed with the specific
 // configuration parameters.
-void GraphicsManager::gmStartup(Configuration windowParam)//, GuiManager& gm)
+void GraphicsManager::startup(Configuration windowParam)//, GuiManager& gm)
 {
     // Window creation magic by GLFW.
     glfwInit();
@@ -191,7 +191,7 @@ void GraphicsManager::gmStartup(Configuration windowParam)//, GuiManager& gm)
     pImpl->bindings.vertex_buffers[0] = vertex_buffer;
 }
 
-void GraphicsManager::gmShutdown()
+void GraphicsManager::shutdown()
 {
     delete pImpl;
     glfwTerminate();
@@ -302,7 +302,7 @@ void GraphicsManager::clearAllImages()
     pImpl->imageMap.clear();
 }
 
-void GraphicsManager::draw(ECS& manager)//, GuiManager& gm)
+void GraphicsManager::draw(ECS& ecs, GuiManager& gm)
 {
     int width, height;
 
@@ -322,12 +322,12 @@ void GraphicsManager::draw(ECS& manager)//, GuiManager& gm)
     createProjectionMatrix(uniforms.projection, width, height);
 
     // 5. Draw each sprite with a position, rotation and scale components.
-    manager.ForEach<Sprite>([&](EntityID e)
+    ecs.ForEach<Sprite>([&](EntityID e)
     {
-        std::string name = manager.Get<Sprite>(e).name;
-        Position pos = manager.Get<Position>(e);
-        Rotation rot = manager.Get<Rotation>(e);
-        Scale scale = manager.Get<Scale>(e);
+        std::string name = ecs.Get<Sprite>(e).name;
+        Position pos = ecs.Get<Position>(e);
+        Rotation rot = ecs.Get<Rotation>(e);
+        Scale scale = ecs.Get<Scale>(e);
 
         // NOTE: Here's a good place to test if images aren't being drawn.
 
@@ -338,8 +338,8 @@ void GraphicsManager::draw(ECS& manager)//, GuiManager& gm)
         sg_draw(0, 4, 1);
     });
 
-    /* imgui draw
-    gm.draw();*/
+
+    gm.draw();
 
     // 6. End drawing.
     sg_end_pass();

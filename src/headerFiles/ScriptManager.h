@@ -35,12 +35,12 @@ namespace RenEngine
             bool scriptQuit;
 
             // Startup and shutdown functions.
-            void scmStartup(GraphicsManager& graphicsManager,
+            void startup(GraphicsManager& graphicsManager,
                             InputManager& inputManager, 
                             ResourceManager& resourceManager,
                             SoundManager& soundManager,
                             ECS& ecsManager);
-            void scmShutDown();
+            void shutDown();
 
             // Loads Lua scripts into the engine.
             bool loadScript(const std::string& name, const std::string& path, bool run);

@@ -16,7 +16,7 @@
 #include "ECS.h"
 #include "ScriptManager.h"
 #include "PhysicsManager.h"
-//#include "GuiManager.h"
+#include "GuiManager.h"
 
 namespace RenEngine
 {
@@ -37,7 +37,7 @@ namespace RenEngine
             ECS ECSManager;
             ScriptManager scriptManager;
             PhysicsManager physicsManager;
-            //GuiManager guiManager;
+            GuiManager guiManager;
 
             // Start and shutdown functions.
             // Made private so no other classes can shut down the engine itself.

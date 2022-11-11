@@ -8,7 +8,7 @@ using namespace RenEngine;
 // Starts up the Lua state with built-in libraries.
 // Creates callback functions to engine functionality
 // so that Lua can access them.
-void ScriptManager::scmStartup(GraphicsManager& graphicsManager, 
+void ScriptManager::startup(GraphicsManager& graphicsManager, 
                                InputManager& inputManager, 
                                ResourceManager& resourceManager,
                                SoundManager& soundManager, 
@@ -175,7 +175,7 @@ void ScriptManager::setComponentStructs()
 }
 
 // Currently does nothing.
-void ScriptManager::scmShutDown()
+void ScriptManager::shutDown()
 {}
 
 // Loads a script into the scripts manager.

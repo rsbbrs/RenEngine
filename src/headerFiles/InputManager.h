@@ -8,8 +8,8 @@ namespace RenEngine
     {
         public:
             // Startup and shutdown routines
-            void imStartup();
-            void imShutdown();
+            void startup();
+            void shutdown();
 
             // Input handling functions.
             void update();
