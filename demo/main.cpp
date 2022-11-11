@@ -65,7 +65,7 @@ int main(int argc, const char* argv[])
         rb.gravity = vec2(0, 0);
         rb.acceleration = vec2(0, 0);
         rb.velocity = vec2(0, 0);
-        rb.mass = 50;
+        rb.mass = 2;
         
         // Setting the entity's components.
         renEngine->getComponent<Sprite>(spaceship) = mySprite;

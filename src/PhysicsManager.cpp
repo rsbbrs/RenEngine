@@ -2,6 +2,7 @@
 
 #include "PhysicsManager.h"
 #include "ECS.h"
+#include <numbers>
 
 using namespace RenEngine;
 
@@ -36,12 +37,14 @@ void PhysicsManager::updatePhysics(std::chrono::time_point<std::chrono::steady_c
         Position& p = manager->Get<Position>(e);
         Rotation& r = manager->Get<Rotation>(e);
 
+        auto pi = 3.14159265358979323846;
+
         // Rigid body kinematic equations.
         rb.acceleration = rb.force * (1.0f/rb.mass + rb.gravity);
-        rb.velocity += (rb.acceleration * t.count());
-        p.x += std::cos(r.angle) * rb.velocity.x * t.count();
-        p.y += std::sin(r.angle) * rb.velocity.y * t.count();
-
+        rb.velocity += rb.acceleration * t.count();
+        std::cout << rb.velocity.x << " " << rb.velocity.y << "\n";
+        p.x += -std::sin(manager->Get<Rotation>(e).angle *  pi / 180.f) * rb.velocity.x * t.count();
+        p.y += std::cos(manager->Get<Rotation>(e).angle * pi / 180.f) * rb.velocity.y * t.count();
     });
 
     start = dt;

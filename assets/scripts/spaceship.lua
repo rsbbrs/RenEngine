@@ -8,18 +8,6 @@ if(not keyPressed(input_code.space)) then
     wasPressed = false
 end
 
-if(not keyPressed(input_code.w)) then
-    position = getPosition(spaceship)
-    velocity = getRigidBody(spaceship).velocity
-    acc = 0.1
-
-    getRigidBody(spaceship).velocity.x = math.max(velocity.x - (acc * dt), 0)
-    getRigidBody(spaceship).velocity.y = math.max(velocity.y - (acc * dt), 0)
-
-    getPosition(spaceship).x = position.x + (math.cos(mvAngle) * velocity.x * dt)
-    getPosition(spaceship).y = position.y + (math.sin(mvAngle) * velocity.y * dt)
-end
-
 if(getPosition(spaceship).x < -185) then
     getPosition(spaceship).x = 185
 elseif(getPosition(spaceship).x > 185) then
@@ -34,8 +22,8 @@ end
 
 if(keyPressed(input_code.w)) then
     angle = math.rad(getRotation(spaceship).angle + 90)
-    getRigidBody(spaceship).force.x = 0.5
-    getRigidBody(spaceship).force.y = 0.5;
+    getRigidBody(spaceship).force.x = 50
+    getRigidBody(spaceship).force.y = 50
     mvAngle = angle
 end
 
@@ -70,4 +58,9 @@ if(keyPressed(input_code.space) and wasPressed == false) then
     getPosition(newID).z = getPosition(spaceship).z
     getScale(newID).scale = 10
     getRotation(newID).angle = (getRotation(spaceship).angle + 90)
+end
+
+if(not keyPressed(input_code.w)) then
+    getRigidBody(spaceship).force.x = -50
+    getRigidBody(spaceship).force.y = -50
 end
