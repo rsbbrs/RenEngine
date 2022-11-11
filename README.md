@@ -144,8 +144,7 @@ Loads a Lua script into the engine.
 #### Returns
 - `True` if the script was successfully loaded. False` otherwise.
 
-### `double radians(const float degrees)`
-### `double radians(const Rotation degrees)`
+### `double radians(const float degrees), double radians(const Rotation degrees)`
 Converts degrees to radians. The engine stores 
 angles in degrees, but many trig. functions in, c++ require radians.
 #### Parameters
