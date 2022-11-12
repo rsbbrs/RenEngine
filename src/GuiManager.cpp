@@ -40,12 +40,12 @@ void GuiManager::draw()
     desc.width = io.DisplaySize.x;
     desc.height = io.DisplaySize.y;
     desc.delta_time = io.DeltaTime;
-    desc.dpi_scale = 1.0f;
+    desc.dpi_scale = 1.2f;
     simgui_new_frame(&desc);
 
     // GUI stuff goes here.
     ImGui::Begin("Object Viewer");
-    
+    ImGui::Text("Under construction...");
     ImGui::End();
     
     simgui_render();

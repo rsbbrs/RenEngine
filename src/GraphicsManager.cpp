@@ -287,6 +287,12 @@ bool GraphicsManager::loadImage(const std::string& name, const std::string& path
     return true;
 }
 
+// Returns the dimensions of an image.
+vec2 GraphicsManager::getImageDimensions(const std::string& name)
+{
+    return vec2(pImpl->imageMap[name].width, pImpl->imageMap[name].height);
+}
+
 // Destroys a specific image in the image map.
 void GraphicsManager::destroyImage(const std::string& name)
 {

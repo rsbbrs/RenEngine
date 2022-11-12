@@ -77,6 +77,7 @@ void Engine::gameLoop(const UpdateCallback& callback)
         // Manager updates of game state.
         scriptManager.update(ECSManager);
         physicsManager.updatePhysics(t1);
+        physicsManager.collision();
         graphicsManager.draw(ECSManager, guiManager);
        
         loops++;
@@ -172,4 +173,9 @@ double Engine::radians(const float degrees)
 double Engine::radians(const Rotation degrees)
 {
     return radians(degrees.angle);
+}
+
+vec2 Engine::getImageDimensions(const std::string& name)
+{
+    return graphicsManager.getImageDimensions(name);
 }

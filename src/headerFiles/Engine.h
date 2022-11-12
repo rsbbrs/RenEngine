@@ -134,6 +134,14 @@ namespace RenEngine
             bool loadSpriteImage(const std::string& name, const std::string& path);
 
             /**
+             * @brief Gets the dimensions of an image.
+             * 
+             * @param name The name of the desired entity.
+             * @return vec2 The dimensions of the image in the order (width, height).
+             */
+            vec2 getImageDimensions(const std::string& name);
+
+            /**
              * @brief Removes a sprite image.
              * 
              * @param name The designated name for the image file.
