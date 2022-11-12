@@ -336,7 +336,7 @@ void GraphicsManager::draw(ECS& ecs, GuiManager& gm)
     });
 
 
-    //gm.draw();
+    gm.draw();
 
     // 6. End drawing.
     sg_end_pass();

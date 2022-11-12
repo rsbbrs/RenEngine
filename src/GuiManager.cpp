@@ -8,7 +8,6 @@
 #define SOKOL_GLCORE33
 
 #include "imgui_impl_glfw.h"
-#include "sokol_app.h"
 #include "sokol_gfx.h"
 #include "util/sokol_imgui.h"
 
@@ -35,9 +34,19 @@ void GuiManager::shutdown()
 void GuiManager::draw()
 {
     ImGui_ImplGlfw_NewFrame();
+    ImGuiIO& io = ImGui::GetIO();
 
-    ImGui::Begin("Demo window");
+    simgui_frame_desc_t desc;
+    desc.width = io.DisplaySize.x;
+    desc.height = io.DisplaySize.y;
+    desc.delta_time = io.DeltaTime;
+    desc.delta_time = 2.0f;
+    simgui_new_frame(&desc);
+
+    // GUI stuff goes here.
+    ImGui::Begin("Hello world!");
+    ImGui::Button("Hello");
     ImGui::End();
-
+    
     simgui_render();
 }
