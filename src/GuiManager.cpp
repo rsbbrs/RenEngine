@@ -44,8 +44,8 @@ void GuiManager::draw()
     simgui_new_frame(&desc);
 
     // GUI stuff goes here.
-    ImGui::Begin("Hello world!");
-    ImGui::Button("Hello");
+    ImGui::Begin("Object Viewer");
+    
     ImGui::End();
     
     simgui_render();
