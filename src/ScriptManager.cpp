@@ -32,7 +32,6 @@ void ScriptManager::startup(GraphicsManager& graphicsManager,
     lua.set_function("winWidth", [&]() { return graphicsManager.width(); } );
     lua.set_function("winHeight", [&]() { return graphicsManager.height(); } );
 
-
     // Input manager functions.
     lua.set_function("keyPressed", [&](const input_code keycode) { return inputManager.keyPressed(graphicsManager, keycode); } );
 
@@ -69,6 +68,9 @@ void ScriptManager::startup(GraphicsManager& graphicsManager,
     {
         return loadScript(name, resourceManager.resolvePath(path), run);
     });
+
+    // Resource manager functions.
+    lua.set_function("filePath", [&](const std::string path) { return resourceManager.resolvePath(path); } );
 
     //lua.set_function("getTime", [&]() { return std::chrono::steady_clock::now(); } );
 }

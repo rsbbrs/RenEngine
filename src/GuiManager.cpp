@@ -40,7 +40,7 @@ void GuiManager::draw()
     desc.width = io.DisplaySize.x;
     desc.height = io.DisplaySize.y;
     desc.delta_time = io.DeltaTime;
-    desc.delta_time = 2.0f;
+    desc.dpi_scale = 1.0f;
     simgui_new_frame(&desc);
 
     // GUI stuff goes here.
