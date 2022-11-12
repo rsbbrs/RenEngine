@@ -64,6 +64,12 @@ void ScriptManager::startup(GraphicsManager& graphicsManager,
     // Quit function.
     lua.set_function("quit", [&]() { quit(); } );
 
+    // Script manager functions.
+    lua.set_function("loadScript", [&](const std::string name, const std::string path, const bool run)
+    {
+        return loadScript(name, resourceManager.resolvePath(path), run);
+    });
+
     //lua.set_function("getTime", [&]() { return std::chrono::steady_clock::now(); } );
 }
 
