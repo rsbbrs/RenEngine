@@ -3,14 +3,14 @@
 using namespace RenEngine;
 
 // Initializes the sound manager.
-void SoundManager::smStartup()
+void SoundManager::startup()
 {
     soundInstance.init();
 }
 
 // Shuts down the sound manager.
 // Clears the sound list completely.
-void SoundManager::smShutdown()
+void SoundManager::shutdown()
 {
     clearSoundsList();
     soundInstance.deinit();

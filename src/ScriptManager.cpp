@@ -8,7 +8,7 @@ using namespace RenEngine;
 // Starts up the Lua state with built-in libraries.
 // Creates callback functions to engine functionality
 // so that Lua can access them.
-void ScriptManager::scmStartup(GraphicsManager& graphicsManager, 
+void ScriptManager::startup(GraphicsManager& graphicsManager, 
                                InputManager& inputManager, 
                                ResourceManager& resourceManager,
                                SoundManager& soundManager, 
@@ -23,15 +23,14 @@ void ScriptManager::scmStartup(GraphicsManager& graphicsManager,
     setComponentStructs();
 
     // Graphics manager functions.
-    lua.set_function("loadImage", [&](const std::string& name, const std::string path) 
+    lua.set_function("loadImage", [&](const std::string name, const std::string path)
     {
         return graphicsManager.loadImage(name, resourceManager.resolvePath(path));
     });
-    lua.set_function("destroyImage", [&](const std::string& name) { graphicsManager.destroyImage(name); } );
+    lua.set_function("destroyImage", [&](const std::string name) { graphicsManager.destroyImage(name); } );
     lua.set_function("closeAllImages", [&]() { graphicsManager.clearAllImages(); });
     lua.set_function("winWidth", [&]() { return graphicsManager.width(); } );
     lua.set_function("winHeight", [&]() { return graphicsManager.height(); } );
-
 
     // Input manager functions.
     lua.set_function("keyPressed", [&](const input_code keycode) { return inputManager.keyPressed(graphicsManager, keycode); } );
@@ -53,17 +52,25 @@ void ScriptManager::scmStartup(GraphicsManager& graphicsManager,
     lua.set_function("getPosition", [&](const EntityID e) -> Position& { return ecsManager.Get<Position>(e); } );
     lua.set_function("getRotation", [&](const EntityID e) -> Rotation& { return ecsManager.Get<Rotation>(e); } );
     lua.set_function("getScale", [&](const EntityID e) -> Scale& { return ecsManager.Get<Scale>(e); } );
-    lua.set_function("getVelocity", [&](const EntityID e) -> Velocity& { return ecsManager.Get<Velocity>(e); } );
-    lua.set_function("getGravity", [&](const EntityID e) -> Gravity& { return ecsManager.Get<Gravity>(e); } );
+    lua.set_function("getRigidBody", [&](const EntityID e) -> RigidBody& { return ecsManager.Get<RigidBody>(e); } );
     lua.set_function("getHealth", [&](const EntityID e) -> Health& { return ecsManager.Get<Health>(e); } );
     lua.set_function("getScript", [&](const EntityID e) -> Script& { return ecsManager.Get<Script>(e); } );
-    lua.set_function("getSprite", [&](const EntityID e) { return ecsManager.Get<Sprite>(e); } );
+    lua.set_function("getSprite", [&](const EntityID e) -> Sprite& { return ecsManager.Get<Sprite>(e); } );
 
     // Lua state in the engine.
     lua.set_function("getState", [&]() { return true; } );
 
     // Quit function.
     lua.set_function("quit", [&]() { quit(); } );
+
+    // Script manager functions.
+    lua.set_function("loadScript", [&](const std::string name, const std::string path, const bool run)
+    {
+        return loadScript(name, resourceManager.resolvePath(path), run);
+    });
+
+    // Resource manager functions.
+    lua.set_function("filePath", [&](const std::string path) { return resourceManager.resolvePath(path); } );
 
     //lua.set_function("getTime", [&]() { return std::chrono::steady_clock::now(); } );
 }
@@ -113,14 +120,8 @@ void ScriptManager::setComponentStructs()
         "Position",
         sol::constructors<Position()>(),
         "x", &Position::x,
-        "y", &Position::y
-    );
-
-    lua.new_usertype<Velocity>(
-        "Velocity",
-        sol::constructors<Velocity()>(),
-        "x", &Velocity::x,
-        "y", &Velocity::y
+        "y", &Position::y,
+        "z", &Position::z
     );
 
     lua.new_usertype<Rotation>(
@@ -133,12 +134,6 @@ void ScriptManager::setComponentStructs()
         "Scale",
         sol::constructors<Scale()>(),
         "scale", &Scale::scale
-    );
-
-    lua.new_usertype<Gravity>(
-        "Gravity",
-        sol::constructors<Gravity()>(),
-        "meter_per_second", &Gravity::meters_per_second
     );
 
     lua.new_usertype<Health>(
@@ -159,18 +154,50 @@ void ScriptManager::setComponentStructs()
         sol::constructors<Sprite()>(),
         "name", &Sprite::name
     );
+
+    // Rigid body stuff.
+    lua.new_usertype<vec2>(
+        "vec2",
+        sol::constructors<vec2()>(),
+        "x", &vec2::x,
+        "y", &vec2::y
+    );
+
+    lua.new_usertype<vec3>(
+        "vec3",
+        sol::constructors<vec3()>(),
+        "x", &vec3::x,
+        "y", &vec3::y,
+        "Z", &vec3::z
+    );
+
+    lua.new_usertype<RigidBody>(
+        "RigidBody",
+        sol::constructors<RigidBody()>(),
+        "velocity", &RigidBody::velocity,
+        "acceleration", &RigidBody::acceleration,
+        "gravity", &RigidBody::gravity,
+        "force", &RigidBody::force,
+        "mass", &RigidBody::mass
+    );
 }
 
 // Currently does nothing.
-void ScriptManager::scmShutDown()
+void ScriptManager::shutDown()
 {}
 
 // Loads a script into the scripts manager.
 // Stored in the unordered map under "name"
-// NOTE: Need to figure out what the load_file function returns on failure.
-bool ScriptManager::loadScript(const std::string& name, const std::string& path)
+bool ScriptManager::loadScript(const std::string& name, const std::string& path, bool run)
 {
     scripts[name] = lua.load_file(path);
+    
+    if(!scripts[name].valid())
+        return false;
+    
+    if(run)
+        getScript(name)();
+
     return true;
 }
 
@@ -192,7 +219,7 @@ void ScriptManager::update(ECS& manager)
     manager.ForEach<Script>([&](EntityID e)
     {
         Script& entity_script = manager.Get<Script>(e);
-        loadScript(entity_script.name, entity_script.path);
+        loadScript(entity_script.name, entity_script.path, false);
         getScript(entity_script.name)();
     });
 }

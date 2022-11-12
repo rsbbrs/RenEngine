@@ -8,6 +8,7 @@
 #include "InputManager.h"
 #include "ResourceManager.h"
 #include "SoundManager.h"
+#include "PhysicsManager.h"
 #include "ECS.h"
 
 namespace RenEngine
@@ -34,15 +35,15 @@ namespace RenEngine
             bool scriptQuit;
 
             // Startup and shutdown functions.
-            void scmStartup(GraphicsManager& graphicsManager,
+            void startup(GraphicsManager& graphicsManager,
                             InputManager& inputManager, 
                             ResourceManager& resourceManager,
                             SoundManager& soundManager,
                             ECS& ecsManager);
-            void scmShutDown();
+            void shutDown();
 
             // Loads Lua scripts into the engine.
-            bool loadScript( const std::string& name, const std::string& path );
+            bool loadScript(const std::string& name, const std::string& path, bool run);
 
             // Returns a script function loaded into the manager.
             sol::load_result& getScript(const std::string& name);

@@ -80,15 +80,16 @@ namespace RenEngine
             /***************************/
 
             // Startup and shutdown functions.
-            void ecsStartup() { count = 0; };
-            void ecsShutdown() {};
+            void startup() { count = 0; };
+            void shutdown() {};
             
             // Create and destroy entities.
             EntityID Create() { return ++count; };
             void Destroy(EntityID e)
             {
                 for( const auto& comps : m_components ) 
-                    comps->Drop( e ); 
+                    comps->Drop( e );
+                count--;
             }
 
             // Get component from an entity.

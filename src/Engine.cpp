@@ -21,12 +21,14 @@ Engine::Engine(const char *name, int width, int height, bool fullscreen)
 // Starts up all managers.
 void Engine::startup()
 {
-    graphicsManager.gmStartup(config);//, guiManager);
-    inputManager.imStartup();
-    resourceManager.rmStartup();
-    soundManager.smStartup();
-    ECSManager.ecsStartup();
-    scriptManager.scmStartup(graphicsManager, 
+    graphicsManager.startup(config);
+    inputManager.startup();
+    resourceManager.startup();
+    soundManager.startup();
+    ECSManager.startup();
+    guiManager.startup(graphicsManager);
+    physicsManager.startup(&ECSManager);
+    scriptManager.startup(graphicsManager, 
                              inputManager, 
                              resourceManager, 
                              soundManager, 
@@ -36,13 +38,14 @@ void Engine::startup()
 // Shuts down the managers.
 void Engine::shutdown()
 {
-    scriptManager.scmShutDown();
-    //guiManager.shutdown();
-    ECSManager.ecsShutdown();
-    soundManager.smShutdown();
-    resourceManager.rmShutdown();
-    inputManager.imShutdown();
-    graphicsManager.gmShutdown();
+    scriptManager.shutDown();
+    physicsManager.shutdown();
+    guiManager.shutdown();
+    ECSManager.shutdown();
+    soundManager.shutdown();
+    resourceManager.shutdown();
+    inputManager.shutdown();
+    graphicsManager.shutdown();
 }
 
 // Main game loop where game logic will be processed.
@@ -73,7 +76,8 @@ void Engine::gameLoop(const UpdateCallback& callback)
 
         // Manager updates of game state.
         scriptManager.update(ECSManager);
-        graphicsManager.draw(ECSManager);//, guiManager);
+        physicsManager.updatePhysics(t1);
+        graphicsManager.draw(ECSManager, guiManager);
        
         loops++;
 
@@ -155,9 +159,9 @@ void Engine::destroyEntity(EntityID e)
     ECSManager.Destroy(e);
 }
 
-bool Engine::loadScript(const std::string& name, const std::string& path)
+bool Engine::loadScript(const std::string& name, const std::string& path, bool run)
 {
-    return scriptManager.loadScript(name, path);
+    return scriptManager.loadScript(name, path, run);
 }
 
 double Engine::radians(const float degrees)

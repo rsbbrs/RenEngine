@@ -12,8 +12,8 @@ namespace RenEngine
             std::filesystem::path assetsPath;
 
         public:
-            void rmStartup();
-            void rmShutdown();
+            void startup();
+            void shutdown();
             std::string resolvePath(std::string relativePath);
     };
 }

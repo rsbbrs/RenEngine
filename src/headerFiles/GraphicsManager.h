@@ -23,8 +23,8 @@ namespace RenEngine
                                        glm::mat4& transform);
         public:
             GraphicsManager();
-            void gmStartup(Configuration windowParam);//, GuiManager& gm);
-            void gmShutdown();
+            void startup(Configuration windowParam);
+            void shutdown();
             bool closeWindow();
 
             // Sprite image handling functions.
@@ -33,7 +33,7 @@ namespace RenEngine
             void clearAllImages();
 
             // Draw images.
-            void draw(ECS& manager);//, GuiManager& gm);
+            void draw(ECS& ecs, GuiManager& gm);
             
             // Getters for window dimensions.
             int width();

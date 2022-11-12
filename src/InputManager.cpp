@@ -6,12 +6,12 @@
 
 using namespace RenEngine;
 
-void InputManager::imStartup()
+void InputManager::startup()
 {
     // Doesn't do anything right now.
 }
 
-void InputManager::imShutdown()
+void InputManager::shutdown()
 {
     // Doesn't do anything right now.
 

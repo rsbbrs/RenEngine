@@ -14,8 +14,8 @@ namespace RenEngine
             std::unordered_map<std::string, SoLoud::Wav> soundsList;
 
         public:
-            void smStartup();
-            void smShutdown();
+            void startup();
+            void shutdown();
 
             void loadSound(const std::string& name, const std::string& path);
             void playSound(const std::string& name);

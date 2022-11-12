@@ -15,7 +15,8 @@
 #include "SoundManager.h"
 #include "ECS.h"
 #include "ScriptManager.h"
-//#include "GuiManager.h"
+#include "PhysicsManager.h"
+#include "GuiManager.h"
 
 namespace RenEngine
 {
@@ -35,7 +36,8 @@ namespace RenEngine
             SoundManager soundManager;
             ECS ECSManager;
             ScriptManager scriptManager;
-            //GuiManager guiManager;
+            PhysicsManager physicsManager;
+            GuiManager guiManager;
 
             // Start and shutdown functions.
             // Made private so no other classes can shut down the engine itself.
@@ -192,10 +194,11 @@ namespace RenEngine
              * 
              * @param name The desired name for the script.
              * @param path The path to the script.
+             * @param run Specifies if we want to run the script immediately or not.
              * @return True if the script was successfully loaded.
              * @return False otherwise.
              */
-            bool loadScript(const std::string& name, const std::string& path);
+            bool loadScript(const std::string& name, const std::string& path, bool run);
 
             /**
              * @brief Converts degrees to radians. The engine stores 

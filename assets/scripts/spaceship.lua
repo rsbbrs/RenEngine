@@ -2,19 +2,28 @@ local maxSpeed = 8
 local turnSpeed = 3
 local acceleration = 0.4
 local spaceship = 2
+local laserSpeed = 8
+
+if(not keyPressed(input_code.space)) then
+    wasPressed = false
+end
+
+if(getPosition(spaceship).x < -185) then
+    getPosition(spaceship).x = 185
+elseif(getPosition(spaceship).x > 185) then
+    getPosition(spaceship).x = -185
+end
+
+if(getPosition(spaceship).y < -121) then
+    getPosition(spaceship).y = 121
+elseif(getPosition(spaceship).y > 121) then
+    getPosition(spaceship).y = -121
+end
 
 if(keyPressed(input_code.w)) then
-    position = getPosition(spaceship)
     angle = math.rad(getRotation(spaceship).angle + 90)
-    velocity = getVelocity(spaceship)
-    dt = 0.5
-
-    getVelocity(spaceship).x = math.min(velocity.x + (acceleration * dt), maxSpeed)
-    getVelocity(spaceship).y = math.min(velocity.y + (acceleration * dt), maxSpeed)
-
-    getPosition(spaceship).x = position.x + (math.cos(angle) * velocity.x * dt)
-    getPosition(spaceship).y = position.y + (math.sin(angle) * velocity.y * dt)
-
+    getRigidBody(spaceship).force.x = 50
+    getRigidBody(spaceship).force.y = 50
     mvAngle = angle
 end
 
@@ -38,26 +47,20 @@ if(keyPressed(input_code.escape)) then
     quit()
 end
 
-if(not keyPressed(input_code.w)) then
-    position = getPosition(spaceship)
-    velocity = getVelocity(spaceship)
-    acc = 0.1
+if(keyPressed(input_code.space) and wasPressed == false) then
+    playSound("Gunshot")
+    wasPressed = true
+    newID = createEntity()
 
-    getVelocity(spaceship).x = math.max(velocity.x - (acc * dt), 0)
-    getVelocity(spaceship).y = math.max(velocity.y - (acc * dt), 0)
-
-    getPosition(spaceship).x = position.x + (math.cos(mvAngle) * velocity.x * dt)
-    getPosition(spaceship).y = position.y + (math.sin(mvAngle) * velocity.y * dt)
+    getSprite(newID).name = "Laser"
+    getPosition(newID).x = getPosition(spaceship).x
+    getPosition(newID).y = getPosition(spaceship).y
+    getPosition(newID).z = getPosition(spaceship).z
+    getScale(newID).scale = 10
+    getRotation(newID).angle = (getRotation(spaceship).angle + 90)
 end
 
-if(getPosition(spaceship).x < -185) then
-    getPosition(spaceship).x = 185
-elseif(getPosition(spaceship).x > 185) then
-    getPosition(spaceship).x = -185
-end
-
-if(getPosition(spaceship).y < -121) then
-    getPosition(spaceship).y = 121
-elseif(getPosition(spaceship).y > 121) then
-    getPosition(spaceship).y = -121
-end
+--if(not keyPressed(input_code.w)) then
+    --getRigidBody(spaceship).force.x = -50
+    --getRigidBody(spaceship).force.y = -50
+--end
