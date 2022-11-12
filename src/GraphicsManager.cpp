@@ -68,7 +68,7 @@ GraphicsManager::GraphicsManager()
 
 // Creates the window to be displayed with the specific
 // configuration parameters.
-void GraphicsManager::startup(Configuration windowParam)//, GuiManager& gm)
+void GraphicsManager::startup(Configuration windowParam)
 {
     // Window creation magic by GLFW.
     glfwInit();
@@ -101,9 +101,6 @@ void GraphicsManager::startup(Configuration windowParam)//, GuiManager& gm)
 
     // Sokol startup
     sg_setup(sg_desc{});
-
-    // imgui manager startup.
-    //gm.startup();
 
     // A vertex buffer containing a textured square.
     const float vertices[] = {
@@ -339,7 +336,7 @@ void GraphicsManager::draw(ECS& ecs, GuiManager& gm)
     });
 
 
-    gm.draw();
+    //gm.draw();
 
     // 6. End drawing.
     sg_end_pass();

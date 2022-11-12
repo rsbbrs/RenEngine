@@ -3,10 +3,14 @@
 #include "GraphicsManager.h"
 #include "GuiManager.h"
 
+#define SOKOL_IMGUI_IMPL
+#define SOKOL_IMGUI_NO_SOKOL_APP
+#define SOKOL_GLCORE33
+
 #include "imgui_impl_glfw.h"
 #include "sokol_app.h"
 #include "sokol_gfx.h"
-#include "util\sokol_imgui.h"
+#include "util/sokol_imgui.h"
 
 using namespace RenEngine;
 
@@ -32,7 +36,8 @@ void GuiManager::draw()
 {
     ImGui_ImplGlfw_NewFrame();
 
-    // GUI stuff
+    ImGui::Begin("Demo window");
+    ImGui::End();
 
     simgui_render();
 }
