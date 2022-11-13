@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GraphicsManager.h"
+#include "ECS.h"
 #include "GuiManager.h"
 
 #define SOKOL_IMGUI_IMPL
@@ -12,11 +13,6 @@
 #include "util/sokol_imgui.h"
 
 using namespace RenEngine;
-
-/*
-    simgui_setup, simgui_shutdown, and simgui_render aren't found.
-    Causes linking error.
-*/
 
 void GuiManager::startup(GraphicsManager& manager)
 {
@@ -31,7 +27,7 @@ void GuiManager::shutdown()
     simgui_shutdown();
 }
 
-void GuiManager::draw()
+void GuiManager::draw(ECS& manager)
 {
     ImGui_ImplGlfw_NewFrame();
     ImGuiIO& io = ImGui::GetIO();
@@ -45,7 +41,16 @@ void GuiManager::draw()
 
     // GUI stuff goes here.
     ImGui::Begin("Object Viewer");
-    ImGui::Text("Under construction...");
+    
+    manager.ForEach<RigidBody>([&](EntityID e)
+    {
+        RigidBody rb = manager.Get<RigidBody>(e);
+        Position p = manager.Get<Position>(e);
+        Sprite s = manager.Get<Sprite>(e);
+
+        ImGui::Text("Object Name: %s", s.name);
+    });
+
     ImGui::End();
     
     simgui_render();
