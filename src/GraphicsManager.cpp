@@ -342,7 +342,7 @@ void GraphicsManager::draw(ECS& ecs, GuiManager& gm)
     });
 
 
-    gm.draw();
+    gm.draw(ecs);
 
     // 6. End drawing.
     sg_end_pass();
