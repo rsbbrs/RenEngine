@@ -33,10 +33,10 @@ void GuiManager::draw(ECS& manager)
     ImGuiIO& io = ImGui::GetIO();
 
     simgui_frame_desc_t desc;
-    desc.width = io.DisplaySize.x;
-    desc.height = io.DisplaySize.y;
+    desc.width = (int)io.DisplaySize.x;
+    desc.height = (int)io.DisplaySize.y;
     desc.delta_time = io.DeltaTime;
-    desc.dpi_scale = 1.2f;
+    desc.dpi_scale = 1.0f;
     simgui_new_frame(&desc);
 
     // GUI stuff goes here.
@@ -44,11 +44,17 @@ void GuiManager::draw(ECS& manager)
     
     manager.ForEach<RigidBody>([&](EntityID e)
     {
-        RigidBody rb = manager.Get<RigidBody>(e);
+        RigidBody& rb = manager.Get<RigidBody>(e);
         Position p = manager.Get<Position>(e);
         Sprite s = manager.Get<Sprite>(e);
 
-        ImGui::Text("Object Name: %s", s.name);
+        ImGui::Text("Object Name: %s\n\n", s.name);
+        ImGui::Text("Position:\n\tx: %f\ty: %f\tz: %f", p.x, p.y, p.z);
+        ImGui::Text("Velocity:\n\tx: %f\ty: %f", rb.velocity.x, rb.velocity.y);
+        ImGui::Text("Acceleration:\n\tx: %f\ty: %f", rb.acceleration.x, rb.acceleration.y);
+        ImGui::Text("Gravity:\n\tx: %f\ty: %f", rb.gravity.x, rb.gravity.y);
+        ImGui::Text("Force:\n\tx: %f\ty: %f", rb.force.x, rb.force.y);
+        ImGui::InputFloat("Mass", &rb.mass);
     });
 
     ImGui::End();

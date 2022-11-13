@@ -30,8 +30,7 @@ void PhysicsManager::updatePhysics(std::chrono::time_point<std::chrono::steady_c
     {
         RigidBody& rb = manager->Get<RigidBody>(e);
         Position& p = manager->Get<Position>(e);
-        Rotation& r = manager->Get<Rotation>(e);
-
+        
         // Rigid body kinematic equations.
         rb.acceleration = rb.force * (1.0f / rb.mass + rb.gravity);
         rb.velocity += rb.acceleration * t.count();

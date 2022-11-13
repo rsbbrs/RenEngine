@@ -14,6 +14,20 @@ getPosition(ball).x = -140.0
 getPosition(ball).y = -50.0
 getPosition(ball).z = 1.0
 
+getRigidBody(ball).velocity.x = 0.0
+getRigidBody(ball).velocity.y = 0.0
+
+getRigidBody(ball).acceleration.x = 0
+getRigidBody(ball).acceleration.y = 0
+
+getRigidBody(ball).gravity.x = 0.0
+getRigidBody(ball).gravity.y = 0.0
+
+getRigidBody(ball).force.x = 0.0
+getRigidBody(ball).force.y = 0.0
+
+getRigidBody(ball).mass = 100.0
+
 getScale(ball).scale = 10
 
 -- Loads and attaches the runtime script to the ball --
