@@ -28,37 +28,14 @@ void rigidBody(EntityID e, ECS& manager)
     ImGui::InputFloat("z", &p.z);
     ImGui::PopItemWidth();
 
-    ImGui::Text("Velocity:\n");
-    ImGui::PushItemWidth(75);
-    ImGui::InputFloat("x", &rb.velocity.x);
-    ImGui::SameLine();
-    ImGui::InputFloat("y", &rb.velocity.y);
-    ImGui::PopItemWidth();
-
-    ImGui::Text("Acceleration:\n");
-    ImGui::PushItemWidth(75);
-    ImGui::InputFloat("x", &rb.acceleration.x);
-    ImGui::SameLine();
-    ImGui::InputFloat("y", &rb.acceleration.y);
-    ImGui::PopItemWidth();
-
-    ImGui::Text("Gravity:\n");
-    ImGui::PushItemWidth(75);
-    ImGui::InputFloat("x", &rb.gravity.x);
-    ImGui::SameLine();
-    ImGui::InputFloat("y", &rb.gravity.y);
-    ImGui::PopItemWidth();
-    
-    ImGui::Text("Force:\n");
-    ImGui::PushItemWidth(75);
-    ImGui::InputFloat("x", &rb.force.x);
-    ImGui::SameLine();
-    ImGui::InputFloat("y", &rb.force.y);
-    ImGui::PopItemWidth();
-
-    ImGui::PushItemWidth(75);
+    ImGui::PushItemWidth(150);
     ImGui::InputFloat("Mass", &rb.mass);
     ImGui::PopItemWidth();
+
+    ImGui::Text("Force:\n\tx: %f\t y: %f", rb.force.x, rb.force.y);
+    ImGui::Text("Acceleration:\n\tx: %f\t y: %f", rb.acceleration.x, rb.acceleration.y);
+    ImGui::Text("Velocity:\n\tx: %f\t y: %f", rb.velocity.x, rb.velocity.y);
+
 }
 
 void GuiManager::startup(GraphicsManager& manager)
@@ -92,10 +69,11 @@ void GuiManager::draw(ECS& manager)
     manager.ForEach<Sprite>([&](EntityID e)
     {
         Sprite s = manager.Get<Sprite>(e);
-        ImGui::Text("Object Name: %s\n\n", s.name);
-
-        //Rigid body objects
-        rigidBody(e, manager);
+        if(ImGui::CollapsingHeader(s.name.c_str()))
+        {
+            //Rigid body objects
+            rigidBody(e, manager);
+        }
     });
 
     ImGui::End();

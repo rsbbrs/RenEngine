@@ -6,7 +6,7 @@ end
 -- Initiates physics simulation --
 if(keyPressed(input_code.enter)) then
     getRigidBody(ball).velocity.x = 100.0
-    getRigidBody(ball).velocity.y = 70.0
+    getRigidBody(ball).velocity.y = 100.0
 
     getRigidBody(ball).gravity.x = 0
     getRigidBody(ball).gravity.y = -9.8
