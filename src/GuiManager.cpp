@@ -28,11 +28,12 @@ void rigidBody(EntityID e, ECS& manager)
     ImGui::InputFloat("z", &p.z);
     ImGui::PopItemWidth();
 
+    ImGui::Text("Mass:\n");
     ImGui::PushItemWidth(150);
-    ImGui::InputFloat("Mass", &rb.mass);
+    ImGui::InputFloat("", &rb.mass);
     ImGui::PopItemWidth();
 
-    ImGui::Text("Force:\n\tx: %f\t y: %f", rb.force.x, rb.force.y);
+    ImGui::Text("\nForce:\n\tx: %f\t y: %f", rb.force.x, rb.force.y);
     ImGui::Text("Acceleration:\n\tx: %f\t y: %f", rb.acceleration.x, rb.acceleration.y);
     ImGui::Text("Velocity:\n\tx: %f\t y: %f", rb.velocity.x, rb.velocity.y);
 
@@ -69,7 +70,7 @@ void GuiManager::draw(ECS& manager)
     manager.ForEach<Sprite>([&](EntityID e)
     {
         Sprite s = manager.Get<Sprite>(e);
-        if(ImGui::CollapsingHeader(s.name.c_str()))
+        if(ImGui::CollapsingHeader(s.name.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
         {
             //Rigid body objects
             rigidBody(e, manager);

@@ -46,7 +46,7 @@ namespace RenEngine
     struct Scale { int scale; };
     struct Health { double percent; };
     struct Script { std::string name; std::string path; };
-    struct Sprite { std::string name; vec2 dimensions; };
+    struct Sprite { std::string name; };
     struct RigidBody 
     {
         vec2 velocity;
@@ -54,6 +54,9 @@ namespace RenEngine
         vec2 gravity;
         vec2 force;
         float mass;
+
+        vec2 min;
+        vec2 max;
     };
 
     //  Some common keyboard buttons for games

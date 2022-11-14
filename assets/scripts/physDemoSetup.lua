@@ -28,7 +28,7 @@ getRigidBody(ball).force.y = 0.0
 
 getRigidBody(ball).mass = 100.0
 
-getScale(ball).scale = 10
+getScale(ball).scale = 100
 
 -- Loads and attaches the runtime script to the ball --
 filepath = "scripts\\ball.lua"

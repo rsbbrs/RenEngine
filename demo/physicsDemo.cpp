@@ -13,6 +13,9 @@ int main()
     else
         std::cout << "Failed to load physDemoSetup.lua\n";
 
+    vec2 min, max;
+    physDemo->getBoxCollider("Ball", min, max);
+
     // Runs the game loop.
     physDemo->gameLoop([&](){});
 

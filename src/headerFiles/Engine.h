@@ -134,14 +134,6 @@ namespace RenEngine
             bool loadSpriteImage(const std::string& name, const std::string& path);
 
             /**
-             * @brief Gets the dimensions of an image.
-             * 
-             * @param name The name of the desired entity.
-             * @return vec2 The dimensions of the image in the order (width, height).
-             */
-            vec2 getImageDimensions(const std::string& name);
-
-            /**
              * @brief Removes a sprite image.
              * 
              * @param name The designated name for the image file.
@@ -227,5 +219,14 @@ namespace RenEngine
              * @return The angle converted to radians.
              */
             double radians(const Rotation degrees);
+
+            /**
+             * @brief Gets the box around an image.
+             * 
+             * @param name The name of the desired entity.
+             * @param min Reference to the minimum dimension of an image.
+             * @param max Reference to the maximum dimension of an image.
+             */
+            void getBoxCollider(const std::string& name, vec2& min, vec2& max);
     };
 }
