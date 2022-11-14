@@ -14,6 +14,53 @@
 
 using namespace RenEngine;
 
+void rigidBody(EntityID e, ECS& manager)
+{
+    RigidBody& rb = manager.Get<RigidBody>(e);
+    Position& p = manager.Get<Position>(e);
+
+    ImGui::Text("Position:\n");
+    ImGui::PushItemWidth(75);
+    ImGui::InputFloat("x", &p.x);
+    ImGui::SameLine();
+    ImGui::InputFloat("y", &p.y);
+    ImGui::SameLine();
+    ImGui::InputFloat("z", &p.z);
+    ImGui::PopItemWidth();
+
+    ImGui::Text("Velocity:\n");
+    ImGui::PushItemWidth(75);
+    ImGui::InputFloat("x", &rb.velocity.x);
+    ImGui::SameLine();
+    ImGui::InputFloat("y", &rb.velocity.y);
+    ImGui::PopItemWidth();
+
+    ImGui::Text("Acceleration:\n");
+    ImGui::PushItemWidth(75);
+    ImGui::InputFloat("x", &rb.acceleration.x);
+    ImGui::SameLine();
+    ImGui::InputFloat("y", &rb.acceleration.y);
+    ImGui::PopItemWidth();
+
+    ImGui::Text("Gravity:\n");
+    ImGui::PushItemWidth(75);
+    ImGui::InputFloat("x", &rb.gravity.x);
+    ImGui::SameLine();
+    ImGui::InputFloat("y", &rb.gravity.y);
+    ImGui::PopItemWidth();
+    
+    ImGui::Text("Force:\n");
+    ImGui::PushItemWidth(75);
+    ImGui::InputFloat("x", &rb.force.x);
+    ImGui::SameLine();
+    ImGui::InputFloat("y", &rb.force.y);
+    ImGui::PopItemWidth();
+
+    ImGui::PushItemWidth(75);
+    ImGui::InputFloat("Mass", &rb.mass);
+    ImGui::PopItemWidth();
+}
+
 void GuiManager::startup(GraphicsManager& manager)
 {
     simgui_desc_t simgui_desc = { };
@@ -42,19 +89,13 @@ void GuiManager::draw(ECS& manager)
     // GUI stuff goes here.
     ImGui::Begin("Object Viewer");
     
-    manager.ForEach<RigidBody>([&](EntityID e)
+    manager.ForEach<Sprite>([&](EntityID e)
     {
-        RigidBody& rb = manager.Get<RigidBody>(e);
-        Position p = manager.Get<Position>(e);
         Sprite s = manager.Get<Sprite>(e);
-
         ImGui::Text("Object Name: %s\n\n", s.name);
-        ImGui::Text("Position:\n\tx: %f\ty: %f\tz: %f", p.x, p.y, p.z);
-        ImGui::Text("Velocity:\n\tx: %f\ty: %f", rb.velocity.x, rb.velocity.y);
-        ImGui::Text("Acceleration:\n\tx: %f\ty: %f", rb.acceleration.x, rb.acceleration.y);
-        ImGui::Text("Gravity:\n\tx: %f\ty: %f", rb.gravity.x, rb.gravity.y);
-        ImGui::Text("Force:\n\tx: %f\ty: %f", rb.force.x, rb.force.y);
-        ImGui::InputFloat("Mass", &rb.mass);
+
+        //Rigid body objects
+        rigidBody(e, manager);
     });
 
     ImGui::End();
