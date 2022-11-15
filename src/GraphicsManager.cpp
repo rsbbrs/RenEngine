@@ -7,6 +7,7 @@
 
 #include <unordered_map>
 #include <complex>
+#include <functional>
 
 #include "GLFW/glfw3.h"
 #include "sokol_gfx.h"
@@ -288,9 +289,22 @@ bool GraphicsManager::loadImage(const std::string& name, const std::string& path
 }
 
 // Returns the dimensions of an image.
-vec2 GraphicsManager::getImageDimensions(const std::string& name)
+void GraphicsManager::getBoxCollider(const std::string& name, const int scale, vec2& min, vec2& max)
 {
-    return vec2(pImpl->imageMap[name].width, pImpl->imageMap[name].height);
+    vec2 dimensions(pImpl->imageMap[name].width, pImpl->imageMap[name].height);
+
+    // Sets the minimum dimension.
+    min.x = min.y = 0;
+
+    // The max is a bit more complex.
+    // Using the approach of the transformation function above.
+    if( dimensions.x < dimensions.y ) 
+    {
+        max = vec2(2 * scale, 2 * scale) * vec2(std::real(dimensions.x)/dimensions.y, 1.0);
+    } else 
+    {
+        max = vec2(2 * scale, 2 * scale) * vec2(1.0, std::real(dimensions.y)/dimensions.x);
+    }
 }
 
 // Destroys a specific image in the image map.
@@ -341,8 +355,7 @@ void GraphicsManager::draw(ECS& ecs, GuiManager& gm)
         sg_draw(0, 4, 1);
     });
 
-
-    gm.draw(ecs);
+    gm.draw(ecs, this);
 
     // 6. End drawing.
     sg_end_pass();

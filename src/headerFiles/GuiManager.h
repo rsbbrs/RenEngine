@@ -11,6 +11,6 @@ namespace RenEngine
         public:
             void startup(GraphicsManager& manager);
             void shutdown();
-            void draw(ECS& manager);
+            void draw(ECS& ecs, GraphicsManager* gm);
     };
 }

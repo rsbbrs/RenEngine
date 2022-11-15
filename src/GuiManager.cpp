@@ -17,18 +17,8 @@ using namespace RenEngine;
 void rigidBody(EntityID e, ECS& manager)
 {
     RigidBody& rb = manager.Get<RigidBody>(e);
-    Position& p = manager.Get<Position>(e);
 
-    ImGui::Text("Position:\n");
-    ImGui::PushItemWidth(75);
-    ImGui::InputFloat("x", &p.x);
-    ImGui::SameLine();
-    ImGui::InputFloat("y", &p.y);
-    ImGui::SameLine();
-    ImGui::InputFloat("z", &p.z);
-    ImGui::PopItemWidth();
-
-    ImGui::Text("Mass:\n");
+    ImGui::Text("\nMass:\n");
     ImGui::PushItemWidth(150);
     ImGui::InputFloat("", &rb.mass);
     ImGui::PopItemWidth();
@@ -36,7 +26,7 @@ void rigidBody(EntityID e, ECS& manager)
     ImGui::Text("\nForce:\n\tx: %f\t y: %f", rb.force.x, rb.force.y);
     ImGui::Text("Acceleration:\n\tx: %f\t y: %f", rb.acceleration.x, rb.acceleration.y);
     ImGui::Text("Velocity:\n\tx: %f\t y: %f", rb.velocity.x, rb.velocity.y);
-
+    ImGui::Text("Box Collider:\n\tmin: (%.3f, %.3f)\n\tmax (%.3f, %.3f)", rb.min.x, rb.min.y, rb.max.x, rb.max.y);
 }
 
 void GuiManager::startup(GraphicsManager& manager)
@@ -52,7 +42,7 @@ void GuiManager::shutdown()
     simgui_shutdown();
 }
 
-void GuiManager::draw(ECS& manager)
+void GuiManager::draw(ECS& ecs, GraphicsManager* gm)
 {
     ImGui_ImplGlfw_NewFrame();
     ImGuiIO& io = ImGui::GetIO();
@@ -67,13 +57,33 @@ void GuiManager::draw(ECS& manager)
     // GUI stuff goes here.
     ImGui::Begin("Object Viewer");
     
-    manager.ForEach<Sprite>([&](EntityID e)
+    ecs.ForEach<Sprite>([&](EntityID e)
     {
-        Sprite s = manager.Get<Sprite>(e);
+        Sprite s = ecs.Get<Sprite>(e);
+        Position& p = ecs.Get<Position>(e);
+        Scale& sc = ecs.Get<Scale>(e);
+        Rotation& rot = ecs.Get<Rotation>(e);
+
         if(ImGui::CollapsingHeader(s.name.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
         {
+            ImGui::Text("Position:\n");
+            ImGui::PushItemWidth(75);
+            ImGui::InputFloat("x", &p.x);
+            ImGui::SameLine();
+            ImGui::InputFloat("y", &p.y);
+            ImGui::SameLine();
+            ImGui::InputFloat("z", &p.z);
+            ImGui::PopItemWidth();
+
+            ImGui::Text("Scale:\n");
+            if(ImGui::DragInt("Size", &sc.scale, 0.5, 0, 100))
+                gm->getBoxCollider(s.name, sc.scale, ecs.Get<RigidBody>(e).min, ecs.Get<RigidBody>(e).max);
+
+            ImGui::Text("Rotation:\n");
+            ImGui::DragFloat("Angle", &rot.angle, 0.5, 0.0, 360.0);
+
             //Rigid body objects
-            rigidBody(e, manager);
+            rigidBody(e, ecs);
         }
     });
 

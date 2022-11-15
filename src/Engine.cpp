@@ -175,8 +175,7 @@ double Engine::radians(const Rotation degrees)
     return radians(degrees.angle);
 }
 
-void Engine::getBoxCollider(const std::string& name, vec2& min, vec2& max)
+void Engine::getBoxCollider(const EntityID e, vec2& min, vec2& max)
 {
-    vec2 dimensions = graphicsManager.getImageDimensions(name);
-    std::cout << dimensions.x << " " << dimensions.y << "\n";
+    graphicsManager.getBoxCollider(ECSManager.Get<Sprite>(e).name, ECSManager.Get<Scale>(e).scale, min, max);
 }

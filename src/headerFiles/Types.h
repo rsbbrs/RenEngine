@@ -55,6 +55,7 @@ namespace RenEngine
         vec2 force;
         float mass;
 
+        // Min/max dimensions of the collider.
         vec2 min;
         vec2 max;
     };

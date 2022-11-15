@@ -223,10 +223,10 @@ namespace RenEngine
             /**
              * @brief Gets the box around an image.
              * 
-             * @param name The name of the desired entity.
+             * @param e The entity ID of the desired entity.
              * @param min Reference to the minimum dimension of an image.
              * @param max Reference to the maximum dimension of an image.
              */
-            void getBoxCollider(const std::string& name, vec2& min, vec2& max);
+            void getBoxCollider(const EntityID e, vec2& min, vec2& max);
     };
 }

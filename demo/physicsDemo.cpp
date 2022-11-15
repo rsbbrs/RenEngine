@@ -13,8 +13,8 @@ int main()
     else
         std::cout << "Failed to load physDemoSetup.lua\n";
 
-    vec2 min, max;
-    physDemo->getBoxCollider("Ball", min, max);
+    RigidBody& rb = physDemo->getComponent<RigidBody>(1);
+    physDemo->getBoxCollider(1, rb.min, rb.max);
 
     // Runs the game loop.
     physDemo->gameLoop([&](){});

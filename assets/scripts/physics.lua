@@ -16,7 +16,7 @@ if(keyPressed(input_code.enter)) then
 end
 
 -- Resets the simulation --
-if(keyPressed(input_code.tab)) then
+if(keyPressed(input_code.left_shift)) then
     getPosition(ball).x = -140.0
     getPosition(ball).y = -50.0
     getPosition(ball).z = 1.0
