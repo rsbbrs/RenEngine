@@ -289,22 +289,23 @@ bool GraphicsManager::loadImage(const std::string& name, const std::string& path
 }
 
 // Returns the dimensions of an image.
-void GraphicsManager::getBoxCollider(const std::string& name, const int scale, vec2& min, vec2& max)
+void GraphicsManager::getBoxCollider(const std::string& name, const vec3 pos, const int scale, vec2& min, vec2& max)
 {
     vec2 dimensions(pImpl->imageMap[name].width, pImpl->imageMap[name].height);
+    vec2 truScale;
 
-    // Sets the minimum dimension.
-    min.x = min.y = 0;
+    // First, compute the true scale values.
+    if(dimensions.x < dimensions.y)
+        truScale = vec2(scale, scale) * vec2(std::real(dimensions.x)/dimensions.y, 1.0);
+    else if(dimensions.x > dimensions.y)
+        truScale = vec2(scale, scale) * vec2(1.0, std::real(dimensions.y)/dimensions.x);
+    else
+        truScale = vec2(scale, scale);
 
-    // The max is a bit more complex.
-    // Using the approach of the transformation function above.
-    if( dimensions.x < dimensions.y ) 
-    {
-        max = vec2(2 * scale, 2 * scale) * vec2(std::real(dimensions.x)/dimensions.y, 1.0);
-    } else 
-    {
-        max = vec2(2 * scale, 2 * scale) * vec2(1.0, std::real(dimensions.y)/dimensions.x);
-    }
+    // Compute the min/max corners of bounding box as world
+    // coordinates based on offsets from the center position.
+    min = vec2(pos.x - truScale.x, pos.y - truScale.y);
+    max = vec2(pos.x + truScale.x, pos.y + truScale.y);
 }
 
 // Destroys a specific image in the image map.

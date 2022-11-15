@@ -29,7 +29,7 @@ namespace RenEngine
 
             // Sprite image handling functions.
             bool loadImage(const std::string& name, const std::string& path);
-            void getBoxCollider(const std::string& name, const int scale, vec2& min, vec2& max);
+            void getBoxCollider(const std::string& name, const vec3 pos, const int scale, vec2& min, vec2& max);
             void destroyImage(const std::string& name);
             void clearAllImages();
 
