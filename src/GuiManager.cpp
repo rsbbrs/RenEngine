@@ -79,7 +79,7 @@ void GuiManager::draw(ECS& ecs, GraphicsManager* gm)
 
             ImGui::Text("Scale:\n");
             if(ImGui::DragInt("Size", &sc.scale, 0.5, 0, 100))
-                gm->getBoxCollider(s.name, sc.scale, ecs.Get<RigidBody>(e).min, ecs.Get<RigidBody>(e).max);
+                gm->getBoxCollider(s.name, p, sc.scale, ecs.Get<RigidBody>(e).min, ecs.Get<RigidBody>(e).max);
 
             ImGui::Text("Rotation:\n");
             ImGui::DragFloat("Angle", &rot.angle, 0.5, 0.0, 360.0);
