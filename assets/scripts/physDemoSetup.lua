@@ -5,6 +5,12 @@ else
     print("Failed to load spaceship.png")
 end
 
+if(loadImage("Ball", "sprites\\ball.png")) then
+    print("Successfully loaded ball.png")
+else
+    print("Failed to load ball.png")
+end
+
 -- Creates the spaceship entity with initial parameters. --
 spaceship = createEntity()
 
@@ -29,6 +35,31 @@ getRigidBody(spaceship).force.y = 0.0
 getRigidBody(spaceship).mass = 100.0
 
 getScale(spaceship).scale = 25
+
+-- Ball entity --
+ball = createEntity()
+
+getSprite(ball).name = "Ball"
+
+getPosition(ball).x = -140.0
+getPosition(ball).y = -50.0
+getPosition(ball).z = 1.0
+
+getRigidBody(ball).velocity.x = 0.0
+getRigidBody(ball).velocity.y = 0.0
+
+getRigidBody(ball).acceleration.x = 0
+getRigidBody(ball).acceleration.y = 0
+
+getRigidBody(ball).gravity.x = 0.0
+getRigidBody(ball).gravity.y = 0.0
+
+getRigidBody(ball).force.x = 0.0
+getRigidBody(ball).force.y = 0.0
+
+getRigidBody(ball).mass = 100.0
+
+getScale(ball).scale = 25
 
 -- Loads and attaches the runtime script to the spaceship --
 filepath = "scripts\\physics.lua"

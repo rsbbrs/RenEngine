@@ -64,6 +64,8 @@ void GuiManager::draw(ECS& ecs, GraphicsManager* gm)
         Scale& sc = ecs.Get<Scale>(e);
         Rotation& rot = ecs.Get<Rotation>(e);
 
+        ImGui::PushID(e);
+
         if(ImGui::CollapsingHeader(s.name.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
         {
             ImGui::Text("Position:\n");
@@ -85,6 +87,8 @@ void GuiManager::draw(ECS& ecs, GraphicsManager* gm)
             //Rigid body objects
             rigidBody(e, ecs);
         }
+
+        ImGui::PopID();
     });
 
     ImGui::End();
