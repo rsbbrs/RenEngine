@@ -59,7 +59,7 @@ getRigidBody(ball).force.y = 0.0
 
 getRigidBody(ball).mass = 100.0
 
-getScale(ball).scale = 25
+getScale(ball).scale = 10
 
 -- Loads and attaches the runtime script to the spaceship --
 filepath = "scripts\\physics.lua"
