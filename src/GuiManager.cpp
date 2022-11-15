@@ -70,11 +70,11 @@ void GuiManager::draw(ECS& ecs, GraphicsManager* gm)
         {
             ImGui::Text("Position:\n");
             ImGui::PushItemWidth(75);
-            ImGui::InputFloat("x", &p.x);
+            ImGui::DragFloat("x", &p.x);
             ImGui::SameLine();
-            ImGui::InputFloat("y", &p.y);
+            ImGui::DragFloat("y", &p.y);
             ImGui::SameLine();
-            ImGui::InputFloat("z", &p.z);
+            ImGui::DragFloat("z", &p.z, 0.1, 0, 1);
             ImGui::PopItemWidth();
 
             ImGui::Text("Scale:\n");

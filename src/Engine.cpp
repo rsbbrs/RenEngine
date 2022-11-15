@@ -77,7 +77,7 @@ void Engine::gameLoop(const UpdateCallback& callback)
         // Manager updates of game state.
         scriptManager.update(ECSManager);
         physicsManager.updatePhysics(t1);
-        physicsManager.collision();
+        physicsManager.collision(ECSManager);
         graphicsManager.draw(ECSManager, guiManager);
        
         loops++;

@@ -288,7 +288,8 @@ bool GraphicsManager::loadImage(const std::string& name, const std::string& path
     return true;
 }
 
-// Returns the dimensions of an image.
+// Computes the box collider of a sprite.
+// Doesn't handle rotations.
 void GraphicsManager::getBoxCollider(const std::string& name, const vec3 pos, const int scale, vec2& min, vec2& max)
 {
     vec2 dimensions(pImpl->imageMap[name].width, pImpl->imageMap[name].height);

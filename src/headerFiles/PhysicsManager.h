@@ -16,7 +16,7 @@ namespace RenEngine
             void startup(ECS* manager);
             void shutdown();
 
-            void collision();
+            void collision(ECS& ecs);
             void updatePhysics(const std::chrono::time_point<std::chrono::steady_clock> dt);
     };
 }
