@@ -40,11 +40,10 @@ void PhysicsManager::collision(ECS& ecs)
 
                 if (d1x > 0.0f || d1y > 0.0f)
                     hasCollided = false;
-
-                if (d2x > 0.0f || d2y > 0.0f)
+                else if (d2x > 0.0f || d2y > 0.0f)
                     hasCollided = false;
-
-                hasCollided = true;
+                else 
+                    hasCollided = true;
             }
         });
 
