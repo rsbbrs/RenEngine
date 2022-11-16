@@ -19,10 +19,12 @@ void PhysicsManager::shutdown()
 
 void PhysicsManager::collision(ECS& ecs)
 {
-    bool hasCollided = false;
-
+    // This is doing an O(n^2) comparisons, which isnt' good.
+    // But it works for now.
     ecs.ForEach<RigidBody>([&](EntityID e1)
     {
+        bool hasCollided = false;
+
         RigidBody& rb1 = ecs.Get<RigidBody>(e1);
         Position& p1 = ecs.Get<Position>(e1);
 
@@ -38,20 +40,18 @@ void PhysicsManager::collision(ECS& ecs)
                 float d2x = rb1.min.x - rb2.max.x; //a->min.x - b->max.x;
                 float d2y = rb1.min.y - rb2.max.y; //a->min.y - b->max.y;
 
-                if (d1x > 0.0f || d1y > 0.0f)
-                    hasCollided = false;
-                else if (d2x > 0.0f || d2y > 0.0f)
-                    hasCollided = false;
-                else 
+                if (d1x < 0.0f && d1y < 0.0f && d2x < 0.0f && d2y < 0.0f)
                     hasCollided = true;
             }
         });
 
         if(hasCollided)
         {
-            std::cout << "Collision Detected\n";
+            std::cout << "Collision Detected: " << e1 << "\n";
             return;
         }
+
+        std::cout << std::endl;
     });
 }
 

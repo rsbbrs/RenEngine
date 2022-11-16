@@ -70,11 +70,14 @@ void GuiManager::draw(ECS& ecs, GraphicsManager* gm)
         {
             ImGui::Text("Position:\n");
             ImGui::PushItemWidth(75);
-            ImGui::DragFloat("x", &p.x);
+            if(ImGui::DragFloat("x", &p.x))
+                gm->getBoxCollider(s.name, p, sc.scale, ecs.Get<RigidBody>(e).min, ecs.Get<RigidBody>(e).max);
             ImGui::SameLine();
-            ImGui::DragFloat("y", &p.y);
+            if(ImGui::DragFloat("y", &p.y))
+                gm->getBoxCollider(s.name, p, sc.scale, ecs.Get<RigidBody>(e).min, ecs.Get<RigidBody>(e).max);
             ImGui::SameLine();
-            ImGui::DragFloat("z", &p.z, 0.1, 0, 1);
+            if(ImGui::DragFloat("z", &p.z, 0.1, 0, 1))
+                gm->getBoxCollider(s.name, p, sc.scale, ecs.Get<RigidBody>(e).min, ecs.Get<RigidBody>(e).max);
             ImGui::PopItemWidth();
 
             ImGui::Text("Scale:\n");

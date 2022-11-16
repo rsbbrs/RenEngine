@@ -13,8 +13,11 @@ int main()
     else
         std::cout << "Failed to load physDemoSetup.lua\n";
 
-    RigidBody& rb = physDemo->getComponent<RigidBody>(1);
-    physDemo->getBoxCollider(1, rb.min, rb.max);
+    RigidBody& rb1 = physDemo->getComponent<RigidBody>(1);
+    physDemo->getBoxCollider(1, rb1.min, rb1.max);
+
+    RigidBody& rb2 = physDemo->getComponent<RigidBody>(2);
+    physDemo->getBoxCollider(2, rb2.min, rb2.max);
 
     // Runs the game loop.
     physDemo->gameLoop([&](){});
