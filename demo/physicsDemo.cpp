@@ -1,7 +1,5 @@
 #pragma once
 
-#define DEBUG
-
 #include "Engine.h"
 
 using namespace RenEngine;

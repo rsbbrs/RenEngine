@@ -1,5 +1,6 @@
 #pragma once
 
+#define DEBUG
 #define GLFW_INCLUDE_NONE
 #define SOKOL_IMPL
 #define SOKOL_GLCORE33
