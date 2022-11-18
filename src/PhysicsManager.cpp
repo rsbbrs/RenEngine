@@ -50,8 +50,6 @@ void PhysicsManager::collision(ECS& ecs)
             std::cout << "Collision Detected: " << e1 << "\n";
             return;
         }
-
-        std::cout << std::endl;
     });
 }
 

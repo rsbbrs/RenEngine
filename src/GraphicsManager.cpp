@@ -357,7 +357,9 @@ void GraphicsManager::draw(ECS& ecs, GuiManager& gm)
         sg_draw(0, 4, 1);
     });
 
+    #ifdef DEBUG
     gm.draw(ecs, this);
+    #endif
 
     // 6. End drawing.
     sg_end_pass();

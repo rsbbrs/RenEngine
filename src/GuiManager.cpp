@@ -5,15 +5,33 @@
 #include "GuiManager.h"
 
 #define SOKOL_IMGUI_IMPL
+#define SOKOL_GL_IMPL
 #define SOKOL_IMGUI_NO_SOKOL_APP
 #define SOKOL_GLCORE33
 
 #include "imgui_impl_glfw.h"
+#include "sokol_app.h"
 #include "sokol_gfx.h"
+#include "sokol_glue.h"
 #include "util/sokol_imgui.h"
-#include "sokol_gl.h"
+#include "util/sokol_gl.h"
 
 using namespace RenEngine;
+
+void drawBox(const vec2& min, const vec2& max)
+{
+    sgl_push_matrix();
+    sgl_c3f(0.0, 1.0, 0.0);
+
+    sgl_begin_lines();
+
+    sgl_v3f(0.0, 0.0, 1.0); sgl_v3f(50.0, 50.0, 1.0);
+
+    sgl_end();
+
+    sgl_pop_matrix();
+    sgl_draw();
+}
 
 void rigidBody(EntityID e, ECS& manager)
 {
@@ -28,15 +46,8 @@ void rigidBody(EntityID e, ECS& manager)
     ImGui::Text("Acceleration:\n\tx: %f\t y: %f", rb.acceleration.x, rb.acceleration.y);
     ImGui::Text("Velocity:\n\tx: %f\t y: %f", rb.velocity.x, rb.velocity.y);
     ImGui::Text("Box Collider:\n\tmin: (%.3f, %.3f)\n\tmax (%.3f, %.3f)", rb.min.x, rb.min.y, rb.max.x, rb.max.y);
-}
 
-void drawBox(const vec3& min, const vec3& max)
-{
-    sgl_begin_lines();
-
-    sgl_v2f(min.x, min.y); sgl_v2f(max.x, min.y);
-
-    sgl_end();
+    drawBox(rb.min, rb.max);
 }
 
 void GuiManager::startup(GraphicsManager& manager)
