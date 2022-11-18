@@ -11,6 +11,7 @@
 #include "imgui_impl_glfw.h"
 #include "sokol_gfx.h"
 #include "util/sokol_imgui.h"
+#include "sokol_gl.h"
 
 using namespace RenEngine;
 
@@ -27,6 +28,15 @@ void rigidBody(EntityID e, ECS& manager)
     ImGui::Text("Acceleration:\n\tx: %f\t y: %f", rb.acceleration.x, rb.acceleration.y);
     ImGui::Text("Velocity:\n\tx: %f\t y: %f", rb.velocity.x, rb.velocity.y);
     ImGui::Text("Box Collider:\n\tmin: (%.3f, %.3f)\n\tmax (%.3f, %.3f)", rb.min.x, rb.min.y, rb.max.x, rb.max.y);
+}
+
+void drawBox(const vec3& min, const vec3& max)
+{
+    sgl_begin_lines();
+
+    sgl_v2f(min.x, min.y); sgl_v2f(max.x, min.y);
+
+    sgl_end();
 }
 
 void GuiManager::startup(GraphicsManager& manager)
