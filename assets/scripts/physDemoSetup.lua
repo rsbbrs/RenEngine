@@ -33,6 +33,7 @@ getRigidBody(spaceship).force.x = 0.0
 getRigidBody(spaceship).force.y = 0.0
 
 getRigidBody(spaceship).mass = 100.0
+getRigidBody(spaceship).static = true
 
 getScale(spaceship).scale = 25
 

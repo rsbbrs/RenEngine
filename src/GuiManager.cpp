@@ -47,7 +47,7 @@ void rigidBody(EntityID e, ECS& manager)
     ImGui::Text("Velocity:\n\tx: %f\t y: %f", rb.velocity.x, rb.velocity.y);
     ImGui::Text("Box Collider:\n\tmin: (%.3f, %.3f)\n\tmax (%.3f, %.3f)", rb.min.x, rb.min.y, rb.max.x, rb.max.y);
 
-    drawBox(rb.min, rb.max);
+    //drawBox(rb.min, rb.max);
 }
 
 void GuiManager::startup(GraphicsManager& manager)

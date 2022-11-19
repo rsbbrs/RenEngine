@@ -5,13 +5,13 @@ end
 
 -- Initiates physics simulation --
 if(keyPressed(input_code.enter)) then
-    getRigidBody(ball).velocity.x = 100.0
+    getRigidBody(ball).velocity.x = 150.0
     getRigidBody(ball).velocity.y = 100.0
 
     getRigidBody(ball).gravity.x = 0
     getRigidBody(ball).gravity.y = -9.8
 
-    getRigidBody(ball).force.x = 100.0
+    getRigidBody(ball).force.x = 200.0
     getRigidBody(ball).force.y = 20.0
 end
 
