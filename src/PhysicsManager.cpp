@@ -20,8 +20,8 @@ bool coll_det(const RigidBody& rb1, const RigidBody& rb2)
     return false;
 }
 
-void coll_resolve(RigidBody& rb1, RigidBody& rb2, Position& p1, Position& p2, const float coe, 
-                  std::string name, int scale, GraphicsManager* gm)
+void coll_resolve(RigidBody& rb1, RigidBody& rb2, Position& p1, Position& p2, 
+                  std::string name1, std::string name2, int scale1, int scale2, GraphicsManager* gm)
 {
     rb1.force.x *= -1;
     rb2.force.x *= -1;
@@ -33,16 +33,17 @@ void coll_resolve(RigidBody& rb1, RigidBody& rb2, Position& p1, Position& p2, co
     {
         if(!rb1.static_obj)
         {
-            p1.x += rb1.velocity.x;
-            p1.y += rb1.velocity.y;
+            p1.x += rb1.velocity.x + 1;
+            p1.y += rb1.velocity.y + 1;
+            gm->getBoxCollider(name1, p1, scale1, rb1.min, rb1.max);
         }
         else
         {
-            p2.x += rb2.velocity.x;
-            p2.y += rb2.velocity.y;
+            p2.x += rb2.velocity.x + 1;
+            p2.y += rb2.velocity.y + 1;
+            gm->getBoxCollider(name2, p2, scale2, rb2.min, rb2.max);
         }
         
-        gm->getBoxCollider(name, p1, scale, rb1.min, rb1.max);
     } 
     while (coll_det(rb1, rb2));
 }
@@ -70,8 +71,8 @@ void PhysicsManager::collision(ECS& ecs)
 
         RigidBody& rb1 = ecs.Get<RigidBody>(e1);
         Position& p1 = ecs.Get<Position>(e1);
-        std::string name = ecs.Get<Sprite>(e1).name;
-        int scale = ecs.Get<Scale>(e1).scale;
+        std::string name1 = ecs.Get<Sprite>(e1).name;
+        int scale1 = ecs.Get<Scale>(e1).scale;
 
         ecs.ForEach<RigidBody>([&](EntityID e2)
         {
@@ -79,12 +80,14 @@ void PhysicsManager::collision(ECS& ecs)
             {
                 RigidBody& rb2 = ecs.Get<RigidBody>(e2);
                 Position& p2 = ecs.Get<Position>(e2);
+                std::string name2 = ecs.Get<Sprite>(e1).name;
+                int scale2 = ecs.Get<Scale>(e1).scale;
 
                 hasCollided = coll_det(rb1, rb2);
 
                 if(hasCollided)
                 {
-                    coll_resolve(rb1, rb2, p1, p2, 0.0f, name, scale, gm);
+                    coll_resolve(rb1, rb2, p1, p2, name1, name2, scale1, scale2, gm);
                     return;
                 }
             }
