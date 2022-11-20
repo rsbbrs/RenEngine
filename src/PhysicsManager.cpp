@@ -23,17 +23,36 @@ bool coll_det(const RigidBody& rb1, const RigidBody& rb2)
 void coll_resolve(RigidBody& rb1, RigidBody& rb2, Position& p1, Position& p2, 
                   std::string name1, std::string name2, int scale1, int scale2, GraphicsManager* gm)
 {
+    // Simple rebounding calculation.
+    // Will need to be more detailed in order to really
+    // mimic a real physics body.
     rb1.force.x *= -1;
     rb2.force.x *= -1;
     rb1.velocity *= -1;
     rb2.velocity *= -1;
 
+    Position current = p1;
+
     // Steps back the calculation and moves the objects out of one another.
+    // Currently, it's just attempting to move the objects away from one
+    // another by 1% of the inverted velocity. This way, the objects don't
+    // travel too far out.
     do
     {
-        p1.x += rb1.velocity.x + 1;
-        p1.y += rb1.velocity.y + 1;
-        gm->getBoxCollider(name1, p1, scale1, rb1.min, rb1.max);
+        if(!rb1.static_obj)
+        {
+            p1.x += rb1.velocity.x * 0.01f;
+            p1.y += rb1.velocity.y * 0.01f;
+            gm->getBoxCollider(name1, p1, scale1, rb1.min, rb1.max);
+        }
+
+        if(!rb2.static_obj)
+        {
+            p2.x += rb2.velocity.x * 0.01f;
+            p2.y += rb2.velocity.y * 0.01f;
+            gm->getBoxCollider(name2, p2, scale2, rb2.min, rb2.max);
+        }
+        
     } 
     while (coll_det(rb1, rb2));
 }
