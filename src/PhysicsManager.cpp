@@ -31,19 +31,9 @@ void coll_resolve(RigidBody& rb1, RigidBody& rb2, Position& p1, Position& p2,
     // Steps back the calculation and moves the objects out of one another.
     do
     {
-        if(!rb1.static_obj)
-        {
-            p1.x += rb1.velocity.x + 1;
-            p1.y += rb1.velocity.y + 1;
-            gm->getBoxCollider(name1, p1, scale1, rb1.min, rb1.max);
-        }
-        else
-        {
-            p2.x += rb2.velocity.x + 1;
-            p2.y += rb2.velocity.y + 1;
-            gm->getBoxCollider(name2, p2, scale2, rb2.min, rb2.max);
-        }
-        
+        p1.x += rb1.velocity.x + 1;
+        p1.y += rb1.velocity.y + 1;
+        gm->getBoxCollider(name1, p1, scale1, rb1.min, rb1.max);
     } 
     while (coll_det(rb1, rb2));
 }
@@ -61,27 +51,27 @@ void PhysicsManager::shutdown()
     gm = nullptr;
 }
 
-void PhysicsManager::collision(ECS& ecs)
+void PhysicsManager::collision()
 {
     // This is doing an O(n^2) comparisons, which isnt' good.
     // But it works for now.
-    ecs.ForEach<RigidBody>([&](EntityID e1)
+    ecs->ForEach<RigidBody>([&](EntityID e1)
     {
         bool hasCollided = false;
 
-        RigidBody& rb1 = ecs.Get<RigidBody>(e1);
-        Position& p1 = ecs.Get<Position>(e1);
-        std::string name1 = ecs.Get<Sprite>(e1).name;
-        int scale1 = ecs.Get<Scale>(e1).scale;
+        RigidBody& rb1 = ecs->Get<RigidBody>(e1);
+        Position& p1 = ecs->Get<Position>(e1);
+        std::string name1 = ecs->Get<Sprite>(e1).name;
+        int scale1 = ecs->Get<Scale>(e1).scale;
 
-        ecs.ForEach<RigidBody>([&](EntityID e2)
+        ecs->ForEach<RigidBody>([&](EntityID e2)
         {
             if(e1 != e2)
             {
-                RigidBody& rb2 = ecs.Get<RigidBody>(e2);
-                Position& p2 = ecs.Get<Position>(e2);
-                std::string name2 = ecs.Get<Sprite>(e1).name;
-                int scale2 = ecs.Get<Scale>(e1).scale;
+                RigidBody& rb2 = ecs->Get<RigidBody>(e2);
+                Position& p2 = ecs->Get<Position>(e2);
+                std::string name2 = ecs->Get<Sprite>(e1).name;
+                int scale2 = ecs->Get<Scale>(e1).scale;
 
                 hasCollided = coll_det(rb1, rb2);
 

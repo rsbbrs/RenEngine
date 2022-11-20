@@ -46,7 +46,7 @@ if(keyPressed(input_code.left_ctrl)) then
     getRigidBody(ball1).force.y = 0.0
 
     -- Ball 2 --
-    getPosition(ball2).x = -140.0
+    getPosition(ball2).x = 140.0
     getPosition(ball2).y = -50.0
     getPosition(ball2).z = 1.0
 

@@ -8,7 +8,7 @@ end
 -- Ball 1 --
 ball1 = createEntity()
 
-getSprite(ball1).name = "Ball 1"
+getSprite(ball1).name = "Ball"
 
 getPosition(ball1).x = -140.0
 getPosition(ball1).y = -50.0
@@ -28,12 +28,14 @@ getRigidBody(ball1).force.y = 0.0
 
 getRigidBody(ball1).mass = 10.0
 
+getRigidBody(ball1).static = false
+
 getScale(ball1).scale = 10
 
 -- Ball 2 --
 ball2 = createEntity()
 
-getSprite(ball2).name = "Ball 2"
+getSprite(ball2).name = "Ball"
 
 getPosition(ball2).x = 140.0
 getPosition(ball2).y = -50.0
@@ -52,6 +54,8 @@ getRigidBody(ball2).force.x = 0.0
 getRigidBody(ball2).force.y = 0.0
 
 getRigidBody(ball2).mass = 10.0
+
+getRigidBody(ball1).static = false
 
 getScale(ball2).scale = 10
 

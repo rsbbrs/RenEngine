@@ -87,7 +87,9 @@ void GuiManager::draw(ECS& ecs, GraphicsManager* gm)
 
         ImGui::PushID(e);
 
-        if(ImGui::CollapsingHeader(s.name.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
+        std::string h_name = s.name + " (" + std::to_string(e) + ")";
+
+        if(ImGui::CollapsingHeader(h_name.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
         {
             ImGui::Text("Position:\n");
             ImGui::PushItemWidth(75);
