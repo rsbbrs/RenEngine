@@ -6,7 +6,7 @@ using namespace RenEngine;
 
 int main()
 {
-    Engine* physDemo = new Engine("Physics Demo");
+    Engine* physDemo = new Engine("Physics Demo", 1600, 900, false);
 
     if(physDemo->loadScript("Setup", physDemo->filePath("scripts\\physDemoSetup.lua"), true))
         std::cout << "Successfully loaded physDemoSetup.lua\n";
