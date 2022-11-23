@@ -54,11 +54,11 @@ void coll_resolve(RigidBody& rb1, RigidBody& rb2, Position& p1, Position& p2,
     } 
     while (coll_det(rb1, rb2));
 
-    auto j1 = (-(1 + coe) * glm::dot(rb1.velocity - rb2.velocity, tempVel1)) / ((1.0f / rb1.mass) + (1.0f / rb2.mass));
-    auto j2 = (-(1 + coe) * glm::dot(rb2.velocity - rb1.velocity, tempVel2)) / ((1.0f / rb2.mass) + (1.0f / rb1.mass));
+    vec2 j1 = (-(1 + coe) * (rb1.velocity - rb2.velocity)) / ((1.0f / rb1.mass) + (1.0f / rb2.mass));
+    vec2 j2 = (-(1 + coe) * (rb2.velocity - rb1.velocity)) / ((1.0f / rb2.mass) + (1.0f / rb1.mass));
 
-    rb1.force = vec2(j1, j1);
-    rb2.force = vec2(j2, j2);
+    rb1.velocity += 1.0f / rb1.mass * j1;
+    rb2.velocity += 1.0f / rb2.mass * j2;
 }
 
 void PhysicsManager::startup(ECS* ecs, GraphicsManager* gm)
