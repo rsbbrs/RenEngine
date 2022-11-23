@@ -21,15 +21,13 @@ bool coll_det(const RigidBody& rb1, const RigidBody& rb2)
 }
 
 void coll_resolve(RigidBody& rb1, RigidBody& rb2, Position& p1, Position& p2, 
-                  std::string name1, std::string name2, int scale1, int scale2, GraphicsManager* gm)
+                  std::string name1, std::string name2, int scale1, int scale2, const float coe, GraphicsManager* gm)
 {
     // Simple rebounding calculation.
     // Will need to be more detailed in order to really
     // mimic a real physics body.
-    rb1.force.x *= -1;
-    rb2.force.x *= -1;
-    rb1.velocity *= -1;
-    rb2.velocity *= -1;
+    auto tempVel1 = vec2(-1 * rb1.velocity.x, -1 * rb1.velocity.y);
+    auto tempVel2 = vec2(-1 * rb2.velocity.x, -1 * rb2.velocity.y);
 
     Position current = p1;
 
@@ -41,20 +39,26 @@ void coll_resolve(RigidBody& rb1, RigidBody& rb2, Position& p1, Position& p2,
     {
         if(!rb1.static_obj)
         {
-            p1.x += rb1.velocity.x * 0.01f;
-            p1.y += rb1.velocity.y * 0.01f;
+            p1.x += tempVel1.x * 0.01f;
+            p1.y += tempVel1.y * 0.01f;
             gm->getBoxCollider(name1, p1, scale1, rb1.min, rb1.max);
         }
 
         if(!rb2.static_obj)
         {
-            p2.x += rb2.velocity.x * 0.01f;
-            p2.y += rb2.velocity.y * 0.01f;
+            p2.x += tempVel2.x * 0.01f;
+            p2.y += tempVel2.y * 0.01f;
             gm->getBoxCollider(name2, p2, scale2, rb2.min, rb2.max);
         }
         
     } 
     while (coll_det(rb1, rb2));
+
+    auto j1 = (-(1 + coe) * glm::dot(rb1.velocity - rb2.velocity, tempVel1)) / ((1.0f / rb1.mass) + (1.0f / rb2.mass));
+    auto j2 = (-(1 + coe) * glm::dot(rb2.velocity - rb1.velocity, tempVel2)) / ((1.0f / rb2.mass) + (1.0f / rb1.mass));
+
+    rb1.force = vec2(j1, j1);
+    rb2.force = vec2(j2, j2);
 }
 
 void PhysicsManager::startup(ECS* ecs, GraphicsManager* gm)
@@ -96,7 +100,7 @@ void PhysicsManager::collision()
 
                 if(hasCollided)
                 {
-                    coll_resolve(rb1, rb2, p1, p2, name1, name2, scale1, scale2, gm);
+                    coll_resolve(rb1, rb2, p1, p2, name1, name2, scale1, scale2, 1.0f, gm);
                     return;
                 }
             }
