@@ -59,6 +59,8 @@ void coll_resolve(RigidBody& rb1, RigidBody& rb2, Position& p1, Position& p2,
 
     rb1.velocity += 1.0f / rb1.mass * j1;
     rb2.velocity += 1.0f / rb2.mass * j2;
+    rb1.force.x *= -1;
+    rb2.force.x *= -1;
 }
 
 void PhysicsManager::startup(ECS* ecs, GraphicsManager* gm)

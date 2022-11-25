@@ -12,7 +12,7 @@ if(keyPressed(input_code.enter)) then
     getRigidBody(ball1).gravity.x = 0
     getRigidBody(ball1).gravity.y = -9.8
 
-    getRigidBody(ball1).force.x = 200.0
+    getRigidBody(ball1).force.x = 0.0
     getRigidBody(ball1).force.y = 20.0
 
     -- Ball 2 --
