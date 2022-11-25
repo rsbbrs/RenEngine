@@ -178,7 +178,8 @@ void ScriptManager::setComponentStructs()
         "acceleration", &RigidBody::acceleration,
         "gravity", &RigidBody::gravity,
         "force", &RigidBody::force,
-        "mass", &RigidBody::mass
+        "mass", &RigidBody::mass,
+        "static", &RigidBody::static_obj
     );
 }
 

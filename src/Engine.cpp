@@ -27,7 +27,7 @@ void Engine::startup()
     soundManager.startup();
     ECSManager.startup();
     guiManager.startup(graphicsManager);
-    physicsManager.startup(&ECSManager);
+    physicsManager.startup(&ECSManager, &graphicsManager);
     scriptManager.startup(graphicsManager, 
                              inputManager, 
                              resourceManager, 
@@ -175,7 +175,10 @@ double Engine::radians(const Rotation degrees)
     return radians(degrees.angle);
 }
 
-vec2 Engine::getImageDimensions(const std::string& name)
+void Engine::getBoxCollider(const EntityID e, vec2& min, vec2& max)
 {
-    return graphicsManager.getImageDimensions(name);
+    std::string name = ECSManager.Get<Sprite>(e).name;
+    int scale = ECSManager.Get<Scale>(e).scale;
+    vec3 pos = ECSManager.Get<Position>(e);
+    graphicsManager.getBoxCollider(name, pos, scale, min, max);
 }

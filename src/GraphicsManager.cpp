@@ -1,5 +1,6 @@
 #pragma once
 
+#define DEBUG
 #define GLFW_INCLUDE_NONE
 #define SOKOL_IMPL
 #define SOKOL_GLCORE33
@@ -7,6 +8,7 @@
 
 #include <unordered_map>
 #include <complex>
+#include <functional>
 
 #include "GLFW/glfw3.h"
 #include "sokol_gfx.h"
@@ -287,10 +289,25 @@ bool GraphicsManager::loadImage(const std::string& name, const std::string& path
     return true;
 }
 
-// Returns the dimensions of an image.
-vec2 GraphicsManager::getImageDimensions(const std::string& name)
+// Computes the box collider of a sprite.
+// Doesn't handle rotations.
+void GraphicsManager::getBoxCollider(const std::string& name, const vec3 pos, const int scale, vec2& min, vec2& max)
 {
-    return vec2(pImpl->imageMap[name].width, pImpl->imageMap[name].height);
+    vec2 dimensions(pImpl->imageMap[name].width, pImpl->imageMap[name].height);
+    vec2 truScale;
+
+    // First, compute the true scale values.
+    if(dimensions.x < dimensions.y)
+        truScale = vec2(scale, scale) * vec2(std::real(dimensions.x)/dimensions.y, 1.0);
+    else if(dimensions.x > dimensions.y)
+        truScale = vec2(scale, scale) * vec2(1.0, std::real(dimensions.y)/dimensions.x);
+    else
+        truScale = vec2(scale, scale);
+
+    // Compute the min/max corners of bounding box as world
+    // coordinates based on offsets from the center position.
+    min = vec2(pos.x - truScale.x, pos.y - truScale.y);
+    max = vec2(pos.x + truScale.x, pos.y + truScale.y);
 }
 
 // Destroys a specific image in the image map.
@@ -341,8 +358,9 @@ void GraphicsManager::draw(ECS& ecs, GuiManager& gm)
         sg_draw(0, 4, 1);
     });
 
-
-    gm.draw();
+    #ifdef DEBUG
+    gm.draw(ecs, this);
+    #endif
 
     // 6. End drawing.
     sg_end_pass();

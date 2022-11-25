@@ -10,10 +10,11 @@ namespace RenEngine
     {
         private:
             std::chrono::time_point<std::chrono::steady_clock> start;
-            ECS* manager;
+            ECS* ecs;
+            GraphicsManager* gm;
 
         public: 
-            void startup(ECS* manager);
+            void startup(ECS* ecs, GraphicsManager* gm);
             void shutdown();
 
             void collision();
