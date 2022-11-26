@@ -234,6 +234,6 @@ namespace RenEngine
              * 
              * @return A reference to the lua environment variable.
              */
-            Lua& getLuaEnv();
+            ScriptManager::Lua& getLuaEnv();
     };
 }

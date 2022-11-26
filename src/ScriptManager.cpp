@@ -64,7 +64,7 @@ void ScriptManager::startup(GraphicsManager& graphicsManager,
     
 
     // Lua state in the engine.
-    lua.set_function("getState", [&]() { return lua; } );
+    lua.set_function("getState", [&]() { return true; } );
 
     // Quit function.
     lua.set_function("quit", [&]() { quit(); } );

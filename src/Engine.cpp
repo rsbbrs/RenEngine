@@ -183,7 +183,7 @@ void Engine::getBoxCollider(const EntityID e, vec2& min, vec2& max)
     graphicsManager.getBoxCollider(name, pos, scale, min, max);
 }
 
-Lua& Engine::getLuaEnv()
+ScriptManager::Lua& Engine::getLuaEnv()
 {
     return scriptManager.lua;
 }
