@@ -34,3 +34,25 @@ createPlayer()
 -----------------------------
 -----------------------------
 
+-----------------------------
+-----------------------------
+-- Spawn Fireball --
+
+-- this table handles resource management
+local fireBall_ID = {}
+function spawnFireball()
+    
+end
+-----------------------------
+-----------------------------
+
+-----------------------------
+-----------------------------
+-- Spawn Pipe --
+local pipe_ID = {}
+function spawnPipe(entityID)
+    --table.insert(pipe_ID, 0, entityID)
+
+end
+-----------------------------
+-----------------------------

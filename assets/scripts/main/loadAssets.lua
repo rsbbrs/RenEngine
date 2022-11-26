@@ -76,6 +76,7 @@ Sound_loaded = Sound_loaded + 1
 print(Sound_loaded .."/" .. expected_Sounds .. " sound assets loaded")
 loadSound("Ouch", "sounds/Ouch_EditedUsingAudacity.mp3")
 Sound_loaded = Sound_loaded + 1
+print(Sound_loaded .."/" .. expected_Sounds .. " sound assets loaded")
 loadSound("Boss_Theme", "sounds/BossBattle4-ByEliteFerrex.mp3")
 setVolume("Boss_Theme", 0.65)
 Sound_loaded = Sound_loaded + 1

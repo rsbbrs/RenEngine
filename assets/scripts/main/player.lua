@@ -1,6 +1,6 @@
 
 -- Initiates physics simulation --
-if( (keyPressed(input_code.enter) or keyPressed(input_code.f)) and game_state == PAUSED) then
+if( (keyPressed(input_code.enter) or keyPressed(input_code.r)) and game_state == PAUSED) then
     getRigidBody(player_ID).velocity.x = 0.0
     getRigidBody(player_ID).velocity.y = 0.0
 

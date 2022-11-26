@@ -49,7 +49,6 @@ void ScriptManager::startup(GraphicsManager& graphicsManager,
     lua.set_function("setVolume", [&](const std::string name, float value) {soundManager.setVolume(name, value); });
     lua.set_function("stopSound", [&](const std::string name) {soundManager.stopSound(name); });
 
-
     // ECS manager functions.
     lua.set_function("createEntity", [&]() { return ecsManager.Create(); } );
     lua.set_function("destroyEntity", [&](const EntityID e) { ecsManager.Destroy(e); } );
@@ -62,7 +61,6 @@ void ScriptManager::startup(GraphicsManager& graphicsManager,
     lua.set_function("getHealth", [&](const EntityID e) -> Health& { return ecsManager.Get<Health>(e); } );
     lua.set_function("getScript", [&](const EntityID e) -> Script& { return ecsManager.Get<Script>(e); } );
     lua.set_function("getSprite", [&](const EntityID e) -> Sprite& { return ecsManager.Get<Sprite>(e); } );
-
     
 
     // Lua state in the engine.
