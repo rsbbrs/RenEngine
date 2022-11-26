@@ -32,8 +32,8 @@ void PhysicsManager::coll_resolve(EntityID e1, EntityID e2, Position& p1, Positi
     // Simple rebounding calculation.
     // Will need to be more detailed in order to really
     // mimic a real physics body.
-    auto tempVel1 = vec2(-1 * rb1.velocity.x, -1 * rb1.velocity.y);
-    auto tempVel2 = vec2(-1 * rb2.velocity.x, -1 * rb2.velocity.y);
+    vec2 tempVel1 = vec2(-1 * rb1.velocity.x, -1 * rb1.velocity.y);
+    vec2 tempVel2 = vec2(-1 * rb2.velocity.x, -1 * rb2.velocity.y);
 
     Position current = p1;
 
@@ -45,15 +45,15 @@ void PhysicsManager::coll_resolve(EntityID e1, EntityID e2, Position& p1, Positi
     {
         if(!rb1.static_obj)
         {
-            p1.x += tempVel1.x * 0.5f;
-            p1.y += tempVel1.y * 0.01f;
+            p1.x += tempVel1.x * 0.01f;
+            // p1.y += tempVel1.y * 0.01f;
             gm->getBoxCollider(name1, p1, scale1, rb1.min, rb1.max);
         }
 
         if(!rb2.static_obj)
         {
-            p2.x += tempVel2.x * 0.5f;
-            p2.y += tempVel2.y * 0.01f;
+            p2.x += tempVel2.x * 0.01f;
+            // p2.y += tempVel2.y * 0.01f;
             gm->getBoxCollider(name2, p2, scale2, rb2.min, rb2.max);
         }
         
@@ -116,6 +116,7 @@ void PhysicsManager::collision()
 
                 if(hasCollided)
                 {
+                    printf("Potatoooo");
                     coll_resolve(e1, e2, p1, p2, name1, name2, scale1, scale2, 1.0f, gm);
                     return;
                 }
