@@ -54,6 +54,7 @@ namespace RenEngine
         vec2 gravity;
         vec2 force;
         float mass;
+        bool trueRB = true;
         bool static_obj = false;
 
         // Min/max dimensions of the collider.

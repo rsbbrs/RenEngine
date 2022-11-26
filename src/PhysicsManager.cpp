@@ -91,38 +91,34 @@ void PhysicsManager::collision()
     // But it works for now.
     ecs->ForEach<RigidBody>([&](EntityID e1)
     {
-        bool hasCollided = false;
-
-        RigidBody& rb1 = ecs->Get<RigidBody>(e1);
-        Position& p1 = ecs->Get<Position>(e1);
-        std::string name1 = ecs->Get<Sprite>(e1).name;
-        int scale1 = ecs->Get<Scale>(e1).scale;
-
-        ecs->ForEach<RigidBody>([&](EntityID e2)
+        if(ecs->Get<RigidBody>(e1).trueRB)
         {
-            if(e1 != e2)
+            bool hasCollided = false;
+
+            RigidBody& rb1 = ecs->Get<RigidBody>(e1);
+            Position& p1 = ecs->Get<Position>(e1);
+            std::string name1 = ecs->Get<Sprite>(e1).name;
+            int scale1 = ecs->Get<Scale>(e1).scale;
+
+            ecs->ForEach<RigidBody>([&](EntityID e2)
             {
                 RigidBody& rb2 = ecs->Get<RigidBody>(e2);
-                Position& p2 = ecs->Get<Position>(e2);
-                std::string name2 = ecs->Get<Sprite>(e1).name;
-                int scale2 = ecs->Get<Scale>(e1).scale;
-
-                hasCollided = coll_det(e1, e2);
-
-                if(hasCollided)
+                if(e1 != e2 && rb2.trueRB)
                 {
-                    coll_resolve(e1, e2, p1, p2, name1, name2, scale1, scale2, 1.0f, gm);
-                    return;
-                }
-            }
-        });
+                    Position& p2 = ecs->Get<Position>(e2);
+                    std::string name2 = ecs->Get<Sprite>(e1).name;
+                    int scale2 = ecs->Get<Scale>(e1).scale;
 
-        
-/*         if(hasCollided)
-        {
-            std::cout << "Collision Detected: " << e1 << "\n";
-            return;
-        } */
+                    hasCollided = coll_det(e1, e2);
+
+                    if(hasCollided)
+                    {
+                        coll_resolve(e1, e2, p1, p2, name1, name2, scale1, scale2, 1.0f, gm);
+                        return;
+                    }
+                }
+            });
+        }
     });
 }
 
