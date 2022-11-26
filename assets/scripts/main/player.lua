@@ -7,7 +7,7 @@ if( (keyPressed(input_code.enter) or keyPressed(input_code.r)) and game_state ==
     getRigidBody(player_ID).gravity.x = 0
     getRigidBody(player_ID).gravity.y = -9.81
 
-    getRigidBody(player_ID).force.x = 0.0
+    getRigidBody(player_ID).force.x = 5.0
     getRigidBody(player_ID).force.y = 22.0
 
     player_Input.hop = false
@@ -48,12 +48,21 @@ if (game_state == RUNNING) then
         player_Input.shoot = false
     end
 
-    -- Ceiling --
+    -- Ceiling and Repositioning --
     if (getPosition(player_ID).y > 100) then
         getPosition(player_ID).y = 100
 
         -- Prevents player from getting "glued"
         getRigidBody(player_ID).velocity.y = 0
+    end
+
+    if (getPosition(player_ID).x < player_Master.posX) then
+        getRigidBody(player_ID).gravity.x = 1.0
+    end
+    
+    if (getPosition(player_ID).x > player_Master.posX) then
+        getPosition(player_ID).x = player_Master.posX
+        getRigidBody(player_ID).gravity.x = 0.0
     end
     
     -----------------------------

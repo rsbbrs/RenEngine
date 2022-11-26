@@ -39,7 +39,7 @@ createPlayer()
 -- Spawn Fireball --
 
 -- this table handles resource management
-local fireBall_ID = {}
+fireBall_ID = {}
 function spawnFireball()
     
 end
@@ -49,10 +49,45 @@ end
 -----------------------------
 -----------------------------
 -- Spawn Pipe --
-local pipe_ID = {}
-function spawnPipe(entityID)
-    --table.insert(pipe_ID, 0, entityID)
+pipe_ID = {}
+function spawnPipe(x, y)
+    pipe = createEntity()
+
+
+    table.insert(pipe_ID, pipe)
+    print("Pipe table size: " .. #pipe_ID)
+    for i = 1, #pipe_ID, 1 do
+        print("Pipe id: " .. pipe_ID[i])
+    end
+
+    getSprite(pipe).name = "Pipe"
+
+    getPosition(pipe).x = x
+    getPosition(pipe).y = y
+    getPosition(pipe).z = 1.0
+
+    getRigidBody(pipe).velocity.x = -50.0
+    getRigidBody(pipe).velocity.y = 0.0
+
+    getRigidBody(pipe).acceleration.x = 0.0
+    getRigidBody(pipe).acceleration.y = 0.0
+
+    getRigidBody(pipe).gravity.x = 0.0
+    getRigidBody(pipe).gravity.y = 0.0
+
+    getRigidBody(pipe).force.x = 0.0
+    getRigidBody(pipe).force.y = 0.0
+
+    getRigidBody(pipe).mass = 1000.0
+
+    getRigidBody(pipe).static = true
+
+    getScale(pipe).scale = 50
 
 end
+
+
+spawnPipe(100.0, -50.0)
+
 -----------------------------
 -----------------------------
