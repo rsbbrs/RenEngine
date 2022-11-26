@@ -25,15 +25,16 @@ player_Master = {
     hopStrength = 80,
     mass = 5.0,
     damage = 10,
-    posX = 0,
+    posX = -75,
     posY = 10,
-    rotate_dir = 1
+    rotate_dir = 1,
+    gravity_X = 3.0
 }
 
-function debug()
-    debug_counter = debug_counter + 1
-    print("Game master has been bothered: " .. debug_counter .. " times")
-end
+pipe_Master = {
+    spawnTrigger_X = 50,
+    hasSpawned = false,
+}
 
 -- Useful for resetting game
 function createPlayer()
@@ -56,14 +57,14 @@ function createPlayer()
     getRigidBody(player_ID).velocity.y = 0.0
     getRigidBody(player_ID).acceleration.x = 0
     getRigidBody(player_ID).acceleration.y = 0
-    getRigidBody(player_ID).gravity.x = 2.0
+    getRigidBody(player_ID).gravity.x = 0.0
     getRigidBody(player_ID).gravity.y = 0.0
     getRigidBody(player_ID).force.x = 0.0
     getRigidBody(player_ID).force.y = 0.0
     getRotation(player_ID).angle = 180
     getRigidBody(player_ID).mass = player_Master.mass
     getRigidBody(player_ID).static = false
-    getScale(player_ID).scale = 10
+    getScale(player_ID).scale = 5
 
     getRigidBody(player_ID).min.x = 0.0
     getRigidBody(player_ID).min.y = 0.0

@@ -59,14 +59,13 @@ if (game_state == RUNNING) then
     end
 
     if (getRigidBody(player_ID).force.x < 0) then        
-        getRigidBody(player_ID).gravity.x = 2
+        getRigidBody(player_ID).gravity.x = player_Master.gravity_X
         getRigidBody(player_ID).force.x = getRigidBody(player_ID).force.x * -1
     end
     
     if (getPosition(player_ID).x > player_Master.posX) then
         getPosition(player_ID).x = player_Master.posX
         getRigidBody(player_ID).velocity.x = 0.0
-        getRigidBody(player_ID).gravity.x = 0.0
     end
     -----------------------------
     -----------------------------

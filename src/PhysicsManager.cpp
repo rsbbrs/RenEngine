@@ -111,7 +111,6 @@ void PhysicsManager::collision()
 
                 if(hasCollided)
                 {
-                    printf("Potatoooo");
                     coll_resolve(e1, e2, p1, p2, name1, name2, scale1, scale2, 1.0f, gm);
                     return;
                 }
