@@ -105,6 +105,7 @@ void ScriptManager::setInputCodes()
         {"a", input_code::a},
         {"s", input_code::s},
         {"d", input_code::d},
+        {"f", input_code::f},
         {"right", input_code::right},
         {"left", input_code::left},
         {"up", input_code::up},

@@ -78,3 +78,19 @@ print(Sound_loaded .."/" .. expected_Sounds .. " sound assets loaded")
 print("----------------------------------------")
 -----------------------------
 -----------------------------
+
+-----------------------------
+-----------------------------
+-- Create GameMaster Object --
+GameMaster = createEntity()
+gm_filepath = "scripts/main/GameMaster.lua"
+if (loadScript("GameMaster", gm_filepath, false)) then
+    getScript(GameMaster).name = "GameMaster"
+    getScript(GameMaster).path = filePath(gm_filepath)
+    print("GameMaster instantiated")
+else
+    print("Failed to instantiate GameMaster")
+end
+
+-----------------------------
+-----------------------------
