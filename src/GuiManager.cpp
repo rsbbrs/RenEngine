@@ -85,36 +85,39 @@ void GuiManager::draw(ECS& ecs, GraphicsManager* gm)
         Scale& sc = ecs.Get<Scale>(e);
         Rotation& rot = ecs.Get<Rotation>(e);
 
-        ImGui::PushID(e);
-
-        std::string h_name = s.name + " (" + std::to_string(e) + ")";
-
-        if(ImGui::CollapsingHeader(h_name.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
+        if(s.rigidBody)
         {
-            ImGui::Text("Position:\n");
-            ImGui::PushItemWidth(75);
-            if(ImGui::DragFloat("x", &p.x))
-                gm->getBoxCollider(s.name, p, sc.scale, ecs.Get<RigidBody>(e).min, ecs.Get<RigidBody>(e).max);
-            ImGui::SameLine();
-            if(ImGui::DragFloat("y", &p.y))
-                gm->getBoxCollider(s.name, p, sc.scale, ecs.Get<RigidBody>(e).min, ecs.Get<RigidBody>(e).max);
-            ImGui::SameLine();
-            if(ImGui::DragFloat("z", &p.z, 0.1, 0, 1))
-                gm->getBoxCollider(s.name, p, sc.scale, ecs.Get<RigidBody>(e).min, ecs.Get<RigidBody>(e).max);
-            ImGui::PopItemWidth();
+            ImGui::PushID(e);
 
-            ImGui::Text("Scale:\n");
-            if(ImGui::DragInt("Size", &sc.scale, 0.5, 0, 100))
-                gm->getBoxCollider(s.name, p, sc.scale, ecs.Get<RigidBody>(e).min, ecs.Get<RigidBody>(e).max);
+            std::string h_name = s.name + " (" + std::to_string(e) + ")";
 
-            ImGui::Text("Rotation:\n");
-            ImGui::DragFloat("Angle", &rot.angle, 0.5, 0.0, 360.0);
+            if(ImGui::CollapsingHeader(h_name.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
+            {
+                ImGui::Text("Position:\n");
+                ImGui::PushItemWidth(75);
+                if(ImGui::DragFloat("x", &p.x))
+                    gm->getBoxCollider(s.name, p, sc.scale, ecs.Get<RigidBody>(e).min, ecs.Get<RigidBody>(e).max);
+                ImGui::SameLine();
+                if(ImGui::DragFloat("y", &p.y))
+                    gm->getBoxCollider(s.name, p, sc.scale, ecs.Get<RigidBody>(e).min, ecs.Get<RigidBody>(e).max);
+                ImGui::SameLine();
+                if(ImGui::DragFloat("z", &p.z, 0.1, 0, 1))
+                    gm->getBoxCollider(s.name, p, sc.scale, ecs.Get<RigidBody>(e).min, ecs.Get<RigidBody>(e).max);
+                ImGui::PopItemWidth();
 
-            //Rigid body objects
-            rigidBody(e, ecs);
+                ImGui::Text("Scale:\n");
+                if(ImGui::DragInt("Size", &sc.scale, 0.5, 0, 100))
+                    gm->getBoxCollider(s.name, p, sc.scale, ecs.Get<RigidBody>(e).min, ecs.Get<RigidBody>(e).max);
+
+                ImGui::Text("Rotation:\n");
+                ImGui::DragFloat("Angle", &rot.angle, 0.5, 0.0, 360.0);
+
+                //Rigid body objects
+                rigidBody(e, ecs);
+            }
+
+            ImGui::PopID();
         }
-
-        ImGui::PopID();
     });
 
     ImGui::End();

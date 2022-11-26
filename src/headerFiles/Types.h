@@ -46,7 +46,7 @@ namespace RenEngine
     struct Scale { int scale; };
     struct Health { double percent; };
     struct Script { std::string name; std::string path; };
-    struct Sprite { std::string name; };
+    struct Sprite { std::string name; bool rigidBody = true; };
     struct RigidBody 
     {
         vec2 velocity;

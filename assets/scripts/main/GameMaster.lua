@@ -134,6 +134,17 @@ function createBoss()
     getHealth(boss_ID).percent = boss_Master.healthPercent
 end
 
+function createBackground()
+    layer_0 = createEntity()
+    getSprite(layer_0).name = "Bg_Layer_0"
+    getSprite(layer_0).rigidBody = false
+    getPosition(layer_0).x = 0.0
+    getPosition(layer_0).y = 0.0
+    getPosition(layer_0).z = 0.1
+    getRotation(layer_0).angle = 180;
+    getScale(layer_0).scale = 100
+end
+
 function resetGame()
     
     -- Reset states

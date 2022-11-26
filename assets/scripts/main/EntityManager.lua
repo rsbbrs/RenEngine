@@ -12,6 +12,7 @@ player_Input = {
     hop = false,
     shoot = false
 }
+createBackground()
 createPlayer()
 createBoss()
 -----------------------------

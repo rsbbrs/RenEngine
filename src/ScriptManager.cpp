@@ -158,7 +158,8 @@ void ScriptManager::setComponentStructs()
     lua.new_usertype<Sprite>(
         "Sprite",
         sol::constructors<Sprite()>(),
-        "name", &Sprite::name
+        "name", &Sprite::name,
+        "rigidBody", &Sprite::rigidBody
     );
 
     // Rigid body stuff.
