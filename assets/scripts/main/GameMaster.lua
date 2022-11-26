@@ -29,16 +29,27 @@ player_Master = {
     hopStrength = 80,
     mass = 5.0,
     damage = 10,
-    posX = -75,
+    posX = -95,
     posY = 10,
     posZ = 1.0,
     rotate_dir = 1,
-    gravity_X = 3.0
+    gravity_X = 3.0,
+    damage = 100.0
+}
+
+boss_Master = 
+{
+    posX = 100,
+    posY = 0,
+    posZ = 0.5,
+    angle = 180,
+    healthPercent = 300.0
 }
 
 pipe_Master = {
     spawnTrigger_X = 50,
     hasSpawned = false,
+    pipeSpeed = -40
 }
 
 -- Useful for resetting game
@@ -51,7 +62,8 @@ function createPlayer()
     getScript(player_ID).name = "Player"
     getScript(player_ID).path = filePath(player_fp)
     else
-    print("\t--Failed to create Player entity--")
+        print("\t--Failed to create Player entity--")
+        return
     end
 
     getSprite(player_ID).name = "Player"
@@ -80,6 +92,48 @@ function createPlayer()
     getBoxCollider(player_ID, getRigidBody(player_ID).min, getRigidBody(player_ID).max)
 end
 
+function createBoss()
+    boss_ID = createEntity()
+
+    EntityTable["Boss"] = boss_ID
+
+    boss_fp = rootpath .. "boss.lua"
+    if (loadScript("Boss", boss_fp, false)) then
+        getScript(boss_ID).name = "Boss"
+        getScript(boss_ID).path = filePath(boss_fp)
+    else
+        print("\t--Failed to create Boss entity--")
+        return
+    end
+
+    getSprite(boss_ID).name = "Boss"
+    getPosition(boss_ID).x = boss_Master.posX
+    getPosition(boss_ID).y = boss_Master.posY
+    getPosition(boss_ID).z = boss_Master.posZ
+    getRigidBody(boss_ID).velocity.x = 0.0
+    getRigidBody(boss_ID).velocity.y = 0.0
+    getRigidBody(boss_ID).acceleration.x = 0
+    getRigidBody(boss_ID).acceleration.y = 0
+    getRigidBody(boss_ID).gravity.x = 0.0
+    getRigidBody(boss_ID).gravity.y = 0.0
+    getRigidBody(boss_ID).force.x = 0.0
+    getRigidBody(boss_ID).force.y = 0.0
+    getRotation(boss_ID).angle = boss_Master.angle
+    getRigidBody(boss_ID).mass = 10.0
+    getRigidBody(boss_ID).static = true
+    getRigidBody(boss_ID).trueRB = false
+    getScale(boss_ID).scale = 35
+
+    getRigidBody(boss_ID).min.x = 0.0
+    getRigidBody(boss_ID).min.y = 0.0
+    getRigidBody(boss_ID).max.x = 0.0
+    getRigidBody(boss_ID).max.y = 0.0
+
+    getBoxCollider(boss_ID, getRigidBody(boss_ID).min, getRigidBody(boss_ID).max)
+
+    getHealth(boss_ID).percent = boss_Master.healthPercent
+end
+
 function resetGame()
     
     -- Reset states
@@ -96,8 +150,12 @@ function resetGame()
         destroyEntity(table.remove(fireBall_ID))
     end
 
-    -- Create player
+    EntityTable["Boss"] = nil    
+    EntityTable["Player"] = nil
+
+    -- Create player and boss
     createPlayer()
+    createBoss()
 end
 -- Create EntityManager --
 em_filepath = "scripts/main/EntityManager.lua"

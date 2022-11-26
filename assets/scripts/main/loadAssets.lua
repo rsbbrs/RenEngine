@@ -68,17 +68,19 @@ loadSound("Gunshot_1", "sounds/gunshot.mp3")
 Sound_loaded = Sound_loaded + 1
 print(Sound_loaded .."/" .. expected_Sounds .. " sound assets loaded")
 loadSound("Gunshot_2", "sounds/gunshot_2.mp3")
-setVolume("Gunshot_2", 0.75)
+setVolume("Gunshot_2", 0.25)
 Sound_loaded = Sound_loaded + 1
 print(Sound_loaded .."/" .. expected_Sounds .. " sound assets loaded")
 loadSound("Minecraft-OOF", "sounds/MinecraftOOF.wav")
 Sound_loaded = Sound_loaded + 1
 print(Sound_loaded .."/" .. expected_Sounds .. " sound assets loaded")
 loadSound("Ouch", "sounds/Ouch_EditedUsingAudacity.mp3")
+setVolume("Ouch", 0.50)
 Sound_loaded = Sound_loaded + 1
 print(Sound_loaded .."/" .. expected_Sounds .. " sound assets loaded")
 loadSound("Boss_Theme", "sounds/BossBattle4-ByEliteFerrex.mp3")
-setVolume("Boss_Theme", 0.65)
+setVolume("Boss_Theme", 0.50)
+setLooping("Boss_Theme", 1)
 Sound_loaded = Sound_loaded + 1
 print(Sound_loaded .."/" .. expected_Sounds .. " sound assets loaded")
 print("----------------------------------------")

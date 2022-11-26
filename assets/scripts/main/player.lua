@@ -43,8 +43,6 @@ if (game_state == RUNNING) then
     -- Shooting --
     if (keyPressed(input_code.f) and not player_Input.shoot) then
         playSound("Gunshot_2")
-        -- TODO: Instantiate projectile
-        -- spawnPipe(150.0, -50.0)
         spawnFireball()
         player_Input.shoot = true
     end
