@@ -5,7 +5,6 @@ end
 
 -- Initiates physics simulation --
 if(keyPressed(input_code.enter)) then
-    print("REEEEEEEEEEEEEEEEE")
     -- Ball 1 --
     getRigidBody(ball1).velocity.x = 0.0
     getRigidBody(ball1).velocity.y = 100.0
