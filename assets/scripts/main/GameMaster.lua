@@ -31,6 +31,7 @@ player_Master = {
     damage = 10,
     posX = -75,
     posY = 10,
+    posZ = 1.0,
     rotate_dir = 1,
     gravity_X = 3.0
 }
@@ -56,7 +57,7 @@ function createPlayer()
     getSprite(player_ID).name = "Player"
     getPosition(player_ID).x = player_Master.posX
     getPosition(player_ID).y = player_Master.posY
-    getPosition(player_ID).z = 1.0
+    getPosition(player_ID).z = player_Master.posZ
     getRigidBody(player_ID).velocity.x = 0.0
     getRigidBody(player_ID).velocity.y = 0.0
     getRigidBody(player_ID).acceleration.x = 0

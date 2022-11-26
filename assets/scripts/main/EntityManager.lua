@@ -25,7 +25,32 @@ function spawnFireball()
 
     table.insert(fireBall_ID, 1, fb)
 
-    -- getSprite(fb).name
+    getSprite(fb).name = "Fireball"
+
+    getPosition(fb).x = getPosition(player_ID).x + 3.0
+    getPosition(fb).y = getPosition(player_ID).y
+    getPosition(fb).z = 0.6
+
+    getRigidBody(fb).velocity.x = 250.0
+    getRigidBody(fb).velocity.y = 0.0
+    getRigidBody(fb).acceleration.x = 0.0
+    getRigidBody(fb).acceleration.y = 0.0
+    getRigidBody(fb).gravity.x = 0.0
+    getRigidBody(fb).gravity.y = 0.0
+    getRigidBody(fb).force.x = 0.0
+    getRigidBody(fb).force.y = 0.0
+    getRigidBody(fb).mass = 10.0
+
+    getRigidBody(fb).static = true
+    getRigidBody(fb).trueRB = false
+    
+    getScale(fb).scale = 8
+
+    getRigidBody(fb).min.x = 0.0
+    getRigidBody(fb).min.y = 0.0
+    getRigidBody(fb).max.x = 0.0
+    getRigidBody(fb).max.y = 0.0
+
 end
 -----------------------------
 -----------------------------
@@ -46,7 +71,7 @@ function spawnPipe(x, y)
 
     getPosition(pipe).x = x
     getPosition(pipe).y = y
-    getPosition(pipe).z = 1.0
+    getPosition(pipe).z = 0.5
 
     getRigidBody(pipe).velocity.x = -40.0
     getRigidBody(pipe).velocity.y = 0.0

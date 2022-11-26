@@ -44,7 +44,8 @@ if (game_state == RUNNING) then
     if (keyPressed(input_code.f) and not player_Input.shoot) then
         playSound("Gunshot_2")
         -- TODO: Instantiate projectile
-        spawnPipe(150.0, -50.0)
+        -- spawnPipe(150.0, -50.0)
+        spawnFireball()
         player_Input.shoot = true
     end
     if (keyReleased(input_code.f) and player_Input.shoot) then
@@ -84,6 +85,7 @@ if (game_state == RUNNING) then
         print("\t-- You lose! ): --")
 
         destroyEntity(EntityTable["Player"])
+        EntityTable["Player"] = nil
     end
     -----------------------------
     -----------------------------
