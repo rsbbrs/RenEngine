@@ -12,7 +12,6 @@ void loadAssets()
     {
         mainGame->getBoxCollider(e, min, max);
     });
-    
 
     if(mainGame->loadScript("LoadAssets", 
         mainGame->filePath("scripts/main/loadAssets.lua"), true))

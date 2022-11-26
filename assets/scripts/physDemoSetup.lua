@@ -55,7 +55,7 @@ getRigidBody(ball2).force.y = 0.0
 
 getRigidBody(ball2).mass = 10.0
 
-getRigidBody(ball1).static = false
+getRigidBody(ball2).static = false
 
 getScale(ball2).scale = 10
 

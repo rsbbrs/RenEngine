@@ -88,19 +88,9 @@ print("----------------------------------------")
 -- prevent weird looping problems (i.e., player input)
 gm_filepath = "scripts/main/GameMaster.lua"
 if (loadScript("GameMaster", gm_filepath, true)) then
-    print("GameMaster instantiated")
+    print("GameMaster loaded")
 else
     print("Failed to load Game Master")
-end
-
-quit_Listener = createEntity()
-quit_filepath = "scripts/main/quit.lua"
-if (loadScript("QuitListener", quit_filepath, false)) then
-    print("Quit listener instantiated")
-    getScript(quit_Listener).name = "QuitListener"
-    getScript(quit_Listener).path = filePath(quit_filepath)
-else
-    print("Failed to load Quit Listener")
 end
 
 -----------------------------
