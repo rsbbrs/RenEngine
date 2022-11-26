@@ -55,9 +55,9 @@ getRigidBody(ball2).force.y = 0.0
 
 getRigidBody(ball2).mass = 10.0
 
-getRigidBody(ball2).static = true
+getRigidBody(ball2).static = false
 
-getRigidBody(ball2).trueRB = false
+getRigidBody(ball2).trueRB = true
 
 getScale(ball2).scale = 10
 
