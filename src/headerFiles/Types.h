@@ -87,7 +87,8 @@ namespace RenEngine
         a = 65,
         d = 68,
         f = 70,
-        s = 83,
+        r = 82,
+        s,
         w = 87,
 
         right = 262,

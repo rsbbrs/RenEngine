@@ -58,6 +58,7 @@ loadSound("Cannon", "sounds/cannon.mp3")
 Sound_loaded = Sound_loaded + 1
 print(Sound_loaded .."/" .. expected_Sounds .. " sound assets loaded")
 loadSound("Explosion", "sounds/explosion.wav")
+setVolume("Explostion", 0.75)
 Sound_loaded = Sound_loaded + 1
 print(Sound_loaded .."/" .. expected_Sounds .. " sound assets loaded")
 loadSound("Flap", "sounds/flap.wav")
@@ -67,6 +68,7 @@ loadSound("Gunshot_1", "sounds/gunshot.mp3")
 Sound_loaded = Sound_loaded + 1
 print(Sound_loaded .."/" .. expected_Sounds .. " sound assets loaded")
 loadSound("Gunshot_2", "sounds/gunshot_2.mp3")
+setVolume("Gunshot_2", 0.75)
 Sound_loaded = Sound_loaded + 1
 print(Sound_loaded .."/" .. expected_Sounds .. " sound assets loaded")
 loadSound("Minecraft-OOF", "sounds/MinecraftOOF.wav")

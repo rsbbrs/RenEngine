@@ -47,6 +47,8 @@ void ScriptManager::startup(GraphicsManager& graphicsManager,
     // Extra sound features
     lua.set_function("setLooping", [&](const std::string name, int value) {soundManager.setLooping(name, value); });
     lua.set_function("setVolume", [&](const std::string name, float value) {soundManager.setVolume(name, value); });
+    lua.set_function("stopSound", [&](const std::string name) {soundManager.stopSound(name); });
+
 
     // ECS manager functions.
     lua.set_function("createEntity", [&]() { return ecsManager.Create(); } );
@@ -109,6 +111,7 @@ void ScriptManager::setInputCodes()
         {"s", input_code::s},
         {"d", input_code::d},
         {"f", input_code::f},
+        {"r", input_code::r},
         {"right", input_code::right},
         {"left", input_code::left},
         {"up", input_code::up},

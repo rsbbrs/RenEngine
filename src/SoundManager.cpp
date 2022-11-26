@@ -55,3 +55,9 @@ void SoundManager::setVolume(const std::string& name, float value)
 {
     soundsList[name].setVolume(value);
 }
+
+// Stop sound source (does not destroy it)
+void SoundManager::stopSound(const std::string& name)
+{
+    soundsList[name].stop();
+}
