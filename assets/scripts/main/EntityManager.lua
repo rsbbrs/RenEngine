@@ -27,6 +27,13 @@ end
 -----------------------------
 -----------------------------
 -- Create Player Entity --
+
+-- keeps track of player input
+-- any new input needs to be recorded on this table
+player_Input = {
+    hop = false
+}
+
 player_ID = createEntity()
 EntityTable["Player"] = player_ID
 

@@ -28,5 +28,10 @@ void InputManager::update()
 // the .cpp file.
 bool InputManager::keyPressed(GraphicsManager& gm, input_code key)
 {
-    return (glfwGetKey((GLFWwindow*)gm.getWindow(), key) == 1) ? true : false;
+    return (glfwGetKey((GLFWwindow*)gm.getWindow(), key) == GLFW_PRESS) ? true : false;
+}
+
+bool InputManager::keyReleased(GraphicsManager& gm, input_code key)
+{
+    return (glfwGetKey((GLFWwindow*)gm.getWindow(), key) == GLFW_RELEASE) ? true : false;
 }

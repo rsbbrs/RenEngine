@@ -34,6 +34,7 @@ void ScriptManager::startup(GraphicsManager& graphicsManager,
 
     // Input manager functions.
     lua.set_function("keyPressed", [&](const input_code keycode) { return inputManager.keyPressed(graphicsManager, keycode); } );
+    lua.set_function("keyReleased", [&](const input_code keycode) { return inputManager.keyReleased(graphicsManager, keycode); } );
 
     // Sound manager functions.
     lua.set_function("loadSound", [&](const std::string name, const std::string path) 
