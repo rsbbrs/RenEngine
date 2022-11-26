@@ -33,7 +33,8 @@ player_Master = {
     posY = 10,
     posZ = 1.0,
     rotate_dir = 1,
-    gravity_X = 3.0
+    gravity_X = 3.0,
+    damage = 100.0
 }
 
 boss_Master = 
