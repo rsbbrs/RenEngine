@@ -1,19 +1,22 @@
 
 -- Initiates physics simulation --
-if( (keyPressed(input_code.enter) or keyPressed(input_code.r)) and game_state == PAUSED) then
+if( keyPressed(input_code.enter) and game_state == PAUSED) then
     getRigidBody(player_ID).velocity.x = 0.0
     getRigidBody(player_ID).velocity.y = 0.0
 
     getRigidBody(player_ID).gravity.x = 0.0
     getRigidBody(player_ID).gravity.y = -9.81
 
-    getRigidBody(player_ID).force.x = 20.0
+    getRigidBody(player_ID).force.x = 10.0
     getRigidBody(player_ID).force.y = 22.0
 
     player_Input.hop = false
     player_Input.shoot = false
 
     game_state = RUNNING
+    
+    -- Debugging
+    spawnPipe(150.0, -50.0)
     playSound("Boss_Theme")
 end
 
@@ -56,15 +59,16 @@ if (game_state == RUNNING) then
         getRigidBody(player_ID).velocity.y = 0
     end
 
-    if (getPosition(player_ID).x < player_Master.posX) then
-        getRigidBody(player_ID).gravity.x = 20.0
+    if (getRigidBody(player_ID).force.x < 0) then        
+        getRigidBody(player_ID).gravity.x = 2
+        getRigidBody(player_ID).force.x = getRigidBody(player_ID).force.x * -1
     end
     
     if (getPosition(player_ID).x > player_Master.posX) then
         getPosition(player_ID).x = player_Master.posX
+        getRigidBody(player_ID).velocity.x = 0.0
         getRigidBody(player_ID).gravity.x = 0.0
     end
-    
     -----------------------------
     -----------------------------
     
@@ -86,3 +90,11 @@ if (game_state == RUNNING) then
     -----------------------------
     -----------------------------
 end
+
+--[[ -- print("Velocity X: " .. getRigidBody(player_ID).velocity.x)
+for i = 1, #pipe_ID, 1 do
+    -- print(getPosition(pipe_ID[i]).x)
+    if ( (getPosition(player_ID).x + 25.0) >= getPosition(pipe_ID[i]).x) then
+        print("HOI")
+    end
+end ]]

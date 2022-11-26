@@ -13,10 +13,10 @@ void loadAssets()
         mainGame->getBoxCollider(e, min, max);
     });
 
-    mainGame->scriptManager.lua.set_function("isColliding",
-    [&](const RigidBody& rb1, const RigidBody& rb2)
+    mainGame->scriptManager.lua.set_function("hasCollided",
+    [&] (const EntityID e1, const EntityID e2) -> bool
     {
-        mainGame->physicsManager.coll_det(rb1, rb2);
+        return mainGame->physicsManager.coll_det(e1, e2);
     });
 
     if(mainGame->loadScript("LoadAssets", 

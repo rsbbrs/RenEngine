@@ -1,24 +1,6 @@
 -- assigning key with value nil removes the key
 -- EntityTable["EventListener"] = nil
 
------------------------------
------------------------------
--- Create EventListener Entity --
-event_State = {
-    themePlaying = false
-}
-eventListener_ID = createEntity()
-eventListener_filepath = rootpath .. "EventListener.lua"
-if (loadScript("EventListener", eventListener_filepath, false)) then
-    print("Event Listener entity created")
-    getScript(eventListener_ID).name = "EventListener"
-    getScript(eventListener_ID).path = filePath(eventListener_filepath)
-    EntityTable["EventListener"] = eventListener_ID
-else
-    print("Failed to create Event Listener entity")
-end
------------------------------
------------------------------
 
 -----------------------------
 -----------------------------
@@ -66,7 +48,7 @@ function spawnPipe(x, y)
     getPosition(pipe).y = y
     getPosition(pipe).z = 1.0
 
-    getRigidBody(pipe).velocity.x = -50.0
+    getRigidBody(pipe).velocity.x = -40.0
     getRigidBody(pipe).velocity.y = 0.0
 
     getRigidBody(pipe).acceleration.x = 0.0
@@ -78,16 +60,36 @@ function spawnPipe(x, y)
     getRigidBody(pipe).force.x = 0.0
     getRigidBody(pipe).force.y = 0.0
 
-    getRigidBody(pipe).mass = 1.0
+    getRigidBody(pipe).mass = 10.0
 
     getRigidBody(pipe).static = true
 
     getScale(pipe).scale = 50
 
+    getRigidBody(pipe).min.x = 0.0
+    getRigidBody(pipe).min.y = 0.0
+    getRigidBody(pipe).max.x = 0.0
+    getRigidBody(pipe).max.y = 0.0
+    getBoxCollider(pipe, getRigidBody(pipe).min, getRigidBody(pipe).max)
 end
+-----------------------------
+-----------------------------
 
-
-spawnPipe(100.0, -50.0)
-
+-----------------------------
+-----------------------------
+-- Create EventListener Entity --
+event_State = {
+    themePlaying = false
+}
+eventListener_ID = createEntity()
+eventListener_filepath = rootpath .. "EventListener.lua"
+if (loadScript("EventListener", eventListener_filepath, false)) then
+    print("Event Listener entity created")
+    getScript(eventListener_ID).name = "EventListener"
+    getScript(eventListener_ID).path = filePath(eventListener_filepath)
+    EntityTable["EventListener"] = eventListener_ID
+else
+    print("Failed to create Event Listener entity")
+end
 -----------------------------
 -----------------------------

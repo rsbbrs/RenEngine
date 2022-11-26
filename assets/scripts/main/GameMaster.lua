@@ -23,9 +23,9 @@ debug_counter = 0
 player_Master = {
     mass = 10,
     hopStrength = 80,
-    mass = 1,
+    mass = 5.0,
     damage = 10,
-    posX = -105,
+    posX = 0,
     posY = 10,
     rotate_dir = 1
 }

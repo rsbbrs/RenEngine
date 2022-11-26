@@ -16,3 +16,12 @@ if (game_state == ENDED) then
         resetGame()
     end
 end
+
+
+
+-- Clean up entities that have gone out of the screen --
+for i = 1, #pipe_ID, 1 do
+    if (getPosition(pipe_ID[i]).x < -200) then
+        destroyEntity(pipe_ID[i])
+    end
+end

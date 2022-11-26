@@ -17,10 +17,10 @@ namespace RenEngine
             void startup(ECS* ecs, GraphicsManager* gm);
             void shutdown();
 
-            bool coll_det(const RigidBody& rb1, const RigidBody& rb2);
+            bool coll_det(const EntityID e1, const EntityID e2);
             
-            void coll_resolve(  RigidBody& rb1, 
-                                RigidBody& rb2, 
+            void coll_resolve(  EntityID rb1, 
+                                EntityID rb2, 
                                 Position& p1, 
                                 Position& p2, 
                                 std::string name1, 
@@ -29,7 +29,7 @@ namespace RenEngine
                                 int scale2, 
                                 const float coe, 
                                 GraphicsManager* gm);
-                                
+
             void collision();
             void updatePhysics(const std::chrono::time_point<std::chrono::steady_clock> dt);
     };
