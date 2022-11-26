@@ -13,21 +13,21 @@ void loadAssets()
         mainGame->getBoxCollider(e, min, max);
     });
 
-    // mainGame->physicsManager.collision("getBoxCollider",
-    // [&](const EntityID e, vec2& min, vec2& max)
-    // {
-    //     mainGame->getBoxCollider(e, min, max);
-    // });
+    mainGame->scriptManager.lua.set_function("isColliding",
+    [&](const RigidBody& rb1, const RigidBody& rb2)
+    {
+        mainGame->physicsManager.coll_det(rb1, rb2);
+    });
 
-    // if(mainGame->loadScript("LoadAssets", 
-    //     mainGame->filePath("scripts/main/loadAssets.lua"), true))
-    //     {
-    //         std::cout << "Assets successfully loaded" << std::endl;
-    //     }
-    //     else
-    //     {
-    //         std::cout << "Assets failed to load" << std::endl;
-    //     }
+    if(mainGame->loadScript("LoadAssets", 
+        mainGame->filePath("scripts/main/loadAssets.lua"), true))
+        {
+            std::cout << "Assets successfully loaded" << std::endl;
+        }
+        else
+        {
+            std::cout << "Assets failed to load" << std::endl;
+        }
 }
 
 int main(void)
