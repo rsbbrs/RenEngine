@@ -84,10 +84,11 @@ namespace RenEngine
         f3,
         f4,
 
-        w = 87,
         a = 65,
-        s = 83,
         d = 68,
+        f = 70,
+        s = 83,
+        w = 87,
 
         right = 262,
         left,
