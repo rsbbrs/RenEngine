@@ -56,13 +56,12 @@ getRigidBody(player_ID).static = false
 getScale(player_ID).scale = 10
 
 getRigidBody(player_ID).min.x = 0.0
--- getRigidBody(player_ID).min.y = 0.0
+getRigidBody(player_ID).min.y = 0.0
+getRigidBody(player_ID).max.x = 0.0
+getRigidBody(player_ID).max.y = 0.0
 
-print("REEEEEEEEEE: " .. getRigidBody(player_ID).force.y)
 
--- getBoxCollider(player_ID, getRigidBody(player_ID).min, getRigidBody(player_ID).max)
-
--- print("REEEEEEEEEE: " .. getRigidBody(player_ID).min)
+getBoxCollider(player_ID, getRigidBody(player_ID).min, getRigidBody(player_ID).max)
 
 -----------------------------
 -----------------------------
