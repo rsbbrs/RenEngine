@@ -56,7 +56,7 @@ function createPlayer()
     getRigidBody(player_ID).velocity.y = 0.0
     getRigidBody(player_ID).acceleration.x = 0
     getRigidBody(player_ID).acceleration.y = 0
-    getRigidBody(player_ID).gravity.x = 0.0
+    getRigidBody(player_ID).gravity.x = 2.0
     getRigidBody(player_ID).gravity.y = 0.0
     getRigidBody(player_ID).force.x = 0.0
     getRigidBody(player_ID).force.y = 0.0
