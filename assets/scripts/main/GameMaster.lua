@@ -34,7 +34,7 @@ player_Master = {
     posZ = 1.0,
     rotate_dir = 1,
     gravity_X = 3.0,
-    damage = 100.0
+    damage = 5.0
 }
 
 boss_Master = 
@@ -43,7 +43,7 @@ boss_Master =
     posY = 0,
     posZ = 1.0,
     angle = 180,
-    healthPercent = 300.0
+    healthPercent = 500.0
 }
 
 pipe_Master = {
@@ -189,6 +189,7 @@ function resetGame()
     isPlayerAlive = true
     isBossAlive = true
     game_state = PAUSED
+    PHASE_NUMBER = 0
 
     -- Destroy all existing objects
     for i = 1, #pipe_ID, 1 do
