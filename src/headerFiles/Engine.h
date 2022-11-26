@@ -35,7 +35,6 @@ namespace RenEngine
             void shutdown();
 
         public:
-
             // Game managers.
             GraphicsManager graphicsManager;
             InputManager inputManager;
@@ -44,7 +43,8 @@ namespace RenEngine
             ECS ECSManager;
             ScriptManager scriptManager;
             PhysicsManager physicsManager;
-            GuiManager guiManager;            
+            GuiManager guiManager;
+                        
             /**
              * @brief Construct a new Engine object.
              * 

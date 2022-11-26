@@ -18,8 +18,6 @@ namespace RenEngine
         private:
             typedef sol::state Lua;
 
-
-
             // Script container.
             std::unordered_map<std::string, sol::load_result> scripts;
 
