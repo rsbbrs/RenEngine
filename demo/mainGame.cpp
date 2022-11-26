@@ -3,12 +3,28 @@
 #include "Engine.h"
 using namespace RenEngine;
 
+static std::unique_ptr<Engine> mainGame = std::make_unique<Engine>("Main Game", 1600, 900, false);
+
+void loadAssets()
+{
+    if(mainGame->loadScript("LoadAssets", 
+        mainGame->filePath("scripts/main/loadAssets.lua"), true))
+        {
+            std::cout << "Assets successfully loaded" << std::endl;
+        }
+        else
+        {
+            std::cout << "Assets failed to load" << std::endl;
+        }
+}
+
 int main(void)
 {
-    Engine* mainGame = new Engine("Main Gaime", 1600, 900, false);
+    loadAssets();
 
-
-
-    mainGame->gameLoop([&](){});
+    mainGame->gameLoop([&](){ 
+        // State machine?
+    });
+    
     return 0;
 }
