@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <functional>
+#include <queue>
 
 #include "SparseSetHolder.h"
 #include "Types.h"
@@ -84,16 +85,35 @@ namespace RenEngine
             /***************************/
 
             // Startup and shutdown functions.
-            void startup() { count = 0; };
+            void startup();// { count = 0; };
             void shutdown() {};
             
             // Create and destroy entities.
-            EntityID Create() { return ++count; };
+            EntityID Create() { 
+                static EntityID newID = 0;
+                EntityID result = -1;
+
+                // Check if we can recycle old id value
+                if (deletedID.size() != 0)
+                {
+                    result = deletedID.front();
+                    deletedID.pop();
+                    return result;
+                }
+
+                result = newID;
+
+                // After creation, increment for next entity
+                ++newID;
+
+                return result; 
+            };
             void Destroy(EntityID e)
             {
                 for( const auto& comps : m_components ) 
                     comps->Drop( e );
-                count--;
+                //count--;
+                deletedID.push(e);
             }
 
             // Get component from an entity.

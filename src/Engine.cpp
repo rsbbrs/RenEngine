@@ -25,7 +25,7 @@ void Engine::startup()
     inputManager.startup();
     resourceManager.startup();
     soundManager.startup();
-    ECSManager.startup();
+    // ECSManager.startup();
     guiManager.startup(graphicsManager);
     physicsManager.startup(&ECSManager, &graphicsManager);
     scriptManager.startup(graphicsManager, 
