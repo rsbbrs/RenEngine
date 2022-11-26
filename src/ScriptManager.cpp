@@ -43,6 +43,9 @@ void ScriptManager::startup(GraphicsManager& graphicsManager,
     lua.set_function("playSound", [&](const std::string name) { soundManager.playSound(name); } );
     lua.set_function("closeSound", [&](const std::string name) { soundManager.closeSound(name); } );
     lua.set_function("clearAllSounds", [&]() { soundManager.clearSoundsList(); } );
+    // Extra sound features
+    lua.set_function("setLooping", [&](const std::string name, int value) {soundManager.setLooping(name, value); });
+    lua.set_function("setVolume", [&](const std::string name, float value) {soundManager.setVolume(name, value); });
 
     // ECS manager functions.
     lua.set_function("createEntity", [&]() { return ecsManager.Create(); } );
