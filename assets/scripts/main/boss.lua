@@ -17,6 +17,7 @@ if (isBossAlive) then
     if (getHealth(EntityTable["Boss"]).percent <= 0) then
         destroyEntity(EntityTable["Boss"])
         EntityTable["Boss"] = nil
+        isBossAlive = false
     end
     -----------------------------
     -----------------------------
