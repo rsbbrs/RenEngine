@@ -5,6 +5,7 @@ end
 
 if (game_state == RUNNING and not event_State.themePlaying) then
     playSound("Boss_Theme")
+    setLooping("Boss_Theme", 1)
     event_State.themePlaying = true
 end
 
@@ -18,8 +19,6 @@ if (game_state == ENDED) then
         resetGame()
     end
 end
-
-
 
 -- Clean up entities that have gone out of the screen --
 for i = 1, #pipe_ID, 1 do

@@ -13,6 +13,7 @@ player_Input = {
     shoot = false
 }
 createPlayer()
+createBoss()
 -----------------------------
 -----------------------------
 
@@ -22,6 +23,15 @@ createPlayer()
 
 function spawnFireball()
     fb = createEntity()
+
+    fb_fp = rootpath .. "fireBall.lua"
+    if (loadScript("Fireball", fb_fp, false)) then
+        getScript(fb).name = "Fireball"
+        getScript(fb).path = filePath(fb_fp)
+    else
+        print("\t--Failed to create Fireball entity--")
+        return
+    end
 
     table.insert(fireBall_ID, 1, fb)
 
@@ -50,6 +60,7 @@ function spawnFireball()
     getRigidBody(fb).min.y = 0.0
     getRigidBody(fb).max.x = 0.0
     getRigidBody(fb).max.y = 0.0
+    getBoxCollider(fb, getRigidBody(fb).min, getRigidBody(fb).max)
 
 end
 -----------------------------
