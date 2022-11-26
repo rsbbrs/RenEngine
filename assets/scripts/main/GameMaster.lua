@@ -141,7 +141,6 @@ function createBackground()
     layer_3 = createEntity()
     layer_4 = createEntity()
 
-
     getSprite(layer_0).name = "Bg_Layer_0"
     getSprite(layer_0).rigidBody = false
     getPosition(layer_0).x = 0.0
