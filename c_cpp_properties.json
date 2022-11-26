@@ -1,0 +1,30 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/Users/pbshi/AppData/Local/.xmake/packages/**",
+                "C:/Users/pbshi/AppData/Local/.xmake/packages/s/spdlog/v1.10.0/6bf6da47960848619cd072b319304dad/include",
+                "C:/Users/pbshi/AppData/Local/.xmake/packages/g/glfw/3.3.8/d12e591897c9472fb7d3725fa5811388/include",
+                "C:/Users/pbshi/AppData/Local/.xmake/packages/s/sol2",
+                "C:/Users/pbshi/AppData/Local/.xmake/packages/s/soloud/20200207/df7d2de22c464928871173041a5f621f/include",
+                "C:/Users/pbshi/AppData/Local/.xmake/packages/s/sokol/2022.02.10/c733520ac5a14eefb793e3d0d4e94d75/include",
+                "C:/Users/pbshi/AppData/Local/.xmake/packages/g/glm/0.9.9+8/8335bab7c0314ab9921440de58961aac/include/**",
+                "C:/Users/pbshi/AppData/Local/.xmake/packages/s/sol2/v3.2.3/ec2500b4f7244c37aed12be34b9162e1/include",
+                "C:/Users/pbshi/AppData/Local/.xmake/packages/l/lua/v5.4.4/200aae53e3a8489bb9f8fd764de1b658/include/lua"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.19041.0",
+            "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/Hostx64/x64/cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64"
+        }
+    ],
+    "version": 4
+}
