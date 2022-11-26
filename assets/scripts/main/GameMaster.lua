@@ -41,7 +41,7 @@ boss_Master =
 {
     posX = 100,
     posY = 0,
-    posZ = 0.5,
+    posZ = 1.0,
     angle = 180,
     healthPercent = 300.0
 }
@@ -136,13 +136,51 @@ end
 
 function createBackground()
     layer_0 = createEntity()
+    layer_1 = createEntity()
+    layer_2 = createEntity()
+    layer_3 = createEntity()
+    layer_4 = createEntity()
+
+
     getSprite(layer_0).name = "Bg_Layer_0"
     getSprite(layer_0).rigidBody = false
     getPosition(layer_0).x = 0.0
     getPosition(layer_0).y = 0.0
-    getPosition(layer_0).z = 0.1
+    getPosition(layer_0).z = 1.0
     getRotation(layer_0).angle = 180;
-    getScale(layer_0).scale = 100
+    getScale(layer_0).scale = 200
+
+    getSprite(layer_1).name = "Bg_Layer_1"
+    getSprite(layer_1).rigidBody = false
+    getPosition(layer_1).x = 0.0
+    getPosition(layer_1).y = 0.0
+    getPosition(layer_1).z = 1.0
+    getRotation(layer_1).angle = 180;
+    getScale(layer_1).scale = 200
+
+    getSprite(layer_2).name = "Bg_Layer_2"
+    getSprite(layer_2).rigidBody = false
+    getPosition(layer_2).x = 0.0
+    getPosition(layer_2).y = 0.0
+    getPosition(layer_2).z = 1.0
+    getRotation(layer_2).angle = 180;
+    getScale(layer_2).scale = 200
+
+    getSprite(layer_3).name = "Bg_Layer_3"
+    getSprite(layer_3).rigidBody = false
+    getPosition(layer_3).x = 0.0
+    getPosition(layer_3).y = 0.0
+    getPosition(layer_3).z = 1.0
+    getRotation(layer_3).angle = 180;
+    getScale(layer_3).scale = 200
+
+    getSprite(layer_4).name = "Bg_Layer_4"
+    getSprite(layer_4).rigidBody = false
+    getPosition(layer_4).x = 0.0
+    getPosition(layer_4).y = 0.0
+    getPosition(layer_4).z = 1.0
+    getRotation(layer_4).angle = 180;
+    getScale(layer_4).scale = 200
 end
 
 function resetGame()
