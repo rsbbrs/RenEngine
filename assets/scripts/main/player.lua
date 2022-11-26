@@ -15,8 +15,6 @@ if( keyPressed(input_code.enter) and game_state == PAUSED) then
 
     game_state = RUNNING
     
-    -- Debugging
-    spawnPipe(150.0, -50.0)
     playSound("Boss_Theme")
 end
 
@@ -86,8 +84,7 @@ if (game_state == RUNNING) then
         print("\t-- You lose! ): --")
 
         destroyEntity(EntityTable["Player"])
-        -- stopSound("Boss_Theme")
-        closeSound("Boss_Theme")
+        stopSound("Boss_Theme")
     end
     -----------------------------
     -----------------------------

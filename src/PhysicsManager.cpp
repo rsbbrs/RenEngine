@@ -43,17 +43,16 @@ void PhysicsManager::coll_resolve(EntityID e1, EntityID e2, Position& p1, Positi
     // travel too far out.
     do
     {
-        printf("Do while loop\n");
         if(!rb1.static_obj)
         {
-            p1.x += tempVel1.x * 0.01f;
+            p1.x += (tempVel1.x * 0.01f) - (p2.x - rb2.min.x);
             // p1.y += tempVel1.y * 0.01f;
             gm->getBoxCollider(name1, p1, scale1, rb1.min, rb1.max);
         }
 
         if(!rb2.static_obj)
         {
-            p2.x += tempVel2.x * 0.01f;
+            p2.x += (tempVel2.x * 0.01f) - (p1.x - rb1.min.x);
             // p2.y += tempVel2.y * 0.01f;
             gm->getBoxCollider(name2, p2, scale2, rb2.min, rb2.max);
         }
@@ -67,13 +66,13 @@ void PhysicsManager::coll_resolve(EntityID e1, EntityID e2, Position& p1, Positi
     // A static object should not move after a collision
     if (!rb1.static_obj)
     {
-        rb1.velocity += (1.0f / rb1.mass) * (j1 * 1.55f);
+        rb1.velocity += (1.0f / rb1.mass) * (j1 * 1.35f);
         rb1.force.x *= -1;
     }
     
     if (!rb2.static_obj)
     {
-        rb2.velocity += (1.0f / rb2.mass) * (j2 * 1.55f);
+        rb2.velocity += (1.0f / rb2.mass) * (j2 * 1.35f);
         rb2.force.x *= -1;
     }
 }

@@ -64,7 +64,7 @@ function spawnPipe(x, y)
 
     getRigidBody(pipe).static = true
 
-    getScale(pipe).scale = 20
+    getScale(pipe).scale = 50
 
     getRigidBody(pipe).min.x = 0.0
     getRigidBody(pipe).min.y = 0.0
