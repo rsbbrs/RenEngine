@@ -90,7 +90,7 @@ gm_filepath = "scripts/main/GameMaster.lua"
 if (loadScript("GameMaster", gm_filepath, true)) then
     print("GameMaster instantiated")
 else
-    print("Failed to instantiate GameMaster")
+    print("Failed to load Game Master")
 end
 
 quit_Listener = createEntity()
@@ -100,7 +100,7 @@ if (loadScript("QuitListener", quit_filepath, false)) then
     getScript(quit_Listener).name = "QuitListener"
     getScript(quit_Listener).path = filePath(quit_filepath)
 else
-    print("Failed to instantiate Quit listener")
+    print("Failed to load Quit Listener")
 end
 
 -----------------------------
