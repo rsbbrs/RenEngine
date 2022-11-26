@@ -4,10 +4,10 @@ if( (keyPressed(input_code.enter) or keyPressed(input_code.r)) and game_state ==
     getRigidBody(player_ID).velocity.x = 0.0
     getRigidBody(player_ID).velocity.y = 0.0
 
-    getRigidBody(player_ID).gravity.x = 0
+    getRigidBody(player_ID).gravity.x = 0.0
     getRigidBody(player_ID).gravity.y = -9.81
 
-    getRigidBody(player_ID).force.x = 5.0
+    getRigidBody(player_ID).force.x = 20.0
     getRigidBody(player_ID).force.y = 22.0
 
     player_Input.hop = false
@@ -57,7 +57,7 @@ if (game_state == RUNNING) then
     end
 
     if (getPosition(player_ID).x < player_Master.posX) then
-        getRigidBody(player_ID).gravity.x = 1.0
+        getRigidBody(player_ID).gravity.x = 10.0
     end
     
     if (getPosition(player_ID).x > player_Master.posX) then

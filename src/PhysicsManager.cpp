@@ -7,7 +7,7 @@
 
 using namespace RenEngine;
 
-bool coll_det(const RigidBody& rb1, const RigidBody& rb2)
+bool PhysicsManager::coll_det(const RigidBody& rb1, const RigidBody& rb2)
 {
     float d1x = rb2.min.x - rb1.max.x; //b->min.x - a->max.x;
     float d1y = rb2.min.y - rb1.max.y; //b->min.y - a->max.y;
@@ -20,7 +20,7 @@ bool coll_det(const RigidBody& rb1, const RigidBody& rb2)
     return false;
 }
 
-void coll_resolve(RigidBody& rb1, RigidBody& rb2, Position& p1, Position& p2, 
+void PhysicsManager::coll_resolve(RigidBody& rb1, RigidBody& rb2, Position& p1, Position& p2, 
                   std::string name1, std::string name2, int scale1, int scale2, const float coe, GraphicsManager* gm)
 {
     // Simple rebounding calculation.
