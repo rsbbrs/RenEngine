@@ -182,3 +182,8 @@ void Engine::getBoxCollider(const EntityID e, vec2& min, vec2& max)
     vec3 pos = ECSManager.Get<Position>(e);
     graphicsManager.getBoxCollider(name, pos, scale, min, max);
 }
+
+Lua& Engine::getLuaEnv()
+{
+    return scriptManager.lua;
+}

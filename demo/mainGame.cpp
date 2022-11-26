@@ -7,7 +7,7 @@ static std::unique_ptr<Engine> mainGame = std::make_unique<Engine>("Main Game", 
 
 void loadAssets()
 {
-    mainGame->scriptManager.lua.set_function("getBoxCollider",
+    mainGame->getLuaEnv().set_function("getBoxCollider",
     [&](const EntityID e, vec2& min, vec2& max)
     {
         mainGame->getBoxCollider(e, min, max);

@@ -64,7 +64,7 @@ void ScriptManager::startup(GraphicsManager& graphicsManager,
     
 
     // Lua state in the engine.
-    lua.set_function("getState", [&]() { return true; } );
+    lua.set_function("getState", [&]() { return lua; } );
 
     // Quit function.
     lua.set_function("quit", [&]() { quit(); } );
@@ -77,8 +77,6 @@ void ScriptManager::startup(GraphicsManager& graphicsManager,
 
     // Resource manager functions.
     lua.set_function("filePath", [&](const std::string path) { return resourceManager.resolvePath(path); } );
-
-    //lua.set_function("getTime", [&]() { return std::chrono::steady_clock::now(); } );
 }
 
 void ScriptManager::setInputCodes()

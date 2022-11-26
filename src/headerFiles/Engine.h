@@ -229,6 +229,11 @@ namespace RenEngine
              */
             void getBoxCollider(const EntityID e, vec2& min, vec2& max);
 
-            ScriptManager getScriptManager();
+            /**
+             * @brief Gets the Lua environment variable from the script manager.
+             * 
+             * @return A reference to the lua environment variable.
+             */
+            Lua& getLuaEnv();
     };
 }
