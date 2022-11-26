@@ -7,6 +7,8 @@ static std::unique_ptr<Engine> mainGame = std::make_unique<Engine>("Main Game", 
 
 void loadAssets()
 {
+    //mainGame->scriptManager.lua.
+
     if(mainGame->loadScript("LoadAssets", 
         mainGame->filePath("scripts/main/loadAssets.lua"), true))
         {

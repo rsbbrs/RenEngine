@@ -29,6 +29,13 @@ namespace RenEngine
             const std::chrono::duration<double> total_loop_time;
             Configuration config;
 
+            // Start and shutdown functions.
+            // Made private so no other classes can shut down the engine itself.
+            void startup();
+            void shutdown();
+
+        public:
+
             // Game managers.
             GraphicsManager graphicsManager;
             InputManager inputManager;
@@ -37,14 +44,7 @@ namespace RenEngine
             ECS ECSManager;
             ScriptManager scriptManager;
             PhysicsManager physicsManager;
-            GuiManager guiManager;
-
-            // Start and shutdown functions.
-            // Made private so no other classes can shut down the engine itself.
-            void startup();
-            void shutdown();
-
-        public:            
+            GuiManager guiManager;            
             /**
              * @brief Construct a new Engine object.
              * 
@@ -228,5 +228,7 @@ namespace RenEngine
              * @param max Reference to the maximum dimension of an image.
              */
             void getBoxCollider(const EntityID e, vec2& min, vec2& max);
+
+            ScriptManager getScriptManager();
     };
 }

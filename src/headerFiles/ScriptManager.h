@@ -18,8 +18,7 @@ namespace RenEngine
         private:
             typedef sol::state Lua;
 
-            // Lua environment variable.
-            Lua lua;
+
 
             // Script container.
             std::unordered_map<std::string, sol::load_result> scripts;
@@ -33,6 +32,8 @@ namespace RenEngine
 
         public:
             bool scriptQuit;
+            // Lua environment variable.
+            Lua lua;
 
             // Startup and shutdown functions.
             void startup(GraphicsManager& graphicsManager,
