@@ -45,34 +45,33 @@ void PhysicsManager::coll_resolve(EntityID e1, EntityID e2, Position& p1, Positi
     {
         if(!rb1.static_obj)
         {
-            p1.x += (tempVel1.x * 0.01f) - (p2.x - rb2.min.x);
-            // p1.y += tempVel1.y * 0.01f;
+            p1.x += (tempVel1.x * 0.01f); //- (p2.x - rb2.min.x);
+            p1.y += tempVel1.y * 0.01f;
             gm->getBoxCollider(name1, p1, scale1, rb1.min, rb1.max);
         }
 
         if(!rb2.static_obj)
         {
-            p2.x += (tempVel2.x * 0.01f) - (p1.x - rb1.min.x);
-            // p2.y += tempVel2.y * 0.01f;
+            p2.x += (tempVel2.x * 0.01f); //- (p1.x - rb1.min.x);
+            p2.y += tempVel2.y * 0.01f;
             gm->getBoxCollider(name2, p2, scale2, rb2.min, rb2.max);
         }
         
     } 
     while (coll_det(e1, e2));
 
-    vec2 j1 = (-(1 + coe) * (rb1.velocity - rb2.velocity)) / ((1.0f / rb1.mass) + (1.0f / rb2.mass));
-    vec2 j2 = (-(1 + coe) * (rb2.velocity - rb1.velocity)) / ((1.0f / rb2.mass) + (1.0f / rb1.mass));
-
     // A static object should not move after a collision
     if (!rb1.static_obj)
     {
-        rb1.velocity += (1.0f / rb1.mass) * (j1 * 1.35f);
+        vec2 j1 = (-(1 + coe) * (rb1.velocity - rb2.velocity)) / ((1.0f / rb1.mass) + (1.0f / rb2.mass));
+        rb1.velocity += (1.0f / rb1.mass) * j1;// * 1.35f);
         rb1.force.x *= -1;
     }
     
     if (!rb2.static_obj)
     {
-        rb2.velocity += (1.0f / rb2.mass) * (j2 * 1.35f);
+        vec2 j2 = (-(1 + coe) * (rb2.velocity - rb1.velocity)) / ((1.0f / rb2.mass) + (1.0f / rb1.mass));
+        rb2.velocity += (1.0f / rb2.mass) * j2;// * 1.35f);
         rb2.force.x *= -1;
     }
 }
