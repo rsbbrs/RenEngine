@@ -21,5 +21,9 @@ namespace RenEngine
             void playSound(const std::string& name);
             void closeSound(const std::string& name);
             void clearSoundsList();
+
+            // Extra features provided by soloud's Wav libraries
+            // void setLooping(const std::string& name);
+
     };
 }
