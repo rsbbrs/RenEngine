@@ -1,8 +1,6 @@
 -- Game states
-game_Started = false
-game_Ended = false
+PAUSED = -1
+RUNNING = 0
+ENDED = 1
+game_state = 0
 
--- Quit game
-if (keyPressed(input_code.escape)) then
-    quit()
-end

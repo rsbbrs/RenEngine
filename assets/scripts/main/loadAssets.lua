@@ -81,15 +81,26 @@ print("----------------------------------------")
 
 -----------------------------
 -----------------------------
--- Create GameMaster Object --
-GameMaster = createEntity()
+-- Load GameMaster and other stuff --
+
+-- Game master handles basically everything, sorta
+-- Game master should be the one creating entities to
+-- prevent weird looping problems (i.e., player input)
 gm_filepath = "scripts/main/GameMaster.lua"
-if (loadScript("GameMaster", gm_filepath, false)) then
-    getScript(GameMaster).name = "GameMaster"
-    getScript(GameMaster).path = filePath(gm_filepath)
+if (loadScript("GameMaster", gm_filepath, true)) then
     print("GameMaster instantiated")
 else
     print("Failed to instantiate GameMaster")
+end
+
+quit_Listener = createEntity()
+quit_filepath = "scripts/main/quit.lua"
+if (loadScript("QuitListener", quit_filepath, false)) then
+    print("Quit listener instantiated")
+    getScript(quit_Listener).name = "QuitListener"
+    getScript(quit_Listener).path = filePath(quit_filepath)
+else
+    print("Failed to instantiate Quit listener")
 end
 
 -----------------------------
