@@ -13,6 +13,7 @@ if(keyPressed(input_code.enter) and game_state == PAUSED) then
     getRigidBody(player_ID).force.y = 22.0
 
     game_state = RUNNING
+    playSound("Boss_Theme")
 end
 
 if (game_state == RUNNING) then
