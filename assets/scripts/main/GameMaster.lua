@@ -64,6 +64,7 @@ function createPlayer()
     getRotation(player_ID).angle = 180
     getRigidBody(player_ID).mass = player_Master.mass
     getRigidBody(player_ID).static = false
+    getRigidBody(player_ID).trueRB = true
     getScale(player_ID).scale = 5
 
     getRigidBody(player_ID).min.x = 0.0

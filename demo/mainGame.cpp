@@ -13,7 +13,7 @@ void loadAssets()
         mainGame->getBoxCollider(e, min, max);
     });
 
-    mainGame->scriptManager.lua.set_function("hasCollided",
+    mainGame->getLuaEnv().set_function("hasCollided",
     [&] (const EntityID e1, const EntityID e2) -> bool
     {
         return mainGame->physicsManager.coll_det(e1, e2);

@@ -17,6 +17,10 @@ namespace RenEngine
             EntityID count;
             std::vector< std::unique_ptr<SparseSetHolder> > m_components;
 
+            // Will be used to store deleted IDs so we can recycle them
+            // when we create another entity
+            std::queue<EntityID> deletedID;
+
             /****************************/
             /*                          */
             /* PRIVATE HELPER FUNCTIONS */

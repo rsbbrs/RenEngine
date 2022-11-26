@@ -36,7 +36,7 @@ function spawnPipe(x, y)
     pipe = createEntity()
 
 
-    table.insert(pipe_ID, pipe)
+    table.insert(pipe_ID, 1, pipe)
     print("Pipe table size: " .. #pipe_ID)
     for i = 1, #pipe_ID, 1 do
         print("Pipe id: " .. pipe_ID[i])
@@ -63,6 +63,7 @@ function spawnPipe(x, y)
     getRigidBody(pipe).mass = 10.0
 
     getRigidBody(pipe).static = true
+    getRigidBody(pipe).trueRB = true
 
     getScale(pipe).scale = 50
 

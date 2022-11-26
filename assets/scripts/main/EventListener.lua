@@ -22,6 +22,9 @@ end
 -- Clean up entities that have gone out of the screen --
 for i = 1, #pipe_ID, 1 do
     if (getPosition(pipe_ID[i]).x < -200) then
-        destroyEntity(pipe_ID[i])
+        
+        print("Entity with ID: "..pipe_ID[i].." --> position.x = " .. getPosition(pipe_ID[i]).x)
+        destroyEntity(table.remove(pipe_ID))
+        
     end
 end
