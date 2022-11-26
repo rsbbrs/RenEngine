@@ -57,7 +57,7 @@ if (game_state == RUNNING) then
     end
 
     if (getPosition(player_ID).x < player_Master.posX) then
-        getRigidBody(player_ID).gravity.x = 10.0
+        getRigidBody(player_ID).gravity.x = 20.0
     end
     
     if (getPosition(player_ID).x > player_Master.posX) then

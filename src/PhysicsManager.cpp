@@ -57,10 +57,18 @@ void PhysicsManager::coll_resolve(RigidBody& rb1, RigidBody& rb2, Position& p1, 
     vec2 j1 = (-(1 + coe) * (rb1.velocity - rb2.velocity)) / ((1.0f / rb1.mass) + (1.0f / rb2.mass));
     vec2 j2 = (-(1 + coe) * (rb2.velocity - rb1.velocity)) / ((1.0f / rb2.mass) + (1.0f / rb1.mass));
 
-    rb1.velocity += 1.0f / rb1.mass * j1;
-    rb2.velocity += 1.0f / rb2.mass * j2;
-    rb1.force.x *= -1;
-    rb2.force.x *= -1;
+    // A static object should not move after a collision
+    if (!rb1.static_obj)
+    {
+        rb1.velocity += 1.0f / rb1.mass * j1;
+        rb1.force.x *= -1;
+    }
+    
+    if (!rb2.static_obj)
+    {
+        rb2.velocity += 1.0f / rb2.mass * j2;
+        rb2.force.x *= -1;
+    }
 }
 
 void PhysicsManager::startup(ECS* ecs, GraphicsManager* gm)

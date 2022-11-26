@@ -78,7 +78,7 @@ function spawnPipe(x, y)
     getRigidBody(pipe).force.x = 0.0
     getRigidBody(pipe).force.y = 0.0
 
-    getRigidBody(pipe).mass = 1000.0
+    getRigidBody(pipe).mass = 1.0
 
     getRigidBody(pipe).static = true
 
@@ -87,7 +87,7 @@ function spawnPipe(x, y)
 end
 
 
--- spawnPipe(100.0, -50.0)
+spawnPipe(100.0, -50.0)
 
 -----------------------------
 -----------------------------
