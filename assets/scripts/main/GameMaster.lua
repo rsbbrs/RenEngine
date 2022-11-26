@@ -1,4 +1,4 @@
--- Keeps track of existing entities
+-- Keeps track of existing significant entities (i.e., player and boss)
 EntityTable = {}
 
 -- root path for scripts
@@ -14,6 +14,10 @@ game_state = PAUSED
 
 isPlayerAlive = true
 isBossAlive = true
+
+-- EntityID Management for projectiles
+fireBall_ID = {}
+pipe_ID = {}
 
 -- Debugging
 debug_number = 69420
@@ -76,9 +80,22 @@ function createPlayer()
 end
 
 function resetGame()
+    
+    -- Reset states
     isPlayerAlive = true
     isBossAlive = true
     game_state = PAUSED
+
+    -- Destroy all existing objects
+    for i = 1, #pipe_ID, 1 do
+        destroyEntity(table.remove(pipe_ID))
+    end
+    
+    for i = 1, #fireBall_ID, 1 do
+        destroyEntity(table.remove(fireBall_ID))
+    end
+
+    -- Create player
     createPlayer()
 end
 -- Create EntityManager --

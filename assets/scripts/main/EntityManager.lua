@@ -20,10 +20,12 @@ createPlayer()
 -----------------------------
 -- Spawn Fireball --
 
--- this table handles resource management
-fireBall_ID = {}
 function spawnFireball()
-    
+    fb = createEntity()
+
+    table.insert(fireBall_ID, 1, fb)
+
+    -- getSprite(fb).name
 end
 -----------------------------
 -----------------------------
@@ -31,16 +33,14 @@ end
 -----------------------------
 -----------------------------
 -- Spawn Pipe --
-pipe_ID = {}
 function spawnPipe(x, y)
     pipe = createEntity()
 
-
     table.insert(pipe_ID, 1, pipe)
-    print("Pipe table size: " .. #pipe_ID)
-    for i = 1, #pipe_ID, 1 do
-        print("Pipe id: " .. pipe_ID[i])
-    end
+    -- print("Pipe table size: " .. #pipe_ID)
+    -- for i = 1, #pipe_ID, 1 do
+    --     print("Pipe id: " .. pipe_ID[i])
+    -- end
 
     getSprite(pipe).name = "Pipe"
 

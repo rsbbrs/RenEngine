@@ -14,15 +14,18 @@ if( keyPressed(input_code.enter) and game_state == PAUSED) then
     player_Input.shoot = false
 
     game_state = RUNNING
-    
-    playSound("Boss_Theme")
 end
+-----------------------------
+-----------------------------
 
+-----------------------------
+-----------------------------
 if (game_state == RUNNING) then
 
     -----------------------------
     -----------------------------
             -- Inputs --
+
     -- Hopping --
     if (keyPressed(input_code.space) and not player_Input.hop) then
         getRigidBody(player_ID).velocity.y = player_Master.hopStrength
@@ -30,13 +33,11 @@ if (game_state == RUNNING) then
         playSound("Flap")
 
         player_Master.rotate_dir = player_Master.rotate_dir * -1
-
         player_Input.hop = true
     end
     if (keyReleased(input_code.space) and player_Input.hop) then
         player_Input.hop = false
     end
-    
     getRotation(player_ID).angle = getRotation(player_ID).angle + (1 * player_Master.rotate_dir)
 
     -- Shooting --
@@ -83,7 +84,6 @@ if (game_state == RUNNING) then
         print("\t-- You lose! ): --")
 
         destroyEntity(EntityTable["Player"])
-        stopSound("Boss_Theme")
     end
     -----------------------------
     -----------------------------
