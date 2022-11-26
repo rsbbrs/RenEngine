@@ -2,7 +2,7 @@
 PAUSED = -1
 RUNNING = 0
 ENDED = 1
-game_state = 0
+game_state = PAUSED
 
 debug_number = 69420
 debug_counter = 0

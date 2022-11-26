@@ -185,7 +185,9 @@ void ScriptManager::setComponentStructs()
         "gravity", &RigidBody::gravity,
         "force", &RigidBody::force,
         "mass", &RigidBody::mass,
-        "static", &RigidBody::static_obj
+        "static", &RigidBody::static_obj,
+        "min", &RigidBody::min,
+        "max", &RigidBody::max
     );
 }
 

@@ -1,6 +1,9 @@
 EntityTable = {}
 
-rootpath = "scripts/main/"
+local rootpath = "scripts/main/"
+
+local origPos_X = -105
+local origPos_Y = 10
 
 -- assigning key with value nil removes the key
 -- EntityTable["EventListener"] = nil
@@ -36,50 +39,31 @@ else
 end
 
 getSprite(player_ID).name = "Player"
-
-getPosition(player_ID).x = -140.0
-getPosition(player_ID).y = -50.0
+getPosition(player_ID).x = origPos_X
+getPosition(player_ID).y = origPos_Y
 getPosition(player_ID).z = 1.0
-
 getRigidBody(player_ID).velocity.x = 0.0
 getRigidBody(player_ID).velocity.y = 0.0
 getRigidBody(player_ID).acceleration.x = 0
 getRigidBody(player_ID).acceleration.y = 0
-
 getRigidBody(player_ID).gravity.x = 0.0
 getRigidBody(player_ID).gravity.y = 0.0
 getRigidBody(player_ID).force.x = 0.0
 getRigidBody(player_ID).force.y = 0.0
-
+getRotation(player_ID).angle = 180
 getRigidBody(player_ID).mass = 10.0
 getRigidBody(player_ID).static = false
 getScale(player_ID).scale = 10
 
--- ball2 = createEntity()
+getRigidBody(player_ID).min.x = 0.0
+-- getRigidBody(player_ID).min.y = 0.0
 
--- getSprite(ball2).name = "Ball"
+print("REEEEEEEEEE: " .. getRigidBody(player_ID).force.y)
 
--- getPosition(ball2).x = 140.0
--- getPosition(ball2).y = -50.0
--- getPosition(ball2).z = 1.0
+-- getBoxCollider(player_ID, getRigidBody(player_ID).min, getRigidBody(player_ID).max)
 
--- getRigidBody(ball2).velocity.x = 0.0
--- getRigidBody(ball2).velocity.y = 0.0
+-- print("REEEEEEEEEE: " .. getRigidBody(player_ID).min)
 
--- getRigidBody(ball2).acceleration.x = 0
--- getRigidBody(ball2).acceleration.y = 0
-
--- getRigidBody(ball2).gravity.x = 0.0
--- getRigidBody(ball2).gravity.y = 0.0
-
--- getRigidBody(ball2).force.x = 0.0
--- getRigidBody(ball2).force.y = 0.0
-
--- getRigidBody(ball2).mass = 10.0
-
--- getRigidBody(ball1).static = false
-
--- getScale(ball2).scale = 10.0
 -----------------------------
 -----------------------------
 
