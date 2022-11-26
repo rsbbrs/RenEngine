@@ -57,6 +57,8 @@ getRigidBody(ball2).mass = 10.0
 
 getRigidBody(ball2).static = true
 
+getRigidBody(ball2).trueRB = false
+
 getScale(ball2).scale = 10
 
 -- Loads and attaches the runtime script to the spaceship --
