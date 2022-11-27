@@ -221,7 +221,7 @@ if (boss_Master.phase == 2) then
 
         -- Readjust boss to aim towards player
         if (getBossEyeLevel() > getPosition(EntityTable["Player"]).y) then
-            getRigidBody(bossID).gravity.y = -5.0 - (2.0 * boss_Master.retreatedCounter)
+            getRigidBody(bossID).gravity.y = -3.0 - (2.0 * boss_Master.retreatedCounter)
             getRigidBody(bossID).force.y = 10.0
 
             if (getRigidBody(bossID).gravity.y >= -15.0) then
@@ -230,7 +230,7 @@ if (boss_Master.phase == 2) then
         end
 
         if (getBossEyeLevel() < getPosition(EntityTable["Player"]).y) then
-            getRigidBody(bossID).gravity.y = 5.0 + (2.0 * boss_Master.retreatedCounter)
+            getRigidBody(bossID).gravity.y = 3.0 + (2.0 * boss_Master.retreatedCounter)
             getRigidBody(bossID).force.y = 10.0
 
             if (getRigidBody(bossID).gravity.y >= 15) then
