@@ -12,7 +12,7 @@ function updateBackgroundPos(e1, e2, speed, wrapPos)
     end
 end
 
-if(game_state == RUNNING) then
+if(game_state == RUNNING or game_state == ENDED) then
 
     -- Clouds
     updateBackgroundPos(BgTable[1], BgTable[2], 0.125, 380)

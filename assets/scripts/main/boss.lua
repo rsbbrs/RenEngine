@@ -1,7 +1,13 @@
 local bossID = EntityTable["Boss"]
 
+if (game_state == PAUSED) then
+    boss_Master.upDown_Ticks = 0
+end
 
-if (isBossAlive and game_state == RUNNING) then
+boss_Master.upDown_Ticks = boss_Master.upDown_Ticks + 1
+upDown_TimeElapsed = startTime + boss_Master.upDown_Ticks * (1/60)
+
+if (isBossAlive and (game_state == RUNNING or game_state == ENDED)) then
 
     -- do stuff here while boss is alive
 
@@ -27,7 +33,7 @@ if (isBossAlive and game_state == RUNNING) then
     -----------------------------
     -----------------------------
     -- Boss moves up and down --
-    getPosition(bossID).y = math.sin(currentTime * boss_Master.frequency) * boss_Master.amplitude + boss_Master.posY
+    getPosition(bossID).y = math.sin(getDeltaTime(upDown_TimeElapsed) * boss_Master.frequency) * boss_Master.amplitude + boss_Master.posY
     -----------------------------
     -----------------------------
 end

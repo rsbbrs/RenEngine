@@ -7,7 +7,6 @@ rootpath = "scripts/main/"
 
 -- Keeping track of time
 startTime = 0.0
-currentTime = 0.0
 ticks = 0
 
 -- Game states
@@ -62,6 +61,9 @@ pipe_Master = {
     pipeSpeed = -40
 }
 
+function getDeltaTime(elapsedTime)
+    return elapsedTime - startTime
+end
 
 -- Useful for resetting game
 function createPlayer()
