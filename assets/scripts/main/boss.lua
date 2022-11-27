@@ -194,14 +194,15 @@ if (boss_Master.phase == 2) then
             boss_Master.coolDown_Ticks = 0
 
             boss_Master.retreatedCounter  = boss_Master.retreatedCounter + 1
-            pipe_Master.pipeGap = pipe_Master.pipeGap - 5
+            pipe_Master.pipeGap = pipe_Master.pipeGap - 3
+            pipe_Master.pipeSpeed = pipe_Master.pipeSpeed - 2.0
 
             -- For now 10 is the cap
             if (boss_Master.retreatedCounter >= 10) then
                 boss_Master.retreatedCounter = 10
             end
-            if (pipe_Master.pipeGap <= 25) then
-                pipe_Master.pipeGap = 25
+            if (pipe_Master.pipeGap <= 30) then
+                pipe_Master.pipeGap = 30
             end
 
             if (isPlayerAlive) then

@@ -65,6 +65,7 @@ boss_Master = {
 }
 
 pipe_Master = {
+    temp_pipeSpeed = -100.0,
     pipeSpeed = -100.0,
     temp_pipeGap = 45.0,
     pipeGap = 45.0
@@ -284,6 +285,7 @@ function resetGame()
     boss_Master.fireRate = boss_Master.temp_fireRate
 
     pipe_Master.pipeGap = pipe_Master.temp_pipeGap
+    pipe_Master.pipeSpeed = pipe_Master.temp_pipeSpeed
     
     game_state = PAUSED
 
