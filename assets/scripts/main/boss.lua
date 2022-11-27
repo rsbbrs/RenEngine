@@ -94,3 +94,6 @@ if (isBossAlive and (game_state == RUNNING or game_state == ENDED)) then
         stopSound("Gunshot_1")
     end
 end
+
+-- Boss AI goes here
+-- State machine based on health and player positioning.
