@@ -54,6 +54,7 @@ boss_Master = {
     frequency = 0.5,
     amplitude = 75,
     skillCoolDown = 15.0,
+    temp_fireRate = 0.5,
     fireRate = 0.5,
     pipeRate = 1.85,
     upDown_Ticks = 0,

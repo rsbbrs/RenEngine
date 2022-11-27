@@ -158,7 +158,7 @@ end
 -- Phase 2
 if (boss_Master.phase == 2) then
 
-    if (not skillCD_Done() and not boss_Master.retreating and not boss_Master.returning) then
+    if (not skillCD_Done() and not boss_Master.retreating and not boss_Master.returning and not boss_Master.retreated) then
         fire(1)
     end
 
@@ -183,7 +183,13 @@ if (boss_Master.phase == 2) then
     end
 
     if (boss_Master.retreated and not skillCD_Done()) then
+
         fire(2)
+        -- approximate where player is located and fire lasers at them
+        if ( (getBossEyeLevel() <= getPosition(player_ID).y + 20) and (getBossEyeLevel() >= getPosition(player_ID).y - 20)) then
+            boss_Master.fireRate = 0.15
+            fire(1)
+        end
     end
 
     if (boss_Master.retreated and skillCD_Done() and not boss_Master.returning) then
@@ -195,6 +201,8 @@ if (boss_Master.phase == 2) then
 
     if (boss_Master.returning) then
         if (getPosition(boss_ID).x <= boss_Master.posX) then
+            
+            boss_Master.fireRate = boss_Master.temp_fireRate
             getPosition(boss_ID).x = boss_Master.posX
             getRigidBody(boss_ID).gravity.x = 0.0
             getRigidBody(boss_ID).velocity.x = 0.0
