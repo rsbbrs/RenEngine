@@ -52,6 +52,7 @@ boss_Master =
     frequency = 0.5,
     amplitude = 75,
     skillCoolDown = 10.0,
+    isCoolingDown = true,
     upDown_Ticks = 0,
     coolDown_Ticks = 0,
     fireRate_Ticks = 0,

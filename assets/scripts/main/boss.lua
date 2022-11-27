@@ -1,11 +1,5 @@
 local bossID = EntityTable["Boss"]
 
-if (game_state == PAUSED) then
-    boss_Master.upDown_Ticks = 0
-    boss_Master.coolDown_Ticks = 0
-    boss_Master.fireRate_Ticks = 0
-end
-
 boss_Master.upDown_Ticks = boss_Master.upDown_Ticks + 1
 boss_Master.coolDown_Ticks = boss_Master.coolDown_Ticks + 1
 local upDown_TimeElapsed = startTime + boss_Master.upDown_Ticks * (1/60)
@@ -17,6 +11,12 @@ function skillCD_Done()
         return true
     end
     return false
+end
+
+if (game_state == PAUSED) then
+    boss_Master.upDown_Ticks = 0
+    boss_Master.coolDown_Ticks = 0
+    boss_Master.fireRate_Ticks = 0
 end
 
 if (isBossAlive and (game_state == RUNNING or game_state == ENDED)) then
@@ -52,8 +52,10 @@ if (isBossAlive and (game_state == RUNNING or game_state == ENDED)) then
     -----------------------------
     -----------------------------
     -- Check cooldown timer
-    if (skillCD_Done()) then
+    if (skillCD_Done() and boss_Master.isCoolingDown) then
         -- TODO: pick an ability
+        print("Boss abilities are up")
+        boss_Master.isCoolingDown = false
     end
     
     -----------------------------
