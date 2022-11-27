@@ -24,10 +24,6 @@ isBossAlive = true
 fireBall_ID = {}
 pipe_ID = {}
 
--- Debugging
-debug_number = 69420
-debug_counter = 0
-
 -- Player options
 player_Master = {
     mass = 10,
@@ -39,22 +35,25 @@ player_Master = {
     posZ = 1.0,
     rotate_dir = 1,
     gravity_X = 3.0,
-    damage = 100.0
+    damage = 0.5
 }
 
-boss_Master = 
-{
+boss_Master = {
+    phase = 0,
+    isBobbing = true,
+    retreated = false,
+    retreating = false,
+    returning = false,
+    tempHealth = 0.0,
     posX = 155,
     posY = 0,
     posZ = 1.0,
     angle = 180,
-    healthPercent = 500.0,
+    healthPercent = 100.0,
     gravityY = 0.0,
     frequency = 0.5,
     amplitude = 75,
-    skillCoolDown = 10.0,
-    isCoolingDown = false,
-    isSpawningPipes = false,
+    skillCoolDown = 15.0,
     fireRate = 0.5,
     pipeRate = 1.85,
     upDown_Ticks = 0,
@@ -67,6 +66,11 @@ pipe_Master = {
     pipeSpeed = -100.0,
     pipeGap = 45.0
 }
+
+-- Retrieves y position relative to boss eye level
+function getBossEyeLevel()
+    return getPosition(boss_ID).y + 20
+end
 
 function getDeltaTime(elapsedTime)
     return elapsedTime - startTime
@@ -265,6 +269,15 @@ function resetGame()
     -- Reset states
     isPlayerAlive = true
     isBossAlive = true
+    
+    boss_Master.phase = 0
+    boss_Master.isCoolingDown = false
+    boss_Master.isSpawningPipes = false
+    boss_Master.isBobbing = true
+    boss_Master.retreated = false
+    boss_Master.retreating = false
+    boss_Master.returning = false
+    
     game_state = PAUSED
 
     -- Destroy all existing objects
