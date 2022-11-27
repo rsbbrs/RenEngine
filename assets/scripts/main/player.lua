@@ -69,6 +69,20 @@ if (game_state == RUNNING) then
     end
     -----------------------------
     -----------------------------
+
+    -----------------------------
+    -----------------------------
+    -- Hit by laser --
+    for i = 1, #laser_ID, 1 do
+        if (hasCollided(player_ID, laser_ID[i])) then
+            destroyEntity(table.remove(laser_ID))
+            playSound("Minecraft-OOF")
+            getRigidBody(player_ID).velocity.x = getRigidBody(player_ID).velocity.x - 30
+            getRigidBody(player_ID).gravity.x = player_Master.gravity_X
+        end
+    end
+    -----------------------------
+    -----------------------------
     
     -----------------------------
     -----------------------------

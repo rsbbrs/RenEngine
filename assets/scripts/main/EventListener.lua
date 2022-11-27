@@ -32,6 +32,12 @@ for i = 1, #pipe_ID, 1 do
     end
 end
 
+for i = 1, #laser_ID, 1 do
+    if (getPosition(laser_ID[i]).x < -200) then
+        destroyEntity(table.remove(laser_ID))
+    end
+end
+
 for i = 1, #fireBall_ID, 1 do
     if (getPosition(fireBall_ID[i]).x > 200) then
         destroyEntity(table.remove(fireBall_ID))

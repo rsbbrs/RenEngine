@@ -2,12 +2,12 @@
 EntityTable = {}
 -- EntityID Management for projectiles
 fireBall_ID = {}
+laser_ID = {}
 pipe_ID = {}
 
 -----------------------------
 -----------------------------
 -- Create Player Entity --
-
 -- keeps track of player input
 -- any new input needs to be recorded on this table
 player_Input = {
@@ -56,6 +56,44 @@ function spawnFireball()
     getRigidBody(fb).max.y = 0.0
     getBoxCollider(fb, getRigidBody(fb).min, getRigidBody(fb).max)
 
+end
+-----------------------------
+-----------------------------
+
+-----------------------------
+-----------------------------
+-- Spawn Boss laser --
+function spawnLaser()
+    laser = createEntity()
+
+    table.insert(laser_ID, 1, laser)
+
+    getSprite(laser).name = "Laser"
+
+    getPosition(laser).x = getPosition(boss_ID).x - 10.0
+    getPosition(laser).y = getPosition(boss_ID).y + 20
+    getPosition(laser).z = 0.6
+
+    getRigidBody(laser).velocity.x = -250.0
+    getRigidBody(laser).velocity.y = 0.0
+    getRigidBody(laser).acceleration.x = 0.0
+    getRigidBody(laser).acceleration.y = 0.0
+    getRigidBody(laser).gravity.x = 0.0
+    getRigidBody(laser).gravity.y = 0.0
+    getRigidBody(laser).force.x = 0.0
+    getRigidBody(laser).force.y = 0.0
+    getRigidBody(laser).mass = 10.0
+
+    getRigidBody(laser).static = true
+    getRigidBody(laser).trueRB = false
+    
+    getScale(laser).scale = 25
+
+    getRigidBody(laser).min.x = 0.0
+    getRigidBody(laser).min.y = 0.0
+    getRigidBody(laser).max.x = 0.0
+    getRigidBody(laser).max.y = 0.0
+    getBoxCollider(laser, getRigidBody(laser).min, getRigidBody(laser).max)
 end
 -----------------------------
 -----------------------------

@@ -29,6 +29,7 @@ end
 function fire(type)
     if (type == 1) then
         playSound("Gunshot_1")
+        spawnLaser()
     end
     boss_Master.fireRate_Ticks = 0
 end

@@ -1,7 +1,7 @@
 print("Loading assets...")
 
 Image_loaded = 0
-expected_Images = 12
+expected_Images = 13
 
 Sound_loaded = 0
 expected_Sounds = 8
@@ -17,6 +17,9 @@ if (loadImage("Ball", "sprites/ball.png")) then
     Image_loaded = Image_loaded + 1
     print(Image_loaded .."/" .. expected_Images .. " image assets loaded") end
 if (loadImage("Fireball", "sprites/fireBall.png")) then
+    Image_loaded = Image_loaded + 1
+    print(Image_loaded .."/" .. expected_Images .. " image assets loaded") end
+if (loadImage("Laser", "sprites/laser.png")) then
     Image_loaded = Image_loaded + 1
     print(Image_loaded .."/" .. expected_Images .. " image assets loaded") end
 if (loadImage("Player", "sprites/Wizard.png")) then 
@@ -65,7 +68,7 @@ loadSound("Flap", "sounds/flap.wav")
 Sound_loaded = Sound_loaded + 1
 print(Sound_loaded .."/" .. expected_Sounds .. " sound assets loaded")
 loadSound("Gunshot_1", "sounds/gunshot.mp3")
-setVolume("Gunshot_1", 0.35)
+setVolume("Gunshot_1", 0.25)
 Sound_loaded = Sound_loaded + 1
 print(Sound_loaded .."/" .. expected_Sounds .. " sound assets loaded")
 loadSound("Gunshot_2", "sounds/gunshot_2.mp3")
@@ -73,6 +76,7 @@ setVolume("Gunshot_2", 0.25)
 Sound_loaded = Sound_loaded + 1
 print(Sound_loaded .."/" .. expected_Sounds .. " sound assets loaded")
 loadSound("Minecraft-OOF", "sounds/MinecraftOOF.wav")
+setVolume("Minecraft-OOF", 1.25)
 Sound_loaded = Sound_loaded + 1
 print(Sound_loaded .."/" .. expected_Sounds .. " sound assets loaded")
 loadSound("Ouch", "sounds/Ouch_EditedUsingAudacity.mp3")
