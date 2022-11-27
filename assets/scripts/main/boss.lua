@@ -197,7 +197,6 @@ if (boss_Master.phase == 2) then
             pipe_Master.pipeGap = pipe_Master.pipeGap - 5
 
             -- For now 10 is the cap
-            -- Ai gets too smart after that
             if (boss_Master.retreatedCounter >= 10) then
                 boss_Master.retreatedCounter = 10
             end
@@ -216,21 +215,25 @@ if (boss_Master.phase == 2) then
     -- Boss retreated, handle aim ai and other stuff here --
     if (boss_Master.retreated and not skillCD_Done() and isPlayerAlive) then
 
-        fire(2)
+        -- fire(2)
         getPosition(EntityTable["Crosshair"]).y = getBossEyeLevel()
 
         -- Readjust boss to aim towards player
         if (getBossEyeLevel() > getPosition(EntityTable["Player"]).y) then
-            getRigidBody(bossID).gravity.y = -3.0 - (2.0 * boss_Master.retreatedCounter)
+            
+            getRigidBody(bossID).gravity.y = -1.0 + (-1.0 * boss_Master.retreatedCounter)
             getRigidBody(bossID).force.y = 10.0
 
-            if (getRigidBody(bossID).gravity.y >= -15.0) then
-                getRigidBody(bossID).gravity.y = -15.0
+            if (getRigidBody(bossID).gravity.y >= 15) then
+                getRigidBody(bossID).gravity.y = 15.0
             end
         end
 
-        if (getBossEyeLevel() < getPosition(EntityTable["Player"]).y) then
-            getRigidBody(bossID).gravity.y = 3.0 + (2.0 * boss_Master.retreatedCounter)
+        if (getBossEyeLevel() <= getPosition(EntityTable["Player"]).y) then
+
+            print("Below player")
+
+            getRigidBody(bossID).gravity.y = 1.0 + (1.0 * boss_Master.retreatedCounter)
             getRigidBody(bossID).force.y = 10.0
 
             if (getRigidBody(bossID).gravity.y >= 15) then
@@ -244,10 +247,8 @@ if (boss_Master.phase == 2) then
         if ( (getBossEyeLevel() <= getPosition(EntityTable["Player"]).y + 5) and (getBossEyeLevel() >= getPosition(EntityTable["Player"]).y - 5)) then
             boss_Master.fireRate = 0.15
             fire(1)
-            tempVelocity_Y = getRigidBody(bossID).velocity.y
-
             getRigidBody(bossID).velocity.y = getPosition(bossID).y / (0.5 + (1.0 * boss_Master.retreatedCounter))
-            
+            print("Potato")
         end
 
     end
