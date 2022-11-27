@@ -56,9 +56,11 @@ if (isBossAlive and (game_state == RUNNING or game_state == ENDED)) then
     end
 
     if (getHealth(bossID).percent <= 0) then
-        destroyEntity(bossID)
-        bossID = nil
         isBossAlive = false
+        state = ENDED
+        destroyEntity(EntityTable["Boss"])
+        EntityTable["Boss"] = nil
+        youWin()
     end
     -----------------------------
     -----------------------------

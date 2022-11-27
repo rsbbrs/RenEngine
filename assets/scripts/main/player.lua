@@ -1,3 +1,5 @@
+local player_ID = EntityTable["Player"]
+
 
 -- Initiates the game --
 if( keyPressed(input_code.enter) and game_state == PAUSED) then
@@ -14,6 +16,8 @@ if( keyPressed(input_code.enter) and game_state == PAUSED) then
     player_Input.shoot = false
 
     game_state = RUNNING
+    playSound("Boss_Theme")
+    setLooping("Boss_Theme", 1)
 end
 -----------------------------
 -----------------------------
@@ -95,6 +99,8 @@ if (game_state == RUNNING) then
         game_state = ENDED
         destroyEntity(EntityTable["Player"])
         EntityTable["Player"] = nil
+
+        youLose()
     end
     -----------------------------
     -----------------------------

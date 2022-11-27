@@ -147,9 +147,6 @@ end
 -----------------------------
 -----------------------------
 -- Create EventListener Entity --
-event_State = {
-    themePlaying = false
-}
 eventListener_ID = createEntity()
 eventListener_filepath = rootpath .. "EventListener.lua"
 if (loadScript("EventListener", eventListener_filepath, false)) then

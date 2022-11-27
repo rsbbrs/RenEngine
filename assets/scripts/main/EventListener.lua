@@ -8,25 +8,7 @@ if (keyPressed(input_code.escape)) then
     quit()
 end
 
-if (game_state == RUNNING and not event_State.themePlaying) then
-    playSound("Boss_Theme")
-    setLooping("Boss_Theme", 1)
-    event_State.themePlaying = true
-end
-
-if (game_state == ENDED) then
-    
-    stopSound("Boss_Theme")
-    event_State.themePlaying = false
-    
-    if (isPlayerAlive and not isBossAlive) then
-        print("\t-- YOU WIN! :) --")
-    end
-
-    if (not isPlayerAlive and isBossAlive) then
-        print("\t-- YOU LOSE! ): --")
-    end
-
+if (game_state == ENDED or game_state == WAITING) then
     -- Restart
     if (keyPressed(input_code.r) or keyPressed(input_code.left_ctrl)) then
         resetGame()

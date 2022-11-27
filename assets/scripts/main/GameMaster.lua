@@ -13,6 +13,7 @@ ticks = 0
 PAUSED = -1
 RUNNING = 0
 ENDED = 1
+WAITING = 2
 
 game_state = PAUSED
 
@@ -38,7 +39,7 @@ player_Master = {
     posZ = 1.0,
     rotate_dir = 1,
     gravity_X = 3.0,
-    damage = 5.0
+    damage = 100.0
 }
 
 boss_Master = 
@@ -292,6 +293,19 @@ function resetGame()
     createPlayer()
     createBoss()
 end
+
+function youWin()
+    print("\t-- YOU WIN! --")
+end
+
+function youLose()
+    stopSound("Boss_Theme")
+
+    if (isBossAlive) then
+        print("\t-- YOU LOSE! --")
+    end
+end
+
 -- Create EntityManager --
 em_filepath = "scripts/main/EntityManager.lua"
 if (loadScript("EntityManager", em_filepath, true)) then
