@@ -179,6 +179,19 @@ if (boss_Master.phase == 2) then
             boss_Master.retreating = false
             boss_Master.isBobbing = true
             boss_Master.coolDown_Ticks = 0
+
+            boss_Master.retreatedCounter  = boss_Master.retreatedCounter + 1
+            pipe_Master.pipeGap = pipe_Master.pipeGap - 5
+
+            -- For now 10 is the cap
+            -- Ai gets too smart after that
+            if (boss_Master.retreatedCounter >= 10) then
+                boss_Master.retreatedCounter = 10
+            end
+            if (pipe_Master.pipeGap <= 25) then
+                pipe_Master.pipeGap = 25
+            end
+
         end
     end
 
@@ -186,10 +199,15 @@ if (boss_Master.phase == 2) then
 
         fire(2)
         -- approximate where player is located and fire lasers at them
-        if ( (getBossEyeLevel() <= getPosition(player_ID).y + 20) and (getBossEyeLevel() >= getPosition(player_ID).y - 20)) then
+        if ( (getBossEyeLevel() <= getPosition(player_ID).y + 10 + boss_Master.retreatedCounter) and (getBossEyeLevel() >= getPosition(player_ID).y - 10 + boss_Master.retreatedCounter)) then
             boss_Master.fireRate = 0.15
             fire(1)
         end
+
+        -- if ( (getBossEyeLevel() >= getPosition(player_ID).y - 30)) then
+        --     boss_Master.fireRate = 0.15
+        --     fire(1)
+        -- end
     end
 
     if (boss_Master.retreated and skillCD_Done() and not boss_Master.returning) then

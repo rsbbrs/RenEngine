@@ -44,6 +44,7 @@ boss_Master = {
     retreated = false,
     retreating = false,
     returning = false,
+    retreatedCounter = 0,
     tempHealth = 0.0,
     posX = 155,
     posY = 0,
@@ -65,6 +66,7 @@ boss_Master = {
 
 pipe_Master = {
     pipeSpeed = -100.0,
+    temp_pipeGap = 45.0,
     pipeGap = 45.0
 }
 
@@ -276,8 +278,12 @@ function resetGame()
     boss_Master.isSpawningPipes = false
     boss_Master.isBobbing = true
     boss_Master.retreated = false
+    boss_Master.retreatedCounter = 0
     boss_Master.retreating = false
     boss_Master.returning = false
+    pipe_Master.pipeGap = pipe_Master.temp_pipeGap
+
+    boss_Master.fireRate = boss_Master.temp_fireRate
     
     game_state = PAUSED
 
