@@ -216,12 +216,14 @@ if (boss_Master.phase == 2) then
     -- Boss retreated, handle aim ai and other stuff here --
     if (boss_Master.retreated and not skillCD_Done() and isPlayerAlive) then
 
+        direction = 0
+
         fire(2)
         getPosition(EntityTable["Crosshair"]).y = getBossEyeLevel()
 
         -- Readjust boss to aim towards player
         if (getBossEyeLevel() > getPosition(EntityTable["Player"]).y) then
-            
+            direction = 1
             getRigidBody(bossID).gravity.y = -1.0 + (-1.0 * boss_Master.retreatedCounter)
             getRigidBody(bossID).force.y = 10.0
 
@@ -231,7 +233,7 @@ if (boss_Master.phase == 2) then
         end
 
         if (getBossEyeLevel() <= getPosition(EntityTable["Player"]).y) then
-
+            direction = -1
             getRigidBody(bossID).gravity.y = 1.0 + (1.0 * boss_Master.retreatedCounter)
             getRigidBody(bossID).force.y = 10.0
 
@@ -246,7 +248,15 @@ if (boss_Master.phase == 2) then
         if ( (getBossEyeLevel() <= getPosition(EntityTable["Player"]).y + 5) and (getBossEyeLevel() >= getPosition(EntityTable["Player"]).y - 5)) then
             boss_Master.fireRate = 0.15
             fire(1)
-            getRigidBody(bossID).velocity.y = getPosition(bossID).y / (0.5 + (1.0 * boss_Master.retreatedCounter))
+            
+
+            if (direction == 1) then
+                getRigidBody(bossID).velocity.y = getPosition(bossID).y / (0.5 + (1.0 * boss_Master.retreatedCounter))
+            end
+
+            if (direction == -1) then
+                getRigidBody(bossID).velocity.y = getPosition(bossID).y / (0.5 + (1.0 * boss_Master.retreatedCounter)) * direction
+            end
         end
 
     end
