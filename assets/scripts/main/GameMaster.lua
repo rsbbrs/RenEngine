@@ -72,7 +72,7 @@ pipe_Master = {
 
 -- Retrieves y position relative to boss eye level
 function getBossEyeLevel()
-    return getPosition(boss_ID).y + 20
+    return getPosition(EntityTable["Boss"]).y + 20
 end
 
 function getDeltaTime(elapsedTime)
@@ -284,11 +284,6 @@ function resetGame()
     boss_Master.fireRate = boss_Master.temp_fireRate
 
     pipe_Master.pipeGap = pipe_Master.temp_pipeGap
-
-    if (crossHair_ID > 0) then
-        destroyEntity(crossHair_ID)
-    end
-    crossHair_ID = -1
     
     game_state = PAUSED
 
@@ -307,14 +302,21 @@ function resetGame()
 
     if (EntityTable["Boss"]) then
         destroyEntity(EntityTable["Boss"])
+        EntityTable["Boss"] = nil
     end
 
     if (EntityTable["Player"]) then
         destroyEntity(EntityTable["Player"])
+        EntityTable["Player"] = nil
     end
 
-    EntityTable["Boss"] = nil    
-    EntityTable["Player"] = nil
+    if(EntityTable["Crosshair"]) then
+        destroyEntity(EntityTable["Crosshair"])
+        EntityTable["Crosshair"] = nil
+    end
+
+        
+    
 
     -- Create player and boss
     createPlayer()

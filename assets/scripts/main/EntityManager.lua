@@ -4,7 +4,6 @@ EntityTable = {}
 fireBall_ID = {}
 laser_ID = {}
 pipe_ID = {}
-crossHair_ID = -1
 
 -----------------------------
 -----------------------------
@@ -24,7 +23,6 @@ createBoss()
 -----------------------------
 -----------------------------
 -- Spawn Fireball --
-
 function spawnFireball()
     fb = createEntity()
 
@@ -184,11 +182,8 @@ end
 function spawnCrossHair()
     
     crossHair = createEntity()    
-
-    crossHair_ID = crossHair
+    EntityTable["Crosshair"] = crossHair
     getSprite(crossHair).name = "Crosshair"
-
-    
 
     getPosition(crossHair).x = getPosition(EntityTable["Player"]).x
     getPosition(crossHair).y = getPosition(EntityTable["Boss"]).y

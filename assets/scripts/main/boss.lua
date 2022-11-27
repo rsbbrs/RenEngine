@@ -86,7 +86,7 @@ if (isBossAlive and (game_state == RUNNING or game_state == ENDED)) then
     -----------------------------
     -----------------------------
     -- Boss bobs up and down --
-    if (boss_Master.isBobbing) then
+    if (boss_Master.isBobbing and not boss_Master.retreated) then
         getPosition(bossID).y = math.sin(getDeltaTime(upDown_TimeElapsed) * boss_Master.frequency) * boss_Master.amplitude + boss_Master.posY
     end
     -----------------------------
@@ -107,14 +107,25 @@ if (isBossAlive and (game_state == RUNNING or game_state == ENDED)) then
 
     -----------------------------
     -----------------------------
+
     -- Activate phase 1
-    if (getHealth(boss_ID).percent > 75.0) then
+    if (getHealth(bossID).percent > 75.0) then
         boss_Master.phase = 1
+
+        -- phase 0 does nothing
+        if (not isPlayerAlive) then
+            boss_Master.phase = 0
+        end
     end
 
     -- Activate phase 2
-    if (getHealth(boss_ID).percent <= 75.0 and getHealth(boss_ID).percent > 50.0) then
+    if (getHealth(bossID).percent <= 75.0 and getHealth(bossID).percent > 50.0) then
         boss_Master.phase = 2
+
+        -- phase 0 does nothing
+        if (not isPlayerAlive) then
+            boss_Master.phase = 0
+        end
     end
 
     -- Activate phase 3
@@ -132,19 +143,19 @@ end -- End of condition
 
 function retreating()
     if (not boss_Master.retreated) then
-        if (getPosition(boss_ID).y <= 10 and getPosition(boss_ID).y >= -10) then
+        if (getPosition(bossID).y <= 10 and getPosition(bossID).y >= -10) then
             boss_Master.isBobbing = false
-            getRigidBody(boss_ID).gravity.x = 5.0
-            getRigidBody(boss_ID).force.x = 10.0
+            getRigidBody(bossID).gravity.x = 5.0
+            getRigidBody(bossID).force.x = 10.0
         end
     end
 end
 
 function retreatReturn()
-    getPosition(boss_ID).y = 0
+    getPosition(bossID).y = 0
 
-    getRigidBody(boss_ID).gravity.x = -8.0
-    getRigidBody(boss_ID).force.x = 10.0
+    getRigidBody(bossID).gravity.x = -8.0
+    getRigidBody(bossID).force.x = 10.0
 end
 
 
@@ -166,17 +177,17 @@ if (boss_Master.phase == 2) then
 
     if (skillCD_Done() and not boss_Master.retreated) then
         boss_Master.retreating = true
-        boss_Master.tempHealth = getHealth(boss_ID).percent
+        boss_Master.tempHealth = getHealth(bossID).percent
     end
 
     if (boss_Master.retreating) then
-        getHealth(boss_ID).percent = boss_Master.tempHealth
+        getHealth(bossID).percent = boss_Master.tempHealth
         retreating()
-        if (getPosition(boss_ID).x >= 300) then
-            getPosition(boss_ID).x = 300
-            getRigidBody(boss_ID).gravity.x = 0.0
-            getRigidBody(boss_ID).velocity.x = 0.0
-            getRigidBody(boss_ID).force.x = 0.0
+        if (getPosition(bossID).x >= 300) then
+            getPosition(bossID).x = 300
+            getRigidBody(bossID).gravity.x = 0.0
+            getRigidBody(bossID).velocity.x = 0.0
+            getRigidBody(bossID).force.x = 0.0
             boss_Master.retreated = true
             boss_Master.retreating = false
             boss_Master.isBobbing = true
@@ -194,46 +205,76 @@ if (boss_Master.phase == 2) then
                 pipe_Master.pipeGap = 25
             end
 
-            spawnCrossHair()
-
+            if (isPlayerAlive) then
+                spawnCrossHair()
+            end
+            
+            boss_Master.upDown_Ticks = 0
         end
     end
 
-    if (boss_Master.retreated and not skillCD_Done()) then
+    -- Boss retreated, handle aim ai and other stuff here --
+    if (boss_Master.retreated and not skillCD_Done() and isPlayerAlive) then
 
         fire(2)
+        getPosition(EntityTable["Crosshair"]).y = getBossEyeLevel()
 
-        getPosition(crossHair_ID).y = getBossEyeLevel()
+        -- Readjust boss to aim towards player
+        if (getBossEyeLevel() > getPosition(EntityTable["Player"]).y) then
+            getRigidBody(bossID).gravity.y = -5.0 - (2.0 * boss_Master.retreatedCounter)
+            getRigidBody(bossID).force.y = 10.0
 
-        -- approximate where player is located and fire lasers at them
-        if ( (getBossEyeLevel() <= getPosition(player_ID).y + 10 + boss_Master.retreatedCounter) and (getBossEyeLevel() >= getPosition(player_ID).y - 10 + boss_Master.retreatedCounter)) then
-            boss_Master.fireRate = 0.15
-            fire(1)
+            if (getRigidBody(bossID).gravity.y >= -15.0) then
+                getRigidBody(bossID).gravity.y = -15.0
+            end
         end
 
-        -- if ( (getBossEyeLevel() >= getPosition(player_ID).y - 30)) then
-        --     boss_Master.fireRate = 0.15
-        --     fire(1)
-        -- end
+        if (getBossEyeLevel() < getPosition(EntityTable["Player"]).y) then
+            getRigidBody(bossID).gravity.y = 5.0 + (2.0 * boss_Master.retreatedCounter)
+            getRigidBody(bossID).force.y = 10.0
+
+            if (getRigidBody(bossID).gravity.y >= 15) then
+                getRigidBody(bossID).gravity.y = 15.0
+            end
+        end
+
+        -- getPosition(bossID).y = math.sin(getDeltaTime(upDown_TimeElapsed) * boss_Master.frequency) * 30 + getPosition(EntityTable["Player"]).y
+
+        -- approximate where player is located and fire lasers at them
+        if ( (getBossEyeLevel() <= getPosition(EntityTable["Player"]).y + 5) and (getBossEyeLevel() >= getPosition(EntityTable["Player"]).y - 5)) then
+            boss_Master.fireRate = 0.15
+            fire(1)
+            tempVelocity_Y = getRigidBody(bossID).velocity.y
+
+            getRigidBody(bossID).velocity.y = getPosition(bossID).y / (0.5 + (1.0 * boss_Master.retreatedCounter))
+            
+        end
+
     end
 
     if (boss_Master.retreated and skillCD_Done() and not boss_Master.returning) then
         -- Return back to original position
         boss_Master.returning = true
         boss_Master.retreated = false
-        destroyEntity(crossHair_ID)
-        crossHair_ID = -1
+        destroyEntity(EntityTable["Crosshair"])
+        EntityTable["Crosshair"] = nil
         retreatReturn()
     end
 
     if (boss_Master.returning) then
-        if (getPosition(boss_ID).x <= boss_Master.posX) then
+        getRigidBody(bossID).gravity.y = 0.0
+        getRigidBody(bossID).acceleration.y = 0.0
+        getRigidBody(bossID).force.y = 0.0
+        getRigidBody(bossID).velocity.y = 0.0
+
+        if (getPosition(bossID).x <= boss_Master.posX) then
             
             boss_Master.fireRate = boss_Master.temp_fireRate
-            getPosition(boss_ID).x = boss_Master.posX
-            getRigidBody(boss_ID).gravity.x = 0.0
-            getRigidBody(boss_ID).velocity.x = 0.0
-            getRigidBody(boss_ID).force.x = 0.0
+            getPosition(bossID).x = boss_Master.posX
+            getRigidBody(bossID).gravity.x = 0.0
+            getRigidBody(bossID).velocity.x = 0.0
+            getRigidBody(bossID).force.x = 0.0
+            getRigidBody(bossID).acceleration.x = 0.0
             boss_Master.upDown_Ticks = 0
             boss_Master.returning = false
             boss_Master.retreated = false
