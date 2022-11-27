@@ -65,6 +65,7 @@ loadSound("Flap", "sounds/flap.wav")
 Sound_loaded = Sound_loaded + 1
 print(Sound_loaded .."/" .. expected_Sounds .. " sound assets loaded")
 loadSound("Gunshot_1", "sounds/gunshot.mp3")
+setVolume("Gunshot_1", 0.35)
 Sound_loaded = Sound_loaded + 1
 print(Sound_loaded .."/" .. expected_Sounds .. " sound assets loaded")
 loadSound("Gunshot_2", "sounds/gunshot_2.mp3")

@@ -81,9 +81,13 @@ if (isBossAlive and (game_state == RUNNING or game_state == ENDED)) then
     end
     
     -- Firerate
-    if (canFire()) then
+    if (canFire() and isPlayerAlive) then
         fire(1)
     end
     -----------------------------
     -----------------------------
+
+    if (not isPlayerAlive) then
+        stopSound("Gunshot_1")
+    end
 end
