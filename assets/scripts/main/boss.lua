@@ -3,10 +3,12 @@ local bossID = EntityTable["Boss"]
 boss_Master.upDown_Ticks = boss_Master.upDown_Ticks + 1
 boss_Master.coolDown_Ticks = boss_Master.coolDown_Ticks + 1
 boss_Master.fireRate_Ticks = boss_Master.fireRate_Ticks + 1
+boss_Master.pipeRate_Ticks = boss_Master.pipeRate_Ticks + 1
 
 local upDown_TimeElapsed = startTime + boss_Master.upDown_Ticks * (1/60)
 local coolDown_TimeElapsed = startTime + boss_Master.coolDown_Ticks * (1/60)
 local fireRate_TimeElapsed = startTime + boss_Master.fireRate_Ticks * (1/60)
+local pipeRate_TimeElapsed = startTime + boss_Master.pipeRate_Ticks * (1/60)
 
 function skillCD_Done()
     if (getDeltaTime(coolDown_TimeElapsed) >= boss_Master.skillCoolDown) then
@@ -23,6 +25,13 @@ function canFire()
     return false
 end
 
+function canSpawnPipe()
+    if (getDeltaTime(pipeRate_TimeElapsed) >= boss_Master.pipeRate) then
+        return true
+    end
+    return false
+end
+
 -- type = 1 --> FIREBALL or basic projectile
 -- type = 2 --> pipes
 -- type = 3 --> something else
@@ -30,8 +39,13 @@ function fire(type)
     if (type == 1) then
         playSound("Gunshot_1")
         spawnLaser()
+        boss_Master.fireRate_Ticks = 0
     end
-    boss_Master.fireRate_Ticks = 0
+
+    if (type == 2) then
+        spawnPipe()
+        boss_Master.pipeRate_Ticks = 0
+    end    
 end
 
 if (game_state == PAUSED) then
@@ -67,7 +81,7 @@ if (isBossAlive and (game_state == RUNNING or game_state == ENDED)) then
 
     -----------------------------
     -----------------------------
-    -- Boss moves up and down --
+    -- Boss bobs up and down --
     getPosition(bossID).y = math.sin(getDeltaTime(upDown_TimeElapsed) * boss_Master.frequency) * boss_Master.amplitude + boss_Master.posY
     -----------------------------
     -----------------------------
@@ -85,7 +99,11 @@ if (isBossAlive and (game_state == RUNNING or game_state == ENDED)) then
     
     -- Firerate
     if (canFire() and isPlayerAlive) then
-        fire(1)
+        -- fire(1)
+    end
+
+    if (canSpawnPipe() and isPlayerAlive) then
+        fire(2)
     end
     -----------------------------
     -----------------------------

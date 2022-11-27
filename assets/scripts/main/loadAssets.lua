@@ -25,7 +25,7 @@ if (loadImage("Laser", "sprites/laser.png")) then
 if (loadImage("Player", "sprites/Wizard.png")) then 
     Image_loaded = Image_loaded + 1
     print(Image_loaded .."/" .. expected_Images .. " image assets loaded")end
-if (loadImage("Pipe", "sprites/pipe.png")) then
+if (loadImage("Pipe", "sprites/longer_pipe.png")) then
     Image_loaded = Image_loaded + 1
     print(Image_loaded .."/" .. expected_Images .. " image assets loaded") end
 if (loadImage("Spaceship", "sprites/Spaceship.png")) then

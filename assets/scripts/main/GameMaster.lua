@@ -31,7 +31,7 @@ debug_counter = 0
 -- Player options
 player_Master = {
     mass = 10,
-    hopStrength = 80,
+    hopStrength = 90,
     mass = 5.0,
     damage = 10,
     posX = -95,
@@ -53,17 +53,19 @@ boss_Master =
     frequency = 0.5,
     amplitude = 75,
     skillCoolDown = 10.0,
-    isCoolingDown = true,
+    isCoolingDown = false,
+    isSpawningPipes = false,
     fireRate = 0.5,
+    pipeRate = 1.85,
     upDown_Ticks = 0,
     coolDown_Ticks = 0,
     fireRate_Ticks = 0,
+    pipeRate_Ticks = 0
 }
 
 pipe_Master = {
-    spawnTrigger_X = 50,
-    hasSpawned = false,
-    pipeSpeed = -40
+    pipeSpeed = -100.0,
+    pipeGap = 45.0
 }
 
 function getDeltaTime(elapsedTime)
@@ -295,6 +297,14 @@ function resetGame()
 end
 
 function youWin()
+    for i = 1, #pipe_ID, 1 do
+        destroyEntity(table.remove(pipe_ID))
+    end
+    
+    for i = 1, #laser_ID, 1 do
+        destroyEntity(table.remove(laser_ID))
+    end
+
     print("\t-- YOU WIN! --")
 end
 

@@ -101,22 +101,24 @@ end
 -----------------------------
 -----------------------------
 -- Spawn Pipe --
-function spawnPipe(x, y)
+function spawnPipe()
     pipe = createEntity()
+    pipe2 = createEntity()
 
     table.insert(pipe_ID, 1, pipe)
-    -- print("Pipe table size: " .. #pipe_ID)
-    -- for i = 1, #pipe_ID, 1 do
-    --     print("Pipe id: " .. pipe_ID[i])
-    -- end
+    table.insert(pipe_ID, 1, pipe2)
+
+    offset = math.random(20, 170)
 
     getSprite(pipe).name = "Pipe"
 
-    getPosition(pipe).x = x
-    getPosition(pipe).y = y
+    getPosition(pipe).x = 200
+    getPosition(pipe).y = 190 - offset
     getPosition(pipe).z = 0.5
 
-    getRigidBody(pipe).velocity.x = -40.0
+    getRotation(pipe).angle = 180
+
+    getRigidBody(pipe).velocity.x = pipe_Master.pipeSpeed
     getRigidBody(pipe).velocity.y = 0.0
 
     getRigidBody(pipe).acceleration.x = 0.0
@@ -133,13 +135,46 @@ function spawnPipe(x, y)
     getRigidBody(pipe).static = true
     getRigidBody(pipe).trueRB = true
 
-    getScale(pipe).scale = 50
+    getScale(pipe).scale = 90
 
     getRigidBody(pipe).min.x = 0.0
     getRigidBody(pipe).min.y = 0.0
     getRigidBody(pipe).max.x = 0.0
     getRigidBody(pipe).max.y = 0.0
     getBoxCollider(pipe, getRigidBody(pipe).min, getRigidBody(pipe).max)
+
+
+
+    getSprite(pipe2).name = "Pipe"
+
+    getPosition(pipe2).x = 200
+    getPosition(pipe2).y = 15 - pipe_Master.pipeGap - offset
+    getPosition(pipe2).z = 0.5
+
+    getRigidBody(pipe2).velocity.x = pipe_Master.pipeSpeed
+    getRigidBody(pipe2).velocity.y = 0.0
+
+    getRigidBody(pipe2).acceleration.x = 0.0
+    getRigidBody(pipe2).acceleration.y = 0.0
+
+    getRigidBody(pipe2).gravity.x = 0.0
+    getRigidBody(pipe2).gravity.y = 0.0
+
+    getRigidBody(pipe2).force.x = 0.0
+    getRigidBody(pipe2).force.y = 0.0
+
+    getRigidBody(pipe2).mass = 10.0
+
+    getRigidBody(pipe2).static = true
+    getRigidBody(pipe2).trueRB = true
+
+    getScale(pipe2).scale = 90
+
+    getRigidBody(pipe2).min.x = 0.0
+    getRigidBody(pipe2).min.y = 0.0
+    getRigidBody(pipe2).max.x = 0.0
+    getRigidBody(pipe2).max.y = 0.0
+    getBoxCollider(pipe2, getRigidBody(pipe2).min, getRigidBody(pipe2).max)
 end
 -----------------------------
 -----------------------------
