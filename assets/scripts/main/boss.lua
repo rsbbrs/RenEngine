@@ -2,10 +2,22 @@ local bossID = EntityTable["Boss"]
 
 if (game_state == PAUSED) then
     boss_Master.upDown_Ticks = 0
+    boss_Master.coolDown_Ticks = 0
+    boss_Master.fireRate_Ticks = 0
 end
 
 boss_Master.upDown_Ticks = boss_Master.upDown_Ticks + 1
-upDown_TimeElapsed = startTime + boss_Master.upDown_Ticks * (1/60)
+boss_Master.coolDown_Ticks = boss_Master.coolDown_Ticks + 1
+local upDown_TimeElapsed = startTime + boss_Master.upDown_Ticks * (1/60)
+local coolDown_TimeElapsed = startTime + boss_Master.coolDown_Ticks * (1/60)
+
+function skillCD_Done()
+    if (getDeltaTime(coolDown_TimeElapsed) >= boss_Master.skillCoolDown) then
+        boss_Master.coolDown_Ticks = 0
+        return true
+    end
+    return false
+end
 
 if (isBossAlive and (game_state == RUNNING or game_state == ENDED)) then
 
@@ -34,6 +46,16 @@ if (isBossAlive and (game_state == RUNNING or game_state == ENDED)) then
     -----------------------------
     -- Boss moves up and down --
     getPosition(bossID).y = math.sin(getDeltaTime(upDown_TimeElapsed) * boss_Master.frequency) * boss_Master.amplitude + boss_Master.posY
+    -----------------------------
+    -----------------------------
+
+    -----------------------------
+    -----------------------------
+    -- Check cooldown timer
+    if (skillCD_Done()) then
+        -- TODO: pick an ability
+    end
+    
     -----------------------------
     -----------------------------
 end

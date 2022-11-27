@@ -13,7 +13,6 @@ ticks = 0
 PAUSED = -1
 RUNNING = 0
 ENDED = 1
-PHASE_NUMBER = 0
 
 game_state = PAUSED
 
@@ -52,7 +51,10 @@ boss_Master =
     gravityY = 0.0,
     frequency = 0.5,
     amplitude = 75,
-    upDown_Ticks = 0
+    skillCoolDown = 10.0,
+    upDown_Ticks = 0,
+    coolDown_Ticks = 0,
+    fireRate_Ticks = 0,
 }
 
 pipe_Master = {
@@ -259,7 +261,6 @@ function resetGame()
     isPlayerAlive = true
     isBossAlive = true
     game_state = PAUSED
-    PHASE_NUMBER = 0
 
     -- Destroy all existing objects
     for i = 1, #pipe_ID, 1 do
