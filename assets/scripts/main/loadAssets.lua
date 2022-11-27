@@ -87,6 +87,12 @@ print("----------------------------------------")
 -----------------------------
 -----------------------------
 
+-- Load Background Scripts --
+if(loadScript("Background", "scripts/main/background.lua", false)) then
+    print("background.lua loaded")
+else
+    print("Failed to load background.lua")
+end
 -----------------------------
 -----------------------------
 -- Load GameMaster and other stuff --

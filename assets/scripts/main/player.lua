@@ -1,5 +1,5 @@
 
--- Initiates physics simulation --
+-- Initiates the game --
 if( keyPressed(input_code.enter) and game_state == PAUSED) then
     getRigidBody(player_ID).velocity.x = 0.0
     getRigidBody(player_ID).velocity.y = 0.0

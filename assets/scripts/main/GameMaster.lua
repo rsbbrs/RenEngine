@@ -1,5 +1,6 @@
 -- Keeps track of existing significant entities (i.e., player and boss)
 EntityTable = {}
+BgTable = {}
 
 -- root path for scripts
 rootpath = "scripts/main/"
@@ -135,12 +136,9 @@ function createBoss()
 end
 
 function createBackground()
+    -- Sky background layer.
     layer_0 = createEntity()
-    layer_1 = createEntity()
-    layer_2 = createEntity()
-    layer_3 = createEntity()
-    layer_4 = createEntity()
-
+    BgTable[0] = layer_0
     getSprite(layer_0).name = "Bg_Layer_0"
     getSprite(layer_0).rigidBody = false
     getPosition(layer_0).x = 0.0
@@ -149,37 +147,98 @@ function createBackground()
     getRotation(layer_0).angle = 180;
     getScale(layer_0).scale = 200
 
-    getSprite(layer_1).name = "Bg_Layer_1"
-    getSprite(layer_1).rigidBody = false
-    getPosition(layer_1).x = 0.0
-    getPosition(layer_1).y = 0.0
-    getPosition(layer_1).z = 1.0
-    getRotation(layer_1).angle = 180;
-    getScale(layer_1).scale = 200
+    -- Clouds background layer.
+    layer_1_1 = createEntity()
+    layer_1_2 = createEntity()
+    BgTable[1] = layer_1_1
+    BgTable[2] = layer_1_2
 
-    getSprite(layer_2).name = "Bg_Layer_2"
-    getSprite(layer_2).rigidBody = false
-    getPosition(layer_2).x = 0.0
-    getPosition(layer_2).y = 0.0
-    getPosition(layer_2).z = 1.0
-    getRotation(layer_2).angle = 180;
-    getScale(layer_2).scale = 200
+    getSprite(layer_1_1).name = "Bg_Layer_1"
+    getSprite(layer_1_1).rigidBody = false
+    getPosition(layer_1_1).x = 0.0
+    getPosition(layer_1_1).y = 0.0
+    getPosition(layer_1_1).z = 1.0
+    getRotation(layer_1_1).angle = 180;
+    getScale(layer_1_1).scale = 200
 
-    getSprite(layer_3).name = "Bg_Layer_3"
-    getSprite(layer_3).rigidBody = false
-    getPosition(layer_3).x = 0.0
-    getPosition(layer_3).y = 0.0
-    getPosition(layer_3).z = 1.0
-    getRotation(layer_3).angle = 180;
-    getScale(layer_3).scale = 200
+    getSprite(layer_1_2).name = "Bg_Layer_1"
+    getSprite(layer_1_2).rigidBody = false
+    getPosition(layer_1_2).x = 380.0
+    getPosition(layer_1_2).y = 0.0
+    getPosition(layer_1_2).z = 1.0
+    getRotation(layer_1_2).angle = 180;
+    getScale(layer_1_2).scale = 200
 
-    getSprite(layer_4).name = "Bg_Layer_4"
-    getSprite(layer_4).rigidBody = false
-    getPosition(layer_4).x = 0.0
-    getPosition(layer_4).y = 0.0
-    getPosition(layer_4).z = 1.0
-    getRotation(layer_4).angle = 180;
-    getScale(layer_4).scale = 200
+    -- White mountain layer.
+    layer_2_1 = createEntity()
+    layer_2_2 = createEntity()
+    BgTable[3] = layer_2_1
+    BgTable[4] = layer_2_2
+
+    getSprite(layer_2_1).name = "Bg_Layer_2"
+    getSprite(layer_2_1).rigidBody = false
+    getPosition(layer_2_1).x = 0.0
+    getPosition(layer_2_1).y = -15.0
+    getPosition(layer_2_1).z = 1.0
+    getRotation(layer_2_1).angle = 180;
+    getScale(layer_2_1).scale = 200
+
+    getSprite(layer_2_2).name = "Bg_Layer_2"
+    getSprite(layer_2_2).rigidBody = false
+    getPosition(layer_2_2).x = 360.0
+    getPosition(layer_2_2).y = -15.0
+    getPosition(layer_2_2).z = 1.0
+    getRotation(layer_2_2).angle = 180;
+    getScale(layer_2_2).scale = 200
+
+    -- Brown mountain layer.
+    layer_3_1 = createEntity()
+    layer_3_2 = createEntity()
+    BgTable[5] = layer_3_1
+    BgTable[6] = layer_3_2
+
+    getSprite(layer_3_1).name = "Bg_Layer_3"
+    getSprite(layer_3_1).rigidBody = false
+    getPosition(layer_3_1).x = 0.0
+    getPosition(layer_3_1).y = -30.0
+    getPosition(layer_3_1).z = 1.0
+    getRotation(layer_3_1).angle = 180;
+    getScale(layer_3_1).scale = 200
+
+    getSprite(layer_3_2).name = "Bg_Layer_3"
+    getSprite(layer_3_2).rigidBody = false
+    getPosition(layer_3_2).x = 380.0
+    getPosition(layer_3_2).y = -30.0
+    getPosition(layer_3_2).z = 1.0
+    getRotation(layer_3_2).angle = 180;
+    getScale(layer_3_2).scale = 200
+
+    -- Forest layer.
+    layer_4_1 = createEntity()
+    layer_4_2 = createEntity()
+    BgTable[7] = layer_4_1
+    BgTable[8] = layer_4_2
+
+    getSprite(layer_4_1).name = "Bg_Layer_4"
+    getSprite(layer_4_1).rigidBody = false
+    getPosition(layer_4_1).x = 0.0
+    getPosition(layer_4_1).y = -30.0
+    getPosition(layer_4_1).z = 1.0
+    getRotation(layer_4_1).angle = 180;
+    getScale(layer_4_1).scale = 200
+
+    getSprite(layer_4_2).name = "Bg_Layer_4"
+    getSprite(layer_4_2).rigidBody = false
+    getPosition(layer_4_2).x = -380.0
+    getPosition(layer_4_2).y = -30.0
+    getPosition(layer_4_2).z = 1.0
+    getRotation(layer_4_2).angle = 180;
+    getScale(layer_4_2).scale = 200
+
+    -- Entity responsible for updating moving background.
+    bgManager = createEntity()
+    getScript(bgManager).name = "Background"
+    getScript(bgManager).path = filePath("scripts/main/background.lua")
 end
 
 function resetGame()
