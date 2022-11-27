@@ -273,6 +273,10 @@ function resetGame()
         destroyEntity(table.remove(fireBall_ID))
     end
 
+    for i = 1, #laser_ID, 1 do
+        destroyEntity(table.remove(laser_ID))
+    end
+
     if (EntityTable["Boss"]) then
         destroyEntity(EntityTable["Boss"])
     end

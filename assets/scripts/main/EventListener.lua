@@ -19,6 +19,14 @@ if (game_state == ENDED) then
     stopSound("Boss_Theme")
     event_State.themePlaying = false
     
+    if (isPlayerAlive and not isBossAlive) then
+        print("\t-- YOU WIN! :) --")
+    end
+
+    if (not isPlayerAlive and isBossAlive) then
+        print("\t-- YOU LOSE! ): --")
+    end
+
     -- Restart
     if (keyPressed(input_code.r) or keyPressed(input_code.left_ctrl)) then
         resetGame()

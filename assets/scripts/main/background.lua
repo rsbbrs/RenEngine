@@ -22,5 +22,5 @@ if(game_state == RUNNING or game_state == ENDED) then
     updateBackgroundPos(BgTable[5], BgTable[6], 0.5, 380)
 
     -- Handles the forest portion of the background.
-    updateBackgroundPos(BgTable[7], BgTable[8], 1, 380)
+    updateBackgroundPos(BgTable[7], BgTable[8], 1.5, 380)
 end

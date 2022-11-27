@@ -93,9 +93,6 @@ if (game_state == RUNNING) then
         
         isPlayerAlive = false
         game_state = ENDED
-
-        print("\t-- You lose! ): --")
-
         destroyEntity(EntityTable["Player"])
         EntityTable["Player"] = nil
     end
