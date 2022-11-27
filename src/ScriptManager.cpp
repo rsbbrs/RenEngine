@@ -77,6 +77,8 @@ void ScriptManager::startup(GraphicsManager& graphicsManager,
 
     // Resource manager functions.
     lua.set_function("filePath", [&](const std::string path) { return resourceManager.resolvePath(path); } );
+
+    lua.set_function("getTime", [&]() { return std::chrono::steady_clock::now(); } );
 }
 
 void ScriptManager::setInputCodes()

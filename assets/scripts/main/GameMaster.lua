@@ -5,6 +5,11 @@ BgTable = {}
 -- root path for scripts
 rootpath = "scripts/main/"
 
+-- Keeping track of time
+startTime = 0.0
+currentTime = 0.0
+ticks = 0
+
 -- Game states
 PAUSED = -1
 RUNNING = 0
@@ -40,11 +45,15 @@ player_Master = {
 
 boss_Master = 
 {
-    posX = 100,
+    posX = 155,
     posY = 0,
     posZ = 1.0,
     angle = 180,
-    healthPercent = 500.0
+    healthPercent = 500.0,
+    gravityY = 0.0,
+    frequency = 0.5,
+    amplitude = 75,
+    upDown_Ticks = 0
 }
 
 pipe_Master = {
@@ -52,6 +61,7 @@ pipe_Master = {
     hasSpawned = false,
     pipeSpeed = -40
 }
+
 
 -- Useful for resetting game
 function createPlayer()
@@ -256,6 +266,14 @@ function resetGame()
     
     for i = 1, #fireBall_ID, 1 do
         destroyEntity(table.remove(fireBall_ID))
+    end
+
+    if (EntityTable["Boss"]) then
+        destroyEntity(EntityTable["Boss"])
+    end
+
+    if (EntityTable["Player"]) then
+        destroyEntity(EntityTable["Player"])
     end
 
     EntityTable["Boss"] = nil    

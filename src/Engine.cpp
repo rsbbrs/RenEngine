@@ -81,7 +81,7 @@ void Engine::gameLoop(const UpdateCallback& callback)
         graphicsManager.draw(ECSManager, guiManager);
        
         loops++;
-
+        
         //Tick end.
         const auto t2 = std::chrono::steady_clock::now();
 

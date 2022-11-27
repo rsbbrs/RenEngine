@@ -1,3 +1,9 @@
+
+-- Update time
+ticks = ticks + 1
+currentTime = ticks * (1/60)
+-- print(currentTime .. " seconds (in lua)")
+
 -- Quit game
 if (keyPressed(input_code.escape)) then
     quit()

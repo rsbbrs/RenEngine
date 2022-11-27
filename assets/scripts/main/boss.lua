@@ -1,5 +1,7 @@
+local bossID = EntityTable["Boss"]
 
-if (isBossAlive) then
+
+if (isBossAlive and game_state == RUNNING) then
 
     -- do stuff here while boss is alive
 
@@ -7,18 +9,25 @@ if (isBossAlive) then
     -----------------------------
     -- Hit by fireball --
     for i = 1, #fireBall_ID, 1 do
-        if (hasCollided(EntityTable["Boss"],fireBall_ID[i])) then
+        if (hasCollided(bossID, fireBall_ID[i])) then
             destroyEntity(table.remove(fireBall_ID))
-            getHealth(EntityTable["Boss"]).percent = getHealth(EntityTable["Boss"]).percent - player_Master.damage
+            getHealth(bossID).percent = getHealth(bossID).percent - player_Master.damage
             playSound("Ouch")
         end
     end
 
-    if (getHealth(EntityTable["Boss"]).percent <= 0) then
-        destroyEntity(EntityTable["Boss"])
-        EntityTable["Boss"] = nil
+    if (getHealth(bossID).percent <= 0) then
+        destroyEntity(bossID)
+        bossID = nil
         isBossAlive = false
     end
+    -----------------------------
+    -----------------------------
+
+    -----------------------------
+    -----------------------------
+    -- Boss moves up and down --
+    getPosition(bossID).y = math.sin(currentTime * boss_Master.frequency) * boss_Master.amplitude + boss_Master.posY
     -----------------------------
     -----------------------------
 end

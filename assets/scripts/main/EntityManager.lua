@@ -1,6 +1,8 @@
--- assigning key with value nil removes the key
--- EntityTable["EventListener"] = nil
-
+-- Keeps track of existing significant entities (i.e., player and boss)
+EntityTable = {}
+-- EntityID Management for projectiles
+fireBall_ID = {}
+pipe_ID = {}
 
 -----------------------------
 -----------------------------
