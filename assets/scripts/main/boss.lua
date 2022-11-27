@@ -116,6 +116,8 @@ if (isBossAlive and (game_state == RUNNING or game_state == ENDED)) then
     if (getHealth(boss_ID).percent <= 75.0 and getHealth(boss_ID).percent > 50.0) then
         boss_Master.phase = 2
     end
+
+    -- Activate phase 3
     -----------------------------
     -----------------------------
 
