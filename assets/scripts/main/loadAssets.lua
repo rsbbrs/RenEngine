@@ -1,7 +1,7 @@
 print("Loading assets...")
 
 Image_loaded = 0
-expected_Images = 13
+expected_Images = 14
 
 Sound_loaded = 0
 expected_Sounds = 8
@@ -47,6 +47,9 @@ if (loadImage("Bg_Layer_3", "sprites/Background/Layer_3.png")) then
     Image_loaded = Image_loaded + 1
     print(Image_loaded .."/" .. expected_Images .. " image assets loaded") end
 if (loadImage("Bg_Layer_4", "sprites/Background/Layer_4.png")) then
+    Image_loaded = Image_loaded + 1
+    print(Image_loaded .."/" .. expected_Images .. " image assets loaded") end
+if (loadImage("Crosshair", "sprites/Crosshairs_Red.png")) then
     Image_loaded = Image_loaded + 1
     print(Image_loaded .."/" .. expected_Images .. " image assets loaded") end
 print("----------------------------------------")

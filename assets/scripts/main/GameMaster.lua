@@ -32,7 +32,7 @@ player_Master = {
     damage = 10,
     posX = -95,
     posY = 10,
-    posZ = 1.0,
+    posZ = 0.9,
     rotate_dir = 1,
     gravity_X = 3.0,
     damage = 0.5
@@ -281,9 +281,14 @@ function resetGame()
     boss_Master.retreatedCounter = 0
     boss_Master.retreating = false
     boss_Master.returning = false
+    boss_Master.fireRate = boss_Master.temp_fireRate
+
     pipe_Master.pipeGap = pipe_Master.temp_pipeGap
 
-    boss_Master.fireRate = boss_Master.temp_fireRate
+    if (crossHair_ID > 0) then
+        destroyEntity(crossHair_ID)
+    end
+    crossHair_ID = -1
     
     game_state = PAUSED
 

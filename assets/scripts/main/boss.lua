@@ -192,12 +192,17 @@ if (boss_Master.phase == 2) then
                 pipe_Master.pipeGap = 25
             end
 
+            spawnCrossHair()
+
         end
     end
 
     if (boss_Master.retreated and not skillCD_Done()) then
 
         fire(2)
+
+        getPosition(crossHair_ID).y = getBossEyeLevel()
+
         -- approximate where player is located and fire lasers at them
         if ( (getBossEyeLevel() <= getPosition(player_ID).y + 10 + boss_Master.retreatedCounter) and (getBossEyeLevel() >= getPosition(player_ID).y - 10 + boss_Master.retreatedCounter)) then
             boss_Master.fireRate = 0.15
@@ -214,6 +219,8 @@ if (boss_Master.phase == 2) then
         -- Return back to original position
         boss_Master.returning = true
         boss_Master.retreated = false
+        destroyEntity(crossHair_ID)
+        crossHair_ID = -1
         retreatReturn()
     end
 

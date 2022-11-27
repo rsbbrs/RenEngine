@@ -4,6 +4,7 @@ EntityTable = {}
 fireBall_ID = {}
 laser_ID = {}
 pipe_ID = {}
+crossHair_ID = -1
 
 -----------------------------
 -----------------------------
@@ -143,8 +144,6 @@ function spawnPipe()
     getRigidBody(pipe).max.y = 0.0
     getBoxCollider(pipe, getRigidBody(pipe).min, getRigidBody(pipe).max)
 
-
-
     getSprite(pipe2).name = "Pipe"
 
     getPosition(pipe2).x = 200
@@ -178,6 +177,46 @@ function spawnPipe()
 end
 -----------------------------
 -----------------------------
+
+-----------------------------
+-----------------------------
+-- Spawn Crosshair --
+function spawnCrossHair()
+    
+    crossHair = createEntity()    
+
+    crossHair_ID = crossHair
+    getSprite(crossHair).name = "Crosshair"
+
+    
+
+    getPosition(crossHair).x = getPosition(EntityTable["Player"]).x
+    getPosition(crossHair).y = getPosition(EntityTable["Boss"]).y
+    getPosition(crossHair).z = 0.1
+    getRotation(crossHair).angle = 0.0
+    getScale(crossHair).scale = 10
+
+    getRigidBody(crossHair).velocity.x = 0.0
+    getRigidBody(crossHair).velocity.y = 0.0
+    getRigidBody(crossHair).acceleration.x = 0.0
+    getRigidBody(crossHair).acceleration.y = 0.0
+    getRigidBody(crossHair).gravity.x = 0.0
+    getRigidBody(crossHair).gravity.y = 0.0
+    getRigidBody(crossHair).force.x = 0.0
+    getRigidBody(crossHair).force.y = 0.0
+    getRigidBody(crossHair).mass = 10.0
+    getRigidBody(crossHair).static = true
+    getRigidBody(crossHair).trueRB = false
+
+    getRigidBody(crossHair).min.x = 0.0
+    getRigidBody(crossHair).min.y = 0.0
+    getRigidBody(crossHair).max.x = 0.0
+    getRigidBody(crossHair).max.y = 0.0
+    getBoxCollider(crossHair, getRigidBody(crossHair).min, getRigidBody(crossHair).max)
+end
+-----------------------------
+-----------------------------
+
 
 -----------------------------
 -----------------------------
