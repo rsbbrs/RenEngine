@@ -305,17 +305,25 @@ if(boss_Master.phase == 3) then
     boss_Master.fireRate = 0.6
 
     -- Decision tree chooses next type of attack.
-    bossPos = getPosition(bossID).y
+    bossPos = getBossEyeLevel()
     playerPos = getPosition(playerID).y
 
+    -- Player is above boss
     if(playerPos > bossPos) then
+        -- If player is above boss level by 50
+        -- Rapidly shoot upward to keep player in range.
+        -- If not, spawn pipes semi-randomly based on
+        -- boss's position.
         if(playerPos - bossPos > 75) then
             boss_Master.fireRate = 0.30
             fire(1, 0, 160, 100.0)
         else
+            fire(2, -1*bossPos, 0.0, 0.0)
             fire(1, 0, boss_Master.angle, 0.0)
         end
+    -- Player is below boss.
     elseif(playerPos < bossPos) then
+        -- Player is below boss eye level by 50
         if(bossPos - playerPos > 75) then
             boss_Master.fireRate = 0.30
             fire(1, 0, 200, -100.0)
