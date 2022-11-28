@@ -21,8 +21,8 @@ isPlayerAlive = true
 isBossAlive = true
 
 -- EntityID Management for projectiles
-fireBall_ID = {}
-pipe_ID = {}
+-- fireBall_ID = {}
+-- pipe_ID = {}
 
 -- Player options
 player_Master = {
@@ -304,6 +304,10 @@ function resetGame()
         destroyEntity(table.remove(laser_ID))
     end
 
+    for i = 1, #ball_ID, 1 do
+        destroyEntity(table.remove(ball_ID))
+    end
+
     if (EntityTable["Boss"]) then
         destroyEntity(EntityTable["Boss"])
         EntityTable["Boss"] = nil
@@ -314,13 +318,10 @@ function resetGame()
         EntityTable["Player"] = nil
     end
 
-    if(EntityTable["Crosshair"]) then
+    if (EntityTable["Crosshair"]) then
         destroyEntity(EntityTable["Crosshair"])
         EntityTable["Crosshair"] = nil
     end
-
-        
-    
 
     -- Create player and boss
     createPlayer()
@@ -334,6 +335,10 @@ function youWin()
     
     for i = 1, #laser_ID, 1 do
         destroyEntity(table.remove(laser_ID))
+    end
+
+    for i = 1, #ball_ID, 1 do
+        destroyEntity(table.remove(ball_ID))
     end
 
     print("\t-- YOU WIN! --")
