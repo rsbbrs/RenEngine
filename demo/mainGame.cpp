@@ -34,9 +34,9 @@ int main(void)
 {
     loadAssets();
 
-    mainGame->gameLoop([&](){ 
-        // State machine?
-    });
-    
+    mainGame->gameLoop([&](){});
+    std::cout << "Finished\n";
+
+    mainGame.reset();
     return 0;
 }

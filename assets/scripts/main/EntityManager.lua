@@ -62,7 +62,7 @@ end
 -----------------------------
 -----------------------------
 -- Spawn Boss laser --
-function spawnLaser()
+function spawnLaser(angle, velocity_Y)
     laser = createEntity()
 
     table.insert(laser_ID, 1, laser)
@@ -72,9 +72,9 @@ function spawnLaser()
     getPosition(laser).x = getPosition(boss_ID).x - 10.0
     getPosition(laser).y = getPosition(boss_ID).y + 20
     getPosition(laser).z = 0.6
-
+    getRotation(laser).angle = angle
     getRigidBody(laser).velocity.x = -250.0
-    getRigidBody(laser).velocity.y = 0.0
+    getRigidBody(laser).velocity.y = velocity_Y
     getRigidBody(laser).acceleration.x = 0.0
     getRigidBody(laser).acceleration.y = 0.0
     getRigidBody(laser).gravity.x = 0.0
@@ -100,14 +100,14 @@ end
 -----------------------------
 -----------------------------
 -- Spawn Pipe --
-function spawnPipe()
+function spawnPipe(offset)
     pipe = createEntity()
     pipe2 = createEntity()
 
     table.insert(pipe_ID, 1, pipe)
     table.insert(pipe_ID, 1, pipe2)
 
-    offset = math.random(20, 170)
+    --offset = math.random(20, 170)
 
     getSprite(pipe).name = "Pipe"
 

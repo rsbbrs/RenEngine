@@ -1,4 +1,5 @@
 local bossID = EntityTable["Boss"]
+local playerID = EntityTable["Player"]
 
 boss_Master.upDown_Ticks = boss_Master.upDown_Ticks + 1
 boss_Master.coolDown_Ticks = boss_Master.coolDown_Ticks + 1
@@ -37,17 +38,17 @@ end
 -- type = 1 --> Laser
 -- type = 2 --> pipes
 -- type = 3 --> something else
-function fire(type)
+function fire(type, offset, angle, velocity_Y)
     
     -- Fire laser
     if (type == 1 and canFire()) then
         playSound("Gunshot_1")
-        spawnLaser()
+        spawnLaser(angle, velocity_Y)
     end
 
     -- Spawn pipe
     if (type == 2 and canSpawnPipe()) then
-        spawnPipe()
+        spawnPipe(offset)
     end 
 end
 
@@ -131,15 +132,19 @@ if (isBossAlive and (game_state == RUNNING or game_state == ENDED)) then
     -- Activate phase 3
     -----------------------------
     -----------------------------
+    if(getHealth(bossID).percent <= 50) then
+        boss_Master.phase = 3
+
+        if (not isPlayerAlive) then
+            boss_Master.phase = 0
+        end
+    end
 
     if (not isPlayerAlive) then
         stopSound("Gunshot_1")
     end
 
 end -- End of condition
-
--- Boss AI goes here
--- State machine based on health and player positioning.
 
 function retreating()
     if (not boss_Master.retreated) then
@@ -165,14 +170,14 @@ end
 
 -- phase 1
 if (boss_Master.phase == 1) then
-    fire(1)
+    fire(1, 0, boss_Master.angle, 0.0)
 end
 
 -- Phase 2
 if (boss_Master.phase == 2) then
 
     if (not skillCD_Done() and not boss_Master.retreating and not boss_Master.returning and not boss_Master.retreated) then
-        fire(1)
+        fire(1, 0, boss_Master.angle, 0.0)
     end
 
     if (skillCD_Done() and not boss_Master.retreated) then
@@ -180,6 +185,7 @@ if (boss_Master.phase == 2) then
         boss_Master.tempHealth = getHealth(bossID).percent
     end
 
+    -- Boss retreats off screen.
     if (boss_Master.retreating) then
         getHealth(bossID).percent = boss_Master.tempHealth
         retreating()
@@ -211,14 +217,15 @@ if (boss_Master.phase == 2) then
             
             boss_Master.upDown_Ticks = 0
         end
-    end
+    end -- End of boss retreating.
 
     -- Boss retreated, handle aim ai and other stuff here --
     if (boss_Master.retreated and not skillCD_Done() and isPlayerAlive) then
 
         direction = 0
-
-        fire(2)
+        
+        -- Random pipe spawning at this phase.
+        fire(2, math.random(50, 150), 0, 0.0)
         getPosition(EntityTable["Crosshair"]).y = getBossEyeLevel()
 
         -- Readjust boss to aim towards player
@@ -246,8 +253,8 @@ if (boss_Master.phase == 2) then
 
         -- approximate where player is located and fire lasers at them
         if ( (getBossEyeLevel() <= getPosition(EntityTable["Player"]).y + 5) and (getBossEyeLevel() >= getPosition(EntityTable["Player"]).y - 5)) then
-            boss_Master.fireRate = 0.15
-            fire(1)
+            boss_Master.fireRate = 0.75
+            fire(1, 0, boss_Master.angle, 0.0)
             
 
             if (direction == 1) then
@@ -259,7 +266,7 @@ if (boss_Master.phase == 2) then
             end
         end
 
-    end
+    end -- End of boss retreated, handle aim ai and other stuff here --
 
     if (boss_Master.retreated and skillCD_Done() and not boss_Master.returning) then
         -- Return back to original position
@@ -293,5 +300,29 @@ if (boss_Master.phase == 2) then
 
 end
 
+-- Phase 3
+if(boss_Master.phase == 3) then
+    boss_Master.fireRate = 0.6
+
+    -- Decision tree chooses next type of attack.
+    bossPos = getPosition(bossID).y
+    playerPos = getPosition(playerID).y
+
+    if(playerPos > bossPos) then
+        if(playerPos - bossPos > 75) then
+            boss_Master.fireRate = 0.30
+            fire(1, 0, 160, 100.0)
+        else
+            fire(1, 0, boss_Master.angle, 0.0)
+        end
+    elseif(playerPos < bossPos) then
+        if(bossPos - playerPos > 75) then
+            boss_Master.fireRate = 0.30
+            fire(1, 0, 200, -100.0)
+        else
+            fire(1, 0, boss_Master.angle, 0.0)
+        end
+    end
+end
 -----------------------------
 -----------------------------

@@ -29,13 +29,13 @@ player_Master = {
     mass = 10,
     hopStrength = 90,
     mass = 5.0,
-    damage = 10,
+    damage = 5,
     posX = -95,
     posY = 10,
     posZ = 0.9,
     rotate_dir = 1,
     gravity_X = 3.0,
-    damage = 0.5
+    --damage = 0.5
 }
 
 boss_Master = {
@@ -56,7 +56,7 @@ boss_Master = {
     amplitude = 75,
     skillCoolDown = 15.0,
     temp_fireRate = 0.5,
-    fireRate = 0.5,
+    fireRate = 0.6,
     pipeRate = 1.85,
     upDown_Ticks = 0,
     coolDown_Ticks = 0,
@@ -68,7 +68,7 @@ pipe_Master = {
     temp_pipeSpeed = -100.0,
     pipeSpeed = -100.0,
     temp_pipeGap = 45.0,
-    pipeGap = 45.0
+    pipeGap = 65.0
 }
 
 -- Retrieves y position relative to boss eye level
