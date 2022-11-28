@@ -33,3 +33,9 @@ for i = 1, #fireBall_ID, 1 do
         destroyEntity(table.remove(fireBall_ID))
     end
 end
+
+for i = 1, #ball_ID, 1 do
+    if(getPosition(ball_ID[i]).y < -200) then
+        destroyEntity(table.remove(ball_ID))
+    end
+end

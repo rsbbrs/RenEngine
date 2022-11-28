@@ -101,6 +101,7 @@ if(loadScript("Background", "scripts/main/background.lua", false)) then
 else
     print("Failed to load background.lua")
 end
+
 -----------------------------
 -----------------------------
 -- Load GameMaster and other stuff --

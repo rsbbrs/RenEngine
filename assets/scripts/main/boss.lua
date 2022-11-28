@@ -5,11 +5,13 @@ boss_Master.upDown_Ticks = boss_Master.upDown_Ticks + 1
 boss_Master.coolDown_Ticks = boss_Master.coolDown_Ticks + 1
 boss_Master.fireRate_Ticks = boss_Master.fireRate_Ticks + 1
 boss_Master.pipeRate_Ticks = boss_Master.pipeRate_Ticks + 1
+boss_Master.ballRate_Ticks = boss_Master.ballRate_Ticks + 1
 
 local upDown_TimeElapsed = startTime + boss_Master.upDown_Ticks * (1/60)
 local coolDown_TimeElapsed = startTime + boss_Master.coolDown_Ticks * (1/60)
 local fireRate_TimeElapsed = startTime + boss_Master.fireRate_Ticks * (1/60)
 local pipeRate_TimeElapsed = startTime + boss_Master.pipeRate_Ticks * (1/60)
+local ballRate_TimeElapsed = startTime + boss_Master.ballRate_Ticks * (1/60)
 
 function skillCD_Done()
     if (getDeltaTime(coolDown_TimeElapsed) >= boss_Master.skillCoolDown) then
@@ -35,6 +37,14 @@ function canSpawnPipe()
     return false
 end
 
+function canFireBall()
+    if (getDeltaTime(ballRate_TimeElapsed) >= boss_Master.ballRate) then
+        boss_Master.ballRate_Ticks = 0
+        return true
+    end
+    return false
+end
+
 -- type = 1 --> Laser
 -- type = 2 --> pipes
 -- type = 3 --> something else
@@ -50,6 +60,10 @@ function fire(type, offset, angle, velocity_Y)
     if (type == 2 and canSpawnPipe()) then
         spawnPipe(offset)
     end 
+
+    if(type == 3 and canFireBall()) then
+        spawnBall()
+    end
 end
 
 if (game_state == PAUSED) then
@@ -312,13 +326,13 @@ if(boss_Master.phase == 3) then
     if(playerPos > bossPos) then
         -- If player is above boss level by 50
         -- Rapidly shoot upward to keep player in range.
-        -- If not, spawn pipes semi-randomly based on
-        -- boss's position.
+        -- If not, spawn pipes near center of the screen
+        -- to try and bring player's position further down.
         if(playerPos - bossPos > 75) then
             boss_Master.fireRate = 0.30
             fire(1, 0, 160, 100.0)
         else
-            fire(2, -1*bossPos, 0.0, 0.0)
+            fire(2, math.random(50, 100), 0.0, 0.0)
             fire(1, 0, boss_Master.angle, 0.0)
         end
     -- Player is below boss.
@@ -326,6 +340,7 @@ if(boss_Master.phase == 3) then
         -- Player is below boss eye level by 50
         if(bossPos - playerPos > 75) then
             boss_Master.fireRate = 0.30
+            fire(3, 0, 0, 0)
             fire(1, 0, 200, -100.0)
         else
             fire(1, 0, boss_Master.angle, 0.0)

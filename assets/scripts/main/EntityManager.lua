@@ -4,6 +4,7 @@ EntityTable = {}
 fireBall_ID = {}
 laser_ID = {}
 pipe_ID = {}
+ball_ID = {}
 
 -----------------------------
 -----------------------------
@@ -175,6 +176,36 @@ function spawnPipe(offset)
 end
 -----------------------------
 -----------------------------
+
+function spawnBall()
+    ball = createEntity()
+
+    table.insert(ball_ID, 1, ball)
+
+    getSprite(ball).name = "Ball"
+    
+    getPosition(ball).x = getPosition(boss_ID).x
+    getPosition(ball).y = getPosition(boss_ID).y
+    getPosition(ball).z = 1.0
+
+    getRigidBody(ball).velocity.x = -200.0
+    getRigidBody(ball).velocity.y = 100.0
+
+    getRigidBody(ball).acceleration.x = 0
+    getRigidBody(ball).acceleration.y = 0
+
+    getRigidBody(ball).gravity.x = 0
+    getRigidBody(ball).gravity.y = -9.8
+
+    getRigidBody(ball).force.x = -50.0
+    getRigidBody(ball).force.y = 20.0
+
+    getRigidBody(ball).mass = 10.0
+
+    getRigidBody(ball).static = false
+
+    getScale(ball).scale = 10
+end
 
 -----------------------------
 -----------------------------
