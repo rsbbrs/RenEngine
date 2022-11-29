@@ -58,12 +58,14 @@ boss_Master = {
     temp_fireRate = 0.5,
     fireRate = 0.6,
     pipeRate = 1.85,
-    ballRate = 1.0,
+    ballRate = 2.0,
+    burstRate = 0.5,
     upDown_Ticks = 0,
     coolDown_Ticks = 0,
     fireRate_Ticks = 0,
     pipeRate_Ticks = 0,
-    ballRate_Ticks = 0
+    ballRate_Ticks = 0,
+    burst_Ticks = 0
 }
 
 pipe_Master = {

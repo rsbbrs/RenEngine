@@ -6,6 +6,8 @@ laser_ID = {}
 pipe_ID = {}
 ball_ID = {}
 
+-- Tracks the laser burst count.
+
 -----------------------------
 -----------------------------
 -- Create Player Entity --
@@ -188,7 +190,7 @@ function spawnBall()
     getPosition(ball).y = getPosition(boss_ID).y
     getPosition(ball).z = 1.0
 
-    getRigidBody(ball).velocity.x = -200.0
+    getRigidBody(ball).velocity.x = -180.0
     getRigidBody(ball).velocity.y = 100.0
 
     getRigidBody(ball).acceleration.x = 0
