@@ -31,7 +31,7 @@ void PhysicsManager::coll_resolve(EntityID e1, EntityID e2, Position& p1, Positi
 
     // Compute the impulse of the collision.
     vec2 j1 = (-(1 + coe) * (rb1.velocity - rb2.velocity)) / ((1.0f / rb1.mass) + (1.0f / rb2.mass));
-    vec2 j2 = j1; //(-(1 + coe) * (rb2.velocity - rb1.velocity)) / ((1.0f / rb2.mass) + (1.0f / rb1.mass));
+    vec2 j2 = (-(1 + coe) * (rb2.velocity - rb1.velocity)) / ((1.0f / rb2.mass) + (1.0f / rb1.mass));
 
     // Update velocities based on impulses, it objects aren't static.
     if(!rb1.static_obj)
