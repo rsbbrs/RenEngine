@@ -356,9 +356,9 @@ if(boss_Master.phase == 3) then
             if(canFireBurst()) then
                 boss_Master.fireRate = 0.05
                 fire(1, 0, 200, -130.0)
+                fire(3, 0, 0, 0)
             end
         else
-            fire(3, 0, 0, 0)
             fire(1, 0, boss_Master.angle, 0.0)
         end
     end
