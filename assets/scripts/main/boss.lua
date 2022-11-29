@@ -339,10 +339,10 @@ if(boss_Master.phase == 3) then
         -- If not, spawn pipes near center of the screen
         -- to try and bring player's position further down.
         if(playerPos - bossPos > 75) then
-
+            -- Fire burst to bring player down.
             if(canFireBurst()) then
                 boss_Master.fireRate = 0.05
-                fire(1, 0, 160, 130.0)
+                fire(1, 0, 165, 130.0)
             end
         else
             fire(2, math.random(50, 100), 0.0, 0.0)
@@ -352,10 +352,10 @@ if(boss_Master.phase == 3) then
     elseif(playerPos < bossPos) then
         -- Player is below boss eye level by 50
         if(bossPos - playerPos > 75) then
-
+            -- Fire burst to bring player up.
             if(canFireBurst()) then
                 boss_Master.fireRate = 0.05
-                fire(1, 0, 200, -130.0)
+                fire(1, 0, 195, -130.0)
                 fire(3, 0, 0, 0)
             end
         else

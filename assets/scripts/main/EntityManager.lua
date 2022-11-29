@@ -6,8 +6,6 @@ laser_ID = {}
 pipe_ID = {}
 ball_ID = {}
 
--- Tracks the laser burst count.
-
 -----------------------------
 -----------------------------
 -- Create Player Entity --

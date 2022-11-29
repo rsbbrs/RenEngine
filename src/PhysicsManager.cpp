@@ -11,10 +11,10 @@ bool PhysicsManager::coll_det(const EntityID e1, const EntityID e2)
 {
     RigidBody& rb1 = ecs->Get<RigidBody>(e1);
     RigidBody& rb2 = ecs->Get<RigidBody>(e2);
-    float d1x = rb2.min.x - rb1.max.x; //b->min.x - a->max.x;
-    float d1y = rb2.min.y - rb1.max.y; //b->min.y - a->max.y;
-    float d2x = rb1.min.x - rb2.max.x; //a->min.x - b->max.x;
-    float d2y = rb1.min.y - rb2.max.y; //a->min.y - b->max.y;
+    float d1x = rb2.min.x - rb1.max.x;
+    float d1y = rb2.min.y - rb1.max.y;
+    float d2x = rb1.min.x - rb2.max.x;
+    float d2y = rb1.min.y - rb2.max.y;
 
     if (d1x < 0.0f && d1y < 0.0f && d2x < 0.0f && d2y < 0.0f)
         return true;
