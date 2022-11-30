@@ -6,14 +6,12 @@ boss_Master.coolDown_Ticks = boss_Master.coolDown_Ticks + 1
 boss_Master.fireRate_Ticks = boss_Master.fireRate_Ticks + 1
 boss_Master.pipeRate_Ticks = boss_Master.pipeRate_Ticks + 1
 boss_Master.ballRate_Ticks = boss_Master.ballRate_Ticks + 1
-boss_Master.burst_Ticks = boss_Master.burst_Ticks + 1
 
 local upDown_TimeElapsed = startTime + boss_Master.upDown_Ticks * (1/60)
 local coolDown_TimeElapsed = startTime + boss_Master.coolDown_Ticks * (1/60)
 local fireRate_TimeElapsed = startTime + boss_Master.fireRate_Ticks * (1/60)
 local pipeRate_TimeElapsed = startTime + boss_Master.pipeRate_Ticks * (1/60)
 local ballRate_TimeElapsed = startTime + boss_Master.ballRate_Ticks * (1/60)
-local burstRate_TimeElapsed = startTime + boss_Master.burst_Ticks * (1/60)
 
 function skillCD_Done()
     if (getDeltaTime(coolDown_TimeElapsed) >= boss_Master.skillCoolDown) then
@@ -42,14 +40,6 @@ end
 function canFireBall()
     if (getDeltaTime(ballRate_TimeElapsed) >= boss_Master.ballRate) then
         boss_Master.ballRate_Ticks = 0
-        return true
-    end
-    return false
-end
-
-function canFireBurst()
-    if (getDeltaTime(burstRate_TimeElapsed) >= boss_Master.burstRate) then
-        boss_Master.burst_Ticks = 0
         return true
     end
     return false
@@ -332,6 +322,9 @@ if(boss_Master.phase == 3) then
     bossPos = getBossEyeLevel()
     playerPos = getPosition(playerID).y
 
+    opposite = getPosition(playerID).y - getPosition(bossID).y
+    adjacent = getPosition(playerID).x - getPosition(bossID).x
+
     -- Player is above boss
     if(playerPos > bossPos) then
         -- If player is above boss level by 50
@@ -340,10 +333,8 @@ if(boss_Master.phase == 3) then
         -- to try and bring player's position further down.
         if(playerPos - bossPos > 75) then
             -- Fire burst to bring player down.
-            if(canFireBurst()) then
-                boss_Master.fireRate = 0.05
-                fire(1, 0, 165, 130.0)
-            end
+            boss_Master.fireRate = 0.4
+            fire(1, 0, boss_Master.angle + (math.atan(opposite, adjacent) * 180/math.pi), (playerPos - bossPos))
         else
             fire(2, math.random(50, 100), 0.0, 0.0)
             fire(1, 0, boss_Master.angle, 0.0)
@@ -353,11 +344,9 @@ if(boss_Master.phase == 3) then
         -- Player is below boss eye level by 50
         if(bossPos - playerPos > 75) then
             -- Fire burst to bring player up.
-            if(canFireBurst()) then
-                boss_Master.fireRate = 0.05
-                fire(1, 0, 195, -130.0)
-                fire(3, 0, 0, 0)
-            end
+            boss_Master.fireRate = 0.4
+            fire(1, 0, boss_Master.angle + (math.atan(opposite, adjacent) * 180/math.pi), (playerPos - bossPos))
+            fire(3, 0, 0, 0)
         else
             fire(1, 0, boss_Master.angle, 0.0)
         end
