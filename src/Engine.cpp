@@ -15,6 +15,8 @@ Engine::Engine(const char *name, int width, int height, bool fullscreen)
     config.window.name = name;
     config.window.fullscreen = fullscreen;
 
+    pause = false;
+
     startup();
 }
 
@@ -65,29 +67,33 @@ void Engine::gameLoop(const UpdateCallback& callback)
     // a second.
     while(graphicsManager.closeWindow() && !scriptManager.scriptQuit)
     {
-        // Tick start.
-        const auto t1 = std::chrono::steady_clock::now();
+        if(!pause)
+        {
+            // Tick start.
+            const auto t1 = std::chrono::steady_clock::now();
 
-        // Update input state.
-        inputManager.update();
+            // Update input state.
+            inputManager.update();
 
-        // User callback to specify custom behaviour.
-        callback();
+            // User callback to specify custom behaviour.
+            callback();
 
-        // Manager updates of game state.
-        scriptManager.update(ECSManager);
-        physicsManager.updatePhysics(t1);
-        physicsManager.collision();
-        graphicsManager.draw(ECSManager, guiManager);
-       
-        loops++;
+            // Manager updates of game state.
+            
+            scriptManager.update(ECSManager);
+            physicsManager.updatePhysics(t1);
+            physicsManager.collision();
+            graphicsManager.draw(ECSManager, guiManager);
         
-        //Tick end.
-        const auto t2 = std::chrono::steady_clock::now();
+            loops++;
+            
+            //Tick end.
+            const auto t2 = std::chrono::steady_clock::now();
 
-        // Send engine to sleep after the tick.
-        // The time spent sleeping will be 1/60 - (tick_end - tick_start).
-        std::this_thread::sleep_for(total_loop_time - (t2 - t1));
+            // Send engine to sleep after the tick.
+            // The time spent sleeping will be 1/60 - (tick_end - tick_start).
+            std::this_thread::sleep_for(total_loop_time - (t2 - t1));
+        }
     }
 
     // Statistics for loop timing printed after game loop finishes.
@@ -186,4 +192,10 @@ void Engine::getBoxCollider(const EntityID e, vec2& min, vec2& max)
 ScriptManager::Lua& Engine::getLuaEnv()
 {
     return scriptManager.lua;
+}
+
+bool Engine::pauseGame()
+{
+    pause = !pause;
+    return pause;
 }

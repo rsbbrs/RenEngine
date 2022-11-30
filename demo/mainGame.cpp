@@ -34,7 +34,11 @@ int main(void)
 {
     loadAssets();
 
-    mainGame->gameLoop([&](){});
+    mainGame->gameLoop([&]()
+    {
+        if(mainGame->queryInput(input_code::tab))
+            mainGame->pauseGame();
+    });
     std::cout << "Finished\n";
 
     mainGame.reset();

@@ -28,6 +28,7 @@ namespace RenEngine
             // Variables used by the engine.
             const std::chrono::duration<double> total_loop_time;
             Configuration config;
+            bool pause;
 
             // Start and shutdown functions.
             // Made private so no other classes can shut down the engine itself.
@@ -235,5 +236,7 @@ namespace RenEngine
              * @return A reference to the lua environment variable.
              */
             ScriptManager::Lua& getLuaEnv();
+
+            bool pauseGame();
     };
 }

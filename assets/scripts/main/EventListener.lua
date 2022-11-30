@@ -2,6 +2,7 @@
 -- Update time
 ticks = ticks + 1
 startTime = ticks * (1/60)
+isPaused = false
 
 -- Quit game
 if (keyPressed(input_code.escape)) then
