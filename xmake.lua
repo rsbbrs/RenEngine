@@ -26,6 +26,16 @@ target("main")
         -- os.cp("$(projectdir)/assets", path.directory(target:targetfile()))
     -- end)
 
+target("mainGame")
+    set_kind("binary")
+    set_languages("cxx17")
+
+    add_deps("RenEngine")
+
+    add_files("demo/mainGame.cpp")
+
+    set_rundir("$(projectdir)")
+
 target("physicsDemo")
     set_kind("binary")
     set_languages("cxx17")

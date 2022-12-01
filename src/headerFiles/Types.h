@@ -46,7 +46,7 @@ namespace RenEngine
     struct Scale { int scale; };
     struct Health { double percent; };
     struct Script { std::string name; std::string path; };
-    struct Sprite { std::string name; };
+    struct Sprite { std::string name; bool rigidBody = true; };
     struct RigidBody 
     {
         vec2 velocity;
@@ -54,6 +54,7 @@ namespace RenEngine
         vec2 gravity;
         vec2 force;
         float mass;
+        bool trueRB = true;
         bool static_obj = false;
 
         // Min/max dimensions of the collider.
@@ -84,10 +85,12 @@ namespace RenEngine
         f3,
         f4,
 
-        w = 87,
         a = 65,
-        s = 83,
         d = 68,
+        f = 70,
+        r = 82,
+        s,
+        w = 87,
 
         right = 262,
         left,

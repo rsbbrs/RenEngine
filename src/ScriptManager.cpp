@@ -34,6 +34,7 @@ void ScriptManager::startup(GraphicsManager& graphicsManager,
 
     // Input manager functions.
     lua.set_function("keyPressed", [&](const input_code keycode) { return inputManager.keyPressed(graphicsManager, keycode); } );
+    lua.set_function("keyReleased", [&](const input_code keycode) { return inputManager.keyReleased(graphicsManager, keycode); } );
 
     // Sound manager functions.
     lua.set_function("loadSound", [&](const std::string name, const std::string path) 
@@ -43,6 +44,10 @@ void ScriptManager::startup(GraphicsManager& graphicsManager,
     lua.set_function("playSound", [&](const std::string name) { soundManager.playSound(name); } );
     lua.set_function("closeSound", [&](const std::string name) { soundManager.closeSound(name); } );
     lua.set_function("clearAllSounds", [&]() { soundManager.clearSoundsList(); } );
+    // Extra sound features
+    lua.set_function("setLooping", [&](const std::string name, int value) {soundManager.setLooping(name, value); });
+    lua.set_function("setVolume", [&](const std::string name, float value) {soundManager.setVolume(name, value); });
+    lua.set_function("stopSound", [&](const std::string name) {soundManager.stopSound(name); });
 
     // ECS manager functions.
     lua.set_function("createEntity", [&]() { return ecsManager.Create(); } );
@@ -56,6 +61,7 @@ void ScriptManager::startup(GraphicsManager& graphicsManager,
     lua.set_function("getHealth", [&](const EntityID e) -> Health& { return ecsManager.Get<Health>(e); } );
     lua.set_function("getScript", [&](const EntityID e) -> Script& { return ecsManager.Get<Script>(e); } );
     lua.set_function("getSprite", [&](const EntityID e) -> Sprite& { return ecsManager.Get<Sprite>(e); } );
+    
 
     // Lua state in the engine.
     lua.set_function("getState", [&]() { return true; } );
@@ -72,7 +78,7 @@ void ScriptManager::startup(GraphicsManager& graphicsManager,
     // Resource manager functions.
     lua.set_function("filePath", [&](const std::string path) { return resourceManager.resolvePath(path); } );
 
-    //lua.set_function("getTime", [&]() { return std::chrono::steady_clock::now(); } );
+    lua.set_function("getTime", [&]() { return std::chrono::steady_clock::now(); } );
 }
 
 void ScriptManager::setInputCodes()
@@ -102,6 +108,8 @@ void ScriptManager::setInputCodes()
         {"a", input_code::a},
         {"s", input_code::s},
         {"d", input_code::d},
+        {"f", input_code::f},
+        {"r", input_code::r},
         {"right", input_code::right},
         {"left", input_code::left},
         {"up", input_code::up},
@@ -152,7 +160,8 @@ void ScriptManager::setComponentStructs()
     lua.new_usertype<Sprite>(
         "Sprite",
         sol::constructors<Sprite()>(),
-        "name", &Sprite::name
+        "name", &Sprite::name,
+        "rigidBody", &Sprite::rigidBody
     );
 
     // Rigid body stuff.
@@ -179,7 +188,10 @@ void ScriptManager::setComponentStructs()
         "gravity", &RigidBody::gravity,
         "force", &RigidBody::force,
         "mass", &RigidBody::mass,
-        "static", &RigidBody::static_obj
+        "trueRB", &RigidBody::trueRB,
+        "static", &RigidBody::static_obj,
+        "min", &RigidBody::min,
+        "max", &RigidBody::max
     );
 }
 

@@ -14,5 +14,6 @@ namespace RenEngine
             // Input handling functions.
             void update();
             bool keyPressed(GraphicsManager& gm, input_code key);
+            bool keyReleased(GraphicsManager& gm, input_code key);
     };
 }

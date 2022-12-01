@@ -16,11 +16,6 @@ namespace RenEngine
     class ScriptManager
     {
         private:
-            typedef sol::state Lua;
-
-            // Lua environment variable.
-            Lua lua;
-
             // Script container.
             std::unordered_map<std::string, sol::load_result> scripts;
 
@@ -32,6 +27,10 @@ namespace RenEngine
             void quit();
 
         public:
+            // Lua environment variable.
+            typedef sol::state Lua;
+            Lua lua;
+            
             bool scriptQuit;
 
             // Startup and shutdown functions.

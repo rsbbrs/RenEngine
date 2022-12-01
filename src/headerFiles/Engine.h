@@ -28,7 +28,14 @@ namespace RenEngine
             // Variables used by the engine.
             const std::chrono::duration<double> total_loop_time;
             Configuration config;
+            bool pause;
 
+            // Start and shutdown functions.
+            // Made private so no other classes can shut down the engine itself.
+            void startup();
+            void shutdown();
+
+        public:
             // Game managers.
             GraphicsManager graphicsManager;
             InputManager inputManager;
@@ -38,13 +45,7 @@ namespace RenEngine
             ScriptManager scriptManager;
             PhysicsManager physicsManager;
             GuiManager guiManager;
-
-            // Start and shutdown functions.
-            // Made private so no other classes can shut down the engine itself.
-            void startup();
-            void shutdown();
-
-        public:            
+                        
             /**
              * @brief Construct a new Engine object.
              * 
@@ -228,5 +229,14 @@ namespace RenEngine
              * @param max Reference to the maximum dimension of an image.
              */
             void getBoxCollider(const EntityID e, vec2& min, vec2& max);
+
+            /**
+             * @brief Gets the Lua environment variable from the script manager.
+             * 
+             * @return A reference to the lua environment variable.
+             */
+            ScriptManager::Lua& getLuaEnv();
+
+            bool pauseGame();
     };
 }

@@ -41,3 +41,23 @@ void SoundManager::clearSoundsList()
 {
     soundsList.clear();
 }
+
+// Toggle loop on/off for sound
+// 1 for loop
+// 0 no loop
+void SoundManager::setLooping(const std::string& name, int value)
+{
+    soundsList[name].setLooping(value);
+}
+
+// Set volume for given sound file
+void SoundManager::setVolume(const std::string& name, float value)
+{
+    soundsList[name].setVolume(value);
+}
+
+// Stop sound source (does not destroy it)
+void SoundManager::stopSound(const std::string& name)
+{
+    soundsList[name].stop();
+}
