@@ -134,4 +134,12 @@ Build Week
 		- GUI components and editors for developers.
 		- Text processing and displaying.
 		- Procedural content generation.
-		- AI and path planning for NPCs and enemies.  
+		- AI and path planning for NPCs and enemies.
+
+Final Submission
+	- Made a flappy-bird style side scrolling shooter.
+	- Implemented rigid bodies and enemy AI.
+
+	Notes: The rigid body stuff is all contained within
+	       the physicsManager files in the engine. The
+		   AI code is all written within boss.lua.
