@@ -23,6 +23,39 @@ components as a game runs. It also manages the main game loop that
 is responsible for running a game. Finally, it also provdes an API
 so that a programmer can access the engine's functionality with ease.
 
+## Engine Architecture
+The Engine class contains all the necessary components necessary
+for the engine to run. It contains an instance of each of the game
+managers. The constructor sets the window parameters and calls the
+startup function. The startup function calls the startup function 
+for each manager, and finally starts the main game loop. This loop
+runs at approx. 60 iterations per second. The game loop steps are:
+- Get and update the input state.
+- Update game managers.
+- Draw the new frame on the screen.
+
+The graphics manager utilizes the GLFW and Sokol GFX libraries and
+is responsible for creating the engine's main window, load and delete 
+sprites, and draw to the main window. Sprites are stored in an unordered
+map where the key is its name and the value is the corresponding sprite.
+
+The input manager uses GLFW poll events to see if a key was pressed. 
+The key codes used are stored in a struct of GLFW key codes.
+
+The sound manager uses the soloud library to load, play and delete
+sounds. An unordered map is used to store the sounds; the key is a name
+and the value is a sound in the form of a soloud WAV file (soloud::WAV).
+
+The physics manager is divided into two parts:
+- Calculating object motion using kinematic equations.
+- Collision detection using box colliders.
+- Collision resolution with the following steps:
+  - Update impulses and velocities of objects in collision.
+  - Move objects apart in the direction of their new velocities
+    until a collision is no longer detected.
+  - Resume the simulation.
+
+
 ## Starting the Engine
 First, create a file named `main.cpp`, this will contain
 the main instance of the engine. Make sure to add `#include "Engine.h"`
