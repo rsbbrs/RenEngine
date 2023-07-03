@@ -55,6 +55,35 @@ The physics manager is divided into two parts:
     until a collision is no longer detected.
   - Resume the simulation.
 
+The resource manager simply establishes the paths of objects
+so that the engine can locate them in the assets folder. The path is
+`.\\assets\\relativePath`
+
+The script manager uses the sol library to integrate Lua scripts into
+C++. The startup function exposes all necessary C++ functions and structures
+to the Lua system so that they can be used in the scripts. An unordered
+map is used to store scripts; the key is a name and the value is the
+corresponding Lua script.
+
+The entity component system is a vector of unordered maps that each store 
+an object's components. Upon creation, each object is assigned a unique 
+entity ID that is used as the key into the component maps. Components 
+are structs that contain information necessary for the execution of the
+object within the engine. When a component is attached to an object, the
+system searches the vector for the correct component map, then using the object's
+entity ID, adds the new component into the map. This way, objects can have 
+components attached to them without the need to create complex inheritance hierachies.
+The components used in the engine are:
+- Position, rotation and scale for drawing objects on screen.
+- RigidBody for the physics simulation.
+- Health for objects that will have a certain number of hit points before being
+  destroyed.
+- Script and sprite to store the names of each. This way, we can associate scripts
+  and sprites to an object, and access them from their respective maps in the system.
+
+The GUI manager is an optional manager that displays object information and allows 
+developers to change certain components directly. It implements an immediate mode
+GUI to easily access an object's components without complex GUI code.
 
 ## Starting the Engine
 First, create a file named `main.cpp`, this will contain
