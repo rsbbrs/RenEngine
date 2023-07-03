@@ -15,6 +15,8 @@ different aspects of the engine. These components are:
 - Resource manager.
 - Script manager.
 - Entity component system.
+- Physics manager.
+- GUI manager.
 
 The Engine itself is responsible for instantiating and tracking these
 components as a game runs. It also manages the main game loop that 
@@ -47,6 +49,10 @@ action is necessary, the engine will handle closing all of its components,
 `delete`).
 
 Using xmake, you can run the code using the command `xmake run main`.
+
+## Bugs
+- There is an issue with the Lua scripting subsystem which prevents the
+  engine from running. 
 
 ## Engine API
 This section contains documentation for the API functions the engine provides.
