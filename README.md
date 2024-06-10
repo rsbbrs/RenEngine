@@ -114,7 +114,7 @@ Using xmake, you can run the code using the command `xmake run main`.
 
 ## Bugs
 - There is an issue with the Lua scripting subsystem which prevents the
-  engine from running. 
+  engine from running. (This issue has been fixed as of 6/10/2024. The root cause is due to a dependency error.  -Peter)
 
 ## Engine API
 This section contains documentation for the API functions the engine provides.
