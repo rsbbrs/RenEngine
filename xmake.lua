@@ -1,12 +1,12 @@
 includes("external/xmake_soloud.lua")
 add_rules("mode.debug", "mode.release")
-add_requires("glfw")
-add_requires("soloud")
-add_requires("sokol")
-add_requires("glm")
-add_requires("stb")
-add_requires("lua", "sol2")
-add_requires("imgui", {configs = {glfw_opengl3 = true}})
+add_requires("glfw >=3.4")
+add_requires("soloud >=20200207")
+add_requires("sokol >=2023.01.27")
+add_requires("glm >=1.0.1")
+add_requires("stb >=2023.12.15")
+add_requires("lua >=5.4.6", "sol2 >=3.3.0")
+add_requires("imgui >=1.90.8", {configs = {glfw_opengl3 = true}})
 
 set_policy("build.warning", true) -- show warnings
 set_warnings("all") -- warn about many things
